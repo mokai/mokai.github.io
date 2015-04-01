@@ -4,7 +4,7 @@
 
 url: http://mokai.github.io
 title: mokai
-subtitle: 一名浮躁的94年iDev
+subtitle: 浮躁的94年iDev
 author: mokai
 simple_search: https://www.google.com/search
 description:
@@ -106,5 +106,5 @@ duoshuo_short_name: mokai
 
 weibo_user: mokaiZz # 微博数字 ID 或域名 ID
 qq_user: 865425695
-weibo_share: true # 是否开启微博分享按钮
+weibo_share: false # 是否开启微博分享按钮
 
