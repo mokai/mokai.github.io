@@ -1,0 +1,3 @@
+rake generate
+rake deploy 
+rake preview
