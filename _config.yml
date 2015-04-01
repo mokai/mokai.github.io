@@ -49,6 +49,16 @@ excerpt_separator: "<!--more-->"
 
 titlecase: true       # Converts page and post titles to titlecase
 
+
+# 多说评论
+duoshuo_comments: true
+duoshuo_short_name: mokai
+
+weibo_user: mokaiZz # 微博数字 ID 或域名 ID
+qq_user: 865425695  # qq
+weibo_share: false  # 是否开启微博分享按钮
+
+
 # list each of the sidebar modules you want to include, in the order you want them to appear.
 # To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
 default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
@@ -100,11 +110,5 @@ google_analytics_tracking_id:
 # Facebook Like
 facebook_like: false
 
-# duoshuo comments
-duoshuo_comments: true
-duoshuo_short_name: mokai
 
-weibo_user: mokaiZz # 微博数字 ID 或域名 ID
-qq_user: 865425695
-weibo_share: false # 是否开启微博分享按钮
 
