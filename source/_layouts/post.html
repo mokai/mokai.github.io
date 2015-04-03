@@ -1,7 +1,6 @@
 ---
 layout: default
 single: true
-sharing: false
 ---
 
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">{% include article.html %}</article>
@@ -18,6 +17,6 @@ sharing: false
 {% if site.duoshuo_short_name and site.duoshuo_comments == true and page.comments == true %}
   <section>
     <h1>说说</h1>
-    <div id="comments" aria-live="polite">{% include post/duoshuo.html %}</div>
+    <div id="comments" aria-live="polite">{% include custom/duoshuo.html %}</div>
   </section>
 {% endif %}

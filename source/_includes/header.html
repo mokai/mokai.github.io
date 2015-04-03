@@ -1,8 +1,7 @@
-
 <div class="profilepic">	
 	<script src="{{ root_url }}/javascripts/md5.js"></script>
 	<script type="text/javascript">
-		document.write("<img alt=“me” src='/images/me.jpg' style='width:100px;height:100px;'/>");
+		document.write("<img src='{{root_url}}/images/me.png' alt='Me' style='width: 160px;height: 160px;' />");
 	</script>
 </div>
 <h1><a href="{{ root_url }}/">{{ site.title }}</a></h1>
@@ -11,7 +10,7 @@
 <nav id="sub-nav">
 	<div class="social">
 		{% if site.qq_user %}
-		<a class="qq" href="http://wpa.qq.com/msgrd?v=3&uin={{ site.qq_user }}&site=qq&menu=yes" title="QQ交谈">QQ</a>
+		<a class="qq" href="http://wpa.qq.com/msgrd?v=3&uin={{site.qq_user}}&site=qq&menu=yes" title="点击这里给我发消息" alt="点击这里给我发消息">QQ</a>
 		{% endif %}
 		{% if site.weibo_user %}
 		<a class="weibo" href="http://www.weibo.com/{{ site.weibo_user }}" title="Weibo">Weibo</a>
@@ -48,3 +47,4 @@
 		{% endif %}
 	</div>
 </nav>
+{% include custom/header.html %}
