@@ -8,6 +8,8 @@ categories:
 
 在使用Xcode IB方式编码中，经常会使用到属性列表中没有的属性，这时则需要通过`Runtime Attributes`来动态注入(实则为`KVO`实现)
 
+<!--more-->
+
 ![](http://ios-blog.co.uk/wp-content/uploads/2014/04/user-defined-runtime-attributes-300x282.png)
 
 
@@ -24,11 +26,18 @@ categories:
 
 	import Foundation
 	extension CALayer{
-    	//解决IB中runtime attribute中layer.borderColor不能转换UIColor为CGColor
-    	func setBorderColorFromUIColor(color:UIColor){
-        	self.borderColor = color.CGColor;
-    	}
+	    //解决IB中runtime attribute中layer.borderColor不能转换UIColor为CGColor
+	    var borderColorFromUIColor:UIColor{
+	        set(color){
+	            self.borderColor = color.CGColor;
+	        }
+	        get{
+	            return UIColor(CGColor: self.borderColor)
+	        }
+	    }
 	}
+	
+> 注意,swift与OC的属性设置器不同，OC中是setXXX，而swift是有内部setter
 
 2、IB中设置，把原先的`layer.borderColor`改为`layer.borderColorFromUIColor`
 
