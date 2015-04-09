@@ -7,8 +7,6 @@ categories: 记录
 sharing: false
 ---
 
-本文主要基于其他博文内容外的一些细节记录，已有内容不做重复述说
-
 ###相关博文：
 [Octopress 精益修改](http://shengmingzhiqing.com/blog/octopress-tutorials-toc.html)
 
