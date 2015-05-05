@@ -10,7 +10,7 @@ sharing: false
 	}
 	
 	function hello(){
-		echo "hello world";
+		echo "hello world"; 
 	}
 	
 	public void hello(){
