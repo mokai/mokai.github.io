@@ -33,7 +33,7 @@ sharing: false
 
 10年入坑
 
-技能get√  `php`  `java`  `android`  `💗iOS`
+技能get√  `java`  `android`  `💗iOS`   
 
 目前专注`iOS`
 
