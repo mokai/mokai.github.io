@@ -1,9 +1,9 @@
 ---
 layout: page
 title: "作品集"
-date: 2015-04-02 09:52
-comments: true
-sharing: false
+noDate: "true"
+comments: false
+share: false
 footer: false
 ---
 

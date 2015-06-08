@@ -1,10 +1,11 @@
 ---
 layout: page
-title: 
+noDate: "true"
+comments: false
+share: false
 footer: false
-sharing: false
 ---
-
+```
 	void hello(){
 		println('hello world')
 	}
@@ -24,6 +25,7 @@ sharing: false
 	func hello()->String{
 		return "hello world"
 	}
+```
 
 大家好！
 
