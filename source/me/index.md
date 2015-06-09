@@ -7,7 +7,7 @@ footer: false
 ---
 ```
 	void hello(){
-		println('hello world')
+		println('hello world');
 	}
 	
 	function hello(){
@@ -19,7 +19,7 @@ footer: false
 	}
 	
 	-(void)hello{
-		NSLog("hello world")
+		NSLog("hello world");
 	}
 
 	func hello()->String{

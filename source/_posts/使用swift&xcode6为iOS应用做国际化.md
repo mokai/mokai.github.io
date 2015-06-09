@@ -5,6 +5,7 @@ date: 2015-05-20 09:43:14 +0800
 comments: true
 share: true
 categories: 记录
+tags: "国际化"
 ---
 
 在真正将国际化实践前，只知道通过`NSLocalizedString`将相应语言的字符串加载进来即可。但最近公司项目的新需求增加英文版本，并支持应用内无死角切换~，这才跳过各种坑实现了应用内切换语言，并记录至此。
@@ -92,8 +93,11 @@ NSLocalizedString("我",comment: "")
 	![](http://7xiew0.com1.z0.glb.clouddn.com/locale_4.png)
 
 	利用文本国际化的方式，在代码中调用
-		
-		UIImage(named: NSLocalizedString("search_logo",comment: ""))
+
+  ```		
+  UIImage(named: NSLocalizedString("search_logo",comment: ""))
+  ```
+
 	>不推荐，一是因为做法太low了，工作量明显加大。二是不能在Storyboard或XIB中使用
 
 * ###### 方案二：原生支持
@@ -146,14 +150,9 @@ ibtool Main.storyboard --generate-strings-file ./NewTemp.string
 ```
 //获取APP当前语言
 (NSUserDefaults.standardUserDefaults().valueForKey("AppleLanguages") as! Array<String>)[0]
-
-
-```	
-
+```
 
 那么我们要实现语言切换改变`AppleLanguages`的值即可，但是这里有一个坑，因为苹果没提供给我们直接修改APP默认语言的API，我们只能通过NSUserDefaults手动去操作，且`AppleLanguages`的值改变后APP得重新启动后才会生效（才会读取相应语言的lproj中的资源，意义着就算你改了，资源还是加载的APP启动时lproj中的资源），猜测应该是框架层对`AppleLanguages`的值进行了内存缓冲
-
-
 
 ```
 //设置APP当前语言
@@ -223,18 +222,18 @@ extension NSBundle{
  
   解决办法就是为`UIImageView`扩展一个方法，然后通过IB中的`User Defined Runtime Attributes`把imageName传进去
 
-```  
-extension UIImageView{
-    var locale:String{
-        get{
-            return ""
-        }
-        set(newlocale){
-            self.image = localizedImage(newlocale)
-        }
-    }
-}
-```
+  ```
+  extension UIImageView{
+      var locale:String{
+          get{
+              return ""
+          }
+          set(newlocale){
+              self.image = localizedImage(newlocale)
+          }
+      }
+  }
+  ```
 
 	![](http://7xiew0.com1.z0.glb.clouddn.com/locale_6_2.png)
 
@@ -242,18 +241,18 @@ extension UIImageView{
 
 	解决办法和UIImageView类似，扩展一个方法，然后把self.text做为key去strings文件中拿相应语言的value
 
-```	
-extension UITextView{
-    var locale:Bool{
-        get{
-            return true
-        }
-        set(newlocale){
-            self.text = localized(self.text)
-        }
-    }
-}
-```		
+  ```
+  extension UITextView{
+      var locale:Bool{
+          get{
+              return true
+          }
+          set(newlocale){
+              self.text = localized(self.text)
+          }
+      }
+  }
+  ```
 
 	![](http://7xiew0.com1.z0.glb.clouddn.com/locale_6_3.png)
 	
