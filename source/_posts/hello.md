@@ -1,11 +1,14 @@
 ---
 layout: post
 title: "hello"
-date: 2015-04-01 
+date: 2015-04-01
 comments: false
 share: false
 categories: 记录
+tags:
 ---
+![](http://7xiew0.com1.z0.glb.clouddn.com/2015-04-01-hello_just_do_it.jpg)
+
 Hello，new Blog~
 
 之前一直都是在[csdn](http://blog.csdn.net/VictorMoKai)上写博客(其实也没怎么写(⊙o⊙)…)，最近订了些目标，个人网站就是其中一项
@@ -14,5 +17,5 @@ so~ Just do it!
 
 
 <!--more-->
-![](http://7xiew0.com1.z0.glb.clouddn.com/2015-04-01-hello_just_do_it.jpg)
+
 

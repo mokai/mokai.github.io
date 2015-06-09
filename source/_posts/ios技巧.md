@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "iOS技巧"
-date: 2015-04-17 09:14:01 +0800
+date: 2015-04-17
 comments: true
 categories: 记录
 sharing: false

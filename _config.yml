@@ -71,12 +71,11 @@ deploy:
   type: git
   repo: git@github.com:mokai/mokai.github.io.git
 
- # Extensions
-plugins:
-- hexo-generator-feed
-- hexo-generator-sitemap
-
+# Extensions
 feed:
   type: atom
   path: atom.xml
   limit: 20
+  
+sitemap:
+    path: sitemap.xml

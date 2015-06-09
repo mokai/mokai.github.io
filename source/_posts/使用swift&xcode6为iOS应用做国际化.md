@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "使用Swift&Xcode6为iOS应用做国际化"
-date: 2015-05-20 09:43:14 +0800
+date: 2015-05-20
 comments: true
 share: true
 categories: 记录

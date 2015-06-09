@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Swift技巧"
-date: 2015-04-17 09:14:12 +0800
+date: 2015-04-17
 comments: true
 categories: 记录
 sharing: false

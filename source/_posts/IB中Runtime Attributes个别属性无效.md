@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "IB中Runtime Attributes个别属性无效"
-date: 2015-04-07 13:38:57 +0800
+date: 2015-04-07
 comments: true
 sharing: true
 categories: iBug
