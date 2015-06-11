@@ -39,6 +39,7 @@ footer: false
 
 目前专注`iOS`
 
+喜欢追求新事物，最新的Mac OSX、iOS、Xcode For Beta必更新。
 
 
 
