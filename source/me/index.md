@@ -35,9 +35,11 @@ footer: false
 
 10年入坑
 
-技能get√  `java`  `android`  `💗iOS`   
+技能get√  `java`  `android`  `💗iOS`	
 
 目前专注`iOS`
+
+从后台到web&移动平台，可谓是通通玩了一遍，也算是半个全栈了吧😁
 
 喜欢追求新事物，最新的Mac OSX、iOS、Xcode For Beta必更新。
 
