@@ -4,7 +4,7 @@
 
 # Site
 title: mokai
-subtitle: 一名94年iDev
+subtitle: 专注iOS的全栈开发者
 description:
 author: kk
 language: zh-CN
@@ -63,6 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
+## git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia
 theme: yilia
 
 # Deployment
