@@ -40,6 +40,11 @@ sharing: false
 	* 多个View层次选择 按住`Cmd`和`Shift`，然后在需要选择的view上方按右键
 	* 添加辅助线  在左边的层级列表中双击某个view，然后`Cmd+_`或者`Cmd+|`即可在选中的view上添加一条水平或者垂直中心的辅助线
 	
+* xcode升级后插件失效修复
+
+	```
+	find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add `defaults read /Applications/Xcode.app/Contents/Info.plist DVTPlugInCompatibilityUUID`
+	```
 
 2、Frame枚举类型转换为string通过`NSStringFromCGRect`
 
