@@ -23,7 +23,7 @@
 
 .a静态库编译
   lipo -info xxx.a 查看静态库支持的平台，目前有armv7、arm64、armv7s、i386 前三者">
-<meta property="og:updated_time" content="2015-06-23T01:53:49.000Z">
+<meta property="og:updated_time" content="2015-07-03T01:50:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS技巧">
 <meta name="twitter:description" content="常用技巧1、Xcode技巧
@@ -242,11 +242,15 @@
 </ul>
 <a id="more"></a>
 <ul>
-<li>IB技巧<ul>
+<li><p>IB技巧</p>
+<ul>
 <li>可视化坐标距离    选中一个View，然后按住<code>option</code>并将鼠标移动到其他View上</li>
 <li>多个View层次选择 按住<code>Cmd</code>和<code>Shift</code>，然后在需要选择的view上方按右键</li>
 <li>添加辅助线  在左边的层级列表中双击某个view，然后<code>Cmd+_</code>或者<code>Cmd+|</code>即可在选中的view上添加一条水平或者垂直中心的辅助线</li>
 </ul>
+</li>
+<li><p>xcode升级后插件失效修复</p>
+  <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find</span> ~<span class="regexp">/Library/</span>Application\ Support<span class="regexp">/Developer/</span>Shared<span class="regexp">/Xcode/</span>Plug-ins -name Info.plist -maxdepth <span class="number">3</span> | xargs -I&#123;&#125; defaults <span class="keyword">write</span> &#123;&#125; DVTPlugInCompatibilityUUIDs -array-add `defaults <span class="keyword">read</span> <span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/I</span>nfo.plist DVTPlugInCompatibilityUUID`</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>2、Frame枚举类型转换为string通过<code>NSStringFromCGRect</code></p>
