@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://mokai.github.io/me/resume.html</loc>
+    <lastmod>2015-07-08T09:23:25.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mokai.github.io/me/index.html</loc>
+    <lastmod>2015-07-08T09:17:55.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mokai.github.io/resume.html</loc>
+    <lastmod>2015-07-08T09:09:55.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://mokai.github.io/2015/04/ios-tips/</loc>
     <lastmod>2015-07-03T01:50:01.000Z</lastmod>
   </url>
@@ -14,11 +29,6 @@
   <url>
     <loc>http://mokai.github.io/2015/05/%E4%BD%BF%E7%94%A8swift&xcode6%E4%B8%BAiOS%E5%BA%94%E7%94%A8%E5%81%9A%E5%9B%BD%E9%99%85%E5%8C%96/</loc>
     <lastmod>2015-06-23T02:15:27.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.github.io/me/index.html</loc>
-    <lastmod>2015-06-23T02:15:16.000Z</lastmod>
   </url>
   
   <url>
