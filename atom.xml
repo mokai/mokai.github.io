@@ -5,7 +5,7 @@
   <subtitle><![CDATA[专注iOS的全栈开发者]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://mokai.github.io//"/>
-  <updated>2015-06-23T02:15:27.000Z</updated>
+  <updated>2015-07-31T07:34:44.000Z</updated>
   <id>http://mokai.github.io//</id>
   
   <author>
@@ -16,11 +16,41 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Effective Objective-C 2.0 笔记]]></title>
+    <link href="http://mokai.github.io/2015/07/book_effective_oc2/"/>
+    <id>http://mokai.github.io/2015/07/book_effective_oc2/</id>
+    <published>2015-07-30T16:00:00.000Z</published>
+    <updated>2015-07-31T07:34:44.000Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://mokai.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Objective-C高级编程 iOS与OS X多线程和内存管理 笔记]]></title>
+    <link href="http://mokai.github.io/2015/07/book_multithreading_memory_management_for_iOS_OSX/"/>
+    <id>http://mokai.github.io/2015/07/book_multithreading_memory_management_for_iOS_OSX/</id>
+    <published>2015-07-30T16:00:00.000Z</published>
+    <updated>2015-07-31T07:34:59.000Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://mokai.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[使用Swift&Xcode6为iOS应用做国际化]]></title>
     <link href="http://mokai.github.io/2015/05/%E4%BD%BF%E7%94%A8swift&xcode6%E4%B8%BAiOS%E5%BA%94%E7%94%A8%E5%81%9A%E5%9B%BD%E9%99%85%E5%8C%96/"/>
     <id>http://mokai.github.io/2015/05/使用swift&xcode6为iOS应用做国际化/</id>
     <published>2015-05-19T16:00:00.000Z</published>
-    <updated>2015-06-23T02:15:27.000Z</updated>
+    <updated>2015-07-30T01:04:28.000Z</updated>
     <content type="html"><![CDATA[<p>在真正将国际化实践前，只知道通过<code>NSLocalizedString</code>将相应语言的字符串加载进来即可。但最近公司项目的新需求增加英文版本，并支持应用内无死角切换~，这才跳过各种坑实现了应用内切换语言，并记录至此。</p>
 <a id="more"></a>
 <h3 id="环境">环境</h3><p>系统环境: iOS7 - iOS8.3</p>
@@ -191,7 +221,7 @@
     <link href="http://mokai.github.io/2015/04/ios-tips/"/>
     <id>http://mokai.github.io/2015/04/ios-tips/</id>
     <published>2015-04-16T16:00:00.000Z</published>
-    <updated>2015-07-03T01:50:01.000Z</updated>
+    <updated>2015-07-16T06:04:09.000Z</updated>
     <content type="html"><![CDATA[<h1 id="常用技巧">常用技巧</h1><p>1、Xcode技巧</p>
 <ul>
 <li>当真机升级了iOS，但对应Xcode未升级时，device会出现ineligible device，这时通过xocde菜单-&gt;Product-&gt;Destination-&gt;选择对应的device 即可解决</li>
@@ -228,6 +258,13 @@
 <li><p>xcode升级后插件失效修复</p>
   <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find</span> ~<span class="regexp">/Library/</span>Application\ Support<span class="regexp">/Developer/</span>Shared<span class="regexp">/Xcode/</span>Plug-ins -name Info.plist -maxdepth <span class="number">3</span> | xargs -I&#123;&#125; defaults <span class="keyword">write</span> &#123;&#125; DVTPlugInCompatibilityUUIDs -array-add `defaults <span class="keyword">read</span> <span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/I</span>nfo.plist DVTPlugInCompatibilityUUID`</span><br></pre></td></tr></table></figure>
 </li>
+</ul>
+<ul>
+<li><p>修复多个Xcode导致的N个模拟器问题</p>
+  <image src="http://ww2.sinaimg.cn/large/51530583jw1eu4h7paw3wj20sw15gn5t.jpg" width="400px" height="500px">
+
+
+</image></li>
 </ul>
 <p>2、Frame枚举类型转换为string通过<code>NSStringFromCGRect</code></p>
 <p>3、指定文件不使用arc,<code>-fno-objc-arc</code></p>
