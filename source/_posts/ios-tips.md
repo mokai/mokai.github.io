@@ -33,7 +33,6 @@ sharing: false
 		#endif 
 		    #import "ddddd.h"  //此处移动上面 __OBJC__ 中就好了
 		```
-
 <!--more-->
 * IB技巧
 	* 可视化坐标距离    选中一个View，然后按住`option`并将鼠标移动到其他View上
@@ -45,6 +44,12 @@ sharing: false
 	```
 	find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add `defaults read /Applications/Xcode.app/Contents/Info.plist DVTPlugInCompatibilityUUID`
 	```
+	
+
+* 修复多个Xcode导致的N个模拟器问题
+
+	<image src='http://ww2.sinaimg.cn/large/51530583jw1eu4h7paw3wj20sw15gn5t.jpg' width='400px' height='500px' />
+	
 
 2、Frame枚举类型转换为string通过`NSStringFromCGRect`
 
