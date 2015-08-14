@@ -5,7 +5,7 @@
   <subtitle><![CDATA[专注iOS的全栈开发者]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://mokai.github.io//"/>
-  <updated>2015-07-31T07:34:44.000Z</updated>
+  <updated>2015-07-31T07:38:56.000Z</updated>
   <id>http://mokai.github.io//</id>
   
   <author>
@@ -16,14 +16,16 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[Effective Objective-C 2.0 笔记]]></title>
-    <link href="http://mokai.github.io/2015/07/book_effective_oc2/"/>
-    <id>http://mokai.github.io/2015/07/book_effective_oc2/</id>
+    <title><![CDATA[Objective-C高级编程 iOS与OS X多线程和内存管理]]></title>
+    <link href="http://mokai.github.io/2015/07/book_multithreading_memory_management_for_iOS_OSX/"/>
+    <id>http://mokai.github.io/2015/07/book_multithreading_memory_management_for_iOS_OSX/</id>
     <published>2015-07-30T16:00:00.000Z</published>
-    <updated>2015-07-31T07:34:44.000Z</updated>
-    <content type="html"></content>
+    <updated>2015-07-31T07:38:56.000Z</updated>
+    <content type="html"><![CDATA[<p>待编辑….</p>
+]]></content>
     <summary type="html">
-    
+    <![CDATA[<p>待编辑….</p>
+]]>
     </summary>
     
       <category term="读书笔记" scheme="http://mokai.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
@@ -31,14 +33,16 @@
   </entry>
   
   <entry>
-    <title><![CDATA[Objective-C高级编程 iOS与OS X多线程和内存管理 笔记]]></title>
-    <link href="http://mokai.github.io/2015/07/book_multithreading_memory_management_for_iOS_OSX/"/>
-    <id>http://mokai.github.io/2015/07/book_multithreading_memory_management_for_iOS_OSX/</id>
+    <title><![CDATA[Effective Objective-C 2.0]]></title>
+    <link href="http://mokai.github.io/2015/07/book_effective_oc2/"/>
+    <id>http://mokai.github.io/2015/07/book_effective_oc2/</id>
     <published>2015-07-30T16:00:00.000Z</published>
-    <updated>2015-07-31T07:34:59.000Z</updated>
-    <content type="html"></content>
+    <updated>2015-07-31T07:39:02.000Z</updated>
+    <content type="html"><![CDATA[<p>待编辑….</p>
+]]></content>
     <summary type="html">
-    
+    <![CDATA[<p>待编辑….</p>
+]]>
     </summary>
     
       <category term="读书笔记" scheme="http://mokai.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
