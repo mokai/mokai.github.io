@@ -355,6 +355,8 @@ if(selected) {
 self.tView.tableFooterView = [UIView new];
 ```
 
+* 手动调用`tableView:cellForRowAtIndexPath:`方法不会参与复用
+
 3、UILabel
 
 * 换行  内容加\n，然后设置label.numberOfLines = 0; 
