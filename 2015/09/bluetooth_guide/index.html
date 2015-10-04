@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>蓝牙编程 | mokai</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="蓝牙技术，很早以前就被有了，如今已更新4.0版本。很多热门技术都是基于它工作的，如Android平台的NFC，iOS的iBeancon，Apple Watch的WatchConnectivity框架等，现在的智能家居基本也是基于蓝牙4.0与APP进行通信，可见蓝牙在实践工作中的重要性。在iOS中，蓝牙是基于4.0标准的，设备间低功耗通信。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="蓝牙编程">
+<meta property="og:url" content="http://mokai.github.io/2015/09/bluetooth_guide/index.html">
+<meta property="og:site_name" content="mokai">
+<meta property="og:description" content="蓝牙技术，很早以前就被有了，如今已更新4.0版本。很多热门技术都是基于它工作的，如Android平台的NFC，iOS的iBeancon，Apple Watch的WatchConnectivity框架等，现在的智能家居基本也是基于蓝牙4.0与APP进行通信，可见蓝牙在实践工作中的重要性。在iOS中，蓝牙是基于4.0标准的，设备间低功耗通信。">
+<meta property="og:image" content="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/Art/CBDevices1_2x.png">
+<meta property="og:updated_time" content="2015-09-28T01:40:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="蓝牙编程">
+<meta name="twitter:description" content="蓝牙技术，很早以前就被有了，如今已更新4.0版本。很多热门技术都是基于它工作的，如Android平台的NFC，iOS的iBeancon，Apple Watch的WatchConnectivity框架等，现在的智能家居基本也是基于蓝牙4.0与APP进行通信，可见蓝牙在实践工作中的重要性。在iOS中，蓝牙是基于4.0标准的，设备间低功耗通信。">
+  
+    <link rel="alternative" href="/atom.xml" title="mokai" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/me.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">kk</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">专注iOS的全栈开发者</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/projects">作品</a></li>
+				        
+							<li><a href="/me">我</a></li>
+				        
+							<li><a href="/me/resume.html">简历</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="http://github.com/mokai" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/mokaiZz" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/国际化/" style="font-size: 10px;">国际化</a> <a href="/tags/蓝牙/" style="font-size: 10px;">蓝牙</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">kk</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/me.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">kk</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">专注iOS的全栈开发者</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/projects">作品</a></li>
+		        
+					<li><a href="/me">我</a></li>
+		        
+					<li><a href="/me/resume.html">简历</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="http://github.com/mokai" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/mokaiZz" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-bluetooth_guide" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/bluetooth_guide/" class="article-date">
+  	<time datetime="2015-09-07T16:00:00.000Z" itemprop="datePublished">2015-09-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      蓝牙编程
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/蓝牙/">蓝牙</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/记录/">记录</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>蓝牙技术，很早以前就被有了，如今已更新4.0版本。很多热门技术都是基于它工作的，如Android平台的NFC，iOS的iBeancon，Apple Watch的WatchConnectivity框架等，现在的智能家居基本也是基于蓝牙4.0与APP进行通信，可见蓝牙在实践工作中的重要性。在iOS中，蓝牙是基于4.0标准的，设备间低功耗通信。</p>
+<a id="more"></a>
+<h2 id="核心成员">核心成员</h2><p>在开始前我们回忆下传统的Socket编程，里面有Server服务端与Client端的区别。那么在蓝牙编程也是如此，其中<code>Peripheral</code>外设相当于Socket编程中的Server服务端，<code>Central</code>中心相当于Client客户端(ps吐槽下，Central中心，作为服务端，不更适合吗！)</p>
+<p><img src="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/Art/CBDevices1_2x.png" width="600" height="400"></p>
+<p>你可以理解外设是一个广播数据的设备，它开始告诉外面的世界说它这儿有一些数据，并且能提供一些服务。另一边中心开始扫描周边有没有合适的设备，如果发现后，会和外设做连接请求，一旦连接确定后，两个设备就可以传输数据了。</p>
+<p>在iOS6之后，iOS 设备可以是外设，也可以是中心，就像Socket编程中一样，你可以是服务端也可以是客户端。</p>
+<h5 id="服务(service)和特征(characteristic)">服务(service)和特征(characteristic)</h5><p>每个蓝牙4.0的设备都是通过服务和特征来展示自己的，一个设备必然包含一个或多个服务，每个服务下面又包含若干个特征。特征是与外界交互的最小单位。比如说，智能音响设备，用服务A标识播放模块，特征A1来表示播放上一首，特征A2来表示播放下一首；服务B标识设置模块，特征B1设置彩灯颜色。这样做的目的主要为了<code>模块化</code>。</p>
+<blockquote>
+<p>外设，服务，特征都有一个<code>UUID</code>来标识</p>
+</blockquote>
+<p>上面说了设备可以是外设，也可以是中心，也就是会有二种模式  </p>
+<p>本地中心 -&gt; 远程外设   </p>
+<p>本地外设 -&gt; 远程中心 </p>
+<p>不过在智能家居开发中，大部分硬件蓝牙都是担任外设的角色，也就是说我们应用只要扮演中心即可了。</p>
+<h2 id="开始">开始</h2><p>本篇只讲述第一种模式的本地中心，远程外设端可借助 <a href="https://itunes.apple.com/cn/app/lightblue/id639944780?mt=12" target="_blank" rel="external">蓝牙调试神器LightBlue For Mac</a>。需要了解第二种模式可以移步<a href="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/PerformingCommonPeripheralRoleTasks/PerformingCommonPeripheralRoleTasks.html#//apple_ref/doc/uid/TP40013257-CH4-SW1" target="_blank" rel="external">创建外设</a> ps 英文，慎入~</p>
+<p>蓝牙交互的流程大致为</p>
+<blockquote>
+<p>建立中心角色 —&gt; 扫描外设（discover）—&gt; 发现外设后连接外设(connect) —&gt; 扫描外设中的服务和特征(discover) —&gt; 与外设做数据交互(explore and interact) —&gt; 断开连接(disconnect)。</p>
+</blockquote>
+<p>下面我们一一讲到</p>
+<h2 id="建立中心角色">建立中心角色</h2><p>在本地中心角色中，使用CBCentralManager类管理，我们创建一个CBCentralManager类</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="built_in">queue</span> <span class="subst">=</span> dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">let</span> centralMgr <span class="subst">=</span> CBCentralManager(delegate: <span class="built_in">self</span>, <span class="built_in">queue</span>: <span class="built_in">queue</span>)</span><br></pre></td></tr></table></figure>
+<p>上面的delegate为CBCentralManagerDelegate，后续蓝牙相关的回调都会在此。queue代表蓝牙在哪个队列里面操作，如果传入nil默认为主队列，值得注意的是后续的回调也是在传入的队列中调用的，所以如果传入的是非主线程的队列，在delegate中需要操作UI时需要手动切换到主线程</p>
+<p>CBCentralManager对象创建后会回调到<code>centralManagerDidUpdateState</code>方法来检测蓝牙可用状态，这时我们可以提醒用户设备是否支持蓝牙，是否打开了蓝牙</p>
+<h2 id="扫描外设">扫描外设</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let serviceUUIDS:Array&lt;CBUUID&gt; = [<span class="function"><span class="title">CBUUID</span><span class="params">(string: <span class="string">"FFDD"</span>)</span></span>]</span><br><span class="line">self<span class="class">.centralMgr</span><span class="class">.scanForPeripheralsWithServices</span>(serviceUUIDS, options: [ CBCentralManagerScanOptionAllowDuplicatesKey : true ])</span><br><span class="line"></span><br><span class="line"><span class="comment">//停止扫描</span></span><br><span class="line">self<span class="class">.centralMgr</span><span class="class">.stopScan</span>()</span><br></pre></td></tr></table></figure>
+<p>如果serviceUUIDS为nil则会扫描周围所有的设外设，反之只会扫描UUID匹配的外设。CBCentralManagerScanOptionAllowDuplicatesKey默认为false，此次扫描中发现过设备则跳过不回调，我们这里传入true，因为下面做外设掉线的处理时需要用到</p>
+<blockquote>
+<p>传入的serviceUUIDS数组元素为CBUUID类型，千万不要传入String，后面的操作也是如此，不然会碰到很多奇葩问题</p>
+</blockquote>
+<p>发现外设后会回调到 <code>centralManager(central:,didDiscoverPeripheral:,advertisementData:, RSSI:)</code><br>其中，perpheral则代表着外设，我们需要保存起来，后续的对外设的操作都是基于perpheral对象的</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">centralManager</span><span class="params">(central: CBCentralManager!, didDiscoverPeripheral peripheral: CBPeripheral!, advertisementData: [NSObject : AnyObject]!, RSSI: NSNumber!)</span></span> &#123;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;discoveredPeripheralers.<span class="built_in">count</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> peripheraler = discoveredPeripheralers[i]</span><br><span class="line">            <span class="keyword">if</span>(!peripheral.identifier.isEqual(peripheraler.peripheral.identifier))&#123; <span class="comment">//未发现过才保存</span></span><br><span class="line">               discoveredPeripheralers.append(peripheraler)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="连接外设">连接外设</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">self</span><span class="class">.centralMgr</span><span class="class">.connectPeripheral</span>(<span class="tag">peripheral</span>, <span class="rule"><span class="attribute">options</span>:<span class="value"> nil)</span></span></span><br></pre></td></tr></table></figure>
+<p>传入上面保存的外设对象，如果连接失败后会回调到 <code>centralManager(central:, didFailToConnectPeripheral:, error:)</code>，<br>连接成功后会回调到 <code>centralManager(central:didConnectPeripheral:)</code>，这个时候我们只是连接上外设而已，还需要发现外设中的服务与特征</p>
+<h2 id="发现服务与特征">发现服务与特征</h2><p>外设连接成功后我们把peripheral保存好，并设置好peripheral的delegate(CBPeripheralDelegate)，然后调用discoverServices来发现服务，同扫描外设时一样，discoverServices也可以传入一个serviceUUIDs参数来只获取需要的服务</p>
+<blockquote>
+<p>注意，注意，注意，重要的话说三遍。以下的回调都是CBPeripheralDelegate的了，不再是CBCentralManagerDelegate的回调</p>
+</blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">centralManager</span><span class="params">(central: CBCentralManager!, didConnectPeripheral peripheral: CBPeripheral!)</span></span> &#123;</span><br><span class="line">    <span class="keyword">self</span>.peripheral = peripheral</span><br><span class="line">    <span class="keyword">self</span>.peripheral.delegate = <span class="keyword">self</span></span><br><span class="line">    <span class="keyword">let</span> serviceUUIDS:<span class="type">Array</span>&lt;<span class="type">CBUUID</span>&gt; = [<span class="type">CBUUID</span>(string: <span class="string">"FF12"</span>)]</span><br><span class="line">    <span class="keyword">self</span>.peripheral.discoverServices(serviceUUIDS)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>发现服务后回调到<code>peripheral(peripheral:,didDiscoverServices:)</code>，这时我们就可以访问所有发现的服务一一去发现服务下的特征</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">peripheral</span><span class="params">(peripheral: CBPeripheral!, didDiscoverServices error: NSError!)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span>(error != <span class="literal">nil</span>)&#123;</span><br><span class="line">	    log(error)</span><br><span class="line">	    <span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> item <span class="keyword">in</span> peripheral.services&#123;</span><br><span class="line">		<span class="keyword">let</span> service = item <span class="keyword">as</span>! <span class="type">CBService</span></span><br><span class="line">		<span class="keyword">let</span> characteristicUUIDs:<span class="type">Array</span>&lt;<span class="type">CBUUID</span>&gt; = [<span class="type">CBUUID</span>(string: <span class="string">"FF02"</span>),<span class="type">CBUUID</span>(string: <span class="string">"FF04"</span>)]</span><br><span class="line">		peripheral.discoverCharacteristics(characteristicUUIDs, forService: service)  <span class="comment">//发现特征</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同样特征也可以传入characteristicUUIDs数组来过滤，发现特征后回调</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">peripheral</span><span class="params">(peripheral: CBPeripheral!, didDiscoverCharacteristicsForService service: CBService!, error: NSError!)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(error != <span class="literal">nil</span>)&#123;</span><br><span class="line">        log(error)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> service.characteristics&#123;</span><br><span class="line">        <span class="keyword">let</span> characteristic = item <span class="keyword">as</span>! <span class="type">CBCharacteristic</span></span><br><span class="line">        <span class="keyword">if</span>(characteristic.properties == .<span class="type">Notify</span>)&#123; <span class="comment">//如果特征为订阅属性则开启订阅</span></span><br><span class="line">            peripheral.setNotifyValue(<span class="literal">true</span>, forCharacteristic: characteristic)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每进入一次回调代表发现一个服务中的特征而不是外设所有的特征，外设、服务、特征从左至右都是上下级一对多的关系。<br>每个特征都有个属性，代表着它是可写、可读等，一个特征可同时拥有读写权限，如上面的订阅其实是一种订阅者模式的读取数据</p>
+<h2 id="发送数据">发送数据</h2><p>拿到可写的特征后，通过writeValue发送数据包</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="built_in">data</span> <span class="subst">=</span> <span class="string">"hello"</span><span class="built_in">.</span>dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: <span class="literal">true</span>)</span><br><span class="line"><span class="comment">//自动判断写特征的类型</span></span><br><span class="line"><span class="built_in">var</span> <span class="keyword">type</span>:CBCharacteristicWriteType <span class="subst">=</span> <span class="built_in">.</span>WithoutResponse</span><br><span class="line"><span class="keyword">if</span>(writeCharacteristic<span class="built_in">.</span>properties <span class="subst">==</span> CBCharacteristicProperties<span class="built_in">.</span>Write)&#123;</span><br><span class="line">    <span class="keyword">type</span> <span class="subst">=</span> <span class="built_in">.</span>WithResponse</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">self</span><span class="built_in">.</span>peripheral<span class="subst">!</span><span class="built_in">.</span>writeValue(<span class="built_in">data</span>, forCharacteristic: writeCharacteristic, <span class="keyword">type</span>: <span class="keyword">type</span>)</span><br></pre></td></tr></table></figure>
+<p>把要发送的文本转换为二进制，发送到相应的特征即可。值得注意的是第三个参数type写类型需要与特征的属性一致，其中WithoutResponse与WithResponse区别在于前者发送数据后是没有回调的，后者会回调到  <code>peripheral(peripheral:, didWriteValueForCharacteristic:, error:)</code> 来检测是否发送成功，如果发送数据传入的类型与特征不同时总是会失败</p>
+<blockquote>
+<p>由于蓝牙的缓冲大小只有20bytes，那么如果我们发送的数据包大小不能大于20bytes，所以得分多次发送</p>
+</blockquote>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">func writeValue(<span class="built_in">data</span>:NSData,withCharacteristic characteristic:CBCharacteristic)<span class="subst">-&gt;</span>Bool&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">self</span><span class="built_in">.</span>peripheral <span class="subst">==</span> nil)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">var</span> didSend <span class="subst">=</span> <span class="literal">false</span></span><br><span class="line">    <span class="built_in">var</span> sendDataIndex <span class="subst">=</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span>  NOTIFY_MTU <span class="subst">=</span> <span class="number">20</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">data</span><span class="built_in">.</span>length <span class="subst">-</span> sendDataIndex <span class="subst">!=</span> <span class="number">0</span>) &#123;</span><br><span class="line">   		<span class="comment">//剩下的数据大小</span></span><br><span class="line">        <span class="built_in">var</span> amountToSend <span class="subst">=</span> <span class="built_in">data</span><span class="built_in">.</span>length <span class="subst">-</span> sendDataIndex</span><br><span class="line">        <span class="comment">// 不能大于20bytes</span></span><br><span class="line">        <span class="keyword">if</span> (amountToSend <span class="subst">&gt;</span> NOTIFY_MTU) &#123;</span><br><span class="line">            amountToSend <span class="subst">=</span> NOTIFY_MTU</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> chunk <span class="subst">=</span> NSData(<span class="built_in">bytes</span>: <span class="built_in">data</span><span class="built_in">.</span><span class="built_in">bytes</span> <span class="subst">+</span> sendDataIndex, length: amountToSend)</span><br><span class="line">        <span class="built_in">var</span> <span class="keyword">type</span>:CBCharacteristicWriteType <span class="subst">=</span> <span class="built_in">.</span>WithoutResponse</span><br><span class="line">        <span class="keyword">if</span>(characteristic<span class="built_in">.</span>properties <span class="subst">==</span> CBCharacteristicProperties<span class="built_in">.</span>Write)&#123;</span><br><span class="line">            <span class="keyword">type</span> <span class="subst">=</span> <span class="built_in">.</span>WithResponse</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">self</span><span class="built_in">.</span>peripheral<span class="subst">!</span><span class="built_in">.</span>writeValue(chunk, forCharacteristic: characteristic, <span class="keyword">type</span>: <span class="keyword">type</span>)</span><br><span class="line">        sendDataIndex <span class="subst">+=</span> amountToSend</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="读取数据">读取数据</h2><p>分为二种，直接读、订阅，顾名思义，直接读就是手动调用API读取，订阅则只要开启后，外设有消息都可以收到</p>
+<p>直接读</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.peripheral!.<span class="function"><span class="title">readValueForCharacteristic</span><span class="params">(characteristic)</span></span></span><br></pre></td></tr></table></figure>
+<p>订阅</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">self</span><span class="class">.peripheral</span>!<span class="class">.setNotifyValue</span>(<span class="tag">true</span>, <span class="rule"><span class="attribute">forCharacteristic</span>:<span class="value"> characteristic)</span></span></span><br></pre></td></tr></table></figure>
+<p>两种回调都会回调到 <code>peripheral(peripheral:, didUpdateValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!)</code>，上面也提到因为蓝牙的缓冲大小，需要发送多次，那么在读取时也需要接收多次，才能保证数据的一体性，所以通常都会在数据包的开始用 <code>EOM</code> 来标识一段数据的开始，数据结束后再次用 <code>EOM</code> 来标识，所以我们接收数据时会这样</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> updatingEOMFlag = <span class="string">"EOM"</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">peripheral</span><span class="params">(peripheral: CBPeripheral!, didUpdateValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(error != <span class="literal">nil</span>)&#123;</span><br><span class="line">        log(error)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(characteristic.value != <span class="literal">nil</span>)&#123;</span><br><span class="line">        <span class="keyword">var</span> data = characteristic.value!</span><br><span class="line">        <span class="keyword">var</span> string = <span class="type">NSString</span>(data: data, encoding: <span class="type">NSUTF8StringEncoding</span>)</span><br><span class="line">        log(string)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//接收多段数据</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">self</span>.updatingEOMFlag != <span class="literal">nil</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">self</span>.updatingEOMFlag == string)&#123;</span><br><span class="line">                <span class="keyword">var</span> <span class="type">EOMEndFlag</span> = <span class="literal">false</span></span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="keyword">self</span>.updatingDatas.<span class="built_in">count</span>&#123; <span class="comment">//数据结束</span></span><br><span class="line">                    <span class="keyword">var</span> updatingData = <span class="keyword">self</span>.updatingDatas[i]</span><br><span class="line">                    <span class="keyword">if</span>(updatingData.characteristic.<span class="type">UUID</span>.isEqual(characteristic.<span class="type">UUID</span>))&#123;</span><br><span class="line">                        data = updatingData.data</span><br><span class="line">                        string = <span class="type">NSString</span>(data: data, encoding: <span class="type">NSUTF8StringEncoding</span>)</span><br><span class="line">                        <span class="keyword">self</span>.updatingDatas.removeAtIndex(i) <span class="comment">//删除缓存数据</span></span><br><span class="line">                        <span class="type">EOMEndFlag</span> = <span class="literal">true</span></span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(!<span class="type">EOMEndFlag</span>)&#123;<span class="comment">//数据开始</span></span><br><span class="line">                    <span class="keyword">let</span> updatingData = <span class="type">UpdatingDataer</span>(characteristic: characteristic, data: <span class="type">NSMutableData</span>())</span><br><span class="line">                    <span class="keyword">self</span>.updatingDatas!.append(updatingData)</span><br><span class="line">                    <span class="keyword">return</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">var</span> updatingData = (<span class="keyword">self</span>.updatingDatas?.<span class="built_in">filter</span>&#123; $<span class="number">0</span>.characteristic.<span class="type">UUID</span>.isEqual(characteristic.<span class="type">UUID</span>) &#125;) <span class="keyword">where</span> updatingData.<span class="built_in">count</span> == <span class="number">1</span> &amp;&amp; updatingData[<span class="number">0</span>].data != <span class="literal">nil</span> &#123; <span class="comment">//数据中间</span></span><br><span class="line">                    updatingData[<span class="number">0</span>].data.appendData(data)</span><br><span class="line">                    <span class="keyword">return</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//触发delegate与通知回调</span></span><br><span class="line">        <span class="keyword">let</span> stringData = <span class="type">StringData</span>(string:string <span class="keyword">as</span>? <span class="type">String</span>,data:data)</span><br><span class="line">        <span class="comment">//在此最终得到完整数据</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="断开连接">断开连接</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">self</span><span class="class">.centralMgr</span><span class="class">.cancelPeripheralConnection</span>(<span class="tag">self</span><span class="class">.peripheral</span>!)</span><br></pre></td></tr></table></figure>
+<p>至此，整个流程就完了</p>
+<h2 id="高级需求~">高级需求~</h2><h4 id="外设掉线检测">外设掉线检测</h4><p>所谓掉线就是外设发现了后，过了一段时间失去信号了。喵了下系统框架，没有找到相关外设掉线的检测，唯一有点像的就是发现外设里面的RSSI,代表设备信号强度，值越小信息越好。</p>
+<h2 id="总结">总结</h2><ul>
+<li>在蓝牙交互的二种角色中，通常APP端扮演<code>中央Central</code>的角色，设备扮演<code>外设Peripheral</code>的角色</li>
+<li>创建CBCentralManager对象时传入的queue决定了后续CBCentralManagerDelegate、CBPeripheralDelegate等回调的所在线程</li>
+<li>一个外设设备可包含一个或多个服务，一个服务可包含一个或多个特征，读写操作最终是针对特征。</li>
+<li>蓝牙的缓冲大小只有20bytes，在发送数据时最多只能发送20bytes，所以得分多次发送，数据的一体性可以用 EOM 标识符表标识</li>
+</ul>
+<h2 id="参考">参考</h2><p><a href="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html" target="_blank" rel="external">Core Bluetooth Programming Guide</a></p>
+<p><a href="http://www.jianshu.com/p/760f042a1d81" target="_blank" rel="external">译-iOS蓝牙编程指南</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/iOS国际化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          iOS国际化
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/book_multithreading_memory_management_for_iOS_OSX/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">《Objective-C高级编程 iOS与OS X多线程和内存管理》精华</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="bluetooth_guide" data-title="蓝牙编程" data-url="http://mokai.github.io/2015/09/bluetooth_guide/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"mokai"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 kk
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

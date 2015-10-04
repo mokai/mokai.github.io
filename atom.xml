@@ -5,7 +5,7 @@
   <subtitle><![CDATA[专注iOS的全栈开发者]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://mokai.github.io//"/>
-  <updated>2015-07-31T07:38:56.000Z</updated>
+  <updated>2015-10-04T02:19:37.000Z</updated>
   <id>http://mokai.github.io//</id>
   
   <author>
@@ -16,16 +16,251 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[Objective-C高级编程 iOS与OS X多线程和内存管理]]></title>
+    <title><![CDATA[iOS国际化]]></title>
+    <link href="http://mokai.github.io/2015/10/iOS%E5%9B%BD%E9%99%85%E5%8C%96/"/>
+    <id>http://mokai.github.io/2015/10/iOS国际化/</id>
+    <published>2015-10-03T16:00:00.000Z</published>
+    <updated>2015-10-04T02:19:37.000Z</updated>
+    <content type="html"><![CDATA[<p>在真正将国际化实践前，只知道通过<code>NSLocalizedString</code>方法将相应语言的字符串加载进来即可。但最近公司项目的新需求增加英文版本，并支持应用内无死角切换~，这才跳过各种坑实现了应用内切换语言，并记录至此。</p>
+<a id="more"></a>
+<h3 id="环境">环境</h3><p>系统环境: iOS7 - iOS9</p>
+<p>开发环境: Swift2 &amp; Xcode7</p>
+<p>DEMO: <a href="https://github.com/mokai/LocalDemo" target="_blank" rel="external">LocalDemo</a></p>
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_0.gif" alt=""></p>
+<p>这个Demo的功能主要是切换语言后相应的界面文字&amp;图片以及搜索引擎都会随语言变化。我们会围绕这个DEMO进行讲解，读者可以先下载这个Demo运行看下效果再往下</p>
+<p><br></p>
+<h3 id="iOS国际化原理分析">iOS国际化原理分析</h3><p>国际化其实都大同小异，其核心思想就是<code>为每种语言单独定义一份资源</code>。</p>
+<p>iOS就是通过<code>xxx.lproj</code>目录来定义每个语言的资源，这里的资源可以是图片，文本，Storyboard，Xib等。我们可以看看LocalDemo源代码的物理目录结构</p>
+<p>Base，暂时无需理会</p>
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_1.png" alt=""></p>
+<p>English</p>
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_1_1.png" alt=""></p>
+<p>中文</p>
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_1_2.png" alt=""></p>
+<p>每种语言都有自己的 <a href="http://www.lingoes.cn/zh/translator/langcode.htm" target="_blank" rel="external">语言代码</a>.lproj文件夹，加载资源时只需要加载相应语言文件夹下的资源就OK，这步可以系统为我们完成，也可以手动去做。</p>
+<blockquote>
+<p>项目源代码中如果有多个不同目录的国际化资源，则会有产生多个xxx.lproj，但在编译打包后，会集中放在app的根目录中的xxx.lproj中，不信你看~</p>
+</blockquote>
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_1_3.png" alt=""><br><br></p>
+<h3 id="开始国际化">开始国际化</h3><p>首先点击项目-&gt;PROJECT-&gt;Info-&gt;Localizations中添加要支持的语言</p>
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_2.png" alt=""></p>
+<blockquote>
+<p>此处Use Base Internationalization开启状态下，每个国际化资源文件会有个Base选项，主要针对String，Storyboard，Xib作为一个基础的模板，像后述<a href="#storyboard_2">storyboard国际化中方案二</a>就是基于Base StoryBoard进行改动。</p>
+</blockquote>
+<p>在点击<code>+</code> 添加相应语言时会弹出以下对话框，意思是为现有的资源添加语言文件，我们点击<code>Finish</code>就行了</p>
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_2_1.png" alt=""></p>
+<p><br></p>
+<h3 id="文本的国际化">文本的国际化</h3><p>主要针对代码中的字符串进行国际化，比如说一些消息，UI标题等。</p>
+<p>我们通过一个<code>Localizable.strings</code>文件来存储每个语言的文本，它是iOS默认加载的文件，如果想用自定义名称命名，在使用<code>NSLocalizedString</code>方法时指定tableName为自定义名称就好了，但你的应用规模不是很大就不要分模块搞特殊了。</p>
+<p>每个资源文件如果想为一种语言添加支持，通过其属性面板中的<code>Localization</code>添加相应语言就行了，此时<code>Localizable.strings</code>处于可展开状态，子级有着相应语言的副本。我们把相应语言的文本放在副本里面就行了</p>
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_3.png" alt=""></p>
+<blockquote>
+<p>此处Base与前面提过到的<code>开启Use Base Internationalization</code>是有关联的，只有开启了全局<code>Use Base Internationalization</code>此处才会显示。那为什么这里没有勾选Base？Base做为一个基础模板，作用于Strings文件是没有太大意义的，另外去掉Base意义着在Base.lproj中少了一个strings文件，APP大小也所有下降，这点对于图片的Base更是如此</p>
+</blockquote>
+<p>在上图可以看到其实就是为每一套语言新建一份strings，其内容采用<code>&quot;key&quot; = &quot;value&quot;;</code>的格式，注意有<code>;</code>号</p>
+<p>我们在代码中这样写就行了<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">NSLocalizedString</span><span class="params">(<span class="string">"首页"</span>,comment: <span class="string">""</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">NSLocalizedString</span><span class="params">(<span class="string">"好友"</span>,comment: <span class="string">""</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">NSLocalizedString</span><span class="params">(<span class="string">"我"</span>,comment: <span class="string">""</span>)</span></span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>另外中文strings【Localizable.strings(Simplified)】可以不要的(可以理解为中文为APP的默认语言)，因为key就是value，当找不到相应的语言strings或value时会直接返回key。nice！这样一来我们做文本的国际化就只要维护一个英文副本strings就O了</p>
+</blockquote>
+<p><br></p>
+<h3 id="图片的国际化">图片的国际化</h3><p>二种方案，通过原生支持与自定义命名</p>
+<blockquote>
+<p>注意，新版Xcode中Images.xcassets不支持国际化（属性页面中没有<code>Localization</code>），Xcode5以前是支持的</p>
+</blockquote>
+<ul>
+<li><p>方案一：自定义文本命名</p>
+<p>  <img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_4.png" alt=""></p>
+<p>  利用文本国际化的方式，在代码中调用</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UIImage<span class="list">(<span class="keyword">named</span>: NSLocalizedString<span class="list">(<span class="string">"search_logo"</span>,comment: <span class="string">""</span>)</span>)</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>不推荐，一是因为做法太low了，工作量明显加大。二是不能在Storyboard或XIB中使用</p>
+</blockquote>
+</li>
+<li><h6 id="方案二：原生支持">方案二：原生支持</h6><p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_4_1.png" alt=""></p>
+<blockquote>
+<p>同上，Base副本去掉。另外需要注意的是，使用这种方式，在XIB或Storyboard中引用图片时如果只使用名称是实时显示不了的，一定要加上后缀名。如avater.png</p>
+</blockquote>
+<p>  使用方式不变，iOS会自动找相应语言(xxx.lproj)下的图片</p>
+  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">UIImage</span><span class="params">(named: <span class="string">"avater"</span>)</span></span></span><br></pre></td></tr></table></figure>
+<p>  对于图片的放置，正确姿态应该是<code>需要国际化的图片放在自定义Group里面，不需要国际化的图片放在Images.xcassets</code></p>
+</li>
+</ul>
+<p><br></p>
+<h3 id="Storyboard&amp;XIB的国际化">Storyboard&amp;XIB的国际化</h3><p>前面的两种资源国际化比较简单，但Storyboard国际化就稍微麻烦了点。同样它也有二种方案</p>
+<ul>
+<li><p>方案一：每种语言定制一套Storyboard</p>
+<p>  <img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_5.png" alt=""></p>
+<p>  在上图我们可以看到，每种语言都可以切换为strings或Storyboard（默认为strings）。如果选用<code>Interface Builder Storyboard</code>方案，那么每种语言都有一套相应的Storyboard，各个语言Storyboard间的界面改动不关联</p>
+</li>
+<li><p>方案二：基于基础的<code>Base StoryBoard</code>以及每种语言一套strings <a id="storyboard_2"></a></p>
+<p>  <img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_5_1.png" alt=""></p>
+<p>基于一个基础的Storyboard，可以看作是一个基础的模板，Storyboard里面所有的文本类资源(如UILabel的text)都会被放在相应语言的strings里面。此时我们为Storyboard里的字符类资源作国际化只需要编辑相应语言的strings就行了</p>
+</li>
+</ul>
+<p>首选方案二。因为采用方案一，意义着你每改动一个界面元素就得去相应语言Storyboard一一改动，那跟为每个语言新起一个项目是一样的道理。但是采用方案二，我们只需改动Base Storyboard就行了</p>
+<blockquote>
+<p>注意，方案二中相应语言的strings一旦生成后，Base Storyboard有任何编辑都不会影响到strings，这就意味着如果我们删除或添加了一个UILabel的text，strings也不能同步改动</p>
+</blockquote>
+<p>  还好，Xcode为我们提供了<code>ibtool</code>工具来生成Storyboard的strings文件。</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ibtool Main.storyboard --<span class="keyword">generate</span>-strings-<span class="keyword">file</span> ./NewTemp.<span class="literal">string</span></span><br></pre></td></tr></table></figure>
+<p>  但是ibtool生成的strings文件是BaseStoryboard的strings(默认语言的strings)，且会把我们原来的strings替换掉。所以我们要做的就是把新生成的strings与旧的strings进行冲突处理(新的附加上，删除掉的注释掉)，这一切可以用这个pythoy脚本来实现，见<a href="https://raw.githubusercontent.com/mokai/iOS-i18n/master/i18n/RunScript/AutoGenStrings.py" target="_blank" rel="external">AutoGenStrings.py</a>。然后我们将借助<code>Xcode 中 Run Script</code>来运行这段脚本。这样每次Build时都会保证语言strings与Base Storyboard保持一致</p>
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_5_2.png" alt=""></p>
+<p><br></p>
+<h4 id="应用内切换语言">应用内切换语言</h4><p>应用启动时，首先会读取NSUserDefaults中的key为<code>AppleLanguages</code>的内容，该key返回一个String数组，存储着APP支持的语言列表，数组的第一项为APP当前默认的语言。</p>
+<p>在安装后第一次打开APP时，会自动初始化该key为当前系统的语言编码，如简体中文就是zh-Hans。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取APP当前语言</span></span><br><span class="line">(NSUserDefaults.<span class="function"><span class="title">standardUserDefaults</span><span class="params">()</span></span>.<span class="function"><span class="title">valueForKey</span><span class="params">(<span class="string">"AppleLanguages"</span>)</span></span> as! Array&lt;String&gt;)[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<p>那么我们要实现语言切换改变<code>AppleLanguages</code>的值即可，但是这里有一个坑，因为苹果没提供给我们直接修改APP默认语言的API，我们只能通过NSUserDefaults手动去操作，且<code>AppleLanguages</code>的值改变后APP得重新启动后才会生效（才会读取相应语言的lproj中的资源，意义着就算你改了，资源还是加载的APP启动时lproj中的资源），猜测应该是框架层在第一次加载时对<code>AppleLanguages</code>的值进行了内存缓冲</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置APP当前语言</span></span><br><span class="line"><span class="tag">var</span> def = NSUserDefaults.<span class="function"><span class="title">standardUserDefaults</span><span class="params">()</span></span></span><br><span class="line">def.<span class="function"><span class="title">setValue</span><span class="params">([“zh-Hans”], forKey:<span class="string">"AppleLanguages"</span>)</span></span></span><br><span class="line">def.<span class="function"><span class="title">synchronize</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<p>那么问题来了，如何做到改变<code>AppleLanguages</code>的值就加载相应语言的lproj资源？</p>
+<p>其实，APP中的Storyboard的加载，图片与字符串的加载都是在<code>NSBundle.mainBundle()</code>上操作的，那么我们只要在语言切换后把<code>NSBundle.mainBundle()</code>替换成当前语言的bundle就行了，这样系统通过<code>NSBundle.mainBundle()</code>去加载资源时实则是加载的当前语言bundle中的资源</p>
+<blockquote>
+<p>lproj目录可以用一个NSBundle表示</p>
+</blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="type">Foundation</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">*  当调用onLanguage后替换掉mainBundle为当前语言的bundle</span><br><span class="line">*/</span></span><br><span class="line">private  <span class="keyword">let</span> _bundle:<span class="type">UnsafePointer</span>&lt;<span class="type">Void</span>&gt; =  unsafeBitCast(<span class="number">0</span>,<span class="type">UnsafePointer</span>&lt;<span class="type">Void</span>&gt;.<span class="keyword">self</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BundleEx</span>: <span class="title">NSBundle</span> </span>&#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">localizedStringForKey</span><span class="params">(key: String, value: String?, table tableName: String?)</span></span> -&gt; <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> bundle = languageBundle() &#123;</span><br><span class="line">            <span class="keyword">return</span> bundle.localizedStringForKey(key, value: value, table: tableName)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.localizedStringForKey(key, value: value, table: tableName)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">NSBundle</span></span>&#123;</span><br><span class="line">    private <span class="class"><span class="keyword">struct</span> <span class="title">Static</span> </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">var</span> onceToken : dispatch_once_t = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">onLanguage</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//替换NSBundle.mainBundle()为自定义的BundleEx</span></span><br><span class="line">        dispatch_once(&amp;<span class="type">Static</span>.onceToken) &#123;</span><br><span class="line">            object_setClass(<span class="type">NSBundle</span>.mainBundle(), <span class="type">BundleEx</span>.<span class="keyword">self</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//当前语言的bundle</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">languageBundle</span><span class="params">()</span></span>-&gt;<span class="type">NSBundle</span>?&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">Languager</span>.standardLanguager().currentLanguageBundle</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上<code>Languager</code>是 <a href="https://github.com/mokai/iOS-i18n" target="_blank" rel="external">iOS-i18n</a> 开源库的一部分，我把项目中国际化部分封装了下，有兴趣的童鞋可以去看看 </p>
+<h3 id="其他">其他</h3><ul>
+<li><p>设置运行语言环境</p>
+<p>有时我们第一次安装APP时不想默认跟随系统，那么可以通过Xcode的scheme来指定特定语言</p>
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_6.png" alt=""></p>
+</li>
+<li><p>Storyboard实时预览</p>
+<p>直接上图~</p>
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_6_1.png" alt=""></p>
+</li>
+</ul>
+<ul>
+<li><p>IB中UIImageView国际化无效</p>
+<p>解决办法就是为<code>UIImageView</code>扩展一个方法，然后通过IB中的<code>User Defined Runtime Attributes</code>把imageName传进去</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">UIImageView</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> locale:<span class="type">String</span>&#123;</span><br><span class="line">        <span class="keyword">get</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">""</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">set</span>(newlocale)&#123;</span><br><span class="line">            <span class="keyword">self</span>.image = localizedImage(newlocale)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  <img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_6_2.png" alt=""></p>
+</li>
+<li><p>IB中UITextView国际化无效</p>
+<p>解决办法和UIImageView类似，扩展一个方法，然后把self.text做为key去strings文件中拿相应语言的value</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">UITextView</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> locale:<span class="type">Bool</span>&#123;</span><br><span class="line">        <span class="keyword">get</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">set</span>(newlocale)&#123;</span><br><span class="line">            <span class="keyword">self</span>.text = localized(<span class="keyword">self</span>.text)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_6_3.png" alt=""></p>
+</li>
+</ul>
+<ul>
+<li><p>LaunchScreen.xib的国际化</p>
+<p> 很遗憾，到目前为止，还不支持LaunchScreen.xib的国际化，我们只能通过自定义一个LaunchViewController来完成此需求，但也有些不足，就是应用启动时会黑屏一段时间，所以建议启动页面不要弄国际化</p>
+</li>
+</ul>
+<p>参考:</p>
+<ul>
+<li><a href="http://www.cnblogs.com/levilinxi/p/4296712.html" target="_blank" rel="external">iOS国际化——通过脚本使storyboard翻译自增</a></li>
+<li><a href="https://medium.com/ios-apprentice/working-with-localization-905e4052b9de" target="_blank" rel="external">Working with Localization</a></li>
+<li><a href="http://stackoverflow.com/questions/1669645/how-to-force-nslocalizedstring-to-use-a-specific-language" target="_blank" rel="external">How to force NSLocalizedString to use a specific language</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在真正将国际化实践前，只知道通过<code>NSLocalizedString</code>方法将相应语言的字符串加载进来即可。但最近公司项目的新需求增加英文版本，并支持应用内无死角切换~，这才跳过各种坑实现了应用内切换语言，并记录至此。</p>]]>
+    
+    </summary>
+    
+      <category term="国际化" scheme="http://mokai.github.io/tags/%E5%9B%BD%E9%99%85%E5%8C%96/"/>
+    
+      <category term="记录" scheme="http://mokai.github.io/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[蓝牙编程]]></title>
+    <link href="http://mokai.github.io/2015/09/bluetooth_guide/"/>
+    <id>http://mokai.github.io/2015/09/bluetooth_guide/</id>
+    <published>2015-09-07T16:00:00.000Z</published>
+    <updated>2015-09-28T01:40:41.000Z</updated>
+    <content type="html"><![CDATA[<p>蓝牙技术，很早以前就被有了，如今已更新4.0版本。很多热门技术都是基于它工作的，如Android平台的NFC，iOS的iBeancon，Apple Watch的WatchConnectivity框架等，现在的智能家居基本也是基于蓝牙4.0与APP进行通信，可见蓝牙在实践工作中的重要性。在iOS中，蓝牙是基于4.0标准的，设备间低功耗通信。</p>
+<a id="more"></a>
+<h2 id="核心成员">核心成员</h2><p>在开始前我们回忆下传统的Socket编程，里面有Server服务端与Client端的区别。那么在蓝牙编程也是如此，其中<code>Peripheral</code>外设相当于Socket编程中的Server服务端，<code>Central</code>中心相当于Client客户端(ps吐槽下，Central中心，作为服务端，不更适合吗！)</p>
+<p><img src="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/Art/CBDevices1_2x.png" width="600" height="400"></p>
+<p>你可以理解外设是一个广播数据的设备，它开始告诉外面的世界说它这儿有一些数据，并且能提供一些服务。另一边中心开始扫描周边有没有合适的设备，如果发现后，会和外设做连接请求，一旦连接确定后，两个设备就可以传输数据了。</p>
+<p>在iOS6之后，iOS 设备可以是外设，也可以是中心，就像Socket编程中一样，你可以是服务端也可以是客户端。</p>
+<h5 id="服务(service)和特征(characteristic)">服务(service)和特征(characteristic)</h5><p>每个蓝牙4.0的设备都是通过服务和特征来展示自己的，一个设备必然包含一个或多个服务，每个服务下面又包含若干个特征。特征是与外界交互的最小单位。比如说，智能音响设备，用服务A标识播放模块，特征A1来表示播放上一首，特征A2来表示播放下一首；服务B标识设置模块，特征B1设置彩灯颜色。这样做的目的主要为了<code>模块化</code>。</p>
+<blockquote>
+<p>外设，服务，特征都有一个<code>UUID</code>来标识</p>
+</blockquote>
+<p>上面说了设备可以是外设，也可以是中心，也就是会有二种模式  </p>
+<p>本地中心 -&gt; 远程外设   </p>
+<p>本地外设 -&gt; 远程中心 </p>
+<p>不过在智能家居开发中，大部分硬件蓝牙都是担任外设的角色，也就是说我们应用只要扮演中心即可了。</p>
+<h2 id="开始">开始</h2><p>本篇只讲述第一种模式的本地中心，远程外设端可借助 <a href="https://itunes.apple.com/cn/app/lightblue/id639944780?mt=12" target="_blank" rel="external">蓝牙调试神器LightBlue For Mac</a>。需要了解第二种模式可以移步<a href="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/PerformingCommonPeripheralRoleTasks/PerformingCommonPeripheralRoleTasks.html#//apple_ref/doc/uid/TP40013257-CH4-SW1" target="_blank" rel="external">创建外设</a> ps 英文，慎入~</p>
+<p>蓝牙交互的流程大致为</p>
+<blockquote>
+<p>建立中心角色 —&gt; 扫描外设（discover）—&gt; 发现外设后连接外设(connect) —&gt; 扫描外设中的服务和特征(discover) —&gt; 与外设做数据交互(explore and interact) —&gt; 断开连接(disconnect)。</p>
+</blockquote>
+<p>下面我们一一讲到</p>
+<h2 id="建立中心角色">建立中心角色</h2><p>在本地中心角色中，使用CBCentralManager类管理，我们创建一个CBCentralManager类</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="built_in">queue</span> <span class="subst">=</span> dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">let</span> centralMgr <span class="subst">=</span> CBCentralManager(delegate: <span class="built_in">self</span>, <span class="built_in">queue</span>: <span class="built_in">queue</span>)</span><br></pre></td></tr></table></figure>
+<p>上面的delegate为CBCentralManagerDelegate，后续蓝牙相关的回调都会在此。queue代表蓝牙在哪个队列里面操作，如果传入nil默认为主队列，值得注意的是后续的回调也是在传入的队列中调用的，所以如果传入的是非主线程的队列，在delegate中需要操作UI时需要手动切换到主线程</p>
+<p>CBCentralManager对象创建后会回调到<code>centralManagerDidUpdateState</code>方法来检测蓝牙可用状态，这时我们可以提醒用户设备是否支持蓝牙，是否打开了蓝牙</p>
+<h2 id="扫描外设">扫描外设</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let serviceUUIDS:Array&lt;CBUUID&gt; = [<span class="function"><span class="title">CBUUID</span><span class="params">(string: <span class="string">"FFDD"</span>)</span></span>]</span><br><span class="line">self<span class="class">.centralMgr</span><span class="class">.scanForPeripheralsWithServices</span>(serviceUUIDS, options: [ CBCentralManagerScanOptionAllowDuplicatesKey : true ])</span><br><span class="line"></span><br><span class="line"><span class="comment">//停止扫描</span></span><br><span class="line">self<span class="class">.centralMgr</span><span class="class">.stopScan</span>()</span><br></pre></td></tr></table></figure>
+<p>如果serviceUUIDS为nil则会扫描周围所有的设外设，反之只会扫描UUID匹配的外设。CBCentralManagerScanOptionAllowDuplicatesKey默认为false，此次扫描中发现过设备则跳过不回调，我们这里传入true，因为下面做外设掉线的处理时需要用到</p>
+<blockquote>
+<p>传入的serviceUUIDS数组元素为CBUUID类型，千万不要传入String，后面的操作也是如此，不然会碰到很多奇葩问题</p>
+</blockquote>
+<p>发现外设后会回调到 <code>centralManager(central:,didDiscoverPeripheral:,advertisementData:, RSSI:)</code><br>其中，perpheral则代表着外设，我们需要保存起来，后续的对外设的操作都是基于perpheral对象的</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">centralManager</span><span class="params">(central: CBCentralManager!, didDiscoverPeripheral peripheral: CBPeripheral!, advertisementData: [NSObject : AnyObject]!, RSSI: NSNumber!)</span></span> &#123;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;discoveredPeripheralers.<span class="built_in">count</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> peripheraler = discoveredPeripheralers[i]</span><br><span class="line">            <span class="keyword">if</span>(!peripheral.identifier.isEqual(peripheraler.peripheral.identifier))&#123; <span class="comment">//未发现过才保存</span></span><br><span class="line">               discoveredPeripheralers.append(peripheraler)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="连接外设">连接外设</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">self</span><span class="class">.centralMgr</span><span class="class">.connectPeripheral</span>(<span class="tag">peripheral</span>, <span class="rule"><span class="attribute">options</span>:<span class="value"> nil)</span></span></span><br></pre></td></tr></table></figure>
+<p>传入上面保存的外设对象，如果连接失败后会回调到 <code>centralManager(central:, didFailToConnectPeripheral:, error:)</code>，<br>连接成功后会回调到 <code>centralManager(central:didConnectPeripheral:)</code>，这个时候我们只是连接上外设而已，还需要发现外设中的服务与特征</p>
+<h2 id="发现服务与特征">发现服务与特征</h2><p>外设连接成功后我们把peripheral保存好，并设置好peripheral的delegate(CBPeripheralDelegate)，然后调用discoverServices来发现服务，同扫描外设时一样，discoverServices也可以传入一个serviceUUIDs参数来只获取需要的服务</p>
+<blockquote>
+<p>注意，注意，注意，重要的话说三遍。以下的回调都是CBPeripheralDelegate的了，不再是CBCentralManagerDelegate的回调</p>
+</blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">centralManager</span><span class="params">(central: CBCentralManager!, didConnectPeripheral peripheral: CBPeripheral!)</span></span> &#123;</span><br><span class="line">    <span class="keyword">self</span>.peripheral = peripheral</span><br><span class="line">    <span class="keyword">self</span>.peripheral.delegate = <span class="keyword">self</span></span><br><span class="line">    <span class="keyword">let</span> serviceUUIDS:<span class="type">Array</span>&lt;<span class="type">CBUUID</span>&gt; = [<span class="type">CBUUID</span>(string: <span class="string">"FF12"</span>)]</span><br><span class="line">    <span class="keyword">self</span>.peripheral.discoverServices(serviceUUIDS)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>发现服务后回调到<code>peripheral(peripheral:,didDiscoverServices:)</code>，这时我们就可以访问所有发现的服务一一去发现服务下的特征</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">peripheral</span><span class="params">(peripheral: CBPeripheral!, didDiscoverServices error: NSError!)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span>(error != <span class="literal">nil</span>)&#123;</span><br><span class="line">	    log(error)</span><br><span class="line">	    <span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> item <span class="keyword">in</span> peripheral.services&#123;</span><br><span class="line">		<span class="keyword">let</span> service = item <span class="keyword">as</span>! <span class="type">CBService</span></span><br><span class="line">		<span class="keyword">let</span> characteristicUUIDs:<span class="type">Array</span>&lt;<span class="type">CBUUID</span>&gt; = [<span class="type">CBUUID</span>(string: <span class="string">"FF02"</span>),<span class="type">CBUUID</span>(string: <span class="string">"FF04"</span>)]</span><br><span class="line">		peripheral.discoverCharacteristics(characteristicUUIDs, forService: service)  <span class="comment">//发现特征</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同样特征也可以传入characteristicUUIDs数组来过滤，发现特征后回调</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">peripheral</span><span class="params">(peripheral: CBPeripheral!, didDiscoverCharacteristicsForService service: CBService!, error: NSError!)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(error != <span class="literal">nil</span>)&#123;</span><br><span class="line">        log(error)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> service.characteristics&#123;</span><br><span class="line">        <span class="keyword">let</span> characteristic = item <span class="keyword">as</span>! <span class="type">CBCharacteristic</span></span><br><span class="line">        <span class="keyword">if</span>(characteristic.properties == .<span class="type">Notify</span>)&#123; <span class="comment">//如果特征为订阅属性则开启订阅</span></span><br><span class="line">            peripheral.setNotifyValue(<span class="literal">true</span>, forCharacteristic: characteristic)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每进入一次回调代表发现一个服务中的特征而不是外设所有的特征，外设、服务、特征从左至右都是上下级一对多的关系。<br>每个特征都有个属性，代表着它是可写、可读等，一个特征可同时拥有读写权限，如上面的订阅其实是一种订阅者模式的读取数据</p>
+<h2 id="发送数据">发送数据</h2><p>拿到可写的特征后，通过writeValue发送数据包</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="built_in">data</span> <span class="subst">=</span> <span class="string">"hello"</span><span class="built_in">.</span>dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: <span class="literal">true</span>)</span><br><span class="line"><span class="comment">//自动判断写特征的类型</span></span><br><span class="line"><span class="built_in">var</span> <span class="keyword">type</span>:CBCharacteristicWriteType <span class="subst">=</span> <span class="built_in">.</span>WithoutResponse</span><br><span class="line"><span class="keyword">if</span>(writeCharacteristic<span class="built_in">.</span>properties <span class="subst">==</span> CBCharacteristicProperties<span class="built_in">.</span>Write)&#123;</span><br><span class="line">    <span class="keyword">type</span> <span class="subst">=</span> <span class="built_in">.</span>WithResponse</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">self</span><span class="built_in">.</span>peripheral<span class="subst">!</span><span class="built_in">.</span>writeValue(<span class="built_in">data</span>, forCharacteristic: writeCharacteristic, <span class="keyword">type</span>: <span class="keyword">type</span>)</span><br></pre></td></tr></table></figure>
+<p>把要发送的文本转换为二进制，发送到相应的特征即可。值得注意的是第三个参数type写类型需要与特征的属性一致，其中WithoutResponse与WithResponse区别在于前者发送数据后是没有回调的，后者会回调到  <code>peripheral(peripheral:, didWriteValueForCharacteristic:, error:)</code> 来检测是否发送成功，如果发送数据传入的类型与特征不同时总是会失败</p>
+<blockquote>
+<p>由于蓝牙的缓冲大小只有20bytes，那么如果我们发送的数据包大小不能大于20bytes，所以得分多次发送</p>
+</blockquote>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">func writeValue(<span class="built_in">data</span>:NSData,withCharacteristic characteristic:CBCharacteristic)<span class="subst">-&gt;</span>Bool&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">self</span><span class="built_in">.</span>peripheral <span class="subst">==</span> nil)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">var</span> didSend <span class="subst">=</span> <span class="literal">false</span></span><br><span class="line">    <span class="built_in">var</span> sendDataIndex <span class="subst">=</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span>  NOTIFY_MTU <span class="subst">=</span> <span class="number">20</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">data</span><span class="built_in">.</span>length <span class="subst">-</span> sendDataIndex <span class="subst">!=</span> <span class="number">0</span>) &#123;</span><br><span class="line">   		<span class="comment">//剩下的数据大小</span></span><br><span class="line">        <span class="built_in">var</span> amountToSend <span class="subst">=</span> <span class="built_in">data</span><span class="built_in">.</span>length <span class="subst">-</span> sendDataIndex</span><br><span class="line">        <span class="comment">// 不能大于20bytes</span></span><br><span class="line">        <span class="keyword">if</span> (amountToSend <span class="subst">&gt;</span> NOTIFY_MTU) &#123;</span><br><span class="line">            amountToSend <span class="subst">=</span> NOTIFY_MTU</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> chunk <span class="subst">=</span> NSData(<span class="built_in">bytes</span>: <span class="built_in">data</span><span class="built_in">.</span><span class="built_in">bytes</span> <span class="subst">+</span> sendDataIndex, length: amountToSend)</span><br><span class="line">        <span class="built_in">var</span> <span class="keyword">type</span>:CBCharacteristicWriteType <span class="subst">=</span> <span class="built_in">.</span>WithoutResponse</span><br><span class="line">        <span class="keyword">if</span>(characteristic<span class="built_in">.</span>properties <span class="subst">==</span> CBCharacteristicProperties<span class="built_in">.</span>Write)&#123;</span><br><span class="line">            <span class="keyword">type</span> <span class="subst">=</span> <span class="built_in">.</span>WithResponse</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">self</span><span class="built_in">.</span>peripheral<span class="subst">!</span><span class="built_in">.</span>writeValue(chunk, forCharacteristic: characteristic, <span class="keyword">type</span>: <span class="keyword">type</span>)</span><br><span class="line">        sendDataIndex <span class="subst">+=</span> amountToSend</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="读取数据">读取数据</h2><p>分为二种，直接读、订阅，顾名思义，直接读就是手动调用API读取，订阅则只要开启后，外设有消息都可以收到</p>
+<p>直接读</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.peripheral!.<span class="function"><span class="title">readValueForCharacteristic</span><span class="params">(characteristic)</span></span></span><br></pre></td></tr></table></figure>
+<p>订阅</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">self</span><span class="class">.peripheral</span>!<span class="class">.setNotifyValue</span>(<span class="tag">true</span>, <span class="rule"><span class="attribute">forCharacteristic</span>:<span class="value"> characteristic)</span></span></span><br></pre></td></tr></table></figure>
+<p>两种回调都会回调到 <code>peripheral(peripheral:, didUpdateValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!)</code>，上面也提到因为蓝牙的缓冲大小，需要发送多次，那么在读取时也需要接收多次，才能保证数据的一体性，所以通常都会在数据包的开始用 <code>EOM</code> 来标识一段数据的开始，数据结束后再次用 <code>EOM</code> 来标识，所以我们接收数据时会这样</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> updatingEOMFlag = <span class="string">"EOM"</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">peripheral</span><span class="params">(peripheral: CBPeripheral!, didUpdateValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(error != <span class="literal">nil</span>)&#123;</span><br><span class="line">        log(error)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(characteristic.value != <span class="literal">nil</span>)&#123;</span><br><span class="line">        <span class="keyword">var</span> data = characteristic.value!</span><br><span class="line">        <span class="keyword">var</span> string = <span class="type">NSString</span>(data: data, encoding: <span class="type">NSUTF8StringEncoding</span>)</span><br><span class="line">        log(string)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//接收多段数据</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">self</span>.updatingEOMFlag != <span class="literal">nil</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">self</span>.updatingEOMFlag == string)&#123;</span><br><span class="line">                <span class="keyword">var</span> <span class="type">EOMEndFlag</span> = <span class="literal">false</span></span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="keyword">self</span>.updatingDatas.<span class="built_in">count</span>&#123; <span class="comment">//数据结束</span></span><br><span class="line">                    <span class="keyword">var</span> updatingData = <span class="keyword">self</span>.updatingDatas[i]</span><br><span class="line">                    <span class="keyword">if</span>(updatingData.characteristic.<span class="type">UUID</span>.isEqual(characteristic.<span class="type">UUID</span>))&#123;</span><br><span class="line">                        data = updatingData.data</span><br><span class="line">                        string = <span class="type">NSString</span>(data: data, encoding: <span class="type">NSUTF8StringEncoding</span>)</span><br><span class="line">                        <span class="keyword">self</span>.updatingDatas.removeAtIndex(i) <span class="comment">//删除缓存数据</span></span><br><span class="line">                        <span class="type">EOMEndFlag</span> = <span class="literal">true</span></span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(!<span class="type">EOMEndFlag</span>)&#123;<span class="comment">//数据开始</span></span><br><span class="line">                    <span class="keyword">let</span> updatingData = <span class="type">UpdatingDataer</span>(characteristic: characteristic, data: <span class="type">NSMutableData</span>())</span><br><span class="line">                    <span class="keyword">self</span>.updatingDatas!.append(updatingData)</span><br><span class="line">                    <span class="keyword">return</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">var</span> updatingData = (<span class="keyword">self</span>.updatingDatas?.<span class="built_in">filter</span>&#123; $<span class="number">0</span>.characteristic.<span class="type">UUID</span>.isEqual(characteristic.<span class="type">UUID</span>) &#125;) <span class="keyword">where</span> updatingData.<span class="built_in">count</span> == <span class="number">1</span> &amp;&amp; updatingData[<span class="number">0</span>].data != <span class="literal">nil</span> &#123; <span class="comment">//数据中间</span></span><br><span class="line">                    updatingData[<span class="number">0</span>].data.appendData(data)</span><br><span class="line">                    <span class="keyword">return</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//触发delegate与通知回调</span></span><br><span class="line">        <span class="keyword">let</span> stringData = <span class="type">StringData</span>(string:string <span class="keyword">as</span>? <span class="type">String</span>,data:data)</span><br><span class="line">        <span class="comment">//在此最终得到完整数据</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="断开连接">断开连接</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">self</span><span class="class">.centralMgr</span><span class="class">.cancelPeripheralConnection</span>(<span class="tag">self</span><span class="class">.peripheral</span>!)</span><br></pre></td></tr></table></figure>
+<p>至此，整个流程就完了</p>
+<h2 id="高级需求~">高级需求~</h2><h4 id="外设掉线检测">外设掉线检测</h4><p>所谓掉线就是外设发现了后，过了一段时间失去信号了。喵了下系统框架，没有找到相关外设掉线的检测，唯一有点像的就是发现外设里面的RSSI,代表设备信号强度，值越小信息越好。</p>
+<h2 id="总结">总结</h2><ul>
+<li>在蓝牙交互的二种角色中，通常APP端扮演<code>中央Central</code>的角色，设备扮演<code>外设Peripheral</code>的角色</li>
+<li>创建CBCentralManager对象时传入的queue决定了后续CBCentralManagerDelegate、CBPeripheralDelegate等回调的所在线程</li>
+<li>一个外设设备可包含一个或多个服务，一个服务可包含一个或多个特征，读写操作最终是针对特征。</li>
+<li>蓝牙的缓冲大小只有20bytes，在发送数据时最多只能发送20bytes，所以得分多次发送，数据的一体性可以用 EOM 标识符表标识</li>
+</ul>
+<h2 id="参考">参考</h2><p><a href="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html" target="_blank" rel="external">Core Bluetooth Programming Guide</a></p>
+<p><a href="http://www.jianshu.com/p/760f042a1d81" target="_blank" rel="external">译-iOS蓝牙编程指南</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>蓝牙技术，很早以前就被有了，如今已更新4.0版本。很多热门技术都是基于它工作的，如Android平台的NFC，iOS的iBeancon，Apple Watch的WatchConnectivity框架等，现在的智能家居基本也是基于蓝牙4.0与APP进行通信，可见蓝牙在实践工作中的重要性。在iOS中，蓝牙是基于4.0标准的，设备间低功耗通信。</p>]]>
+    
+    </summary>
+    
+      <category term="蓝牙" scheme="http://mokai.github.io/tags/%E8%93%9D%E7%89%99/"/>
+    
+      <category term="记录" scheme="http://mokai.github.io/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[《Objective-C高级编程 iOS与OS X多线程和内存管理》精华]]></title>
     <link href="http://mokai.github.io/2015/07/book_multithreading_memory_management_for_iOS_OSX/"/>
     <id>http://mokai.github.io/2015/07/book_multithreading_memory_management_for_iOS_OSX/</id>
     <published>2015-07-30T16:00:00.000Z</published>
-    <updated>2015-07-31T07:38:56.000Z</updated>
-    <content type="html"><![CDATA[<p>待编辑….</p>
-]]></content>
+    <updated>2015-08-19T01:44:29.000Z</updated>
+    <content type="html"><![CDATA[<p>做iOS已经一年多了，前段时间买了二本书<code>Objective-C高级编程 iOS与OS X多线程和内存管理</code>与<code>Effective Objective-C 2.0</code>，感觉内容还不错，简直是面试良品，故记录下笔记</p>
+<a id="more"></a>
+<h2 id="一、自动引用计数">一、自动引用计数</h2><h2 id="二、Blocks">二、Blocks</h2><h2 id="三、GCD">三、GCD</h2>]]></content>
     <summary type="html">
-    <![CDATA[<p>待编辑….</p>
-]]>
+    <![CDATA[<p>做iOS已经一年多了，前段时间买了二本书<code>Objective-C高级编程 iOS与OS X多线程和内存管理</code>与<code>Effective Objective-C 2.0</code>，感觉内容还不错，简直是面试良品，故记录下笔记</p>]]>
+    
     </summary>
     
       <category term="读书笔记" scheme="http://mokai.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
@@ -46,147 +281,6 @@
     </summary>
     
       <category term="读书笔记" scheme="http://mokai.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[使用Swift&Xcode6为iOS应用做国际化]]></title>
-    <link href="http://mokai.github.io/2015/05/%E4%BD%BF%E7%94%A8swift&xcode6%E4%B8%BAiOS%E5%BA%94%E7%94%A8%E5%81%9A%E5%9B%BD%E9%99%85%E5%8C%96/"/>
-    <id>http://mokai.github.io/2015/05/使用swift&xcode6为iOS应用做国际化/</id>
-    <published>2015-05-19T16:00:00.000Z</published>
-    <updated>2015-07-30T01:04:28.000Z</updated>
-    <content type="html"><![CDATA[<p>在真正将国际化实践前，只知道通过<code>NSLocalizedString</code>将相应语言的字符串加载进来即可。但最近公司项目的新需求增加英文版本，并支持应用内无死角切换~，这才跳过各种坑实现了应用内切换语言，并记录至此。</p>
-<a id="more"></a>
-<h3 id="环境">环境</h3><p>系统环境: iOS7 - iOS8.3</p>
-<p>开发环境: Swift1.2 &amp; Xcode6.3.2</p>
-<p>DEMO: <a href="https://github.com/mokai/LocalDemo" target="_blank" rel="external">LocalDemo</a></p>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_0.gif" alt=""></p>
-<p>这个Demo的功能主要是切换语言后相应的界面文字&amp;图片以及搜索引擎都会随语言变化。我们会围绕这个DEMO进行讲解，读者可以先下载这个Demo运行看下效果再往下</p>
-<p><br></p>
-<h3 id="iOS国际化原理分析">iOS国际化原理分析</h3><p>国际化其实都大同小异，其核心思想就是<code>为每种语言单独定义一份资源</code>。</p>
-<p>iOS就是通过<code>xxx.lproj</code>目录来定义每个语言的资源，这里的资源可以是图片，文本，storyboard，xib等。我们可以看看LocalDemo源代码的物理目录结构</p>
-<p>Base，暂时无需理会</p>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_1.png" alt=""></p>
-<p>English</p>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_1_1.png" alt=""></p>
-<p>中文</p>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_1_2.png" alt=""></p>
-<p>每种语言都有自己的 <a href="http://www.lingoes.cn/zh/translator/langcode.htm" target="_blank" rel="external">语言代码</a>.lproj文件夹，加载资源时只需要加载相应语言文件夹下的资源就OK，这步可以系统为我们完成，也可以手动去做。</p>
-<blockquote>
-<p>项目源代码中如果有多个不同目录的国际化资源，则会有产生多个xxx.lproj，但在编译打包后，会集中放在app的根目录中的xxx.lproj中，不信你看~</p>
-</blockquote>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_1_3.png" alt=""></p>
-<h3 id="开始国际化">开始国际化</h3><p>首先点击项目-&gt;PROJECT-&gt;Info-&gt;Localizations中添加要支持的语言</p>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_2.png" alt=""></p>
-<blockquote>
-<p>此处Use Base Internationalization开启状态下，每个国际化资源文件会有个Base选项，主要针对string，storyboard，xib作为一个基础的模板，像后述<a href="#storyboard_2">storyboard国际化中方案二</a>就是基于Base StoryBoard进行改动。</p>
-</blockquote>
-<p>在点击<code>+</code> 添加相应语言时会弹出以下对话框，意思是为现有的资源添加语言文件，我们点击<code>Finish</code>就行了</p>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_2_1.png" alt=""></p>
-<h3 id="文本的国际化">文本的国际化</h3><p>主要针对代码中的字符串进行国际化，比如说一些消息，UI标题等。</p>
-<p>我们通过一个<code>Localizable.strings</code>文件来存储每个语言的文本，它是iOS默认加载的文件，如果想用自定义名称命名，在使用<code>NSLocalizedString</code>时指定tableName为自定义名称就好了，但你的应用规模不是很大就不要分模块搞特殊了。</p>
-<p>每个资源文件如果想为一种语言添加支持，通过其属性面板中的<code>Localization</code>添加相应语言就行了，此时<code>Localizable.strings</code>处于可展开状态，子级有着相应语言的副本。我们把相应语言的文本放在副本里面就行了</p>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_3.png" alt=""></p>
-<blockquote>
-<p>此处Base与前面提过到的<code>开启Use Base Internationalization</code>是有关联的，只有开启了全局<code>Use Base Internationalization</code>此处才会显示。那为什么这里没有勾选Base？Base做为一个基础模板，作用于strings文件是没有太大意义的，另外去掉Base意义着在Base.lproj中少了一个strings文件，APP大小也所有下降，这点对于图片的base更是如此</p>
-</blockquote>
-<p>在上图可以看到其实就是为每一套语言新建一份strings，其内容采用<code>&quot;key&quot; = &quot;value&quot;;</code>的格式，注意有<code>;</code>号</p>
-<p>我们在代码中这样写就行了<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">NSLocalizedString</span><span class="params">(<span class="string">"首页"</span>,comment: <span class="string">""</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">NSLocalizedString</span><span class="params">(<span class="string">"好友"</span>,comment: <span class="string">""</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">NSLocalizedString</span><span class="params">(<span class="string">"我"</span>,comment: <span class="string">""</span>)</span></span></span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>另外中文strings【Localizable.strings(Simplified)】可以不要的，因为key就是value，当找不到相应的语言strings或value时会直接返回key。nice！这样一来我们做文本的国际化就只要维护一个英文副本strings就O了</p>
-</blockquote>
-<h3 id="图片的国际化">图片的国际化</h3><p>二种方案，通过原生支持与自定义命名</p>
-<blockquote>
-<p>注意，新版Xcode中Images.xcassets不支持国际化（属性页面中没有<code>Localization</code>），Xcode5以前是支持的（应该是5以前）</p>
-</blockquote>
-<ul>
-<li><p>方案一：自定义文本命名</p>
-<p>  <img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_4.png" alt=""></p>
-<p>  利用文本国际化的方式，在代码中调用</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UIImage<span class="list">(<span class="keyword">named</span>: NSLocalizedString<span class="list">(<span class="string">"search_logo"</span>,comment: <span class="string">""</span>)</span>)</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>不推荐，一是因为做法太low了，工作量明显加大。二是不能在Storyboard或XIB中使用</p>
-</blockquote>
-</li>
-<li><h6 id="方案二：原生支持">方案二：原生支持</h6><p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_4_1.png" alt=""></p>
-<blockquote>
-<p>同上，Base副本去掉。另外需要注意的是，使用这种方式，在XIB或Storyboard中引用图片时如果只使用名称是实时显示不了的，一定要加上后缀名。如avater.png</p>
-</blockquote>
-<p>  使用方式不变，iOS会自动找相应语言(xxx.lproj)下的图片</p>
-</li>
-</ul>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">UIImage</span><span class="params">(named: <span class="string">"avater"</span>)</span></span></span><br></pre></td></tr></table></figure>
-<p>对于图片的放置，正确姿态应该是<code>需要国际化的图片放在自定义Group里面，不需要国际化的图片放在Images.xcassets</code></p>
-<h3 id="Storyboard&amp;XIB的国际化">Storyboard&amp;XIB的国际化</h3><p>前面的两种资源国际化比较简单，但Storyboard国际化就稍微麻烦了点。同样它也有二种方案</p>
-<ul>
-<li><p>方案一：每种语言定制一套Storyboard</p>
-<p>  <img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_5.png" alt=""></p>
-<p>  在上图我们可以看到，每种语言都可以切换为strings或Storyboard（默认为strings）。如果选用<code>Interface Builder Storyboard</code>方案，那么每种语言都有一套相应的Storyboard，各个语言Storyboard间的界面改动不关联。</p>
-</li>
-<li><p>方案二：基于基础的<code>Base StoryBoard</code>以及每种语言一套strings <a id="storyboard_2"></a></p>
-<p>  <img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_5_1.png" alt=""></p>
-<p>基于一个基础的Storyboard，可以看作是一个基础的模板，Storyboard里面所有的文本类资源(如UILabel的text)都会被放在相应语言的strings里面。此时我们为Storyboard里的字符类资源作国际化只需要编辑相应语言的strings就行了</p>
-</li>
-</ul>
-<p>  首选方案二。因为采用方案一，意义着你每改动一个界面元素就得去相应语言Storyboard一一改动，那跟为每个语言新起一个项目是一样的道理。但是采用方案二，我们只需改动Base Storyboard就行了</p>
-<blockquote>
-<p>注意，方案二中相应语言的strings一旦生成后，Base Storyboard有任何编辑都不会影响到strings，这就意味着如果我们删除或添加了一个UILabel的text，strings也不能同步改动</p>
-</blockquote>
-<p>  还好，xcode为我们提供了<code>ibtool</code>工具来生成Storyboard的strings文件。</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ibtool Main.storyboard --<span class="keyword">generate</span>-strings-<span class="keyword">file</span> ./NewTemp.<span class="literal">string</span></span><br></pre></td></tr></table></figure>
-<p>  但是ibtool生成的strings文件是BaseStory的strings(默认语言的strings)，且会把我们原来的strings替换掉。所以我们要做的就是把新生成的strings与旧的strings进行冲突处理(新的附加上，删除掉的注释掉)，这一切可以用这个pythoy脚本来实现，见<a href="https://github.com/mokai/LocalDemo/blob/master/LocalDemo/i18n/RunScript/AutoGenStrings.py" target="_blank" rel="external">AutoGenStrings.py</a>。然后我们将借助<code>xcode 中 Run Script</code>来运行这段脚本。这样每次Build时都会保证语言strings与Base Storyboard保持一致</p>
-<h3 id="应用内实现语言切换">应用内实现语言切换</h3><p>应用启动时，首先会读取NSUserDefaults中的key为<code>AppleLanguages</code>的内容，该key返回一个String数组，存储着APP支持的语言列表，数组的第一项为APP当前默认的语言。</p>
-<p>在安装后第一次打开APP时，会自动初始化该key为当前系统的语言编码，如简体中文就是zh-Hans。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取APP当前语言</span></span><br><span class="line">(NSUserDefaults.<span class="function"><span class="title">standardUserDefaults</span><span class="params">()</span></span>.<span class="function"><span class="title">valueForKey</span><span class="params">(<span class="string">"AppleLanguages"</span>)</span></span> as! Array&lt;String&gt;)[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
-<p>那么我们要实现语言切换改变<code>AppleLanguages</code>的值即可，但是这里有一个坑，因为苹果没提供给我们直接修改APP默认语言的API，我们只能通过NSUserDefaults手动去操作，且<code>AppleLanguages</code>的值改变后APP得重新启动后才会生效（才会读取相应语言的lproj中的资源，意义着就算你改了，资源还是加载的APP启动时lproj中的资源），猜测应该是框架层对<code>AppleLanguages</code>的值进行了内存缓冲</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置APP当前语言</span></span><br><span class="line"><span class="tag">var</span> def = NSUserDefaults.<span class="function"><span class="title">standardUserDefaults</span><span class="params">()</span></span></span><br><span class="line">def.<span class="function"><span class="title">setValue</span><span class="params">([“zh-Hans”], forKey:<span class="string">"AppleLanguages"</span>)</span></span></span><br><span class="line">def.<span class="function"><span class="title">synchronize</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<p>那么问题来了，如何做到改变<code>AppleLanguages</code>的值就加载相应语言的lproj资源？</p>
-<p>其实，APP中的Storyboard的加载，图片与字符串的加载都是在<code>NSBundle.mainBundle()</code>上做的，那么我们只要在语言切换后把<code>NSBundle.mainBundle()</code>替换成当前语言的bundle就行了，这样系统通过<code>NSBundle.mainBundle()</code>去加载资源时实则是加载的当前语言bundle中的资源</p>
-<blockquote>
-<p>lproj目录可以用一个NSBundle表示</p>
-</blockquote>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="type">Foundation</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">*  当调用onLanguage后替换掉mainBundle为当前语言的bundle</span><br><span class="line">*/</span></span><br><span class="line">private  <span class="keyword">let</span> _bundle:<span class="type">UnsafePointer</span>&lt;<span class="type">Void</span>&gt; =  unsafeBitCast(<span class="number">0</span>,<span class="type">UnsafePointer</span>&lt;<span class="type">Void</span>&gt;.<span class="keyword">self</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BundleEx</span>: <span class="title">NSBundle</span> </span>&#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">localizedStringForKey</span><span class="params">(key: String, value: String?, table tableName: String?)</span></span> -&gt; <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> bundle = languageBundle() &#123;</span><br><span class="line">            <span class="keyword">return</span> bundle.localizedStringForKey(key, value: value, table: tableName)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.localizedStringForKey(key, value: value, table: tableName)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">NSBundle</span></span>&#123;</span><br><span class="line">    private <span class="class"><span class="keyword">struct</span> <span class="title">Static</span> </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">var</span> onceToken : dispatch_once_t = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">onLanguage</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//替换NSBundle.mainBundle()为自定义的BundleEx</span></span><br><span class="line">        dispatch_once(&amp;<span class="type">Static</span>.onceToken) &#123;</span><br><span class="line">            object_setClass(<span class="type">NSBundle</span>.mainBundle(), <span class="type">BundleEx</span>.<span class="keyword">self</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//当前语言的bundle</span></span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">languageBundle</span><span class="params">()</span></span>-&gt;<span class="type">NSBundle</span>?&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">Languager</span>.standardLanguager().currentLanguageBundle</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上<code>Languager</code>是 <a href="https://github.com/mokai/iOS-i18n" target="_blank" rel="external">iOS-i18n</a> 开源库的一部分，我把项目中国际化部分封装了下，有兴趣的童鞋可以去看看 </p>
-<h3 id="其他">其他</h3><ul>
-<li><p>设置运行语言环境</p>
-<p>有时我们第一次安装APP时不想默认跟随系统，那么可以通过xcode的scheme来指定特定语言</p>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_6.png" alt=""></p>
-</li>
-<li><p>Storyboard实时预览</p>
-<p>直接上图~</p>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_6_1.png" alt=""></p>
-</li>
-<li><p>IB中UIImageView国际化无效</p>
-<p>解决办法就是为<code>UIImageView</code>扩展一个方法，然后通过IB中的<code>User Defined Runtime Attributes</code>把imageName传进去</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">UIImageView</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> locale:<span class="type">String</span>&#123;</span><br><span class="line">        <span class="keyword">get</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">""</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">set</span>(newlocale)&#123;</span><br><span class="line">            <span class="keyword">self</span>.image = localizedImage(newlocale)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  <img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_6_2.png" alt=""></p>
-</li>
-<li><p>IB中UITextView国际化无效</p>
-<p>  解决办法和UIImageView类似，扩展一个方法，然后把self.text做为key去strings文件中拿相应语言的value</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">UITextView</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> locale:<span class="type">Bool</span>&#123;</span><br><span class="line">        <span class="keyword">get</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">set</span>(newlocale)&#123;</span><br><span class="line">            <span class="keyword">self</span>.text = localized(<span class="keyword">self</span>.text)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  <img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_6_3.png" alt=""></p>
-</li>
-</ul>
-<ul>
-<li><p>LaunchScreen.xib的国际化</p>
-<p>  很遗憾，到目前为止，还不支持LaunchScreen.xib的国际化，我们只能通过自定义一个LaunchViewController来完成此需求，但也有些不足，就是应用启动时会黑屏一段时间</p>
-</li>
-</ul>
-<p>参考:</p>
-<ul>
-<li><a href="http://www.cnblogs.com/levilinxi/p/4296712.html" target="_blank" rel="external">iOS国际化——通过脚本使storyboard翻译自增</a></li>
-<li><a href="https://medium.com/ios-apprentice/working-with-localization-905e4052b9de" target="_blank" rel="external">Working with Localization</a></li>
-<li><a href="http://stackoverflow.com/questions/1669645/how-to-force-nslocalizedstring-to-use-a-specific-language" target="_blank" rel="external">How to force NSLocalizedString to use a specific language</a></li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>在真正将国际化实践前，只知道通过<code>NSLocalizedString</code>将相应语言的字符串加载进来即可。但最近公司项目的新需求增加英文版本，并支持应用内无死角切换~，这才跳过各种坑实现了应用内切换语言，并记录至此。</p>]]>
-    
-    </summary>
-    
-      <category term="国际化" scheme="http://mokai.github.io/tags/%E5%9B%BD%E9%99%85%E5%8C%96/"/>
-    
-      <category term="记录" scheme="http://mokai.github.io/categories/%E8%AE%B0%E5%BD%95/"/>
     
   </entry>
   
@@ -224,6 +318,320 @@
     <title><![CDATA[iOS技巧]]></title>
     <link href="http://mokai.github.io/2015/04/ios-tips/"/>
     <id>http://mokai.github.io/2015/04/ios-tips/</id>
+    <published>2015-04-16T16:00:00.000Z</published>
+    <updated>2015-09-25T01:20:43.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="常用技巧">常用技巧</h1><p>1、Xcode技巧</p>
+<ul>
+<li>当真机升级了iOS，但对应Xcode未升级时，device会出现ineligible device，这时通过xocde菜单-&gt;Product-&gt;Destination-&gt;选择对应的device 即可解决</li>
+<li><p>编译相关</p>
+<ul>
+<li><p>.a静态库编译</p>
+<p>  <code>lipo -info xxx.a</code> 查看静态库支持的平台，目前有armv7、arm64、armv7s、i386 前三者为真机平台，后者为iphone Simulator</p>
+<p>  <code>lipo -create libXXX-armv7s.a libXXX-i138.a -output libXXX.a</code> 合并生成通用平台的静态库</p>
+</li>
+<li><p>环境变量</p>
+<p>  $(SRCROOT) 工程文件（比如Nuno.xcodeproj）的路径</p>
+<p>  $(PROJECT_DIR) 项目目录        </p>
+</li>
+</ul>
+</li>
+<li><p>Xcode常见编译错误</p>
+<ul>
+<li><p><code>could not build module &#39;Foundation&#39;</code></p>
+<p>  原因在于，在pch文件中没有把import放在<code>#ifdef_OBJC_</code></p>
+  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#ifdef</span> __OBJC__ </span><br><span class="line">    <span class="id">#import</span> &lt;UIKit/UIKit.h&gt; </span><br><span class="line">    <span class="id">#import</span> &lt;Foundation/Foundation.h&gt; </span><br><span class="line"><span class="id">#endif</span> </span><br><span class="line">    <span class="id">#import</span> <span class="string">"ddddd.h"</span>  <span class="comment">//此处移动上面 __OBJC__ 中就好了</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>IB技巧</p>
+<ul>
+<li>可视化坐标距离    选中一个View，然后按住<code>option</code>并将鼠标移动到其他View上</li>
+<li>多个View层次选择 按住<code>Cmd</code>和<code>Shift</code>，然后在需要选择的view上方按右键</li>
+<li>添加辅助线  在左边的层级列表中双击某个view，然后<code>Cmd+_</code>或者<code>Cmd+|</code>即可在选中的view上添加一条水平或者垂直中心的辅助线</li>
+</ul>
+</li>
+<li><p>xcode升级后插件失效修复</p>
+  <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find</span> ~<span class="regexp">/Library/</span>Application\ Support<span class="regexp">/Developer/</span>Shared<span class="regexp">/Xcode/</span>Plug-ins -name Info.plist -maxdepth <span class="number">3</span> | xargs -I&#123;&#125; defaults <span class="keyword">write</span> &#123;&#125; DVTPlugInCompatibilityUUIDs -array-add `defaults <span class="keyword">read</span> <span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/I</span>nfo.plist DVTPlugInCompatibilityUUID`</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>修复多个Xcode导致的N个模拟器问题</p>
+  <image src="http://ww2.sinaimg.cn/large/51530583jw1eu4h7paw3wj20sw15gn5t.jpg" width="400px" height="500px">
+
+
+</image></li>
+</ul>
+<p>2、Frame枚举类型转换为string通过<code>NSStringFromCGRect</code></p>
+<p>3、指定文件不使用arc,<code>-fno-objc-arc</code></p>
+<p>4、OC语法简写</p>
+<ul>
+<li>NSNumber<ul>
+<li>[NSNumber numberWithChar:‘X’] 简写为 @‘X’;</li>
+<li>[NSNumber numberWithInt:12345] 简写为 @12345</li>
+<li>[NSNumber numberWithUnsignedLong:12345ul] 简写为 @12345ul</li>
+<li>[NSNumber numberWithLongLong:12345ll] 简写为 @12345ll</li>
+<li>[NSNumber numberWithFloat:123.45f] 简写为 @123.45f</li>
+<li>[NSNumber numberWithDouble:123.45] 简写为 @123.45</li>
+<li>[NSNumber numberWithBool:YES] 简写为 @YES</li>
+</ul>
+</li>
+<li>NSArray<ul>
+<li>[NSArray array] 简写为 @[]</li>
+<li>[NSArray arrayWithObject:a] 简写为 @[ a ]</li>
+<li>[NSArray arrayWithObjects:a, b, c, nil] 简写为 @[ a, b, c ]</li>
+</ul>
+</li>
+<li>NSDictionary<ul>
+<li>[NSDictionary dictionary] 简写为 @{}</li>
+<li>[NSDictionary dictionaryWithObject:o1 forKey:k1] 简写为 @{ k1 : o1 }</li>
+<li>[NSDictionary dictionaryWithObjectsAndKeys:o1, k1, o2, k2, o3, k3, nil] 简写为 @{ k1 : o1, k2 : o2, k3 : o3 }</li>
+</ul>
+</li>
+</ul>
+<p>如果想生成Mutable版本，直接调用 [@[] mutableCopy] 就行了</p>
+<ul>
+<li>下标<ul>
+<li>[array objectAtIndex:idx] 简写为 array[idx];</li>
+<li>[array replaceObjectAtIndex:idx withObject:newObj] 简写为 array[idx] = newObj</li>
+<li>[dic objectForKey:key] 简写为 dic[key]</li>
+<li>[dic setObject:object forKey:key] 简写为 dic[key] = newObject</li>
+</ul>
+</li>
+</ul>
+<p>5、Resource底下的plist文件需要clean才可以消除清楚</p>
+<p>6、[NSDate date]获取的是GMT时间，和北京时间相差8个小时</p>
+<p>7、拨打电话</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[UIApplication sharedApplication]</span> openURL:<span class="collection">[NSURL URLWithString:@<span class="string">"tel:466453"</span>]</span>]</span><span class="comment">;</span></span><br><span class="line"><span class="collection">[<span class="collection">[<span class="collection">[UIWebView alloc]</span> init]</span> loadRequest:<span class="collection">[NSURLRequest requestWithURL:<span class="collection">[NSURL URLWithString:@<span class="string">"tel:466453"</span>]</span>]</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>8、调用照相或者相册</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)takePicture:(<span class="built_in">UIButton</span> *)btn&#123;</span><br><span class="line">    _currentCardBtn = btn;</span><br><span class="line">    IBActionSheet *sheet = [[IBActionSheet alloc] initWithTitle:<span class="literal">nil</span> delegate:<span class="keyword">self</span> cancelButtonTitle:<span class="string">@"取消"</span> destructiveButtonTitle:<span class="literal">nil</span> otherButtonTitles:<span class="string">@"相册"</span>,<span class="string">@"拍照"</span>, <span class="literal">nil</span>];</span><br><span class="line">    [sheet showInView:<span class="keyword">self</span><span class="variable">.view</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)actionSheet:(IBActionSheet *)actionSheet clickedButtonAtIndex:(<span class="built_in">NSInteger</span>)buttonIndex&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,buttonIndex);</span><br><span class="line">    <span class="keyword">if</span> (buttonIndex==<span class="number">0</span>) &#123;<span class="comment">//相册</span></span><br><span class="line">        [<span class="keyword">self</span> takePicker:<span class="built_in">UIImagePickerControllerSourceTypePhotoLibrary</span>];</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(buttonIndex==<span class="number">1</span>)&#123;<span class="comment">//拍照</span></span><br><span class="line">        [<span class="keyword">self</span> takePicker:<span class="built_in">UIImagePickerControllerSourceTypeCamera</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)takePicker:(<span class="built_in">UIImagePickerControllerSourceType</span>)sourceType</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSArray</span> *mediatypes=[<span class="built_in">UIImagePickerController</span> availableMediaTypesForSourceType:sourceType];</span><br><span class="line">    <span class="keyword">if</span>([<span class="built_in">UIImagePickerController</span> isSourceTypeAvailable:sourceType] &amp;&amp;[mediatypes count]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">NSArray</span> *mediatypes=[<span class="built_in">UIImagePickerController</span> availableMediaTypesForSourceType:sourceType];</span><br><span class="line">        <span class="built_in">UIImagePickerController</span> *picker=[[<span class="built_in">UIImagePickerController</span> alloc] init];</span><br><span class="line">        picker<span class="variable">.mediaTypes</span>=mediatypes;</span><br><span class="line">        picker<span class="variable">.delegate</span>=<span class="keyword">self</span>;</span><br><span class="line">        picker<span class="variable">.allowsEditing</span>=<span class="literal">YES</span>;</span><br><span class="line">        picker<span class="variable">.sourceType</span>=sourceType;</span><br><span class="line">        <span class="built_in">NSString</span> *requiredmediatype=(<span class="built_in">NSString</span> *)kUTTypeImage;</span><br><span class="line">        <span class="built_in">NSArray</span> *arrmediatypes=[<span class="built_in">NSArray</span> arrayWithObject:requiredmediatype];</span><br><span class="line">        [picker setMediaTypes:arrmediatypes];</span><br><span class="line">        [<span class="keyword">self</span> presentModalViewController:picker animated:<span class="literal">YES</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        [AlertUtils showAlert:<span class="string">@"当前设备不支持拍摄功能"</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>) imagePickerController:(<span class="built_in">UIImagePickerController</span> *)picker didFinishPickingMediaWithInfo:(<span class="built_in">NSDictionary</span> *)info&#123;</span><br><span class="line">    <span class="comment">//self.lastChosenMediaType=[info objectForKey:UIImagePickerControllerMediaType];</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UIImage</span> *chosenImage=[info objectForKey:<span class="built_in">UIImagePickerControllerEditedImage</span>];</span><br><span class="line">    <span class="comment">//_avatarImageView.image=chosenImage;</span></span><br><span class="line">    <span class="comment">//_currentCardBtn.imageView.image = chosenImage;</span></span><br><span class="line">    [_currentCardBtn setBackgroundImage:chosenImage forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    [_currentCardBtn setTitle:<span class="string">@""</span> forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//    if([lastChosenMediaType isEqual:(NSString *) kUTTypeMovie])</span></span><br><span class="line">    <span class="comment">//    &#123;</span></span><br><span class="line">    <span class="comment">//        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示信息!" message:@"系统只支持图片格式" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles: nil];</span></span><br><span class="line">    <span class="comment">//        [alert show];</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">//    &#125;</span></span><br><span class="line">    [picker dismissModalViewControllerAnimated:<span class="literal">YES</span>];</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="keyword">void</span>) imagePickerControllerDidCancel:(<span class="built_in">UIImagePickerController</span> *)picker&#123;</span><br><span class="line">    [picker dismissModalViewControllerAnimated:<span class="literal">YES</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>9、iphone程序中实现截屏的一种方法</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导入头文件</span></span><br><span class="line"><span class="id">#import</span> QuartzCore/QuartzCore<span class="class">.h</span></span><br><span class="line"><span class="comment">//将整个self.view大小的图层形式创建一张图片image 	UIGraphicsBeginImageContext(self.view.bounds.size)；</span></span><br><span class="line">[self<span class="class">.view</span><span class="class">.layer</span> renderInContext：<span class="function"><span class="title">UIGraphicsGetCurrentContext</span><span class="params">()</span></span>]；</span><br><span class="line">UIImage*image=<span class="function"><span class="title">UIGraphicsGetImageFromCurrentImageContext</span><span class="params">()</span></span>；</span><br><span class="line"><span class="function"><span class="title">UIGraphicsEndImageContext</span><span class="params">()</span></span>；</span><br><span class="line"><span class="comment">//然后将该图片保存到图片图</span></span><br><span class="line"><span class="function"><span class="title">UIImageWriteToSavedPhotosAlbum</span><span class="params">(image,self,nil,nil)</span></span>；</span><br></pre></td></tr></table></figure>
+<p>10、启动界面的制作</p>
+<p> 在Resource里面增加Default.png,然后在XXXAppDelegate.m里面增加 [NSThread sleepForTimeInterval:5.0];</p>
+<p>11、动画</p>
+<ul>
+<li>基于位置动画</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CATransition</span> *animation = [<span class="built_in">CATransition</span> animation];</span><br><span class="line">animation<span class="variable">.duration</span> = <span class="number">0.3</span>f;<span class="comment">//间隔的时间</span></span><br><span class="line">animation<span class="variable">.timingFunction</span> = [<span class="built_in">CAMediaTimingFunction</span> functionWithName:k<span class="built_in">CAMediaTimingFunctionLinear</span>]; ;</span><br><span class="line">animation<span class="variable">.type</span> = k<span class="built_in">CATransitionPush</span>;<span class="comment">//设置上面4种动画效果</span></span><br><span class="line">animation<span class="variable">.subtype</span> = k<span class="built_in">CATransitionFromLeft</span>;<span class="comment">//设置动画的方向，有四种，分别为kCATransitionFromRight、kCATransitionFromLeft、kCATransitionFromTop、kCATransitionFromBottom</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.layer</span> addAnimation:animation forKey:<span class="string">@"animationID"</span>];</span><br></pre></td></tr></table></figure>
+<p>12、以使用如下代码判断开启了那些类型的消息通知：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIRemoteNotificationType</span> enabledTypes = [[<span class="built_in">UIApplication</span> sharedApplication] enabledRemoteNotificationTypes];</span><br><span class="line"><span class="keyword">if</span> (enabledTypes &amp; <span class="built_in">UIRemoteNotificationTypeBadge</span>) &#123;</span><br><span class="line"><span class="comment">//开启badge number</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (enabledTypes &amp; <span class="built_in">UIRemoteNotificationTypeSound</span>) &#123;</span><br><span class="line"><span class="comment">//开启声音</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (enabledTypes &amp; <span class="built_in">UIRemoteNotificationTypeAlert</span>) &#123;</span><br><span class="line"><span class="comment">//开启alert</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>13、NSDictionary排序</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NSMutableDictionary</span> *dict = [@&#123;&#125;mutableCopy];</span><br><span class="line">dict[@(<span class="number">1</span>)] = @<span class="string">"1"</span>;</span><br><span class="line">dict[@(<span class="number">2</span>)] = @<span class="string">"2"</span>;</span><br><span class="line">dict[@(<span class="number">3</span>)] = @<span class="string">"3"</span>;</span><br><span class="line">dict[@(<span class="number">5</span>)] = @<span class="string">"4"</span>;</span><br><span class="line">dict[@(<span class="number">4</span>)] = @<span class="string">"5"</span>;</span><br><span class="line"><span class="type">NSArray</span> *arr = [dict.allKeys sortedArrayUsingComparator:^<span class="type">NSComparisonResult</span>(id obj1, id obj2)&#123;</span><br><span class="line">    <span class="type">NSComparisonResult</span> <span class="literal">result</span> = [obj1 compare:obj2];</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">result</span>==<span class="type">NSOrderedDescending</span>;</span><br><span class="line">&#125;];</span><br><span class="line"><span class="type">NSLog</span>(@<span class="string">"%@"</span>,arr);</span><br></pre></td></tr></table></figure>
+<p>14、使用OpenURL打开设置页面</p>
+<ul>
+<li>网路设置项</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr_selector">[[UIApplication sharedApplication]</span> <span class="rule"><span class="attribute">openURL</span>:<span class="value">[NSURL URLWithString:@<span class="string">"prefs:root=General&amp;path=Network"</span>]]</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>定位设置</li>
+</ul>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[NSURL URLWithString:@<span class="string">"prefs:root=LOCATION_SERVICES"</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置Twitter</li>
+</ul>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[NSURL URLWithString:@<span class="string">"prefs:root=TWITTER"</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>蓝牙</li>
+</ul>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[NSURL URLWithString:@<span class="string">"prefs:root=General&amp;path=Bluetooth"</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>其他</li>
+</ul>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>About</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>ACCESSIBILITY</span><br><span class="line">prefs:<span class="variable">root=</span>AIRPLANE_MODE</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>AUTOLOCK</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>USAGE/CELLULAR_USAGE</span><br><span class="line">prefs:<span class="variable">root=</span>Brightness</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Bluetooth</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>DATE_AND_TIME</span><br><span class="line">prefs:<span class="variable">root=</span>FACETIME</span><br><span class="line">prefs:<span class="variable">root=</span>General</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Keyboard</span><br><span class="line">prefs:<span class="variable">root=</span>CASTLE</span><br><span class="line">prefs:<span class="variable">root=</span>CASTLE&amp;<span class="variable">path=</span>STORAGE_AND_BACKUP</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>INTERNATIONAL</span><br><span class="line">prefs:<span class="variable">root=</span>LOCATION_SERVICES</span><br><span class="line">prefs:<span class="variable">root=</span>ACCOUNT_SETTINGS</span><br><span class="line">prefs:<span class="variable">root=</span>MUSIC</span><br><span class="line">prefs:<span class="variable">root=</span>MUSIC&amp;<span class="variable">path=</span>EQ</span><br><span class="line">prefs:<span class="variable">root=</span>MUSIC&amp;<span class="variable">path=</span>VolumeLimit</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Network</span><br><span class="line">prefs:<span class="variable">root=</span>NIKE_PLUS_IPOD</span><br><span class="line">prefs:<span class="variable">root=</span>NOTES</span><br><span class="line">prefs:<span class="variable">root=</span>NOTIFICATIONS_ID</span><br><span class="line">prefs:<span class="variable">root=</span>Phone</span><br><span class="line">prefs:<span class="variable">root=</span>Photos</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>ManagedConfigurationList</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Reset</span><br><span class="line">prefs:<span class="variable">root=</span>Sounds&amp;<span class="variable">path=</span>Ringtone</span><br><span class="line">prefs:<span class="variable">root=</span>Safari</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Assistant</span><br><span class="line">prefs:<span class="variable">root=</span>Sounds</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>SOFTWARE_UPDATE_LINK</span><br><span class="line">prefs:<span class="variable">root=</span>STORE</span><br><span class="line">prefs:<span class="variable">root=</span>TWITTER</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>USAGE</span><br><span class="line">prefs:<span class="variable">root=</span>VIDEO</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Network/VPN</span><br><span class="line">prefs:<span class="variable">root=</span>Wallpaper</span><br><span class="line">prefs:<span class="variable">root=</span>WIFI</span><br><span class="line">prefs:<span class="variable">root=</span>INTERNET_TETHERING</span><br></pre></td></tr></table></figure>
+<p>15、<code>No known instance method for selector &#39;respondsToSelector:&#39;</code><br>这种情况是声明的协议protocol没有继承NSObject导致 </p>
+<h1 id="常用组件">常用组件</h1><p>1、UIView</p>
+<ul>
+<li>圆角</li>
+</ul>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">outLable.layer.<span class="variable">masksToBounds =</span> YES;</span><br><span class="line">outLable.layer.<span class="variable">cornerRadius =</span> <span class="number">5</span>;//如果要设置为圆，view的width与height一样，然后设置view.width/<span class="number">2</span></span><br><span class="line">outLable.layer.<span class="variable">borderWidth =</span> <span class="number">1</span>;</span><br><span class="line">outLable.layer.<span class="variable">borderColor =</span> TYPE_OUT</span><br></pre></td></tr></table></figure>
+<p>2、UITableView</p>
+<ul>
+<li>去掉默认分割线  </li>
+</ul>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">list</span>.separatorStyle = <span class="keyword">NO</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>UITableViewCell去掉点击效果  </p>
+<pre><code>cell.selectionStyle = UITableViewCellSelectionStyleNone<span class="comment">;</span>
+</code></pre></li>
+<li>使用UITableViewCellStyleGrouped要注意，ios6与ios7下的效果是不同的</li>
+<li>显示右按钮 accessoryType</li>
+<li>去掉UItableview headerview黏性(sticky)</li>
+</ul>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>scrollViewDidScroll:<span class="params">(UIScrollView *)</span>scrollView &#123;</span><br><span class="line">    CGFloat sectionHeaderHeight = <span class="number">40</span>;</span><br><span class="line">    <span class="keyword">if</span> <span class="params">(scrollView.contentOffset.y&lt;=sectionHeaderHeight&amp;&amp;scrollView.contentOffset.y&gt;=<span class="number">0</span>)</span> &#123;</span><br><span class="line">        scrollView.contentInset = UIEdgeInsetsMake<span class="params">(-scrollView.contentOffset.y, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="params">(scrollView.contentOffset.y&gt;=sectionHeaderHeight)</span> &#123;</span><br><span class="line">        scrollView.contentInset = UIEdgeInsetsMake<span class="params">(-sectionHeaderHeight, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>UITableViewCell自动滚动到顶部 </li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[tableView <span class="string">scrollToRowAtIndexPath:</span>[NSIndexPath <span class="string">indexPathForRow:</span><span class="number">0</span> <span class="string">inSection:</span><span class="number">0</span>] <span class="string">atScrollPosition:</span>UITableViewScrollPositionTop <span class="string">animated:</span>YES];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>取消选中状态 </li>
+</ul>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">NSIndexPath</span> *<span class="keyword">selected </span>= [_tView indexPathForSelectedRow]<span class="comment">;</span></span><br><span class="line"><span class="label">if</span>(<span class="keyword">selected) </span>&#123;</span><br><span class="line">	[_tView deselectRowAtIndexPath:<span class="keyword">selected </span>animated:NO]<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>选中一行</li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self.tView <span class="string">selectRowAtIndexPath:</span>[NSIndexPath <span class="string">indexPathForRow:</span><span class="number">0</span> <span class="string">inSection:</span><span class="number">0</span>]  <span class="string">animated:</span>YES <span class="string">scrollPosition:</span>UITableViewScrollPositionTop];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>TableView不显示没内容的Cell怎么办</li>
+</ul>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">self</span><span class="built_in">.</span>tView<span class="built_in">.</span>tableFooterView <span class="subst">=</span> <span class="preprocessor">[</span>UIView <span class="literal">new</span><span class="preprocessor">]</span><span class="markup">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>手动调用<code>tableView:cellForRowAtIndexPath:</code>方法不会参与复用</li>
+</ul>
+<p>3、UILabel</p>
+<ul>
+<li>换行  内容加\n，然后设置label.numberOfLines = 0; </li>
+<li>文本自适应</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">m_t</span>itleLabel.font = [UIFont systemFontOfSize:<span class="number">20</span>];</span><br><span class="line"><span class="keyword">m_t</span>itleLabel.adjustsFontSizeToFitWidth = YES;</span><br><span class="line"><span class="keyword">m_t</span>itleLabel.minimumFontSize = <span class="number">6</span>;</span><br></pre></td></tr></table></figure>
+<p>就是在空间够的情况下，使用20号字体，如果空间不够，那么就会自动将字体向下调整，但是也不会少于6号字体，<br>如果6号字体也显示不完，后续显示省略号。。。</p>
+<ul>
+<li>自动高度</li>
+</ul>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">lab</span> setNumberOfLines:0];</span><br><span class="line"><span class="keyword">lab</span>.lineBreakMode = UILineBreakModeWordWrap;</span><br><span class="line">CGSize maxSize = CGSizeMake(<span class="keyword">lab</span>.width, SCREEN_HEIGHT - <span class="keyword">lab</span>.top);</span><br><span class="line"><span class="keyword">lab</span>.size = [_descLab.text sizeWithFont:_descLab.font constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];</span><br></pre></td></tr></table></figure>
+<p>4、UITextField</p>
+<ul>
+<li>居中 </li>
+</ul>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">field.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>获得焦点  </li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[field becomeFirstResponder]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>键盘样式</p>
+<ul>
+<li><p>风格:</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">textView<span class="variable">.keyboardType</span> = <span class="built_in">UIKeyboardTypeNumberPad</span>;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">enum</span>  &#123;  </span><br><span class="line">    <span class="built_in">UIKeyboardTypeDefault</span>,                 <span class="comment">// 默认键盘：支持所有字符   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeASCIICapable</span>,            <span class="comment">// 支持ASCII的默认键盘   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeNumbersAndPunctuation</span>,   <span class="comment">// 标准电话键盘，支持+*#等符号   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeURL</span>,                     <span class="comment">// URL键盘，有.com按钮；只支持URL字符   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeNumberPad</span>,               <span class="comment">//数字键盘   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypePhonePad</span>,                <span class="comment">// 电话键盘   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeNamePhonePad</span>,            <span class="comment">// 电话键盘，也支持输入人名字   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeEmailAddress</span>,            <span class="comment">// 用于输入电子邮件地址的键盘   </span></span><br><span class="line">&#125; <span class="built_in">UIKeyboardType</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>键盘外观:</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">textView<span class="variable">.keyboardAppearance</span>=<span class="built_in">UIKeyboardAppearanceDefault</span>;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">enum</span>  &#123;  </span><br><span class="line">    <span class="built_in">UIKeyboardAppearanceDefault</span>,     <span class="comment">// 默认外观：浅灰色   </span></span><br><span class="line">    <span class="built_in">UIKeyboardAppearanceAlert</span>,       <span class="comment">//深灰/石墨色   </span></span><br><span class="line">&#125; <span class="built_in">UIKeyboardAppearance</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>回车键</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">textView<span class="variable">.returnKeyType</span>=<span class="built_in">UIReturnKeyGo</span>;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">enum</span>  &#123;  </span><br><span class="line">    <span class="built_in">UIReturnKeyDefault</span>,  <span class="comment">//默认：灰色按钮，标有Return</span></span><br><span class="line">    <span class="built_in">UIReturnKeyGo</span>,  <span class="comment">//标有Go的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyGoogle</span>,  <span class="comment">//标有Google的蓝色按钮，用于搜索</span></span><br><span class="line">    <span class="built_in">UIReturnKeyJoin</span>,  <span class="comment">//标有Join的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyNext</span>,  <span class="comment">//标有Next的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyRoute</span>,  <span class="comment">//标有Route的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeySearch</span>,  <span class="comment">//标有Search的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeySend</span>,  <span class="comment">//标有Send的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyYahoo</span>,  <span class="comment">//标有Yahoo!的蓝色按钮，用于搜索</span></span><br><span class="line">    <span class="built_in">UIReturnKeyDone</span>,  <span class="comment">//标有Done的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyEmergencyCall</span>,  <span class="comment">//紧急呼叫按钮</span></span><br><span class="line">&#125; <span class="built_in">UIReturnKeyType</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自动大写</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">textField<span class="variable">.autocapitalizationType</span> = <span class="built_in">UITextAutocapitalizationTypeWords</span></span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">enum</span>  &#123;  </span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeNone</span>,  <span class="comment">//不自动大写   </span></span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeWords</span>,  <span class="comment">//单词首字母大写   </span></span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeSentences</span>,  <span class="comment">//句子首字母大写   </span></span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeAllCharacters</span>,  <span class="comment">//所有字母大写   </span></span><br><span class="line">&#125; <span class="built_in">UITextAutocapitalizationType</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自动更正</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">textField<span class="variable">.autocorrectionType</span>= <span class="built_in">UITextAutocorrectionTypeYes</span>;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">enum</span>  &#123;  </span><br><span class="line">    <span class="built_in">UITextAutocorrectionTypeDefault</span>, <span class="comment">//默认   </span></span><br><span class="line">    <span class="built_in">UITextAutocorrectionTypeNo</span>, <span class="comment">//不自动更正   </span></span><br><span class="line">    <span class="built_in">UITextAutocorrectionTypeYes</span>, <span class="comment">//自动更正   </span></span><br><span class="line">&#125; <span class="built_in">UITextAutocorrectionType</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安全文本输入</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textField.secureTextEntry=YES<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示消除图标 </p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textField.clearButtonMode = UITextFieldViewModeWhileEditing<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>隐藏输入法 </p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[self.view endEditing:YES]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>5、UIScrollView</p>
+<ul>
+<li>去掉弹簧效果    </li>
+</ul>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sView.bounces ＝ <span class="literal">no</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>动态改变内容区大小  contentSize </li>
+<li>隐藏滑动条</li>
+</ul>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scrollView.showsVerticalScrollIndicator = <span class="literal">FALSE</span><span class="comment">;</span></span><br><span class="line">scrollView.showsHorizontalScrollIndicator = <span class="literal">FALSE</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>6、UIApplication </p>
+<ul>
+<li>获取当前应用状态   <code>application.applicationState</code></li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIApplicationStateActive</span>  </span><br><span class="line"><span class="built_in">UIApplicationStateInactive</span> </span><br><span class="line"><span class="built_in">UIApplicationStateBackground</span>  后台</span><br></pre></td></tr></table></figure>
+<p>7、UIDatePicker</p>
+<p>8、UINavigationController</p>
+<ul>
+<li>设置主题颜色</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">navCtr<span class="variable">.navigationBar</span><span class="variable">.barTintColor</span> = app_theme_color;<span class="comment">//背景色</span></span><br><span class="line">navCtr<span class="variable">.navigationBar</span><span class="variable">.tintColor</span> = [<span class="built_in">UIColor</span> blackColor];<span class="comment">//文字</span></span><br><span class="line"><span class="built_in">NSDictionary</span> * dict=[<span class="built_in">NSDictionary</span> dictionaryWithObject:[<span class="built_in">UIColor</span> blackColor] forKey:<span class="built_in">UITextAttributeTextColor</span>];</span><br><span class="line">navCtr<span class="variable">.navigationBar</span><span class="variable">.titleTextAttributes</span> = dict;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>改变返回标题</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在前一个页面执行</span></span><br><span class="line"><span class="built_in">UIBarButtonItem</span> *backItem = [[<span class="built_in">UIBarButtonItem</span> alloc] init];</span><br><span class="line"><span class="keyword">self</span><span class="variable">.navigationItem</span><span class="variable">.backBarButtonItem</span> = backItem;</span><br><span class="line">backItem<span class="variable">.title</span> = <span class="string">@""</span>;    </span><br><span class="line"></span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line">[[<span class="built_in">UIBarButtonItem</span> appearance] setBackButtonTitlePositionAdjustment:<span class="built_in">UIOffsetMake</span>(<span class="number">0</span>, -<span class="number">60</span>)  forBarMetrics:<span class="built_in">UIBarMetricsDefault</span>];</span><br></pre></td></tr></table></figure>
+<h1 id="资源">资源</h1><p>1、Xcode插件</p>
+<ul>
+<li><p>Alcatraz  管理和发现插件</p>
+<ul>
+<li><p>安装 </p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL http<span class="variable">s:</span>//raw.githubusercontent.<span class="keyword">com</span>/supermarin/Alcatraz/master/Scripts/install.<span class="keyword">sh</span> | <span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>卸载 </p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ~<span class="regexp">/Library/</span>Application\ Support<span class="regexp">/Developer/</span>Shared<span class="regexp">/Xcode/</span>Plug-ins<span class="regexp">/Alcatraz.xcplugin</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>卸载所有插件 </p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ~/<span class="keyword">Library</span>/Application\ Support/Alcatraz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常用插件</p>
+<ul>
+<li>OMColorSense 可视化设置Color</li>
+<li>VVDocumenter-Xcode  生成java风格的注释</li>
+<li>KSImageNamed-Xcode  可视化设置Image</li>
+<li>XAlign 代码对齐</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Cocospod库管理 </p>
+<ul>
+<li><p>安装 </p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem <span class="keyword">install</span> cocoapods</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更改源</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gem sources --remove <span class="string">https:</span><span class="comment">//rubygems.org/</span></span><br><span class="line">gem sources -a <span class="string">http:</span><span class="comment">//ruby.taobao.org/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>基本模板</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">platform <span class="symbol">:ios</span>, <span class="string">"7.0"</span></span><br><span class="line">inhibit_all_warnings!<span class="regexp">//pod</span>的工程不显示任何警告</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常用Lib</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">pod</span> <span class="string">"MBProgressHUD"</span></span><br><span class="line">pod <span class="string">"SIAlertView"</span></span><br><span class="line">pod <span class="string">"FMDB"</span></span><br><span class="line">pod <span class="string">"AFNetworking"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="常用技巧">常用技巧</h1><p>1、Xcode技巧</p>
+<ul>
+<li>当真机升级了iOS，但对应Xcode未升级时，device会出现ineligible device，这时通过xocde菜单-&gt;Product-&gt;Destination-&gt;选择对应的device 即可解决</li>
+<li><p>编译相关</p>
+<ul>
+<li><p>.a静态库编译</p>
+<p>  <code>lipo -info xxx.a</code> 查看静态库支持的平台，目前有armv7、arm64、armv7s、i386 前三者为真机平台，后者为iphone Simulator</p>
+<p>  <code>lipo -create libXXX-armv7s.a libXXX-i138.a -output libXXX.a</code> 合并生成通用平台的静态库</p>
+</li>
+<li><p>环境变量</p>
+<p>  $(SRCROOT) 工程文件（比如Nuno.xcodeproj）的路径</p>
+<p>  $(PROJECT_DIR) 项目目录        </p>
+</li>
+</ul>
+</li>
+<li><p>Xcode常见编译错误</p>
+<ul>
+<li><p><code>could not build module &#39;Foundation&#39;</code></p>
+<p>  原因在于，在pch文件中没有把import放在<code>#ifdef_OBJC_</code></p>
+  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#ifdef</span> __OBJC__ </span><br><span class="line">    <span class="id">#import</span> &lt;UIKit/UIKit.h&gt; </span><br><span class="line">    <span class="id">#import</span> &lt;Foundation/Foundation.h&gt; </span><br><span class="line"><span class="id">#endif</span> </span><br><span class="line">    <span class="id">#import</span> <span class="string">"ddddd.h"</span>  <span class="comment">//此处移动上面 __OBJC__ 中就好了</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>]]>
+    
+    </summary>
+    
+      <category term="记录" scheme="http://mokai.github.io/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[iOS技巧]]></title>
+    <link href="http://mokai.github.io/2015/04/ios-tips%E5%89%AF%E6%9C%AC/"/>
+    <id>http://mokai.github.io/2015/04/ios-tips副本/</id>
     <published>2015-04-16T16:00:00.000Z</published>
     <updated>2015-07-16T06:04:09.000Z</updated>
     <content type="html"><![CDATA[<h1 id="常用技巧">常用技巧</h1><p>1、Xcode技巧</p>
@@ -527,7 +935,314 @@
     
     </summary>
     
-      <category term="记录" scheme="http://mokai.github.io/categories/%E8%AE%B0%E5%BD%95/"/>
+  </entry>
+  
+  <entry>
+    <title><![CDATA[iOS技巧]]></title>
+    <link href="http://mokai.github.io/2015/04/iBug_uitableview_/"/>
+    <id>http://mokai.github.io/2015/04/iBug_uitableview_/</id>
+    <published>2015-04-16T16:00:00.000Z</published>
+    <updated>2015-07-16T06:04:09.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="常用技巧">常用技巧</h1><p>1、Xcode技巧</p>
+<ul>
+<li>当真机升级了iOS，但对应Xcode未升级时，device会出现ineligible device，这时通过xocde菜单-&gt;Product-&gt;Destination-&gt;选择对应的device 即可解决</li>
+<li><p>编译相关</p>
+<ul>
+<li><p>.a静态库编译</p>
+<p>  <code>lipo -info xxx.a</code> 查看静态库支持的平台，目前有armv7、arm64、armv7s、i386 前三者为真机平台，后者为iphone Simulator</p>
+<p>  <code>lipo -create libXXX-armv7s.a libXXX-i138.a -output libXXX.a</code> 合并生成通用平台的静态库</p>
+</li>
+<li><p>环境变量</p>
+<p>  $(SRCROOT) 工程文件（比如Nuno.xcodeproj）的路径</p>
+<p>  $(PROJECT_DIR) 项目目录        </p>
+</li>
+</ul>
+</li>
+<li><p>Xcode常见编译错误</p>
+<ul>
+<li><p><code>could not build module &#39;Foundation&#39;</code></p>
+<p>  原因在于，在pch文件中没有把import放在<code>#ifdef_OBJC_</code></p>
+  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#ifdef</span> __OBJC__ </span><br><span class="line">    <span class="id">#import</span> &lt;UIKit/UIKit.h&gt; </span><br><span class="line">    <span class="id">#import</span> &lt;Foundation/Foundation.h&gt; </span><br><span class="line"><span class="id">#endif</span> </span><br><span class="line">    <span class="id">#import</span> <span class="string">"ddddd.h"</span>  <span class="comment">//此处移动上面 __OBJC__ 中就好了</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>IB技巧</p>
+<ul>
+<li>可视化坐标距离    选中一个View，然后按住<code>option</code>并将鼠标移动到其他View上</li>
+<li>多个View层次选择 按住<code>Cmd</code>和<code>Shift</code>，然后在需要选择的view上方按右键</li>
+<li>添加辅助线  在左边的层级列表中双击某个view，然后<code>Cmd+_</code>或者<code>Cmd+|</code>即可在选中的view上添加一条水平或者垂直中心的辅助线</li>
+</ul>
+</li>
+<li><p>xcode升级后插件失效修复</p>
+  <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find</span> ~<span class="regexp">/Library/</span>Application\ Support<span class="regexp">/Developer/</span>Shared<span class="regexp">/Xcode/</span>Plug-ins -name Info.plist -maxdepth <span class="number">3</span> | xargs -I&#123;&#125; defaults <span class="keyword">write</span> &#123;&#125; DVTPlugInCompatibilityUUIDs -array-add `defaults <span class="keyword">read</span> <span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/I</span>nfo.plist DVTPlugInCompatibilityUUID`</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>修复多个Xcode导致的N个模拟器问题</p>
+  <image src="http://ww2.sinaimg.cn/large/51530583jw1eu4h7paw3wj20sw15gn5t.jpg" width="400px" height="500px">
+
+
+</image></li>
+</ul>
+<p>2、Frame枚举类型转换为string通过<code>NSStringFromCGRect</code></p>
+<p>3、指定文件不使用arc,<code>-fno-objc-arc</code></p>
+<p>4、OC语法简写</p>
+<ul>
+<li>NSNumber<ul>
+<li>[NSNumber numberWithChar:‘X’] 简写为 @‘X’;</li>
+<li>[NSNumber numberWithInt:12345] 简写为 @12345</li>
+<li>[NSNumber numberWithUnsignedLong:12345ul] 简写为 @12345ul</li>
+<li>[NSNumber numberWithLongLong:12345ll] 简写为 @12345ll</li>
+<li>[NSNumber numberWithFloat:123.45f] 简写为 @123.45f</li>
+<li>[NSNumber numberWithDouble:123.45] 简写为 @123.45</li>
+<li>[NSNumber numberWithBool:YES] 简写为 @YES</li>
+</ul>
+</li>
+<li>NSArray<ul>
+<li>[NSArray array] 简写为 @[]</li>
+<li>[NSArray arrayWithObject:a] 简写为 @[ a ]</li>
+<li>[NSArray arrayWithObjects:a, b, c, nil] 简写为 @[ a, b, c ]</li>
+</ul>
+</li>
+<li>NSDictionary<ul>
+<li>[NSDictionary dictionary] 简写为 @{}</li>
+<li>[NSDictionary dictionaryWithObject:o1 forKey:k1] 简写为 @{ k1 : o1 }</li>
+<li>[NSDictionary dictionaryWithObjectsAndKeys:o1, k1, o2, k2, o3, k3, nil] 简写为 @{ k1 : o1, k2 : o2, k3 : o3 }</li>
+</ul>
+</li>
+</ul>
+<p>如果想生成Mutable版本，直接调用 [@[] mutableCopy] 就行了</p>
+<ul>
+<li>下标<ul>
+<li>[array objectAtIndex:idx] 简写为 array[idx];</li>
+<li>[array replaceObjectAtIndex:idx withObject:newObj] 简写为 array[idx] = newObj</li>
+<li>[dic objectForKey:key] 简写为 dic[key]</li>
+<li>[dic setObject:object forKey:key] 简写为 dic[key] = newObject</li>
+</ul>
+</li>
+</ul>
+<p>5、Resource底下的plist文件需要clean才可以消除清楚</p>
+<p>6、[NSDate date]获取的是GMT时间，和北京时间相差8个小时</p>
+<p>7、拨打电话</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[UIApplication sharedApplication]</span> openURL:<span class="collection">[NSURL URLWithString:@<span class="string">"tel:466453"</span>]</span>]</span><span class="comment">;</span></span><br><span class="line"><span class="collection">[<span class="collection">[<span class="collection">[UIWebView alloc]</span> init]</span> loadRequest:<span class="collection">[NSURLRequest requestWithURL:<span class="collection">[NSURL URLWithString:@<span class="string">"tel:466453"</span>]</span>]</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>8、调用照相或者相册</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)takePicture:(<span class="built_in">UIButton</span> *)btn&#123;</span><br><span class="line">    _currentCardBtn = btn;</span><br><span class="line">    IBActionSheet *sheet = [[IBActionSheet alloc] initWithTitle:<span class="literal">nil</span> delegate:<span class="keyword">self</span> cancelButtonTitle:<span class="string">@"取消"</span> destructiveButtonTitle:<span class="literal">nil</span> otherButtonTitles:<span class="string">@"相册"</span>,<span class="string">@"拍照"</span>, <span class="literal">nil</span>];</span><br><span class="line">    [sheet showInView:<span class="keyword">self</span><span class="variable">.view</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)actionSheet:(IBActionSheet *)actionSheet clickedButtonAtIndex:(<span class="built_in">NSInteger</span>)buttonIndex&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,buttonIndex);</span><br><span class="line">    <span class="keyword">if</span> (buttonIndex==<span class="number">0</span>) &#123;<span class="comment">//相册</span></span><br><span class="line">        [<span class="keyword">self</span> takePicker:<span class="built_in">UIImagePickerControllerSourceTypePhotoLibrary</span>];</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(buttonIndex==<span class="number">1</span>)&#123;<span class="comment">//拍照</span></span><br><span class="line">        [<span class="keyword">self</span> takePicker:<span class="built_in">UIImagePickerControllerSourceTypeCamera</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)takePicker:(<span class="built_in">UIImagePickerControllerSourceType</span>)sourceType</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSArray</span> *mediatypes=[<span class="built_in">UIImagePickerController</span> availableMediaTypesForSourceType:sourceType];</span><br><span class="line">    <span class="keyword">if</span>([<span class="built_in">UIImagePickerController</span> isSourceTypeAvailable:sourceType] &amp;&amp;[mediatypes count]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">NSArray</span> *mediatypes=[<span class="built_in">UIImagePickerController</span> availableMediaTypesForSourceType:sourceType];</span><br><span class="line">        <span class="built_in">UIImagePickerController</span> *picker=[[<span class="built_in">UIImagePickerController</span> alloc] init];</span><br><span class="line">        picker<span class="variable">.mediaTypes</span>=mediatypes;</span><br><span class="line">        picker<span class="variable">.delegate</span>=<span class="keyword">self</span>;</span><br><span class="line">        picker<span class="variable">.allowsEditing</span>=<span class="literal">YES</span>;</span><br><span class="line">        picker<span class="variable">.sourceType</span>=sourceType;</span><br><span class="line">        <span class="built_in">NSString</span> *requiredmediatype=(<span class="built_in">NSString</span> *)kUTTypeImage;</span><br><span class="line">        <span class="built_in">NSArray</span> *arrmediatypes=[<span class="built_in">NSArray</span> arrayWithObject:requiredmediatype];</span><br><span class="line">        [picker setMediaTypes:arrmediatypes];</span><br><span class="line">        [<span class="keyword">self</span> presentModalViewController:picker animated:<span class="literal">YES</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        [AlertUtils showAlert:<span class="string">@"当前设备不支持拍摄功能"</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>) imagePickerController:(<span class="built_in">UIImagePickerController</span> *)picker didFinishPickingMediaWithInfo:(<span class="built_in">NSDictionary</span> *)info&#123;</span><br><span class="line">    <span class="comment">//self.lastChosenMediaType=[info objectForKey:UIImagePickerControllerMediaType];</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UIImage</span> *chosenImage=[info objectForKey:<span class="built_in">UIImagePickerControllerEditedImage</span>];</span><br><span class="line">    <span class="comment">//_avatarImageView.image=chosenImage;</span></span><br><span class="line">    <span class="comment">//_currentCardBtn.imageView.image = chosenImage;</span></span><br><span class="line">    [_currentCardBtn setBackgroundImage:chosenImage forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    [_currentCardBtn setTitle:<span class="string">@""</span> forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//    if([lastChosenMediaType isEqual:(NSString *) kUTTypeMovie])</span></span><br><span class="line">    <span class="comment">//    &#123;</span></span><br><span class="line">    <span class="comment">//        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示信息!" message:@"系统只支持图片格式" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles: nil];</span></span><br><span class="line">    <span class="comment">//        [alert show];</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">//    &#125;</span></span><br><span class="line">    [picker dismissModalViewControllerAnimated:<span class="literal">YES</span>];</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="keyword">void</span>) imagePickerControllerDidCancel:(<span class="built_in">UIImagePickerController</span> *)picker&#123;</span><br><span class="line">    [picker dismissModalViewControllerAnimated:<span class="literal">YES</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>9、iphone程序中实现截屏的一种方法</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导入头文件</span></span><br><span class="line"><span class="id">#import</span> QuartzCore/QuartzCore<span class="class">.h</span></span><br><span class="line"><span class="comment">//将整个self.view大小的图层形式创建一张图片image 	UIGraphicsBeginImageContext(self.view.bounds.size)；</span></span><br><span class="line">[self<span class="class">.view</span><span class="class">.layer</span> renderInContext：<span class="function"><span class="title">UIGraphicsGetCurrentContext</span><span class="params">()</span></span>]；</span><br><span class="line">UIImage*image=<span class="function"><span class="title">UIGraphicsGetImageFromCurrentImageContext</span><span class="params">()</span></span>；</span><br><span class="line"><span class="function"><span class="title">UIGraphicsEndImageContext</span><span class="params">()</span></span>；</span><br><span class="line"><span class="comment">//然后将该图片保存到图片图</span></span><br><span class="line"><span class="function"><span class="title">UIImageWriteToSavedPhotosAlbum</span><span class="params">(image,self,nil,nil)</span></span>；</span><br></pre></td></tr></table></figure>
+<p>10、启动界面的制作</p>
+<p> 在Resource里面增加Default.png,然后在XXXAppDelegate.m里面增加 [NSThread sleepForTimeInterval:5.0];</p>
+<p>11、动画</p>
+<ul>
+<li>基于位置动画</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CATransition</span> *animation = [<span class="built_in">CATransition</span> animation];</span><br><span class="line">animation<span class="variable">.duration</span> = <span class="number">0.3</span>f;<span class="comment">//间隔的时间</span></span><br><span class="line">animation<span class="variable">.timingFunction</span> = [<span class="built_in">CAMediaTimingFunction</span> functionWithName:k<span class="built_in">CAMediaTimingFunctionLinear</span>]; ;</span><br><span class="line">animation<span class="variable">.type</span> = k<span class="built_in">CATransitionPush</span>;<span class="comment">//设置上面4种动画效果</span></span><br><span class="line">animation<span class="variable">.subtype</span> = k<span class="built_in">CATransitionFromLeft</span>;<span class="comment">//设置动画的方向，有四种，分别为kCATransitionFromRight、kCATransitionFromLeft、kCATransitionFromTop、kCATransitionFromBottom</span></span><br><span class="line">[<span class="keyword">self</span><span class="variable">.layer</span> addAnimation:animation forKey:<span class="string">@"animationID"</span>];</span><br></pre></td></tr></table></figure>
+<p>12、以使用如下代码判断开启了那些类型的消息通知：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIRemoteNotificationType</span> enabledTypes = [[<span class="built_in">UIApplication</span> sharedApplication] enabledRemoteNotificationTypes];</span><br><span class="line"><span class="keyword">if</span> (enabledTypes &amp; <span class="built_in">UIRemoteNotificationTypeBadge</span>) &#123;</span><br><span class="line"><span class="comment">//开启badge number</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (enabledTypes &amp; <span class="built_in">UIRemoteNotificationTypeSound</span>) &#123;</span><br><span class="line"><span class="comment">//开启声音</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (enabledTypes &amp; <span class="built_in">UIRemoteNotificationTypeAlert</span>) &#123;</span><br><span class="line"><span class="comment">//开启alert</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>13、NSDictionary排序</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NSMutableDictionary</span> *dict = [@&#123;&#125;mutableCopy];</span><br><span class="line">dict[@(<span class="number">1</span>)] = @<span class="string">"1"</span>;</span><br><span class="line">dict[@(<span class="number">2</span>)] = @<span class="string">"2"</span>;</span><br><span class="line">dict[@(<span class="number">3</span>)] = @<span class="string">"3"</span>;</span><br><span class="line">dict[@(<span class="number">5</span>)] = @<span class="string">"4"</span>;</span><br><span class="line">dict[@(<span class="number">4</span>)] = @<span class="string">"5"</span>;</span><br><span class="line"><span class="type">NSArray</span> *arr = [dict.allKeys sortedArrayUsingComparator:^<span class="type">NSComparisonResult</span>(id obj1, id obj2)&#123;</span><br><span class="line">    <span class="type">NSComparisonResult</span> <span class="literal">result</span> = [obj1 compare:obj2];</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">result</span>==<span class="type">NSOrderedDescending</span>;</span><br><span class="line">&#125;];</span><br><span class="line"><span class="type">NSLog</span>(@<span class="string">"%@"</span>,arr);</span><br></pre></td></tr></table></figure>
+<p>14、使用OpenURL打开设置页面</p>
+<ul>
+<li>网路设置项</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr_selector">[[UIApplication sharedApplication]</span> <span class="rule"><span class="attribute">openURL</span>:<span class="value">[NSURL URLWithString:@<span class="string">"prefs:root=General&amp;path=Network"</span>]]</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>定位设置</li>
+</ul>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[NSURL URLWithString:@<span class="string">"prefs:root=LOCATION_SERVICES"</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置Twitter</li>
+</ul>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[NSURL URLWithString:@<span class="string">"prefs:root=TWITTER"</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>蓝牙</li>
+</ul>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[NSURL URLWithString:@<span class="string">"prefs:root=General&amp;path=Bluetooth"</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>其他</li>
+</ul>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>About</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>ACCESSIBILITY</span><br><span class="line">prefs:<span class="variable">root=</span>AIRPLANE_MODE</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>AUTOLOCK</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>USAGE/CELLULAR_USAGE</span><br><span class="line">prefs:<span class="variable">root=</span>Brightness</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Bluetooth</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>DATE_AND_TIME</span><br><span class="line">prefs:<span class="variable">root=</span>FACETIME</span><br><span class="line">prefs:<span class="variable">root=</span>General</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Keyboard</span><br><span class="line">prefs:<span class="variable">root=</span>CASTLE</span><br><span class="line">prefs:<span class="variable">root=</span>CASTLE&amp;<span class="variable">path=</span>STORAGE_AND_BACKUP</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>INTERNATIONAL</span><br><span class="line">prefs:<span class="variable">root=</span>LOCATION_SERVICES</span><br><span class="line">prefs:<span class="variable">root=</span>ACCOUNT_SETTINGS</span><br><span class="line">prefs:<span class="variable">root=</span>MUSIC</span><br><span class="line">prefs:<span class="variable">root=</span>MUSIC&amp;<span class="variable">path=</span>EQ</span><br><span class="line">prefs:<span class="variable">root=</span>MUSIC&amp;<span class="variable">path=</span>VolumeLimit</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Network</span><br><span class="line">prefs:<span class="variable">root=</span>NIKE_PLUS_IPOD</span><br><span class="line">prefs:<span class="variable">root=</span>NOTES</span><br><span class="line">prefs:<span class="variable">root=</span>NOTIFICATIONS_ID</span><br><span class="line">prefs:<span class="variable">root=</span>Phone</span><br><span class="line">prefs:<span class="variable">root=</span>Photos</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>ManagedConfigurationList</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Reset</span><br><span class="line">prefs:<span class="variable">root=</span>Sounds&amp;<span class="variable">path=</span>Ringtone</span><br><span class="line">prefs:<span class="variable">root=</span>Safari</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Assistant</span><br><span class="line">prefs:<span class="variable">root=</span>Sounds</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>SOFTWARE_UPDATE_LINK</span><br><span class="line">prefs:<span class="variable">root=</span>STORE</span><br><span class="line">prefs:<span class="variable">root=</span>TWITTER</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>USAGE</span><br><span class="line">prefs:<span class="variable">root=</span>VIDEO</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Network/VPN</span><br><span class="line">prefs:<span class="variable">root=</span>Wallpaper</span><br><span class="line">prefs:<span class="variable">root=</span>WIFI</span><br><span class="line">prefs:<span class="variable">root=</span>INTERNET_TETHERING</span><br></pre></td></tr></table></figure>
+<p>15、<code>No known instance method for selector &#39;respondsToSelector:&#39;</code><br>这种情况是声明的协议protocol没有继承NSObject导致 </p>
+<h1 id="常用组件">常用组件</h1><p>1、UIView</p>
+<ul>
+<li>圆角</li>
+</ul>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">outLable.layer.<span class="variable">masksToBounds =</span> YES;</span><br><span class="line">outLable.layer.<span class="variable">cornerRadius =</span> <span class="number">5</span>;//如果要设置为圆，view的width与height一样，然后设置view.width/<span class="number">2</span></span><br><span class="line">outLable.layer.<span class="variable">borderWidth =</span> <span class="number">1</span>;</span><br><span class="line">outLable.layer.<span class="variable">borderColor =</span> TYPE_OUT</span><br></pre></td></tr></table></figure>
+<p>2、UITableView</p>
+<ul>
+<li>去掉默认分割线  </li>
+</ul>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">list</span>.separatorStyle = <span class="keyword">NO</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>UITableViewCell去掉点击效果  </p>
+<pre><code>cell.selectionStyle = UITableViewCellSelectionStyleNone<span class="comment">;</span>
+</code></pre></li>
+<li>使用UITableViewCellStyleGrouped要注意，ios6与ios7下的效果是不同的</li>
+<li>显示右按钮 accessoryType</li>
+<li>去掉UItableview headerview黏性(sticky)</li>
+</ul>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>scrollViewDidScroll:<span class="params">(UIScrollView *)</span>scrollView &#123;</span><br><span class="line">    CGFloat sectionHeaderHeight = <span class="number">40</span>;</span><br><span class="line">    <span class="keyword">if</span> <span class="params">(scrollView.contentOffset.y&lt;=sectionHeaderHeight&amp;&amp;scrollView.contentOffset.y&gt;=<span class="number">0</span>)</span> &#123;</span><br><span class="line">        scrollView.contentInset = UIEdgeInsetsMake<span class="params">(-scrollView.contentOffset.y, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="params">(scrollView.contentOffset.y&gt;=sectionHeaderHeight)</span> &#123;</span><br><span class="line">        scrollView.contentInset = UIEdgeInsetsMake<span class="params">(-sectionHeaderHeight, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>UITableViewCell自动滚动到顶部 </li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[tableView <span class="string">scrollToRowAtIndexPath:</span>[NSIndexPath <span class="string">indexPathForRow:</span><span class="number">0</span> <span class="string">inSection:</span><span class="number">0</span>] <span class="string">atScrollPosition:</span>UITableViewScrollPositionTop <span class="string">animated:</span>YES];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>取消选中状态 </li>
+</ul>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">NSIndexPath</span> *<span class="keyword">selected </span>= [_tView indexPathForSelectedRow]<span class="comment">;</span></span><br><span class="line"><span class="label">if</span>(<span class="keyword">selected) </span>&#123;</span><br><span class="line">	[_tView deselectRowAtIndexPath:<span class="keyword">selected </span>animated:NO]<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>选中一行</li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self.tView <span class="string">selectRowAtIndexPath:</span>[NSIndexPath <span class="string">indexPathForRow:</span><span class="number">0</span> <span class="string">inSection:</span><span class="number">0</span>]  <span class="string">animated:</span>YES <span class="string">scrollPosition:</span>UITableViewScrollPositionTop];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>TableView不显示没内容的Cell怎么办</li>
+</ul>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">self</span><span class="built_in">.</span>tView<span class="built_in">.</span>tableFooterView <span class="subst">=</span> <span class="preprocessor">[</span>UIView <span class="literal">new</span><span class="preprocessor">]</span><span class="markup">;</span></span><br></pre></td></tr></table></figure>
+<p>3、UILabel</p>
+<ul>
+<li>换行  内容加\n，然后设置label.numberOfLines = 0; </li>
+<li>文本自适应</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">m_t</span>itleLabel.font = [UIFont systemFontOfSize:<span class="number">20</span>];</span><br><span class="line"><span class="keyword">m_t</span>itleLabel.adjustsFontSizeToFitWidth = YES;</span><br><span class="line"><span class="keyword">m_t</span>itleLabel.minimumFontSize = <span class="number">6</span>;</span><br></pre></td></tr></table></figure>
+<p>就是在空间够的情况下，使用20号字体，如果空间不够，那么就会自动将字体向下调整，但是也不会少于6号字体，<br>如果6号字体也显示不完，后续显示省略号。。。</p>
+<ul>
+<li>自动高度</li>
+</ul>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">lab</span> setNumberOfLines:0];</span><br><span class="line"><span class="keyword">lab</span>.lineBreakMode = UILineBreakModeWordWrap;</span><br><span class="line">CGSize maxSize = CGSizeMake(<span class="keyword">lab</span>.width, SCREEN_HEIGHT - <span class="keyword">lab</span>.top);</span><br><span class="line"><span class="keyword">lab</span>.size = [_descLab.text sizeWithFont:_descLab.font constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];</span><br></pre></td></tr></table></figure>
+<p>4、UITextField</p>
+<ul>
+<li>居中 </li>
+</ul>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">field.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>获得焦点  </li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[field becomeFirstResponder]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>键盘样式</p>
+<ul>
+<li><p>风格:</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">textView<span class="variable">.keyboardType</span> = <span class="built_in">UIKeyboardTypeNumberPad</span>;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">enum</span>  &#123;  </span><br><span class="line">    <span class="built_in">UIKeyboardTypeDefault</span>,                 <span class="comment">// 默认键盘：支持所有字符   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeASCIICapable</span>,            <span class="comment">// 支持ASCII的默认键盘   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeNumbersAndPunctuation</span>,   <span class="comment">// 标准电话键盘，支持+*#等符号   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeURL</span>,                     <span class="comment">// URL键盘，有.com按钮；只支持URL字符   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeNumberPad</span>,               <span class="comment">//数字键盘   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypePhonePad</span>,                <span class="comment">// 电话键盘   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeNamePhonePad</span>,            <span class="comment">// 电话键盘，也支持输入人名字   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeEmailAddress</span>,            <span class="comment">// 用于输入电子邮件地址的键盘   </span></span><br><span class="line">&#125; <span class="built_in">UIKeyboardType</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>键盘外观:</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">textView<span class="variable">.keyboardAppearance</span>=<span class="built_in">UIKeyboardAppearanceDefault</span>;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">enum</span>  &#123;  </span><br><span class="line">    <span class="built_in">UIKeyboardAppearanceDefault</span>,     <span class="comment">// 默认外观：浅灰色   </span></span><br><span class="line">    <span class="built_in">UIKeyboardAppearanceAlert</span>,       <span class="comment">//深灰/石墨色   </span></span><br><span class="line">&#125; <span class="built_in">UIKeyboardAppearance</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>回车键</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">textView<span class="variable">.returnKeyType</span>=<span class="built_in">UIReturnKeyGo</span>;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">enum</span>  &#123;  </span><br><span class="line">    <span class="built_in">UIReturnKeyDefault</span>,  <span class="comment">//默认：灰色按钮，标有Return</span></span><br><span class="line">    <span class="built_in">UIReturnKeyGo</span>,  <span class="comment">//标有Go的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyGoogle</span>,  <span class="comment">//标有Google的蓝色按钮，用于搜索</span></span><br><span class="line">    <span class="built_in">UIReturnKeyJoin</span>,  <span class="comment">//标有Join的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyNext</span>,  <span class="comment">//标有Next的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyRoute</span>,  <span class="comment">//标有Route的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeySearch</span>,  <span class="comment">//标有Search的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeySend</span>,  <span class="comment">//标有Send的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyYahoo</span>,  <span class="comment">//标有Yahoo!的蓝色按钮，用于搜索</span></span><br><span class="line">    <span class="built_in">UIReturnKeyDone</span>,  <span class="comment">//标有Done的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyEmergencyCall</span>,  <span class="comment">//紧急呼叫按钮</span></span><br><span class="line">&#125; <span class="built_in">UIReturnKeyType</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自动大写</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">textField<span class="variable">.autocapitalizationType</span> = <span class="built_in">UITextAutocapitalizationTypeWords</span></span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">enum</span>  &#123;  </span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeNone</span>,  <span class="comment">//不自动大写   </span></span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeWords</span>,  <span class="comment">//单词首字母大写   </span></span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeSentences</span>,  <span class="comment">//句子首字母大写   </span></span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeAllCharacters</span>,  <span class="comment">//所有字母大写   </span></span><br><span class="line">&#125; <span class="built_in">UITextAutocapitalizationType</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自动更正</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">textField<span class="variable">.autocorrectionType</span>= <span class="built_in">UITextAutocorrectionTypeYes</span>;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">enum</span>  &#123;  </span><br><span class="line">    <span class="built_in">UITextAutocorrectionTypeDefault</span>, <span class="comment">//默认   </span></span><br><span class="line">    <span class="built_in">UITextAutocorrectionTypeNo</span>, <span class="comment">//不自动更正   </span></span><br><span class="line">    <span class="built_in">UITextAutocorrectionTypeYes</span>, <span class="comment">//自动更正   </span></span><br><span class="line">&#125; <span class="built_in">UITextAutocorrectionType</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安全文本输入</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textField.secureTextEntry=YES<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示消除图标 </p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textField.clearButtonMode = UITextFieldViewModeWhileEditing<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>隐藏输入法 </p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[self.view endEditing:YES]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>5、UIScrollView</p>
+<ul>
+<li>去掉弹簧效果    </li>
+</ul>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sView.bounces ＝ <span class="literal">no</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>动态改变内容区大小  contentSize </li>
+<li>隐藏滑动条</li>
+</ul>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scrollView.showsVerticalScrollIndicator = <span class="literal">FALSE</span><span class="comment">;</span></span><br><span class="line">scrollView.showsHorizontalScrollIndicator = <span class="literal">FALSE</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>6、UIApplication </p>
+<ul>
+<li>获取当前应用状态   <code>application.applicationState</code></li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIApplicationStateActive</span>  </span><br><span class="line"><span class="built_in">UIApplicationStateInactive</span> </span><br><span class="line"><span class="built_in">UIApplicationStateBackground</span>  后台</span><br></pre></td></tr></table></figure>
+<p>7、UIDatePicker</p>
+<p>8、UINavigationController</p>
+<ul>
+<li>设置主题颜色</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">navCtr<span class="variable">.navigationBar</span><span class="variable">.barTintColor</span> = app_theme_color;<span class="comment">//背景色</span></span><br><span class="line">navCtr<span class="variable">.navigationBar</span><span class="variable">.tintColor</span> = [<span class="built_in">UIColor</span> blackColor];<span class="comment">//文字</span></span><br><span class="line"><span class="built_in">NSDictionary</span> * dict=[<span class="built_in">NSDictionary</span> dictionaryWithObject:[<span class="built_in">UIColor</span> blackColor] forKey:<span class="built_in">UITextAttributeTextColor</span>];</span><br><span class="line">navCtr<span class="variable">.navigationBar</span><span class="variable">.titleTextAttributes</span> = dict;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>改变返回标题</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在前一个页面执行</span></span><br><span class="line"><span class="built_in">UIBarButtonItem</span> *backItem = [[<span class="built_in">UIBarButtonItem</span> alloc] init];</span><br><span class="line"><span class="keyword">self</span><span class="variable">.navigationItem</span><span class="variable">.backBarButtonItem</span> = backItem;</span><br><span class="line">backItem<span class="variable">.title</span> = <span class="string">@""</span>;    </span><br><span class="line"></span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line">[[<span class="built_in">UIBarButtonItem</span> appearance] setBackButtonTitlePositionAdjustment:<span class="built_in">UIOffsetMake</span>(<span class="number">0</span>, -<span class="number">60</span>)  forBarMetrics:<span class="built_in">UIBarMetricsDefault</span>];</span><br></pre></td></tr></table></figure>
+<h1 id="资源">资源</h1><p>1、Xcode插件</p>
+<ul>
+<li><p>Alcatraz  管理和发现插件</p>
+<ul>
+<li><p>安装 </p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL http<span class="variable">s:</span>//raw.githubusercontent.<span class="keyword">com</span>/supermarin/Alcatraz/master/Scripts/install.<span class="keyword">sh</span> | <span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>卸载 </p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ~<span class="regexp">/Library/</span>Application\ Support<span class="regexp">/Developer/</span>Shared<span class="regexp">/Xcode/</span>Plug-ins<span class="regexp">/Alcatraz.xcplugin</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>卸载所有插件 </p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ~/<span class="keyword">Library</span>/Application\ Support/Alcatraz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常用插件</p>
+<ul>
+<li>OMColorSense 可视化设置Color</li>
+<li>VVDocumenter-Xcode  生成java风格的注释</li>
+<li>KSImageNamed-Xcode  可视化设置Image</li>
+<li>XAlign 代码对齐</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Cocospod库管理 </p>
+<ul>
+<li><p>安装 </p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem <span class="keyword">install</span> cocoapods</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更改源</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gem sources --remove <span class="string">https:</span><span class="comment">//rubygems.org/</span></span><br><span class="line">gem sources -a <span class="string">http:</span><span class="comment">//ruby.taobao.org/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>基本模板</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">platform <span class="symbol">:ios</span>, <span class="string">"7.0"</span></span><br><span class="line">inhibit_all_warnings!<span class="regexp">//pod</span>的工程不显示任何警告</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常用Lib</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">pod</span> <span class="string">"MBProgressHUD"</span></span><br><span class="line">pod <span class="string">"SIAlertView"</span></span><br><span class="line">pod <span class="string">"FMDB"</span></span><br><span class="line">pod <span class="string">"AFNetworking"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="常用技巧">常用技巧</h1><p>1、Xcode技巧</p>
+<ul>
+<li>当真机升级了iOS，但对应Xcode未升级时，device会出现ineligible device，这时通过xocde菜单-&gt;Product-&gt;Destination-&gt;选择对应的device 即可解决</li>
+<li><p>编译相关</p>
+<ul>
+<li><p>.a静态库编译</p>
+<p>  <code>lipo -info xxx.a</code> 查看静态库支持的平台，目前有armv7、arm64、armv7s、i386 前三者为真机平台，后者为iphone Simulator</p>
+<p>  <code>lipo -create libXXX-armv7s.a libXXX-i138.a -output libXXX.a</code> 合并生成通用平台的静态库</p>
+</li>
+<li><p>环境变量</p>
+<p>  $(SRCROOT) 工程文件（比如Nuno.xcodeproj）的路径</p>
+<p>  $(PROJECT_DIR) 项目目录        </p>
+</li>
+</ul>
+</li>
+<li><p>Xcode常见编译错误</p>
+<ul>
+<li><p><code>could not build module &#39;Foundation&#39;</code></p>
+<p>  原因在于，在pch文件中没有把import放在<code>#ifdef_OBJC_</code></p>
+  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#ifdef</span> __OBJC__ </span><br><span class="line">    <span class="id">#import</span> &lt;UIKit/UIKit.h&gt; </span><br><span class="line">    <span class="id">#import</span> &lt;Foundation/Foundation.h&gt; </span><br><span class="line"><span class="id">#endif</span> </span><br><span class="line">    <span class="id">#import</span> <span class="string">"ddddd.h"</span>  <span class="comment">//此处移动上面 __OBJC__ 中就好了</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>]]>
+    
+    </summary>
     
   </entry>
   
