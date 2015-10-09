@@ -532,6 +532,13 @@ backItem.title = @"";
 //或者
 [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)  forBarMetrics:UIBarMetricsDefault]; 
 ```
+* 当translucent打开时view.frame.orgin.y在iOS7与iOS8下的64个高度兼容
+
+```
+if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+    self.edgesForExtendedLayout = UIRectEdgeNone;   // iOS 7 specific
+```
+
 
 #资源
 1、Xcode插件
