@@ -23,7 +23,7 @@
 
 .a静态库编译
   lipo -info xxx.a 查看静态库支持的平台，目前有armv7、arm64、armv7s、i386 前三者">
-<meta property="og:updated_time" content="2015-09-25T01:20:43.000Z">
+<meta property="og:updated_time" content="2015-10-08T07:43:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS技巧">
 <meta name="twitter:description" content="常用技巧1、Xcode技巧
@@ -455,6 +455,10 @@
 <li>改变返回标题</li>
 </ul>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在前一个页面执行</span></span><br><span class="line"><span class="built_in">UIBarButtonItem</span> *backItem = [[<span class="built_in">UIBarButtonItem</span> alloc] init];</span><br><span class="line"><span class="keyword">self</span><span class="variable">.navigationItem</span><span class="variable">.backBarButtonItem</span> = backItem;</span><br><span class="line">backItem<span class="variable">.title</span> = <span class="string">@""</span>;    </span><br><span class="line"></span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line">[[<span class="built_in">UIBarButtonItem</span> appearance] setBackButtonTitlePositionAdjustment:<span class="built_in">UIOffsetMake</span>(<span class="number">0</span>, -<span class="number">60</span>)  forBarMetrics:<span class="built_in">UIBarMetricsDefault</span>];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>当translucent打开时view.frame.orgin.y在iOS7与iOS8下的64个高度兼容</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ([<span class="keyword">self</span> respondsToSelector:<span class="keyword">@selector</span>(edgesForExtendedLayout)])</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.edgesForExtendedLayout</span> = <span class="built_in">UIRectEdgeNone</span>;   <span class="comment">// iOS 7 specific</span></span><br></pre></td></tr></table></figure>
 <h1 id="资源">资源</h1><p>1、Xcode插件</p>
 <ul>
 <li><p>Alcatraz  管理和发现插件</p>
@@ -514,8 +518,8 @@
     </a>
   
   
-    <a href="/2015/04/ios-tips副本/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">iOS技巧</div>
+    <a href="/2015/04/IB中Runtime Attributes个别属性无效/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">IB中Runtime Attributes个别属性无效</div>
       <strong class="article-nav-caption">></strong>
     </a>
   

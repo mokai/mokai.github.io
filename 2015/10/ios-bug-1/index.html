@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>IB中Runtime Attributes个别属性无效 | mokai</title>
+  <title>#坑1# iOS8以后presendViewController透明效果无效 | mokai</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在使用Xcode IB方式编码中，经常会使用到属性列表中没有的属性，这时则需要通过Runtime Attributes来动态注入(实则为KVO实现)">
+  <meta name="description" content="iOS弹出的视图背景默认是黑色，如果想去掉，以往我们使用 self.modalPresentationStyle = .CurrentContext 就可以实现效果，如以下半透明的代码
+1234let vc = UIViewController()vc.view.backgroundColor = UIColor(red:0.000 , green:0.000 , blue:0.000, alph">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IB中Runtime Attributes个别属性无效">
-<meta property="og:url" content="http://mokai.github.io/2015/04/IB中Runtime Attributes个别属性无效/index.html">
+<meta property="og:title" content="#坑1# iOS8以后presendViewController透明效果无效">
+<meta property="og:url" content="http://mokai.github.io/2015/10/ios-bug-1/index.html">
 <meta property="og:site_name" content="mokai">
-<meta property="og:description" content="在使用Xcode IB方式编码中，经常会使用到属性列表中没有的属性，这时则需要通过Runtime Attributes来动态注入(实则为KVO实现)">
-<meta property="og:image" content="http://7xiew0.com1.z0.glb.clouddn.com/2015-04-07_1.png">
-<meta property="og:image" content="http://7xiew0.com1.z0.glb.clouddn.com/2015-04-07_2.png">
-<meta property="og:image" content="http://7xiew0.com1.z0.glb.clouddn.com/2015-04-07_3.png">
-<meta property="og:updated_time" content="2015-06-23T02:21:00.000Z">
+<meta property="og:description" content="iOS弹出的视图背景默认是黑色，如果想去掉，以往我们使用 self.modalPresentationStyle = .CurrentContext 就可以实现效果，如以下半透明的代码
+1234let vc = UIViewController()vc.view.backgroundColor = UIColor(red:0.000 , green:0.000 , blue:0.000, alph">
+<meta property="og:updated_time" content="2015-10-10T03:42:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IB中Runtime Attributes个别属性无效">
-<meta name="twitter:description" content="在使用Xcode IB方式编码中，经常会使用到属性列表中没有的属性，这时则需要通过Runtime Attributes来动态注入(实则为KVO实现)">
+<meta name="twitter:title" content="#坑1# iOS8以后presendViewController透明效果无效">
+<meta name="twitter:description" content="iOS弹出的视图背景默认是黑色，如果想去掉，以往我们使用 self.modalPresentationStyle = .CurrentContext 就可以实现效果，如以下半透明的代码
+1234let vc = UIViewController()vc.view.backgroundColor = UIColor(red:0.000 , green:0.000 , blue:0.000, alph">
   
     <link rel="alternative" href="/atom.xml" title="mokai" type="application/atom+xml">
   
@@ -168,11 +168,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-IB中Runtime Attributes个别属性无效" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ios-bug-1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/04/IB中Runtime Attributes个别属性无效/" class="article-date">
-  	<time datetime="2015-04-06T16:00:00.000Z" itemprop="datePublished">2015-04-07</time>
+      <a href="/2015/10/ios-bug-1/" class="article-date">
+  	<time datetime="2015-10-09T16:00:00.000Z" itemprop="datePublished">2015-10-10</time>
 </a>
     </div>
   
@@ -185,7 +185,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      IB中Runtime Attributes个别属性无效
+      #坑1# iOS8以后presendViewController透明效果无效
     </h1>
   
 
@@ -195,7 +195,7 @@
         
         
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/iBug/">iBug</a>
+	<a class="article-category-link" href="/categories/iOS那些坑/">iOS那些坑</a>
 	</div>
 
 
@@ -205,20 +205,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在使用Xcode IB方式编码中，经常会使用到属性列表中没有的属性，这时则需要通过<code>Runtime Attributes</code>来动态注入(实则为<code>KVO</code>实现)</p>
-<a id="more"></a>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/2015-04-07_1.png" alt=""></p>
-<p>但有个别属性设置你会发现怎样都无效</p>
-<p>如：<code>layer.borderColor</code></p>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/2015-04-07_2.png" alt=""></p>
-<p>原因在于<code>borderColor</code>接受的参数是CGColor类型，而此处的Color为UIColor，所以导致注入时参数类型不一致</p>
-<h3 id="解决方案：利用扩展自定义一个中间属性器来转换一下类型就OK了">解决方案：利用扩展自定义一个<code>中间属性器</code>来转换一下类型就OK了</h3><p>1、自定义代码<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="type">Foundation</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">CALayer</span></span>&#123;</span><br><span class="line">    <span class="comment">//解决IB中runtime attribute中layer.borderColor不能转换UIColor为CGColor</span></span><br><span class="line">    <span class="keyword">var</span> borderColorFromUIColor:<span class="type">UIColor</span>&#123;</span><br><span class="line">        <span class="keyword">set</span>(color)&#123;</span><br><span class="line">            <span class="keyword">self</span>.borderColor = color.<span class="type">CGColor</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">get</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="type">UIColor</span>(<span class="type">CGColor</span>: <span class="keyword">self</span>.borderColor)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>注意,swift与OC的属性设置器不同，OC中是setXXX，而swift是有内部setter</p>
-</blockquote>
-<p>2、IB中设置，把原先的<code>layer.borderColor</code>改为<code>layer.borderColorFromUIColor</code></p>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/2015-04-07_3.png" alt=""></p>
-<p>参考:<br><a href="http://ios-blog.co.uk/tutorials/user-defined-runtime-attributes/" target="_blank" rel="external">User Defined Runtime Attributes</a></p>
+        <p>iOS弹出的视图背景默认是黑色，如果想去掉，以往我们使用 <code>self.modalPresentationStyle = .CurrentContext</code> 就可以实现效果，如以下半透明的代码</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let vc = <span class="function"><span class="title">UIViewController</span><span class="params">()</span></span></span><br><span class="line">vc<span class="class">.view</span><span class="class">.backgroundColor</span> = <span class="function"><span class="title">UIColor</span><span class="params">(red:<span class="number">0.000</span> , green:<span class="number">0.000</span> , blue:<span class="number">0.000</span>, alpha:<span class="number">0.5</span>)</span></span></span><br><span class="line">self<span class="class">.modalPresentationStyle</span> = <span class="class">.CurrentContext</span></span><br><span class="line">self.<span class="function"><span class="title">presentViewController</span><span class="params">(vc, animated: true, completion: nil)</span></span></span><br></pre></td></tr></table></figure>
+<p>但是你会发现这段代码在iOS8、iOS9上面运行依旧一片黑，因此iOS8以后得这么干</p>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> vc = UIViewController<span class="params">()</span></span><br><span class="line">vc.view.backgroundColor = UIColor<span class="params">(red:<span class="number">0.000</span> , green:<span class="number">0.000</span> , blue:<span class="number">0.000</span>, alpha:<span class="number">0.5</span>)</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">let</span> <span class="built_in">version</span> = Float<span class="params">(UIDevice.currentDevice<span class="params">()</span>.systemVersion)</span> where <span class="built_in">version</span> &gt;= <span class="number">8</span>&#123;</span><br><span class="line">    vc.modalPresentationStyle = .OverCurrentContext <span class="comment">//注意此处是弹出VC对象，不是self</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    self.modalPresentationStyle = .CurrentContext</span><br><span class="line">&#125;</span><br><span class="line">self.presentViewController<span class="params">(vc, animated: <span class="literal">true</span>, completion: nil)</span></span><br></pre></td></tr></table></figure>
+<p>iOS8后增加了<code>OverCurrentContext</code>取代<code>CurrentContext</code>，并且设置的对象是弹出的VC</p>
 
       
     </div>
@@ -228,18 +219,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/04/ios-tips/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          iOS技巧
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/04/hello/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">hello</div>
+    <a href="/2015/10/iOS国际化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS国际化</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -253,7 +235,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="IB中Runtime Attributes个别属性无效" data-title="IB中Runtime Attributes个别属性无效" data-url="http://mokai.github.io/2015/04/IB中Runtime Attributes个别属性无效/"></div>
+	<div class="ds-thread" data-thread-key="ios-bug-1" data-title="#坑1# iOS8以后presendViewController透明效果无效" data-url="http://mokai.github.io/2015/10/ios-bug-1/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

@@ -166,6 +166,65 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-ios-bug-1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/ios-bug-1/" class="article-date">
+  	<time datetime="2015-10-09T16:00:00.000Z" itemprop="datePublished">2015-10-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/ios-bug-1/">#坑1# iOS8以后presendViewController透明效果无效</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>iOS弹出的视图背景默认是黑色，如果想去掉，以往我们使用 <code>self.modalPresentationStyle = .CurrentContext</code> 就可以实现效果，如以下半透明的代码</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let vc = <span class="function"><span class="title">UIViewController</span><span class="params">()</span></span></span><br><span class="line">vc<span class="class">.view</span><span class="class">.backgroundColor</span> = <span class="function"><span class="title">UIColor</span><span class="params">(red:<span class="number">0.000</span> , green:<span class="number">0.000</span> , blue:<span class="number">0.000</span>, alpha:<span class="number">0.5</span>)</span></span></span><br><span class="line">self<span class="class">.modalPresentationStyle</span> = <span class="class">.CurrentContext</span></span><br><span class="line">self.<span class="function"><span class="title">presentViewController</span><span class="params">(vc, animated: true, completion: nil)</span></span></span><br></pre></td></tr></table></figure>
+<p>但是你会发现这段代码在iOS8、iOS9上面运行依旧一片黑，因此iOS8以后得这么干</p>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> vc = UIViewController<span class="params">()</span></span><br><span class="line">vc.view.backgroundColor = UIColor<span class="params">(red:<span class="number">0.000</span> , green:<span class="number">0.000</span> , blue:<span class="number">0.000</span>, alpha:<span class="number">0.5</span>)</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">let</span> <span class="built_in">version</span> = Float<span class="params">(UIDevice.currentDevice<span class="params">()</span>.systemVersion)</span> where <span class="built_in">version</span> &gt;= <span class="number">8</span>&#123;</span><br><span class="line">    vc.modalPresentationStyle = .OverCurrentContext <span class="comment">//注意此处是弹出VC对象，不是self</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    self.modalPresentationStyle = .CurrentContext</span><br><span class="line">&#125;</span><br><span class="line">self.presentViewController<span class="params">(vc, animated: <span class="literal">true</span>, completion: nil)</span></span><br></pre></td></tr></table></figure>
+<p>iOS8后增加了<code>OverCurrentContext</code>取代<code>CurrentContext</code>，并且设置的对象是弹出的VC</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/iOS那些坑/">iOS那些坑</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-iOS国际化" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -528,160 +587,6 @@
       
         <p class="article-more-link">
           <a  href="/2015/04/ios-tips/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-ios-tips副本" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/04/ios-tips副本/" class="article-date">
-  	<time datetime="2015-04-16T16:00:00.000Z" itemprop="datePublished">2015-04-17</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/ios-tips副本/">iOS技巧</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="常用技巧">常用技巧</h1><p>1、Xcode技巧</p>
-<ul>
-<li>当真机升级了iOS，但对应Xcode未升级时，device会出现ineligible device，这时通过xocde菜单-&gt;Product-&gt;Destination-&gt;选择对应的device 即可解决</li>
-<li><p>编译相关</p>
-<ul>
-<li><p>.a静态库编译</p>
-<p>  <code>lipo -info xxx.a</code> 查看静态库支持的平台，目前有armv7、arm64、armv7s、i386 前三者为真机平台，后者为iphone Simulator</p>
-<p>  <code>lipo -create libXXX-armv7s.a libXXX-i138.a -output libXXX.a</code> 合并生成通用平台的静态库</p>
-</li>
-<li><p>环境变量</p>
-<p>  $(SRCROOT) 工程文件（比如Nuno.xcodeproj）的路径</p>
-<p>  $(PROJECT_DIR) 项目目录        </p>
-</li>
-</ul>
-</li>
-<li><p>Xcode常见编译错误</p>
-<ul>
-<li><p><code>could not build module &#39;Foundation&#39;</code></p>
-<p>  原因在于，在pch文件中没有把import放在<code>#ifdef_OBJC_</code></p>
-  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#ifdef</span> __OBJC__ </span><br><span class="line">    <span class="id">#import</span> &lt;UIKit/UIKit.h&gt; </span><br><span class="line">    <span class="id">#import</span> &lt;Foundation/Foundation.h&gt; </span><br><span class="line"><span class="id">#endif</span> </span><br><span class="line">    <span class="id">#import</span> <span class="string">"ddddd.h"</span>  <span class="comment">//此处移动上面 __OBJC__ 中就好了</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/04/ios-tips副本/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-iBug_uitableview_" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/04/iBug_uitableview_/" class="article-date">
-  	<time datetime="2015-04-16T16:00:00.000Z" itemprop="datePublished">2015-04-17</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/iBug_uitableview_/">iOS技巧</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="常用技巧">常用技巧</h1><p>1、Xcode技巧</p>
-<ul>
-<li>当真机升级了iOS，但对应Xcode未升级时，device会出现ineligible device，这时通过xocde菜单-&gt;Product-&gt;Destination-&gt;选择对应的device 即可解决</li>
-<li><p>编译相关</p>
-<ul>
-<li><p>.a静态库编译</p>
-<p>  <code>lipo -info xxx.a</code> 查看静态库支持的平台，目前有armv7、arm64、armv7s、i386 前三者为真机平台，后者为iphone Simulator</p>
-<p>  <code>lipo -create libXXX-armv7s.a libXXX-i138.a -output libXXX.a</code> 合并生成通用平台的静态库</p>
-</li>
-<li><p>环境变量</p>
-<p>  $(SRCROOT) 工程文件（比如Nuno.xcodeproj）的路径</p>
-<p>  $(PROJECT_DIR) 项目目录        </p>
-</li>
-</ul>
-</li>
-<li><p>Xcode常见编译错误</p>
-<ul>
-<li><p><code>could not build module &#39;Foundation&#39;</code></p>
-<p>  原因在于，在pch文件中没有把import放在<code>#ifdef_OBJC_</code></p>
-  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#ifdef</span> __OBJC__ </span><br><span class="line">    <span class="id">#import</span> &lt;UIKit/UIKit.h&gt; </span><br><span class="line">    <span class="id">#import</span> &lt;Foundation/Foundation.h&gt; </span><br><span class="line"><span class="id">#endif</span> </span><br><span class="line">    <span class="id">#import</span> <span class="string">"ddddd.h"</span>  <span class="comment">//此处移动上面 __OBJC__ 中就好了</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/04/iBug_uitableview_/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
