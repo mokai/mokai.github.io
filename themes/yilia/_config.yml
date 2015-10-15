@@ -4,7 +4,7 @@ menu:
   所有文章: /archives
   作品: /projects
   我: /me
-  简历: /me/resume.html
+  # 简历: /me/resume.html
   # 随笔: /tags/随笔
 
 # SubNav 
