@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   
   <title><![CDATA[mokai]]></title>
-  <subtitle><![CDATA[专注iOS的全栈开发者]]></subtitle>
+  <subtitle><![CDATA[iOS dev]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://mokai.github.io//"/>
   <updated>2015-10-10T03:42:30.000Z</updated>
@@ -283,25 +283,6 @@
     <![CDATA[<p>做iOS已经一年多了，前段时间买了二本书<code>Objective-C高级编程 iOS与OS X多线程和内存管理</code>与<code>Effective Objective-C 2.0</code>，感觉内容还不错，简直是面试良品，故记录下笔记</p>]]>
     
     </summary>
-    
-      <category term="读书笔记" scheme="http://mokai.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Effective Objective-C 2.0]]></title>
-    <link href="http://mokai.github.io/2015/07/book_effective_oc2/"/>
-    <id>http://mokai.github.io/2015/07/book_effective_oc2/</id>
-    <published>2015-07-30T16:00:00.000Z</published>
-    <updated>2015-07-31T07:39:02.000Z</updated>
-    <content type="html"><![CDATA[<p>待编辑….</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>待编辑….</p>
-]]>
-    </summary>
-    
-      <category term="读书笔记" scheme="http://mokai.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
