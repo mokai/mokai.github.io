@@ -271,22 +271,6 @@
   </entry>
   
   <entry>
-    <title><![CDATA[《Objective-C高级编程 iOS与OS X多线程和内存管理》精华]]></title>
-    <link href="http://mokai.github.io/2015/07/book_multithreading_memory_management_for_iOS_OSX/"/>
-    <id>http://mokai.github.io/2015/07/book_multithreading_memory_management_for_iOS_OSX/</id>
-    <published>2015-07-30T16:00:00.000Z</published>
-    <updated>2015-08-19T01:44:29.000Z</updated>
-    <content type="html"><![CDATA[<p>做iOS已经一年多了，前段时间买了二本书<code>Objective-C高级编程 iOS与OS X多线程和内存管理</code>与<code>Effective Objective-C 2.0</code>，感觉内容还不错，简直是面试良品，故记录下笔记</p>
-<a id="more"></a>
-<h2 id="一、自动引用计数">一、自动引用计数</h2><h2 id="二、Blocks">二、Blocks</h2><h2 id="三、GCD">三、GCD</h2>]]></content>
-    <summary type="html">
-    <![CDATA[<p>做iOS已经一年多了，前段时间买了二本书<code>Objective-C高级编程 iOS与OS X多线程和内存管理</code>与<code>Effective Objective-C 2.0</code>，感觉内容还不错，简直是面试良品，故记录下笔记</p>]]>
-    
-    </summary>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[Swift技巧]]></title>
     <link href="http://mokai.github.io/2015/04/swift-tips/"/>
     <id>http://mokai.github.io/2015/04/swift-tips/</id>
