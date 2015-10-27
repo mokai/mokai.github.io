@@ -5,7 +5,7 @@
   <subtitle><![CDATA[iOS dev]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://mokai.github.io//"/>
-  <updated>2015-10-10T03:42:30.000Z</updated>
+  <updated>2015-10-27T08:04:33.000Z</updated>
   <id>http://mokai.github.io//</id>
   
   <author>
@@ -14,6 +14,25 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[3D Touch使用]]></title>
+    <link href="http://mokai.github.io/2015/10/3d-touch/"/>
+    <id>http://mokai.github.io/2015/10/3d-touch/</id>
+    <published>2015-10-26T16:00:00.000Z</published>
+    <updated>2015-10-27T08:04:33.000Z</updated>
+    <content type="html"><![CDATA[<p>待更新….</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>待更新….</p>
+]]>
+    </summary>
+    
+      <category term="3D Touch" scheme="http://mokai.github.io/tags/3D-Touch/"/>
+    
+      <category term="记录" scheme="http://mokai.github.io/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[#坑1# iOS8以后presendViewController透明效果无效]]></title>
@@ -186,8 +205,8 @@
   
   <entry>
     <title><![CDATA[蓝牙编程]]></title>
-    <link href="http://mokai.github.io/2015/09/bluetooth_guide/"/>
-    <id>http://mokai.github.io/2015/09/bluetooth_guide/</id>
+    <link href="http://mokai.github.io/2015/09/bluetooth-guide/"/>
+    <id>http://mokai.github.io/2015/09/bluetooth-guide/</id>
     <published>2015-09-07T16:00:00.000Z</published>
     <updated>2015-09-28T01:40:41.000Z</updated>
     <content type="html"><![CDATA[<p>蓝牙技术，很早以前就被有了，如今已更新4.0版本。很多热门技术都是基于它工作的，如Android平台的NFC，iOS的iBeancon，Apple Watch的WatchConnectivity框架等，现在的智能家居基本也是基于蓝牙4.0与APP进行通信，可见蓝牙在实践工作中的重要性。在iOS中，蓝牙是基于4.0标准的，设备间低功耗通信。</p>
