@@ -9,7 +9,6 @@ footer: false
 <br/>
 ## #开源库
 #####[inject-android](https://github.com/mokai/inject-android)  android注入库，提供layout绑定、属性注入、值注入等技能√
-#####[ios-upgrade](https://github.com/mokai/ios-upgrade) APP检测更新，获取app store最新版本号与更新说明、下载最新版本
 <br/>
 ## #项目
 #####[外勤宝-员工考勤管理](http://www.hr-soft.cn/solutionDetail_wqb.html)  移动考勤、实时定位、工作轨迹及工作情况记录等功能
