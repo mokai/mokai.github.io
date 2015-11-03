@@ -124,7 +124,7 @@ sharing: false
         NSString *requiredmediatype=(NSString *)kUTTypeImage;
         NSArray *arrmediatypes=[NSArray arrayWithObject:requiredmediatype];
         [picker setMediaTypes:arrmediatypes];
-        [self presentModalViewController:picker animated:YES];
+        [self presentViewController:picker animated:YES completion:nil];
     }
     else{
         [AlertUtils showAlert:@"当前设备不支持拍摄功能"];
