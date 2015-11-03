@@ -2,13 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://mokai.github.io/projects/index.html</loc>
-    <lastmod>2015-11-01T13:17:56.000Z</lastmod>
+    <loc>http://mokai.github.io/2015/10/3d-touch/</loc>
+    <lastmod>2015-11-03T10:03:31.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://mokai.github.io/2015/10/3d-touch/</loc>
-    <lastmod>2015-10-31T06:29:45.000Z</lastmod>
+    <loc>http://mokai.github.io/2015/04/ios-tips/</loc>
+    <lastmod>2015-11-03T06:41:22.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mokai.github.io/projects/index.html</loc>
+    <lastmod>2015-11-01T13:17:56.000Z</lastmod>
   </url>
   
   <url>
@@ -19,11 +24,6 @@
   <url>
     <loc>http://mokai.github.io/2015/10/ios-bug-viewcontroller_translucent/</loc>
     <lastmod>2015-10-10T03:42:30.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.github.io/2015/04/ios-tips/</loc>
-    <lastmod>2015-10-08T07:43:19.000Z</lastmod>
   </url>
   
   <url>
