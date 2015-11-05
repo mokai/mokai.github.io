@@ -142,8 +142,6 @@ override func previewActionItems() -> [UIPreviewActionItem] {
 
 使用这种方式指定我们在代码中连注册都不用，所以使用SB的项目适配3D Touch那是分分钟搞定的事，尤其在Xcode7出了`Storyboard References`后，我大 `Swift + Storyboard` 组合势必统一iOS界~
 
-![](http://7xiew0.com1.z0.glb.clouddn.com/funny_nonono.gif)
-
 <br/>
 好了，有点小激动了，继续回到正文
 <br/>
@@ -209,6 +207,7 @@ override func endPeek() {
  * 如果要改变Peek窗口的size可以设置目标VC的`preferredContentSize`
  * 对于直接使用`registerForPreviewingWithDelegate`注册VC的self.view，虽然可以自动注册subviews，但是如果说你的VC中不止一种视图要触发Peek，那么它会分分钟教你做人的道理。
 
+![](http://7xiew0.com1.z0.glb.clouddn.com/funny_nonono.gif)
 
 ## UITouch
 高级玩法，绘图、游戏，把3D Touch发挥到极致。不过我也唔知玩也暂时没这方面需求，有需求看[官方绘图demo](https://developer.apple.com/library/prerelease/ios/samplecode/TouchCanvas/)
