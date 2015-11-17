@@ -3,21 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>IB中Runtime Attributes个别属性无效 | mokai</title>
+  <title>Raywenderlich指南收集【持续更新】 | mokai</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在使用Xcode IB方式编码中，经常会使用到属性列表中没有的属性，这时则需要通过Runtime Attributes来动态注入(实则为KVO实现)">
+  <meta name="description" content="最近在啃字raywenderlich中，顺便把一些Totorials收集，包括原文以及译文。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IB中Runtime Attributes个别属性无效">
-<meta property="og:url" content="http://mokai.github.io/2015/04/IB中Runtime Attributes个别属性无效/index.html">
+<meta property="og:title" content="Raywenderlich指南收集【持续更新】">
+<meta property="og:url" content="http://mokai.github.io/2015/11/raywenderlichs/index.html">
 <meta property="og:site_name" content="mokai">
-<meta property="og:description" content="在使用Xcode IB方式编码中，经常会使用到属性列表中没有的属性，这时则需要通过Runtime Attributes来动态注入(实则为KVO实现)">
-<meta property="og:image" content="http://7xiew0.com1.z0.glb.clouddn.com/2015-04-07_1.png">
-<meta property="og:image" content="http://7xiew0.com1.z0.glb.clouddn.com/2015-04-07_2.png">
-<meta property="og:image" content="http://7xiew0.com1.z0.glb.clouddn.com/2015-04-07_3.png">
-<meta property="og:updated_time" content="2015-11-03T10:06:28.000Z">
+<meta property="og:description" content="最近在啃字raywenderlich中，顺便把一些Totorials收集，包括原文以及译文。">
+<meta property="og:updated_time" content="2015-11-17T05:34:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IB中Runtime Attributes个别属性无效">
-<meta name="twitter:description" content="在使用Xcode IB方式编码中，经常会使用到属性列表中没有的属性，这时则需要通过Runtime Attributes来动态注入(实则为KVO实现)">
+<meta name="twitter:title" content="Raywenderlich指南收集【持续更新】">
+<meta name="twitter:description" content="最近在啃字raywenderlich中，顺便把一些Totorials收集，包括原文以及译文。">
   
     <link rel="alternative" href="/atom.xml" title="mokai" type="application/atom+xml">
   
@@ -177,11 +174,11 @@ var _hmt = _hmt || [];
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-IB中Runtime Attributes个别属性无效" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-raywenderlichs" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/04/IB中Runtime Attributes个别属性无效/" class="article-date">
-  	<time datetime="2015-04-06T16:00:00.000Z" itemprop="datePublished">2015-04-07</time>
+      <a href="/2015/11/raywenderlichs/" class="article-date">
+  	<time datetime="2015-11-10T16:00:00.000Z" itemprop="datePublished">2015-11-11</time>
 </a>
     </div>
   
@@ -194,7 +191,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      IB中Runtime Attributes个别属性无效
+      Raywenderlich指南收集【持续更新】
     </h1>
   
 
@@ -204,7 +201,7 @@ var _hmt = _hmt || [];
         
         
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/iBug/">iBug</a>
+	<a class="article-category-link" href="/categories/raywenderlich/">raywenderlich</a>
 	</div>
 
 
@@ -214,20 +211,24 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在使用Xcode IB方式编码中，经常会使用到属性列表中没有的属性，这时则需要通过<code>Runtime Attributes</code>来动态注入(实则为<code>KVO</code>实现)</p>
+        <p>最近在啃字<a href="http://www.raywenderlich.com" target="_blank" rel="external">raywenderlich</a>中，顺便把一些Totorials收集，包括原文以及译文。</p>
 <a id="more"></a>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/2015-04-07_1.png" alt=""></p>
-<p>但有个别属性设置你会发现怎样都无效</p>
-<p>如：<code>layer.borderColor</code></p>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/2015-04-07_2.png" alt=""></p>
-<p>原因在于<code>borderColor</code>接受的参数是CGColor类型，而此处的Color为UIColor，所以导致注入时参数类型不一致</p>
-<h3 id="解决方案：利用扩展自定义一个中间属性器来转换一下类型就OK了">解决方案：利用扩展自定义一个<code>中间属性器</code>来转换一下类型就OK了</h3><p>1、自定义代码<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="type">Foundation</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">CALayer</span></span>&#123;</span><br><span class="line">    <span class="comment">//解决IB中runtime attribute中layer.borderColor不能转换UIColor为CGColor</span></span><br><span class="line">    <span class="keyword">var</span> borderColorFromUIColor:<span class="type">UIColor</span>&#123;</span><br><span class="line">        <span class="keyword">set</span>(color)&#123;</span><br><span class="line">            <span class="keyword">self</span>.borderColor = color.<span class="type">CGColor</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">get</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="type">UIColor</span>(<span class="type">CGColor</span>: <span class="keyword">self</span>.borderColor)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>注意,swift与OC的属性设置器不同，OC中是setXXX，而swift是有内部setter</p>
-</blockquote>
-<p>2、IB中设置，把原先的<code>layer.borderColor</code>改为<code>layer.borderColorFromUIColor</code></p>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/2015-04-07_3.png" alt=""></p>
-<p>参考:<br><a href="http://ios-blog.co.uk/tutorials/user-defined-runtime-attributes/" target="_blank" rel="external">User Defined Runtime Attributes</a></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>英文</th>
+<th>译文</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CALayer Tutorial【CALayer指南】</code></td>
+<td><a href="http://www.raywenderlich.com/90488/calayer-in-ios-with-swift-10-examples" target="_blank" rel="external">传送门</a></td>
+<td>暂无</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -237,18 +238,18 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2015/04/swift-tips/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/11/ios-bug-postNoficationName/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          Swift技巧
+          #坑3# postNotificationName触发后的监听代码是同步还是异步执行的？
         
       </div>
     </a>
   
   
-    <a href="/2015/04/hello/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">hello</div>
+    <a href="/2015/11/3d-touch/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">3D Touch大法</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -262,7 +263,7 @@ var _hmt = _hmt || [];
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="IB中Runtime Attributes个别属性无效" data-title="IB中Runtime Attributes个别属性无效" data-url="http://mokai.github.io/2015/04/IB中Runtime Attributes个别属性无效/"></div>
+	<div class="ds-thread" data-thread-key="raywenderlichs" data-title="Raywenderlich指南收集【持续更新】" data-url="http://mokai.github.io/2015/11/raywenderlichs/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

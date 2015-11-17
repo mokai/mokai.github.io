@@ -3,21 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>#坑2# 强制旋转应用当前屏幕 | mokai</title>
+  <title>Archives: 2015 | mokai</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="经常有这样的需求，APP只需要竖屏，但是一些特殊的场景下需要横屏。
-比如说调用系统的MPMovieViewController播放视频时，我们会在AppDelegate中或者UIViewController中更新允许横屏的配置，当播放器旋转到横屏（此时设备应该也是处于横屏），APP现有ViewController也会跟着旋转，那么问题来了，当再次回到APP时，此时现有ViewController是">
-<meta property="og:type" content="article">
-<meta property="og:title" content="#坑2# 强制旋转应用当前屏幕">
-<meta property="og:url" content="http://mokai.github.io/2015/10/ios-bug-screen_rotate/index.html">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="mokai">
+<meta property="og:url" content="http://mokai.github.io/archives/2015/page/2/index.html">
 <meta property="og:site_name" content="mokai">
-<meta property="og:description" content="经常有这样的需求，APP只需要竖屏，但是一些特殊的场景下需要横屏。
-比如说调用系统的MPMovieViewController播放视频时，我们会在AppDelegate中或者UIViewController中更新允许横屏的配置，当播放器旋转到横屏（此时设备应该也是处于横屏），APP现有ViewController也会跟着旋转，那么问题来了，当再次回到APP时，此时现有ViewController是">
-<meta property="og:updated_time" content="2015-11-17T05:12:26.000Z">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="#坑2# 强制旋转应用当前屏幕">
-<meta name="twitter:description" content="经常有这样的需求，APP只需要竖屏，但是一些特殊的场景下需要横屏。
-比如说调用系统的MPMovieViewController播放视频时，我们会在AppDelegate中或者UIViewController中更新允许横屏的配置，当播放器旋转到横屏（此时设备应该也是处于横屏），APP现有ViewController也会跟着旋转，那么问题来了，当再次回到APP时，此时现有ViewController是">
+<meta name="twitter:title" content="mokai">
+<meta name="twitter:description">
   
     <link rel="alternative" href="/atom.xml" title="mokai" type="application/atom+xml">
   
@@ -177,100 +173,57 @@ var _hmt = _hmt || [];
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-ios-bug-screen_rotate" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2015/10/ios-bug-screen_rotate/" class="article-date">
-  	<time datetime="2015-10-30T16:00:00.000Z" itemprop="datePublished">2015-10-31</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2015" class="archive-year">2015</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2015/04/hello/" class="archive-article-date">
+  	<time datetime="2015-03-31T16:00:00.000Z" itemprop="datePublished">4月 1</time>
 </a>
-    </div>
+        </div>
+    	 
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      #坑2# 强制旋转应用当前屏幕
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2015/04/hello/">hello</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-        
+        <div class="article-info info-on-right">
+          
+          
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/iOS那些坑/">iOS那些坑</a>
+	<a class="article-category-link" href="/categories/记录/">记录</a>
 	</div>
 
 
+        </div>
         <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>经常有这样的需求，APP只需要竖屏，但是一些特殊的场景下需要横屏。</p>
-<p>比如说调用系统的<code>MPMovieViewController</code>播放视频时，我们会在AppDelegate中或者UIViewController中更新允许横屏的配置，当播放器旋转到横屏（此时设备应该也是处于横屏），APP现有<code>ViewController</code>也会跟着旋转，那么问题来了，当再次回到APP时，此时现有<code>ViewController</code>是处于横屏的，我们再去代理中更新为竖屏会发现代理根本不会被调用，这时我们就需要用到下面这段代码，去手动触发屏幕旋转事件 </p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let vc = <span class="built_in">UIViewController</span>();</span><br><span class="line"><span class="keyword">self</span><span class="variable">.presentViewController</span>(vc, animated: <span class="literal">false</span>, completion: <span class="literal">nil</span>)</span><br><span class="line">vc<span class="variable">.dismissViewControllerAnimated</span>(<span class="literal">false</span>, completion: <span class="literal">nil</span>)</span><br></pre></td></tr></table></figure>
-<h4 id="参考:参考：">参考:参考：</h4><p><a href="http://foggry.com/blog/2014/08/08/ping-mu-xuan-zhuan-xue-xi-bi-ji/" target="_blank" rel="external">iOS屏幕旋转学习笔记</a></p>
-
-      
-    </div>
-    
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/11/3d-touch/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          3D Touch大法
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/10/ios-bug-viewcontroller_translucent/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">#坑1# iOS8以后presendViewController透明效果无效</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="ios-bug-screen_rotate" data-title="#坑2# 强制旋转应用当前屏幕" data-url="http://mokai.github.io/2015/10/ios-bug-screen_rotate/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"mokai"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/2015/">&laquo; Prev</a><a class="page-number" href="/archives/2015/">1</a><span class="page-number current">2</span>
+    </nav>
+  
 
 </div>
       <footer id="footer">
@@ -296,8 +249,8 @@ var _hmt = _hmt || [];
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false

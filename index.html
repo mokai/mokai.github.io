@@ -175,6 +175,124 @@ var _hmt = _hmt || [];
 </nav>
       <div class="body-wrap">
   
+    <article id="post-ios-bug-postNoficationName" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/ios-bug-postNoficationName/" class="article-date">
+  	<time datetime="2015-11-16T16:00:00.000Z" itemprop="datePublished">2015-11-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/ios-bug-postNoficationName/">#坑3# postNotificationName触发后的监听代码是同步还是异步执行的？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>昨天去酷狗面试，被问到<code>postNotificationName触发后的监听代码是同步还是异步执行的？</code>，我当时知道<code>触发后的监听代码和触发的代码是在同一线程上执行的你</code>，但却回答了是异步，哎，我这逻辑又下降了。。。。</p>
+<p>举个栗子，比如说HTTP异步请求返回代码中我们触发一个通知，这个时候在监听的代码中直接去设置视图就会报错，因为当前线程不是主线程，正确的姿态应该是</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_async<span class="list">(<span class="keyword">dispatch_get_main_queue</span><span class="list">()</span>, &#123; <span class="list">()</span> -&gt; Void in</span><br><span class="line">    NSNotificationCenter.defaultCenter<span class="list">()</span>.postNotificationName<span class="list">(<span class="keyword">kNotificationName</span>, object: <span class="literal">nil</span>)</span></span><br><span class="line">&#125;)</span></span><br></pre></td></tr></table></figure>
+<p>当然你也可以选择另一种方式，<code>NSNotificationQueue</code>通知队列，我们可以通过它做很多基于Runloop的需求，最重要的是它是异步执行的。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let queue = NSNotificationQueue.<span class="function"><span class="title">defaultQueue</span><span class="params">()</span></span></span><br><span class="line">queue.<span class="function"><span class="title">enqueueNotification</span><span class="params">(NSNotification(name: kNotificationName, object: nil)</span></span>, postingStyle: NSPostingStyle.PostNow)</span><br></pre></td></tr></table></figure>
+<h4 id="参考:">参考:</h4><p><a href="http://www.cnblogs.com/xiaouisme/archive/2012/04/06/2434753.html" target="_blank" rel="external">cocoa的NSNotification通知</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/iOS那些坑/">iOS那些坑</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-raywenderlichs" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/raywenderlichs/" class="article-date">
+  	<time datetime="2015-11-10T16:00:00.000Z" itemprop="datePublished">2015-11-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/raywenderlichs/">Raywenderlich指南收集【持续更新】</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在啃字<a href="http://www.raywenderlich.com">raywenderlich</a>中，顺便把一些Totorials收集，包括原文以及译文。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/raywenderlich/">raywenderlich</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/raywenderlichs/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-3d-touch" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -266,8 +384,7 @@ var _hmt = _hmt || [];
         <p>经常有这样的需求，APP只需要竖屏，但是一些特殊的场景下需要横屏。</p>
 <p>比如说调用系统的<code>MPMovieViewController</code>播放视频时，我们会在AppDelegate中或者UIViewController中更新允许横屏的配置，当播放器旋转到横屏（此时设备应该也是处于横屏），APP现有<code>ViewController</code>也会跟着旋转，那么问题来了，当再次回到APP时，此时现有<code>ViewController</code>是处于横屏的，我们再去代理中更新为竖屏会发现代理根本不会被调用，这时我们就需要用到下面这段代码，去手动触发屏幕旋转事件 </p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let vc = <span class="built_in">UIViewController</span>();</span><br><span class="line"><span class="keyword">self</span><span class="variable">.presentViewController</span>(vc, animated: <span class="literal">false</span>, completion: <span class="literal">nil</span>)</span><br><span class="line">vc<span class="variable">.dismissViewControllerAnimated</span>(<span class="literal">false</span>, completion: <span class="literal">nil</span>)</span><br></pre></td></tr></table></figure>
-<p>参考：</p>
-<p><a href="http://foggry.com/blog/2014/08/08/ping-mu-xuan-zhuan-xue-xi-bi-ji/" target="_blank" rel="external">iOS屏幕旋转学习笔记</a></p>
+<h4 id="参考:参考：">参考:参考：</h4><p><a href="http://foggry.com/blog/2014/08/08/ping-mu-xuan-zhuan-xue-xi-bi-ji/" target="_blank" rel="external">iOS屏幕旋转学习笔记</a></p>
 
       
     </div>
@@ -479,66 +596,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-swift-tips" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/04/swift-tips/" class="article-date">
-  	<time datetime="2015-04-16T16:00:00.000Z" itemprop="datePublished">2015-04-17</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/swift-tips/">Swift技巧</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1、[UIView class]在swift中怎么写  <code>UIView.self</code></p>
-<p>2、String类型无count、length检测长度方法，使用<code>countElements</code>来使用，我们可以为String扩展一个属性</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span></span>&#123;</span><br><span class="line">    <span class="comment">//字符长度</span></span><br><span class="line">    <span class="keyword">var</span> <span class="built_in">count</span>:<span class="type">Int</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">countElements</span>(<span class="keyword">self</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/记录/">记录</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/04/swift-tips/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
     <article id="post-ios-tips" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -620,6 +677,66 @@ var _hmt = _hmt || [];
 
 
   
+    <article id="post-swift-tips" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/swift-tips/" class="article-date">
+  	<time datetime="2015-04-16T16:00:00.000Z" itemprop="datePublished">2015-04-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/swift-tips/">Swift技巧</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、[UIView class]在swift中怎么写  <code>UIView.self</code></p>
+<p>2、String类型无count、length检测长度方法，使用<code>countElements</code>来使用，我们可以为String扩展一个属性</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span></span>&#123;</span><br><span class="line">    <span class="comment">//字符长度</span></span><br><span class="line">    <span class="keyword">var</span> <span class="built_in">count</span>:<span class="type">Int</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">countElements</span>(<span class="keyword">self</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/记录/">记录</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/04/swift-tips/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-IB中Runtime Attributes个别属性无效" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -678,67 +795,10 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-hello" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2015/04/hello/" class="article-date">
-  	<time datetime="2015-03-31T16:00:00.000Z" itemprop="datePublished">2015-04-01</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/hello/">hello</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://7xiew0.com1.z0.glb.clouddn.com/2015-04-01-hello_just_do_it.jpg" alt=""></p>
-<p>Hello，new Blog~</p>
-<p>之前一直都是在<a href="http://blog.csdn.net/VictorMoKai">csdn</a>上写博客(其实也没怎么写(⊙o⊙)…)，最近订了些目标，个人网站就是其中一项</p>
-<p>so~ Just do it!</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/记录/">记录</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/04/hello/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">
