@@ -17,6 +17,6 @@ self.presentViewController(vc, animated: false, completion: nil)
 vc.dismissViewControllerAnimated(false, completion: nil)
 ```
 
-参考：
+####参考:参考：
 
 [iOS屏幕旋转学习笔记](http://foggry.com/blog/2014/08/08/ping-mu-xuan-zhuan-xue-xi-bi-ji/)

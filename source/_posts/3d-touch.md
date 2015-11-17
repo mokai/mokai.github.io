@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "3D Touch使用"
+title: "3D Touch大法"
 date: 2015-11-5
 comments: true
 categories: 记录

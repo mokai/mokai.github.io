@@ -569,7 +569,16 @@ if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
 		* VVDocumenter-Xcode  生成java风格的注释
 		* KSImageNamed-Xcode  可视化设置Image
 		* XAlign 代码对齐
-
+		* XcodeBoost 粘贴m文件的代码到h文件即可自动生成定义方法
+		* Auto-Import 自动import头文件
+		* DerivedData Exterminator 清除设备数据
+		* ESJsonFormat 根据Json自动生成Model
+		* FuzzyAutocomplete 自动补全，方法过长时能缩写
+		* HOStringSense 字符串工具
+		* NJHMultiTheme 代码主题
+		* RTImageAssets 根据3x图片自动生成2x、1x图片
+		* SCXcodeSwitchExpander 自动生成每项case 枚举值
+		 
 * Cocospod库管理 
 	* 安装 
 
