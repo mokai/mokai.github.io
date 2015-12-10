@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   
   <title><![CDATA[mokai]]></title>
-  <subtitle><![CDATA[大爱 Swift + Storyboard]]></subtitle>
+  <subtitle><![CDATA[爱Swift，不爱OC]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://mokai.github.io//"/>
   <updated>2015-11-17T05:35:12.000Z</updated>
@@ -433,7 +433,7 @@
     <link href="http://mokai.github.io/2015/04/ios-tips/"/>
     <id>http://mokai.github.io/2015/04/ios-tips/</id>
     <published>2015-04-16T16:00:00.000Z</published>
-    <updated>2015-12-01T06:53:02.000Z</updated>
+    <updated>2015-12-08T07:43:40.000Z</updated>
     <content type="html"><![CDATA[<h1 id="常用技巧">常用技巧</h1><p>1、Xcode技巧</p>
 <ul>
 <li>当真机升级了iOS，但对应Xcode未升级时，device会出现ineligible device，这时通过xocde菜单-&gt;Product-&gt;Destination-&gt;选择对应的device 即可解决</li>
@@ -594,7 +594,10 @@
 </ul>
 <figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">self</span><span class="built_in">.</span>tView<span class="built_in">.</span>tableFooterView <span class="subst">=</span> <span class="preprocessor">[</span>UIView <span class="literal">new</span><span class="preprocessor">]</span><span class="markup">;</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>手动调用<code>tableView:cellForRowAtIndexPath:</code>方法不会参与复用</li>
+<li><p>手动调用<code>tableView:cellForRowAtIndexPath:</code>方法不会参与复用</p>
+</li>
+<li><p>在使用sectionIndex时，如果不想要indexView占位设置 <code>tableView.sectionIndexBackgroundColor = [UIColor clearColor];</code></p>
+</li>
 </ul>
 <p>3、UILabel</p>
 <ul>
@@ -721,6 +724,12 @@
 <li><p>常用Lib</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">pod</span> <span class="string">"MBProgressHUD"</span></span><br><span class="line">pod <span class="string">"SIAlertView"</span></span><br><span class="line">pod <span class="string">"FMDB"</span></span><br><span class="line">pod <span class="string">"AFNetworking"</span></span><br><span class="line">pod <span class="string">'Alamofire'</span>, <span class="string">'~&gt; 3.0'</span></span><br></pre></td></tr></table></figure>
 </li>
+</ul>
+</li>
+<li><p>利器</p>
+<ul>
+<li><code>cloc</code> 代码行数统计  <code>npm install -g cloc</code></li>
+<li></li>
 </ul>
 </li>
 </ul>

@@ -23,7 +23,7 @@
 
 .a静态库编译
   lipo -info xxx.a 查看静态库支持的平台，目前有armv7、arm64、armv7s、i386 前三者">
-<meta property="og:updated_time" content="2015-12-01T06:53:02.000Z">
+<meta property="og:updated_time" content="2015-12-08T07:43:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS技巧">
 <meta name="twitter:description" content="常用技巧1、Xcode技巧
@@ -71,7 +71,7 @@ var _hmt = _hmt || [];
 		</hgroup>
 
 		
-		<p class="header-subtitle">大爱 Swift + Storyboard</p>
+		<p class="header-subtitle">爱Swift，不爱OC</p>
 		
 
 		
@@ -111,8 +111,6 @@ var _hmt = _hmt || [];
 							<li><a href="/">主页</a></li>
 				        
 							<li><a href="/archives">所有文章</a></li>
-				        
-							<li><a href="/projects">作品</a></li>
 				        
 							<li><a href="/me">我</a></li>
 				        
@@ -162,7 +160,7 @@ var _hmt = _hmt || [];
 			  <h1 class="header-author">kk</h1>
 			</hgroup>
 			
-			<p class="header-subtitle">大爱 Swift + Storyboard</p>
+			<p class="header-subtitle">爱Swift，不爱OC</p>
 			
 			<nav class="header-menu">
 				<ul>
@@ -170,8 +168,6 @@ var _hmt = _hmt || [];
 					<li><a href="/">主页</a></li>
 		        
 					<li><a href="/archives">所有文章</a></li>
-		        
-					<li><a href="/projects">作品</a></li>
 		        
 					<li><a href="/me">我</a></li>
 		        
@@ -389,7 +385,10 @@ var _hmt = _hmt || [];
 </ul>
 <figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">self</span><span class="built_in">.</span>tView<span class="built_in">.</span>tableFooterView <span class="subst">=</span> <span class="preprocessor">[</span>UIView <span class="literal">new</span><span class="preprocessor">]</span><span class="markup">;</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>手动调用<code>tableView:cellForRowAtIndexPath:</code>方法不会参与复用</li>
+<li><p>手动调用<code>tableView:cellForRowAtIndexPath:</code>方法不会参与复用</p>
+</li>
+<li><p>在使用sectionIndex时，如果不想要indexView占位设置 <code>tableView.sectionIndexBackgroundColor = [UIColor clearColor];</code></p>
+</li>
 </ul>
 <p>3、UILabel</p>
 <ul>
@@ -516,6 +515,12 @@ var _hmt = _hmt || [];
 <li><p>常用Lib</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">pod</span> <span class="string">"MBProgressHUD"</span></span><br><span class="line">pod <span class="string">"SIAlertView"</span></span><br><span class="line">pod <span class="string">"FMDB"</span></span><br><span class="line">pod <span class="string">"AFNetworking"</span></span><br><span class="line">pod <span class="string">'Alamofire'</span>, <span class="string">'~&gt; 3.0'</span></span><br></pre></td></tr></table></figure>
 </li>
+</ul>
+</li>
+<li><p>利器</p>
+<ul>
+<li><code>cloc</code> 代码行数统计  <code>npm install -g cloc</code></li>
+<li></li>
 </ul>
 </li>
 </ul>
