@@ -37,7 +37,9 @@ tags: "蓝牙"
 
 
 ##开始
-本篇只讲述第一种模式的本地中心，远程外设端可借助 [蓝牙调试神器LightBlue For Mac](https://itunes.apple.com/cn/app/lightblue/id639944780?mt=12)。需要了解第二种模式可以移步[创建外设](https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/PerformingCommonPeripheralRoleTasks/PerformingCommonPeripheralRoleTasks.html#//apple_ref/doc/uid/TP40013257-CH4-SW1) ps 英文，慎入~
+本篇只讲述第一种模式的本地中心，远程外设端可借助 ~~[蓝牙调试神器LightBlue For Mac](https://itunes.apple.com/cn/app/lightblue/id639944780?mt=12)~~。需要了解第二种模式可以移步[创建外设](https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/PerformingCommonPeripheralRoleTasks/PerformingCommonPeripheralRoleTasks.html#//apple_ref/doc/uid/TP40013257-CH4-SW1) ps 英文，慎入~
+
+> 12月22号更新：LightBlue For Mac只可以做为Central，不可以做为Peripheral，如需模拟请下载[iOS版本](https://itunes.apple.com/cn/app/lightblue-explorer-bluetooth/id557428110?mt=8)
 
 蓝牙交互的流程大致为
 
@@ -275,6 +277,11 @@ self.centralMgr.cancelPeripheralConnection(self.peripheral!)
 * 蓝牙的缓冲大小只有20bytes，在发送数据时最多只能发送20bytes，所以得分多次发送，数据的一体性可以用 EOM 标识符表标识
 
 
+> 12月22号更新：
+> 
+>  LightBlue For Mac只可以做为Central，不可以做为Peripheral，如需模拟请下载[iOS版本](https://itunes.apple.com/cn/app/lightblue-explorer-bluetooth/id557428110?mt=8)
+>
+>  提供了一个读写的[Central端Demo](https://github.com/mokai/BluetoothDemos)，Peripheral端请用上述iOS版LightBlue模拟
 
 ##参考
 

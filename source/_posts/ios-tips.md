@@ -49,7 +49,17 @@ sharing: false
 * 修复多个Xcode导致的N个模拟器问题
 
 	<image src='http://ww2.sinaimg.cn/large/51530583jw1eu4h7paw3wj20sw15gn5t.jpg' width='400px' height='500px' />
+
+```
+sudo killall -9 com.apple.CoreSimulator.CoreSimulatorService
+rm -rf ~/Library/Developer/CoreSimulator/Devices
+```	
 	
+* LLDB中import UIKit
+
+```
+touch ~/.lldbinit echo display @import UIKit >> ~/.lldbinit echo target stop-hook add -o \"target stop-hook disable\" >> ~/.lldbinit
+```
 
 2、Frame枚举类型转换为string通过`NSStringFromCGRect`
 
@@ -289,6 +299,13 @@ prefs:root=INTERNET_TETHERING
 这种情况是声明的协议protocol没有继承NSObject导致 
 
 
+16、复制字符串到剪贴板
+
+```
+UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+pasteboard.string = xxx;
+```
+
 #常用组件
 
 1、UIView
@@ -356,6 +373,8 @@ self.tView.tableFooterView = [UIView new];
 ```
 
 * 手动调用`tableView:cellForRowAtIndexPath:`方法不会参与复用
+
+* 在使用sectionIndex时，如果不想要indexView占位设置 `tableView.sectionIndexBackgroundColor = [UIColor clearColor];`
 
 3、UILabel
 
@@ -607,5 +626,10 @@ if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
 	pod "SIAlertView"
 	pod "FMDB"
 	pod "AFNetworking"
+	pod 'Alamofire', '~> 3.0'
 	```
 
+* 利器
+  
+  * `cloc` 代码行数统计  `npm install -g cloc`
+  *	
