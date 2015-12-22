@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="mokai">
 <meta property="og:description" content="蓝牙技术，很早以前就被有了，如今已更新4.0版本。很多热门技术都是基于它工作的，如Android平台的NFC，iOS的iBeancon，Apple Watch的WatchConnectivity框架等，现在的智能家居基本也是基于蓝牙4.0与APP进行通信，可见蓝牙在实践工作中的重要性。在iOS中，蓝牙是基于4.0标准的，设备间低功耗通信。">
 <meta property="og:image" content="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/Art/CBDevices1_2x.png">
-<meta property="og:updated_time" content="2015-11-03T10:06:28.000Z">
+<meta property="og:updated_time" content="2015-12-22T02:58:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="蓝牙编程">
 <meta name="twitter:description" content="蓝牙技术，很早以前就被有了，如今已更新4.0版本。很多热门技术都是基于它工作的，如Android平台的NFC，iOS的iBeancon，Apple Watch的WatchConnectivity框架等，现在的智能家居基本也是基于蓝牙4.0与APP进行通信，可见蓝牙在实践工作中的重要性。在iOS中，蓝牙是基于4.0标准的，设备间低功耗通信。">
@@ -226,7 +226,10 @@ var _hmt = _hmt || [];
 <p>本地中心 -&gt; 远程外设   </p>
 <p>本地外设 -&gt; 远程中心 </p>
 <p>不过在智能家居开发中，大部分硬件蓝牙都是担任外设的角色，也就是说我们应用只要扮演中心即可了。</p>
-<h2 id="开始">开始</h2><p>本篇只讲述第一种模式的本地中心，远程外设端可借助 <a href="https://itunes.apple.com/cn/app/lightblue/id639944780?mt=12" target="_blank" rel="external">蓝牙调试神器LightBlue For Mac</a>。需要了解第二种模式可以移步<a href="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/PerformingCommonPeripheralRoleTasks/PerformingCommonPeripheralRoleTasks.html#//apple_ref/doc/uid/TP40013257-CH4-SW1" target="_blank" rel="external">创建外设</a> ps 英文，慎入~</p>
+<h2 id="开始">开始</h2><p>本篇只讲述第一种模式的本地中心，远程外设端可借助 <del><a href="https://itunes.apple.com/cn/app/lightblue/id639944780?mt=12" target="_blank" rel="external">蓝牙调试神器LightBlue For Mac</a></del>。需要了解第二种模式可以移步<a href="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/PerformingCommonPeripheralRoleTasks/PerformingCommonPeripheralRoleTasks.html#//apple_ref/doc/uid/TP40013257-CH4-SW1" target="_blank" rel="external">创建外设</a> ps 英文，慎入~</p>
+<blockquote>
+<p>12月22号更新：LightBlue For Mac只可以做为Central，不可以做为Peripheral，如需模拟请下载<a href="https://itunes.apple.com/cn/app/lightblue-explorer-bluetooth/id557428110?mt=8" target="_blank" rel="external">iOS版本</a></p>
+</blockquote>
 <p>蓝牙交互的流程大致为</p>
 <blockquote>
 <p>建立中心角色 —&gt; 扫描外设（discover）—&gt; 发现外设后连接外设(connect) —&gt; 扫描外设中的服务和特征(discover) —&gt; 与外设做数据交互(explore and interact) —&gt; 断开连接(disconnect)。</p>
@@ -278,6 +281,11 @@ var _hmt = _hmt || [];
 <li>一个外设设备可包含一个或多个服务，一个服务可包含一个或多个特征，读写操作最终是针对特征。</li>
 <li>蓝牙的缓冲大小只有20bytes，在发送数据时最多只能发送20bytes，所以得分多次发送，数据的一体性可以用 EOM 标识符表标识</li>
 </ul>
+<blockquote>
+<p>12月22号更新：</p>
+<p> LightBlue For Mac只可以做为Central，不可以做为Peripheral，如需模拟请下载<a href="https://itunes.apple.com/cn/app/lightblue-explorer-bluetooth/id557428110?mt=8" target="_blank" rel="external">iOS版本</a></p>
+<p> 提供了一个读写的<a href="https://github.com/mokai/BluetoothDemos" target="_blank" rel="external">Central端Demo</a>，Peripheral端请用上述iOS版LightBlue模拟</p>
+</blockquote>
 <h2 id="参考">参考</h2><p><a href="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html" target="_blank" rel="external">Core Bluetooth Programming Guide</a></p>
 <p><a href="http://www.jianshu.com/p/760f042a1d81" target="_blank" rel="external">译-iOS蓝牙编程指南</a></p>
 
