@@ -23,7 +23,7 @@ extension String{
 
 3、@synchronized 在swift中怎么写
 
-```	
+```
 objc_sync_enter(lock)
 //code
 objc_sync_exit(lock)
@@ -43,9 +43,9 @@ dispatch_sync(lockQueue) {
 ```
 import Synchronized
 let x = synchronized(NSObject()) { 0 }
-```	
+```
 
 
 
 #资源
-1、`XcodeSwiftSnippets` swift代码片段
+1、[`XcodeSwiftSnippets`](https://github.com/burczyk/XcodeSwiftSnippets) Swift代码片段

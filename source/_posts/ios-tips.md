@@ -1,13 +1,15 @@
 ---
 layout: post
 title: "iOS技巧"
-date: 2015-04-17
+date: 2015-12-17
 comments: true
 categories: 记录
 sharing: false
 ---
-#常用技巧
-1、Xcode技巧
+
+记录平时开发中的技巧，持续更新！
+
+##Xcode技巧
 
 * 当真机升级了iOS，但对应Xcode未升级时，device会出现ineligible device，这时通过xocde菜单->Product->Destination->选择对应的device 即可解决
 * 编译相关
@@ -33,77 +35,84 @@ sharing: false
 		#endif 
 		    #import "ddddd.h"  //此处移动上面 __OBJC__ 中就好了
 		```
+
 <!--more-->
+
 * IB技巧
 	* 可视化坐标距离    选中一个View，然后按住`option`并将鼠标移动到其他View上
 	* 多个View层次选择 按住`Cmd`和`Shift`，然后在需要选择的view上方按右键
 	* 添加辅助线  在左边的层级列表中双击某个view，然后`Cmd+_`或者`Cmd+|`即可在选中的view上添加一条水平或者垂直中心的辅助线
-	
-* xcode升级后插件失效修复
 
-	```
-	find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add `defaults read /Applications/Xcode.app/Contents/Info.plist DVTPlugInCompatibilityUUID`
-	```
-	
-
-* 修复多个Xcode导致的N个模拟器问题
-
-	<image src='http://ww2.sinaimg.cn/large/51530583jw1eu4h7paw3wj20sw15gn5t.jpg' width='400px' height='500px' />
+* Xcode升级后插件失效修复
 
 ```
-sudo killall -9 com.apple.CoreSimulator.CoreSimulatorService
-rm -rf ~/Library/Developer/CoreSimulator/Devices
+find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add `defaults read /Applications/Xcode.app/Contents/Info.plist DVTPlugInCompatibilityUUID`
+```
+
+
+
+* [Chisel-LLDB命令插件](https://github.com/facebook/chisel)
+
 ```	
-	
+brew update
+brew install chisel
+```
+
 * LLDB中import UIKit
 
 ```
 touch ~/.lldbinit echo display @import UIKit >> ~/.lldbinit echo target stop-hook add -o \"target stop-hook disable\" >> ~/.lldbinit
 ```
 
-2、Frame枚举类型转换为string通过`NSStringFromCGRect`
-
-3、指定文件不使用arc,`-fno-objc-arc`
-
-4、OC语法简写
-
-* NSNumber
-	* [NSNumber numberWithChar:‘X’] 简写为 @‘X’;
-	* [NSNumber numberWithInt:12345] 简写为 @12345
-	* [NSNumber numberWithUnsignedLong:12345ul] 简写为 @12345ul
-	* [NSNumber numberWithLongLong:12345ll] 简写为 @12345ll
-	* [NSNumber numberWithFloat:123.45f] 简写为 @123.45f
-	* [NSNumber numberWithDouble:123.45] 简写为 @123.45
-	* [NSNumber numberWithBool:YES] 简写为 @YES
-* NSArray
-	* [NSArray array] 简写为 @[]
-	* [NSArray arrayWithObject:a] 简写为 @[ a ]
-	* [NSArray arrayWithObjects:a, b, c, nil] 简写为 @[ a, b, c ]
-* NSDictionary
-	* [NSDictionary dictionary] 简写为 @{}
-	* [NSDictionary dictionaryWithObject:o1 forKey:k1] 简写为 @{ k1 : o1 }
-	* [NSDictionary dictionaryWithObjectsAndKeys:o1, k1, o2, k2, o3, k3, nil] 简写为 @{ k1 : o1, k2 : o2, k3 : o3 }
-	
-如果想生成Mutable版本，直接调用 [@[] mutableCopy] 就行了
-	
-* 下标
-	* [array objectAtIndex:idx] 简写为 array[idx];
-	* [array replaceObjectAtIndex:idx withObject:newObj] 简写为 array[idx] = newObj
-	* [dic objectForKey:key] 简写为 dic[key]
-	* [dic setObject:object forKey:key] 简写为 dic[key] = newObject
-
-5、Resource底下的plist文件需要clean才可以消除清楚
-
-6、[NSDate date]获取的是GMT时间，和北京时间相差8个小时
-
-7、拨打电话
+* 修复多个Xcode导致的N个模拟器问题
 
 ```
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:466453"]];
-	[[[UIWebView alloc] init] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"tel:466453"]]];
+sudo killall -9 com.apple.CoreSimulator.CoreSimulatorService
+rm -rf ~/Library/Developer/CoreSimulator/Devices
 ```
 
-8、调用照相或者相册
+##常用技巧
+* Frame枚举类型转换为string通过 `NSStringFromCGRect`
+* 指定文件不使用arc，在`Build Phase` -> `Compile Source`指定文件`Compile Flags`中加入`-fno-objc-arc`
+* OC语法简写
+
+	
+```
+	* NSNumber
+		* [NSNumber numberWithChar:‘X’] 简写为 @‘X’;
+		* [NSNumber numberWithInt:12345] 简写为 @12345
+		* [NSNumber numberWithUnsignedLong:12345ul] 简写为 @12345ul
+		* [NSNumber numberWithLongLong:12345ll] 简写为 @12345ll
+		* [NSNumber numberWithFloat:123.45f] 简写为 @123.45f
+		* [NSNumber numberWithDouble:123.45] 简写为 @123.45
+		* [NSNumber numberWithBool:YES] 简写为 @YES
+	* NSArray
+		* [NSArray array] 简写为 @[]
+		* [NSArray arrayWithObject:a] 简写为 @[ a ]
+		* [NSArray arrayWithObjects:a, b, c, nil] 简写为 @[ a, b, c ]
+	* NSDictionary
+		* [NSDictionary dictionary] 简写为 @{}
+		* [NSDictionary dictionaryWithObject:o1 forKey:k1] 简写为 @{ k1 : o1 }
+		* [NSDictionary dictionaryWithObjectsAndKeys:o1, k1, o2, k2, o3, k3, nil] 简写为 @{ k1 : o1, k2 : o2, k3 : o3 }
+	* 下标
+		* [array objectAtIndex:idx] 简写为 array[idx];
+		* [array replaceObjectAtIndex:idx withObject:newObj] 简写为 array[idx] = newObj
+		* [dic objectForKey:key] 简写为 dic[key]
+		* [dic setObject:object forKey:key] 简写为 dic[key] = newObject
+```
+
+> 如果想生成Mutable版本，直接调用 [@[] mutableCopy] 就行了
+
+* [NSDate date]获取的是GMT时间，和北京时间相差8个小时
+
+* 拨打电话
+
+```
+[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:466453"]];
+[[[UIWebView alloc] init] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"tel:466453"]]];
+```
+
+* 调用照相或者相册
 
 ```
 -(void)takePicture:(UIButton *)btn{
@@ -162,8 +171,8 @@ touch ~/.lldbinit echo display @import UIKit >> ~/.lldbinit echo target stop-hoo
     [picker dismissModalViewControllerAnimated:YES];
 }
 ```
-	
-9、iphone程序中实现截屏的一种方法
+
+* 实现截屏的方法
 
 ```
 	//导入头文件
@@ -176,39 +185,7 @@ touch ~/.lldbinit echo display @import UIKit >> ~/.lldbinit echo target stop-hoo
 	UIImageWriteToSavedPhotosAlbum(image,self,nil,nil)；
 ```
 
-10、启动界面的制作
-
- 在Resource里面增加Default.png,然后在XXXAppDelegate.m里面增加 [NSThread sleepForTimeInterval:5.0];
-    
-11、动画
-
-* 基于位置动画
-
-```
-CATransition *animation = [CATransition animation];
-animation.duration = 0.3f;//间隔的时间
-animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]; ;
-animation.type = kCATransitionPush;//设置上面4种动画效果
-animation.subtype = kCATransitionFromLeft;//设置动画的方向，有四种，分别为kCATransitionFromRight、kCATransitionFromLeft、kCATransitionFromTop、kCATransitionFromBottom
-[self.layer addAnimation:animation forKey:@"animationID"];
-```
-
-12、以使用如下代码判断开启了那些类型的消息通知：
-
-```
-UIRemoteNotificationType enabledTypes = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-if (enabledTypes & UIRemoteNotificationTypeBadge) {
-//开启badge number
-}
-if (enabledTypes & UIRemoteNotificationTypeSound) {
-//开启声音
-}
-if (enabledTypes & UIRemoteNotificationTypeAlert) {
-//开启alert
-}
-```
-
-13、NSDictionary排序
+* NSDictionary排序
 
 ```
 NSMutableDictionary *dict = [@{}mutableCopy];
@@ -224,35 +201,22 @@ NSArray *arr = [dict.allKeys sortedArrayUsingComparator:^NSComparisonResult(id o
 NSLog(@"%@",arr);
 ```
 
-14、使用OpenURL打开设置页面
+* 使用OpenURL打开设置页面
 
+```
 * 网路设置项
-
-```
 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=General&path=Network"]];  
-```
-
+	
 * 定位设置
-
-```
 [NSURL URLWithString:@"prefs:root=LOCATION_SERVICES"];
-```
-
+	
 * 设置Twitter
-
-```
 [NSURL URLWithString:@"prefs:root=TWITTER"];
-```
-
-* 蓝牙
-
-```
+	
+* 蓝牙	
 [NSURL URLWithString:@"prefs:root=General&path=Bluetooth"];
-```
-
+	
 * 其他
-
-```
 prefs:root=General&path=About
 prefs:root=General&path=ACCESSIBILITY
 prefs:root=AIRPLANE_MODE
@@ -295,21 +259,19 @@ prefs:root=WIFI
 prefs:root=INTERNET_TETHERING
 ```
 
-15、`No known instance method for selector 'respondsToSelector:'   `
+* `No known instance method for selector 'respondsToSelector:'`
 这种情况是声明的协议protocol没有继承NSObject导致 
 
-
-16、复制字符串到剪贴板
+* 复制字符串到剪贴板
 
 ```
 UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
 pasteboard.string = xxx;
 ```
 
-#常用组件
+##常用组件
 
-1、UIView
-
+####UIView
 * 圆角
 
 ```
@@ -319,66 +281,8 @@ outLable.layer.borderWidth = 1;
 outLable.layer.borderColor = TYPE_OUT
 ```
 
-2、UITableView
-
-* 去掉默认分割线  
-
-```
-list.separatorStyle = NO;
-```
-
-* UITableViewCell去掉点击效果  
-	
-		cell.selectionStyle = UITableViewCellSelectionStyleNone;
-* 使用UITableViewCellStyleGrouped要注意，ios6与ios7下的效果是不同的
-* 显示右按钮 accessoryType
-* 去掉UItableview headerview黏性(sticky)
-
-```
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGFloat sectionHeaderHeight = 40;
-    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
-        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
-    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
-        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
-    }
-}
-```
-
-* UITableViewCell自动滚动到顶部 
-
-```
-[tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-```
-
-* 取消选中状态 
-
-```
-NSIndexPath *selected = [_tView indexPathForSelectedRow];
-if(selected) {
-	[_tView deselectRowAtIndexPath:selected animated:NO];
-}
-```
-
-* 选中一行
-  
-``` 
-[self.tView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]  animated:YES scrollPosition:UITableViewScrollPositionTop];
-```
-
-* TableView不显示没内容的Cell怎么办
-
-```
-self.tView.tableFooterView = [UIView new];
-```
-
-* 手动调用`tableView:cellForRowAtIndexPath:`方法不会参与复用
-
-* 在使用sectionIndex时，如果不想要indexView占位设置 `tableView.sectionIndexBackgroundColor = [UIColor clearColor];`
-
-3、UILabel
-
-* 换行  内容加\n，然后设置label.numberOfLines = 0; 
+####UILabel
+* 换行  内容加`\n`，然后设置label.numberOfLines = 0; 
 * 文本自适应
 
 ```
@@ -390,7 +294,7 @@ m_titleLabel.minimumFontSize = 6;
 就是在空间够的情况下，使用20号字体，如果空间不够，那么就会自动将字体向下调整，但是也不会少于6号字体，
 如果6号字体也显示不完，后续显示省略号。。。
 
-* 自动高度
+* 计算文本高度
 
 ```
 [lab setNumberOfLines:0];
@@ -399,7 +303,7 @@ CGSize maxSize = CGSizeMake(lab.width, SCREEN_HEIGHT - lab.top);
 lab.size = [_descLab.text sizeWithFont:_descLab.font constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
 ```
 
-4、UITextField
+####UITextField
 
 * 居中 
 
@@ -407,10 +311,16 @@ lab.size = [_descLab.text sizeWithFont:_descLab.font constrainedToSize:maxSize l
 field.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 ```
 
-* 获得焦点  
+* 获得焦点 
  
 ```
 [field becomeFirstResponder];
+```
+
+* 隐藏输入法 
+	
+```
+[self.view endEditing:YES];
 ```
 
 * 键盘样式
@@ -488,20 +398,14 @@ field.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 	```
 	textField.secureTextEntry=YES;
 	```
+	
 	* 显示消除图标 
 
 	```
 	textField.clearButtonMode = UITextFieldViewModeWhileEditing;
 	```
 
-	* 隐藏输入法 
-	
-	```
-	[self.view endEditing:YES];
-	```
-
-5、UIScrollView
-
+####UIScrollView
 * 去掉弹簧效果	
 
 ```
@@ -512,28 +416,77 @@ sView.bounces ＝ no;
 * 隐藏滑动条
 
 ```
-scrollView.showsVerticalScrollIndicator = FALSE;
-scrollView.showsHorizontalScrollIndicator = FALSE;
+scrollView.showsVerticalScrollIndicator = false;
+scrollView.showsHorizontalScrollIndicator = false;
+```
+	
+####UITableView
+* 去掉默认分割线  
+
+```
+list.separatorStyle = NO;
 ```
 
-6、UIApplication 
+* UITableViewCell去掉点击效果  
 
-* 获取当前应用状态   `application.applicationState `
-
-``` 
-UIApplicationStateActive  
-UIApplicationStateInactive 
-UIApplicationStateBackground  后台
+```
+cell.selectionStyle = UITableViewCellSelectionStyleNone;
 ```
 
-7、UIDatePicker
-	
+* 使用UITableViewCellStyleGrouped要注意，ios6与ios7下的效果是不同的
+* 显示右按钮 accessoryType
+* 去掉UITableview headerview黏性(sticky)
 
-8、UINavigationController
-	
+```
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat sectionHeaderHeight = 40;
+    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+    }
+}
+```
+
+* UITableViewCell自动滚动到顶部 
+
+```
+[tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+```
+
+* 取消选中状态 
+
+```
+NSIndexPath *selected = [_tView indexPathForSelectedRow];
+if(selected) {
+	[_tView deselectRowAtIndexPath:selected animated:NO];
+}
+```
+
+* 选中一行
+  
+```
+[self.tView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]  animated:YES scrollPosition:UITableViewScrollPositionTop];
+```
+
+* TableView不显示没内容的Cell怎么办
+
+```
+self.tView.tableFooterView = [UIView new];
+```
+
+* 手动调用`tableView:cellForRowAtIndexPath:`方法不会参与复用
+
+* 在使用sectionIndex时，如果不想要indexView占位设置 
+
+```
+tableView.sectionIndexBackgroundColor = [UIColor clearColor];
+```
+
+#### UINavigationController
 * 设置主题颜色
 
-```	
+```
 navCtr.navigationBar.barTintColor = app_theme_color;//背景色
 navCtr.navigationBar.tintColor = [UIColor blackColor];//文字
 NSDictionary * dict=[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:UITextAttributeTextColor];
@@ -542,7 +495,7 @@ navCtr.navigationBar.titleTextAttributes = dict;
 
 * 改变返回标题
 
-```		
+```
 //在前一个页面执行
 UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
 self.navigationItem.backBarButtonItem = backItem;
@@ -551,6 +504,7 @@ backItem.title = @"";
 //或者
 [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)  forBarMetrics:UIBarMetricsDefault]; 
 ```
+
 * 当translucent打开时view.frame.orgin.y在iOS7与iOS8下的64个高度兼容
 
 ```
@@ -559,77 +513,75 @@ if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
 ```
 
 
-#资源
-1、Xcode插件
- 	
-* Alcatraz  管理和发现插件
+##资源
 	
-	* 安装 
+#### Alcatraz  管理和发现插件
+* 安装 
 
- 	```
- 	curl -fsSL https://raw.githubusercontent.com/supermarin/Alcatraz/master/Scripts/install.sh | sh
-	```
+```
+curl -fsSL https://raw.githubusercontent.com/supermarin/Alcatraz/master/Scripts/install.sh | sh
+```
 
-	* 卸载 
+* 卸载 
 
-	```
-	rm -rf ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/Alcatraz.xcplugin
-	```
+```
+rm -rf ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/Alcatraz.xcplugin
+```
 
-	* 卸载所有插件 
+* 卸载所有插件 
 
-	```
-	rm -rf ~/Library/Application\ Support/Alcatraz
-	```
+```
+rm -rf ~/Library/Application\ Support/Alcatraz
+```
 
-	* 常用插件
+* 常用插件
 
-		* OMColorSense 可视化设置Color
-		* VVDocumenter-Xcode  生成java风格的注释
-		* KSImageNamed-Xcode  可视化设置Image
-		* XAlign 代码对齐
-		* XcodeBoost 粘贴m文件的代码到h文件即可自动生成定义方法
-		* Auto-Import 自动import头文件
-		* DerivedData Exterminator 清除设备数据
-		* ESJsonFormat 根据Json自动生成Model
-		* FuzzyAutocomplete 自动补全，方法过长时能缩写
-		* HOStringSense 字符串工具
-		* NJHMultiTheme 代码主题
-		* RTImageAssets 根据3x图片自动生成2x、1x图片
-		* SCXcodeSwitchExpander 自动生成每项case 枚举值
-		 
-* Cocospod库管理 
-	* 安装 
+	* OMColorSense 可视化设置Color
+	* VVDocumenter-Xcode  生成java风格的注释
+	* KSImageNamed-Xcode  可视化设置Image
+	* XAlign 代码对齐
+	* XcodeBoost 粘贴m文件的代码到h文件即可自动生成定义方法
+	* Auto-Import 自动import头文件
+	* DerivedData Exterminator 清除设备数据
+	* ESJsonFormat 根据Json自动生成Model
+	* FuzzyAutocomplete 自动补全，方法过长时能缩写
+	* HOStringSense 字符串工具
+	* NJHMultiTheme 代码主题
+	* RTImageAssets 根据3x图片自动生成2x、1x图片
+	* SCXcodeSwitchExpander 自动生成每项case 枚举值
 
-	```
-	sudo gem install cocoapods
-	```
 
-	* 更改源
+####Cocospod库管理
+* 安装 
 
-	```
-	gem sources --remove https://rubygems.org/
-	gem sources -a http://ruby.taobao.org/
-	```
+```
+sudo gem install cocoapods
+```
 
-	* 基本模板
+* 更改源
+
+```
+gem sources --remove https://rubygems.org/
+gem sources -a http://ruby.taobao.org/
+```
+
+* 基本模板
 	
-	```
-	platform :ios, "7.0"
-	inhibit_all_warnings!//pod的工程不显示任何警告
-	```
+```
+platform :ios, "7.0"
+inhibit_all_warnings!//pod的工程不显示任何警告
+```
 
-	* 常用Lib
+* 常用Lib
 	
-	```
-	pod "MBProgressHUD"
-	pod "SIAlertView"
-	pod "FMDB"
-	pod "AFNetworking"
-	pod 'Alamofire', '~> 3.0'
-	```
+```
+pod "MBProgressHUD"
+pod "SIAlertView"
+pod "FMDB"
+pod "AFNetworking"
+pod 'Alamofire', '~> 3.0'
+```
 
-* 利器
+#### 利器
   
   * `cloc` 代码行数统计  `npm install -g cloc`
-  *	
