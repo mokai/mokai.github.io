@@ -113,7 +113,7 @@ var _hmt = _hmt || [];
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/3D-Touch/" style="font-size: 10px;">3D Touch</a> <a href="/tags/国际化/" style="font-size: 10px;">国际化</a> <a href="/tags/蓝牙/" style="font-size: 10px;">蓝牙</a>
+						<a href="/tags/3D-Touch/" style="font-size: 10px;">3D Touch</a> <a href="/tags/国际化/" style="font-size: 10px;">国际化</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a> <a href="/tags/蓝牙/" style="font-size: 10px;">蓝牙</a>
 					</div>
 				</section>
 				
@@ -170,6 +170,124 @@ var _hmt = _hmt || [];
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-swift-tips" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/swift-tips/" class="article-date">
+  	<time datetime="2015-04-16T16:00:00.000Z" itemprop="datePublished">2015-04-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/swift-tips/">Swift技巧</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、[UIView class]在swift中怎么写  <code>UIView.self</code></p>
+<p>2、String类型无count、length检测长度方法，使用<code>countElements</code>来使用，我们可以为String扩展一个属性</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span></span>&#123;</span><br><span class="line">    <span class="comment">//字符长度</span></span><br><span class="line">    <span class="keyword">var</span> <span class="built_in">count</span>:<span class="type">Int</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">countElements</span>(<span class="keyword">self</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/记录/">记录</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/04/swift-tips/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-IB中Runtime Attributes个别属性无效" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/IB中Runtime Attributes个别属性无效/" class="article-date">
+  	<time datetime="2015-04-06T16:00:00.000Z" itemprop="datePublished">2015-04-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/IB中Runtime Attributes个别属性无效/">IB中Runtime Attributes个别属性无效</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在使用Xcode IB方式编码中，经常会使用到属性列表中没有的属性，这时则需要通过<code>Runtime Attributes</code>来动态注入(实则为<code>KVO</code>实现)</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/iBug/">iBug</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/04/IB中Runtime Attributes个别属性无效/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-hello" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -242,7 +360,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2015 kk
+    		&copy; 2016 kk
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

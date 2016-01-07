@@ -15,7 +15,7 @@
 <meta property="og:description" content="1、[UIView class]在swift中怎么写  UIView.self
 2、String类型无count、length检测长度方法，使用countElements来使用，我们可以为String扩展一个属性
 123456extension String&amp;#123;    //字符长度    var count:Int&amp;#123;        return countElements(sel">
-<meta property="og:updated_time" content="2015-11-03T10:06:28.000Z">
+<meta property="og:updated_time" content="2016-01-07T09:42:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift技巧">
 <meta name="twitter:description" content="1、[UIView class]在swift中怎么写  UIView.self
@@ -120,7 +120,7 @@ var _hmt = _hmt || [];
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/3D-Touch/" style="font-size: 10px;">3D Touch</a> <a href="/tags/国际化/" style="font-size: 10px;">国际化</a> <a href="/tags/蓝牙/" style="font-size: 10px;">蓝牙</a>
+						<a href="/tags/3D-Touch/" style="font-size: 10px;">3D Touch</a> <a href="/tags/国际化/" style="font-size: 10px;">国际化</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a> <a href="/tags/蓝牙/" style="font-size: 10px;">蓝牙</a>
 					</div>
 				</section>
 				
@@ -222,9 +222,8 @@ var _hmt = _hmt || [];
 <p>但是 <a href="http://stackoverflow.com/questions/24045895/what-is-the-swift-equivalent-to-objective-cs-synchronized" target="_blank" rel="external">stackoverflow</a>上说这种方式有bug，用dispatch_sync代替</p>
 <figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> lockQueue = dispatch_queue_create<span class="params">(<span class="string">"com.test.LockQueue"</span>, nil)</span></span><br><span class="line">dispatch_sync<span class="params">(lockQueue)</span> &#123;</span><br><span class="line">    <span class="comment">// code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>或者使用<a href="https://github.com/ide/Synchronized" target="_blank" rel="external">Synchronized开源库</a>也可以</p>
-<pre><code><span class="built_in">import</span> Synchronized
-<span class="built_in">let</span> x = synchronized<span class="params">(NSObject<span class="params">()</span>)</span> { <span class="number">0</span> }
-</code></pre><h1 id="资源">资源</h1><p>1、<code>XcodeSwiftSnippets</code> swift代码片段</p>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">import</span> Synchronized</span><br><span class="line"><span class="built_in">let</span> x = synchronized<span class="params">(NSObject<span class="params">()</span>)</span> &#123; <span class="number">0</span> &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="资源">资源</h1><p>1、<a href="https://github.com/burczyk/XcodeSwiftSnippets" target="_blank" rel="external"><code>XcodeSwiftSnippets</code></a> Swift代码片段</p>
 
       
     </div>
@@ -234,11 +233,11 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2015/04/ios-tips/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/09/bluetooth-guide/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          iOS技巧
+          蓝牙编程
         
       </div>
     </a>
@@ -284,7 +283,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2015 kk
+    		&copy; 2016 kk
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
