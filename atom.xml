@@ -41,7 +41,7 @@
     <link href="http://mokai.github.io/2015/12/ios-tips/"/>
     <id>http://mokai.github.io/2015/12/ios-tips/</id>
     <published>2015-12-16T16:00:00.000Z</published>
-    <updated>2016-01-07T09:30:19.000Z</updated>
+    <updated>2016-01-07T09:30:21.000Z</updated>
     <content type="html"><![CDATA[<p>记录平时开发中的技巧，持续更新！</p>
 <h2 id="Xcode技巧">Xcode技巧</h2><ul>
 <li>当真机升级了iOS，但对应Xcode未升级时，device会出现ineligible device，这时通过xocde菜单-&gt;Product-&gt;Destination-&gt;选择对应的device 即可解决</li>
@@ -325,11 +325,11 @@
   </entry>
   
   <entry>
-    <title></title>
+    <title><![CDATA[#坑4# 设置statusBarStyle无效]]></title>
     <link href="http://mokai.github.io/2015/11/ios-bug-status_bar_style_not_working/"/>
     <id>http://mokai.github.io/2015/11/ios-bug-status_bar_style_not_working/</id>
     <published>2015-11-17T16:00:00.000Z</published>
-    <updated>2016-01-07T03:22:25.000Z</updated>
+    <updated>2016-01-07T10:04:10.000Z</updated>
     <content type="html"><![CDATA[<p>新的一个APP，需要设置状态栏为白色，无论通过代码设置<code>UIApplication.sharedApplication().statusBarStyle = .LightContent</code><br>还是直接在 <code>TARGETS</code> 中设置，发现都无效。</p>
 <p><img src="http://i.stack.imgur.com/NoSiZ.png" alt=""></p>
 <p>我们只需要把<code>Info.plist</code>中的<code>View controller-based status bar appearance</code>改为NO就行了，默认为YES</p>
