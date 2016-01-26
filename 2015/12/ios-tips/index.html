@@ -23,7 +23,7 @@ Xcode技巧
 
 .a静态库编译
   lipo -info xxx.a 查看静态库支持的平台，目前有armv7、arm64、armv7">
-<meta property="og:updated_time" content="2016-01-07T09:30:21.000Z">
+<meta property="og:updated_time" content="2016-01-21T08:31:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS技巧">
 <meta name="twitter:description" content="记录平时开发中的技巧，持续更新！
@@ -335,6 +335,8 @@ var _hmt = _hmt || [];
 <li>获得焦点 </li>
 </ul>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[field becomeFirstResponder]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>在<code>textFieldShouldReturn</code>中becomeFirstResponder的正确姿势</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">textFieldShouldReturn</span><span class="params">(textField: UITextField)</span></span> -&gt; <span class="type">Bool</span>&#123;</span><br><span class="line">   textField.resignFirstResponder()</span><br><span class="line">   nextTextField.becomeFirstResponder()</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>隐藏输入法 </li>
 </ul>
@@ -366,7 +368,11 @@ var _hmt = _hmt || [];
 <pre><code>* 显示消除图标 
 
 <span class="comment"><figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textField.clearButtonMode = UITextFieldViewModeWhileEditing<span class="comment">;</span></span><br></pre></td></tr></table></figure></span>
-</code></pre><h4 id="UIScrollView">UIScrollView</h4><ul>
+</code></pre><h5 id="UITextView">UITextView</h5><ul>
+<li>默认显示为最底下的内容，如果想显示最上面的内容使用</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">private <span class="keyword">var</span> firstFlag = <span class="literal">true</span></span><br><span class="line"><span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">viewDidLayoutSubviews</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.viewDidLayoutSubviews()</span><br><span class="line">    guard firstFlag <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    firstFlag = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">self</span>.textView.scrollRangeToVisible(<span class="type">NSMakeRange</span>(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="UIScrollView">UIScrollView</h4><ul>
 <li>去掉弹簧效果    </li>
 </ul>
 <figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sView.bounces ＝ <span class="literal">no</span>;</span><br></pre></td></tr></table></figure>

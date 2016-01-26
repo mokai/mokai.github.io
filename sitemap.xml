@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://mokai.github.io/me/index.html</loc>
+    <lastmod>2016-01-26T01:35:52.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mokai.github.io/2015/12/ios-tips/</loc>
+    <lastmod>2016-01-21T08:31:39.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://mokai.github.io/2015/11/ios-bug-status_bar_style_not_working/</loc>
     <lastmod>2016-01-07T10:04:10.000Z</lastmod>
   </url>
@@ -17,11 +27,6 @@
   </url>
   
   <url>
-    <loc>http://mokai.github.io/2015/12/ios-tips/</loc>
-    <lastmod>2016-01-07T09:30:21.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://mokai.github.io/2015/09/bluetooth-guide/</loc>
     <lastmod>2015-12-22T02:58:33.000Z</lastmod>
   </url>
@@ -29,11 +34,6 @@
   <url>
     <loc>http://mokai.github.io/me/resume.html</loc>
     <lastmod>2015-12-10T03:01:00.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.github.io/me/Swift.html</loc>
-    <lastmod>2015-12-02T10:04:29.000Z</lastmod>
   </url>
   
   <url>
@@ -62,7 +62,7 @@
   </url>
   
   <url>
-    <loc>http://mokai.github.io/2015/10/iOS%E5%9B%BD%E9%99%85%E5%8C%96/</loc>
+    <loc>http://mokai.github.io/2015/10/ios-bug-viewcontroller_translucent/</loc>
     <lastmod>2015-11-03T10:06:28.000Z</lastmod>
   </url>
   
@@ -77,17 +77,12 @@
   </url>
   
   <url>
-    <loc>http://mokai.github.io/2015/10/ios-bug-viewcontroller_translucent/</loc>
-    <lastmod>2015-11-03T10:06:28.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.github.io/me/index.html</loc>
-    <lastmod>2015-11-03T10:06:28.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://mokai.github.io/2015/04/hello/</loc>
+    <lastmod>2015-11-03T10:06:28.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mokai.github.io/2015/10/iOS%E5%9B%BD%E9%99%85%E5%8C%96/</loc>
     <lastmod>2015-11-03T10:06:28.000Z</lastmod>
   </url>
   
