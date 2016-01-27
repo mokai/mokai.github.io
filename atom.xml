@@ -5,7 +5,7 @@
   <subtitle><![CDATA[爱Swift，不爱OC]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://mokai.github.io//"/>
-  <updated>2016-01-07T09:54:17.000Z</updated>
+  <updated>2016-01-27T08:26:52.000Z</updated>
   <id>http://mokai.github.io//</id>
   
   <author>
@@ -16,32 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[编程中常用数学知识]]></title>
-    <link href="http://mokai.github.io/2015/12/math/"/>
-    <id>http://mokai.github.io/2015/12/math/</id>
-    <published>2015-12-22T16:00:00.000Z</published>
-    <updated>2016-01-07T09:54:17.000Z</updated>
-    <content type="html"><![CDATA[<p>对于初中未毕业的人来说数学真是一道坎，尽管初二有学过几何，但这么多年过去了早已抛之脑后，这篇文章记录平时用到的数学知识，所以连续更新中…</p>
-<h5 id="对角线">对角线</h5><p><img src="http://7xiew0.com1.z0.glb.clouddn.com/math_diagonal_line.png" alt=""></p>
-<p>公式：<code>对角线 = 四边线和的平方根</code></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>对于初中未毕业的人来说数学真是一道坎，尽管初二有学过几何，但这么多年过去了早已抛之脑后，这篇文章记录平时用到的数学知识，所以连续更新中…</p>
-<h5 id="对角线">对角线</h5><p><img src="http://7xiew0.com1.z0.glb.clou]]>
-    </summary>
-    
-      <category term="数学" scheme="http://mokai.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
-    
-      <category term="记录" scheme="http://mokai.github.io/categories/%E8%AE%B0%E5%BD%95/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[iOS技巧]]></title>
-    <link href="http://mokai.github.io/2015/12/ios-tips/"/>
-    <id>http://mokai.github.io/2015/12/ios-tips/</id>
-    <published>2015-12-16T16:00:00.000Z</published>
-    <updated>2016-01-21T08:31:39.000Z</updated>
+    <link href="http://mokai.github.io/2016/01/ios-tips/"/>
+    <id>http://mokai.github.io/2016/01/ios-tips/</id>
+    <published>2016-01-26T16:00:00.000Z</published>
+    <updated>2016-01-27T08:26:52.000Z</updated>
     <content type="html"><![CDATA[<p>记录平时开发中的技巧，持续更新！</p>
 <h2 id="Xcode技巧">Xcode技巧</h2><ul>
 <li>当真机升级了iOS，但对应Xcode未升级时，device会出现ineligible device，这时通过xocde菜单-&gt;Product-&gt;Destination-&gt;选择对应的device 即可解决</li>
@@ -325,6 +304,27 @@
 </ul>]]>
     
     </summary>
+    
+      <category term="记录" scheme="http://mokai.github.io/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[编程中常用数学知识]]></title>
+    <link href="http://mokai.github.io/2015/12/math/"/>
+    <id>http://mokai.github.io/2015/12/math/</id>
+    <published>2015-12-22T16:00:00.000Z</published>
+    <updated>2016-01-27T08:26:22.000Z</updated>
+    <content type="html"><![CDATA[<p>对于初中未毕业的人来说数学真是一道坎，尽管初二有学过几何，但这么多年过去了早已抛之脑后，这篇文章记录平时用到的数学知识，所以连续更新中…</p>
+<h5 id="对角线">对角线</h5><p><img src="http://7xiew0.com1.z0.glb.clouddn.com/math_diagonal_line.png" alt=""></p>
+<p>公式：<code>对角线 = 边长的平方的开方根</code></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>对于初中未毕业的人来说数学真是一道坎，尽管初二有学过几何，但这么多年过去了早已抛之脑后，这篇文章记录平时用到的数学知识，所以连续更新中…</p>
+<h5 id="对角线">对角线</h5><p><img src="http://7xiew0.com1.z0.glb.clou]]>
+    </summary>
+    
+      <category term="数学" scheme="http://mokai.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
     
       <category term="记录" scheme="http://mokai.github.io/categories/%E8%AE%B0%E5%BD%95/"/>
     
