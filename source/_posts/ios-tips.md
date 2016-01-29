@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "iOS技巧"
-date: 2015-12-17
+date: 2016-1-27
 comments: true
 categories: 记录
 sharing: false
@@ -317,6 +317,16 @@ field.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 [field becomeFirstResponder];
 ```
 
+在`textFieldShouldReturn`中becomeFirstResponder的正确姿势
+
+```
+func textFieldShouldReturn(textField: UITextField) -> Bool{
+   textField.resignFirstResponder()
+   nextTextField.becomeFirstResponder()
+	return false
+}
+```
+
 * 隐藏输入法 
 	
 ```
@@ -404,6 +414,20 @@ field.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 	```
 	textField.clearButtonMode = UITextFieldViewModeWhileEditing;
 	```
+#####UITextView
+* 默认显示为最底下的内容，如果想显示最上面的内容使用
+
+```
+private var firstFlag = true
+override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    guard firstFlag else{
+        return
+    }
+    firstFlag = false
+    self.textView.scrollRangeToVisible(NSMakeRange(0, 1))
+}
+```
 
 ####UIScrollView
 * 去掉弹簧效果	
