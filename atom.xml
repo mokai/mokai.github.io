@@ -355,22 +355,24 @@
     <link href="http://mokai.github.io/2015/11/raywenderlichs/"/>
     <id>http://mokai.github.io/2015/11/raywenderlichs/</id>
     <published>2015-11-10T16:00:00.000Z</published>
-    <updated>2015-11-17T05:34:22.000Z</updated>
+    <updated>2016-02-17T06:34:31.000Z</updated>
     <content type="html"><![CDATA[<p>最近在啃字<a href="http://www.raywenderlich.com" target="_blank" rel="external">raywenderlich</a>中，顺便把一些Totorials收集，包括原文以及译文。</p>
 <a id="more"></a>
 <table>
 <thead>
 <tr>
-<th>名称</th>
-<th>英文</th>
+<th>原文</th>
 <th>译文</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>CALayer Tutorial【CALayer指南】</code></td>
-<td><a href="http://www.raywenderlich.com/90488/calayer-in-ios-with-swift-10-examples" target="_blank" rel="external">传送门</a></td>
+<td><a href="http://www.raywenderlich.com/90488/calayer-in-ios-with-swift-10-examples" target="_blank" rel="external">CALayer Tutorial</a></td>
 <td>暂无</td>
+</tr>
+<tr>
+<td>Introduction to C++ for iOS Developers <a href="http://www.raywenderlich.com/?p=62989" target="_blank" rel="external">Part 1</a>、<a href="http://www.raywenderlich.com/62990/introduction-c-ios-developers-part-2" target="_blank" rel="external">Part 2</a></td>
+<td>向iOS开发者介绍C++<a href="http://www.cocoachina.com/industry/20140415/8163.html" target="_blank" rel="external">一</a>、<a href="http://www.cocoachina.com/ios/20140417/8182.html" target="_blank" rel="external">二</a></td>
 </tr>
 </tbody>
 </table>
