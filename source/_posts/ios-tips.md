@@ -560,6 +560,7 @@ rm -rf ~/Library/Application\ Support/Alcatraz
 
 * 常用插件
 
+	* Injection 重量级插件，代码修改后不用build即可实现生效
 	* OMColorSense 可视化设置Color
 	* VVDocumenter-Xcode  生成java风格的注释
 	* KSImageNamed-Xcode  可视化设置Image
@@ -609,3 +610,4 @@ pod 'Alamofire', '~> 3.0'
 #### 利器
   
   * `cloc` 代码行数统计  `npm install -g cloc`
+  

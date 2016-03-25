@@ -11,15 +11,15 @@ footer: false
 94年开发者，入坑3年，目前在广州联系电话：18565593042邮箱：865425695@qq.com
 
 ## #个人简介
-学习能力强，效率高，偏处女座，对代码比较有洁癖
-向往新事物，擅长`Swift + Storyboard`敏捷开发、金融以及音频方向的产品开发
+学习能力强，效率高，偏处女座，对代码比较有洁癖，对产品开发细腻
+向往新事物，擅长`Swift + Storyboard`敏捷开发，以及金融、音频、运动方向的产品开发
 
 ## #技能
-1.精通iOS平台开发，良好的Objective-C与Swift编程能力，熟练掌握多线程、动画、网络、蓝牙、流媒体编程
+1.精通iOS平台开发，良好的Objective-C与Swift编程能力，熟练多线程、动画、定位、蓝牙、流媒体编程
 2.熟练Android平台开发
 3.熟练Java网站开发、JBPM工作流框架以及各种主流框架架构思想
-4.掌握JavaScript编程，熟练使用常见的jQuery&Extjs框架。
-5.熟悉主流数据库，如Mysql、Oracle。
+4.掌握JavaScript编程，熟练使用常见的jQuery&Extjs框架
+5.熟悉主流数据库，如Mysql、Oracle
 
 ## #理想团队
 在乎代码质量，热爱发现新技术
@@ -48,10 +48,17 @@ footer: false
 项目使用Swift + 模块化Storyboard敏捷开发，基于Alamofire网络库使用AOP的方式实现自动会话操作，使用FDStackView兼容UIStackView在iOS9以下使用。
 因为项目规模不大，所以独立开发这个项目。
 
+[兔子骑行](https://itunes.apple.com/cn/app/tu-zi-qi-xing-qi-xing-ji-lu/id1062196764?mt=8)
+实时记录骑行途中的速度、里程、海拔骑行轨迹，致力于打造专业的骑行工具应用。
+
+基于实时GPS坐标和气压计传感器工作，利用各种算法来保证数据的准确性。采用缓存文件与压缩文件优化方式来保存轨迹以保证数据与后台的同步。以及基于JBChartView定制的图表显示统计数据
+负责历史轨迹模块，轨迹数据的缓存与下载、以及整个车队模块。
+
 [落网](https://itunes.apple.com/cn/app/luo-wang/id788474943)
 一个做了十余年个性化独立音乐推荐的平台。
 
 由于是一款音乐APP，所以对音频处理上要求比较高，使用了AudioQueue。另外牵涉有国际化与支付相关的技术。
+负责v3到v4版本迭代，其中包括把底层音频处理从AVPlayer迁移到AudioQueue上面、国际化支持、新一代iPhone设备的适配、增加社区版块、感谢支付等功能。
 
 [emo](https://itunes.apple.com/cn/app/emo-ke-yi-shi-bie-qing-xu/id962633348?mt=8)
 可以识别情绪的音乐APP。
@@ -61,7 +68,7 @@ footer: false
 [泰麟资本-P2P理财平台](http://fir.im/tp2p)
 泰麟资本是一款P2P网贷理财的平台。
 
-使用Autolayout自动布局Masonry库构建界面、HTTPS协议以及二层token验证保证资金操作的安全、移动支付。在项目中主要担任iOS端主程开发，项目基础代码的封装，以及负责账户、资金计划功能开发，后期APP的发布上架。
+使用Autolayout自动布局Masonry库构建界面、https协议以及二层token验证保证资金操作的安全、移动支付。在项目中主要担任iOS端主程开发，项目基础代码的封装，以及负责账户、资金计划功能开发，后期APP的发布上架。
 
 [吉车宝](https://itunes.apple.com/cn/app/ji-che-bao-wo-zhi-neng-che/id967166557?mt=8&ign-mpt=uo%3D4)
 帮助车主实现车辆定位，车况智能检测提醒，记录行程，驾况检测提醒。给车主营造一个安全、舒心的用车环境。
