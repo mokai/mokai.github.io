@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   
   <title><![CDATA[mokai]]></title>
-  <subtitle><![CDATA[爱Swift，不爱OC]]></subtitle>
+  <subtitle><![CDATA[SOHO ing...]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://mokai.github.io//"/>
-  <updated>2016-01-27T08:26:52.000Z</updated>
+  <updated>2016-05-31T12:06:25.000Z</updated>
   <id>http://mokai.github.io//</id>
   
   <author>
@@ -16,12 +16,12 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[iOS技巧]]></title>
-    <link href="http://mokai.github.io/2016/01/ios-tips/"/>
-    <id>http://mokai.github.io/2016/01/ios-tips/</id>
+    <title><![CDATA[iOS记录]]></title>
+    <link href="http://mokai.github.io/2016/01/ios-note/"/>
+    <id>http://mokai.github.io/2016/01/ios-note/</id>
     <published>2016-01-26T16:00:00.000Z</published>
-    <updated>2016-01-27T08:26:52.000Z</updated>
-    <content type="html"><![CDATA[<p>记录平时开发中的技巧，持续更新！</p>
+    <updated>2016-05-31T12:06:25.000Z</updated>
+    <content type="html"><![CDATA[<p>记录平时开发中的技巧与代码片段，持续更新！</p>
 <h2 id="Xcode技巧">Xcode技巧</h2><ul>
 <li>当真机升级了iOS，但对应Xcode未升级时，device会出现ineligible device，这时通过xocde菜单-&gt;Product-&gt;Destination-&gt;选择对应的device 即可解决</li>
 <li><p>编译相关</p>
@@ -32,10 +32,13 @@
 </li>
 <li><p>环境变量</p>
 <p>  $(SRCROOT) 工程文件（比如Nuno.xcodeproj）的路径</p>
-<p>  $(PROJECT_DIR) 项目目录        </p>
+<p>  $(PROJECT_DIR) 项目目录    </p>
 </li>
 </ul>
 </li>
+</ul>
+<a id="more"></a>
+<ul>
 <li><p>Xcode常见编译错误</p>
 <ul>
 <li><p><code>could not build module &#39;Foundation&#39;</code></p>
@@ -44,9 +47,6 @@
 </li>
 </ul>
 </li>
-</ul>
-<a id="more"></a>
-<ul>
 <li><p>IB技巧</p>
 <ul>
 <li>可视化坐标距离    选中一个View，然后按住<code>option</code>并将鼠标移动到其他View上</li>
@@ -241,6 +241,7 @@
 <ul>
 <li><p>常用插件</p>
 <ul>
+<li>Injection 重量级插件，代码修改后不用build即可实现生效</li>
 <li>OMColorSense 可视化设置Color</li>
 <li>VVDocumenter-Xcode  生成java风格的注释</li>
 <li>KSImageNamed-Xcode  可视化设置Image</li>
@@ -278,7 +279,7 @@
 </ul>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>记录平时开发中的技巧，持续更新！</p>
+    <![CDATA[<p>记录平时开发中的技巧与代码片段，持续更新！</p>
 <h2 id="Xcode技巧">Xcode技巧</h2><ul>
 <li>当真机升级了iOS，但对应Xcode未升级时，device会出现ineligible device，这时通过xocde菜单-&gt;Product-&gt;Destination-&gt;选择对应的device 即可解决</li>
 <li><p>编译相关</p>
@@ -289,15 +290,7 @@
 </li>
 <li><p>环境变量</p>
 <p>  $(SRCROOT) 工程文件（比如Nuno.xcodeproj）的路径</p>
-<p>  $(PROJECT_DIR) 项目目录        </p>
-</li>
-</ul>
-</li>
-<li><p>Xcode常见编译错误</p>
-<ul>
-<li><p><code>could not build module &#39;Foundation&#39;</code></p>
-<p>  原因在于，在pch文件中没有把import放在<code>#ifdef_OBJC_</code></p>
-  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#ifdef</span> __OBJC__ </span><br><span class="line">    <span class="id">#import</span> &lt;UIKit/UIKit.h&gt; </span><br><span class="line">    <span class="id">#import</span> &lt;Foundation/Foundation.h&gt; </span><br><span class="line"><span class="id">#endif</span> </span><br><span class="line">    <span class="id">#import</span> <span class="string">"ddddd.h"</span>  <span class="comment">//此处移动上面 __OBJC__ 中就好了</span></span><br></pre></td></tr></table></figure>
+<p>  $(PROJECT_DIR) 项目目录    </p>
 </li>
 </ul>
 </li>
@@ -310,11 +303,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[#坑4# 设置statusBarStyle无效]]></title>
-    <link href="http://mokai.github.io/2015/11/ios-bug-status_bar_style_not_working/"/>
-    <id>http://mokai.github.io/2015/11/ios-bug-status_bar_style_not_working/</id>
+    <title><![CDATA[#技巧4# 设置statusBarStyle无效]]></title>
+    <link href="http://mokai.github.io/2015/11/ios-tip-status_bar_style_not_working/"/>
+    <id>http://mokai.github.io/2015/11/ios-tip-status_bar_style_not_working/</id>
     <published>2015-11-17T16:00:00.000Z</published>
-    <updated>2016-01-07T10:04:10.000Z</updated>
+    <updated>2016-05-31T12:03:54.000Z</updated>
     <content type="html"><![CDATA[<p>新的一个APP，需要设置状态栏为白色，无论通过代码设置<code>UIApplication.sharedApplication().statusBarStyle = .LightContent</code><br>还是直接在 <code>TARGETS</code> 中设置，发现都无效。</p>
 <p><img src="http://i.stack.imgur.com/NoSiZ.png" alt=""></p>
 <p>我们只需要把<code>Info.plist</code>中的<code>View controller-based status bar appearance</code>改为NO就行了，默认为YES</p>
@@ -324,7 +317,7 @@
     <![CDATA[<p>新的一个APP，需要设置状态栏为白色，无论通过代码设置<code>UIApplication.sharedApplication().statusBarStyle = .LightContent</code><br>还是直接在 <code>TARGETS</code> 中设]]>
     </summary>
     
-      <category term="iOS那些坑" scheme="http://mokai.github.io/categories/iOS%E9%82%A3%E4%BA%9B%E5%9D%91/"/>
+      <category term="iOS那些技巧" scheme="http://mokai.github.io/categories/iOS%E9%82%A3%E4%BA%9B%E6%8A%80%E5%B7%A7/"/>
     
   </entry>
   
@@ -346,7 +339,27 @@
 <]]>
     </summary>
     
-      <category term="iOS那些坑" scheme="http://mokai.github.io/categories/iOS%E9%82%A3%E4%BA%9B%E5%9D%91/"/>
+  </entry>
+  
+  <entry>
+    <title><![CDATA[#技巧3# postNotificationName触发后的监听代码是同步还是异步执行的？]]></title>
+    <link href="http://mokai.github.io/2015/11/ios-tip-postNoficationName/"/>
+    <id>http://mokai.github.io/2015/11/ios-tip-postNoficationName/</id>
+    <published>2015-11-16T16:00:00.000Z</published>
+    <updated>2016-05-31T12:03:04.000Z</updated>
+    <content type="html"><![CDATA[<p>昨天去酷狗面试，被问到<code>postNotificationName触发后的监听代码是同步还是异步执行的？</code>，我当时知道<code>触发后的监听代码和触发的代码是在同一线程上执行的</code>，但却回答了是异步，哎，我这逻辑又下降了。。。。</p>
+<p>举个栗子，比如说HTTP异步请求返回代码中我们触发一个通知，这个时候在监听的代码中直接去设置视图就会报错，因为当前线程不是主线程，正确的姿态应该是</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_async<span class="list">(<span class="keyword">dispatch_get_main_queue</span><span class="list">()</span>, &#123; <span class="list">()</span> -&gt; Void in</span><br><span class="line">    NSNotificationCenter.defaultCenter<span class="list">()</span>.postNotificationName<span class="list">(<span class="keyword">kNotificationName</span>, object: <span class="literal">nil</span>)</span></span><br><span class="line">&#125;)</span></span><br></pre></td></tr></table></figure>
+<p>当然你也可以选择另一种方式，<code>NSNotificationQueue</code>通知队列，我们可以通过它做很多基于Runloop的需求，最重要的是它是异步执行的。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let queue = NSNotificationQueue.<span class="function"><span class="title">defaultQueue</span><span class="params">()</span></span></span><br><span class="line">queue.<span class="function"><span class="title">enqueueNotification</span><span class="params">(NSNotification(name: kNotificationName, object: nil)</span></span>, postingStyle: NSPostingStyle.PostNow)</span><br></pre></td></tr></table></figure>
+<h4 id="参考:">参考:</h4><p><a href="http://www.cnblogs.com/xiaouisme/archive/2012/04/06/2434753.html" target="_blank" rel="external">cocoa的NSNotification通知</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>昨天去酷狗面试，被问到<code>postNotificationName触发后的监听代码是同步还是异步执行的？</code>，我当时知道<code>触发后的监听代码和触发的代码是在同一线程上执行的</code>，但却回答了是异步，哎，我这逻辑又下降了。。。。</p>
+<p]]>
+    </summary>
+    
+      <category term="iOS那些技巧" scheme="http://mokai.github.io/categories/iOS%E9%82%A3%E4%BA%9B%E6%8A%80%E5%B7%A7/"/>
     
   </entry>
   
@@ -469,11 +482,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[#坑2# 强制旋转应用当前屏幕]]></title>
-    <link href="http://mokai.github.io/2015/10/ios-bug-screen_rotate/"/>
-    <id>http://mokai.github.io/2015/10/ios-bug-screen_rotate/</id>
+    <title><![CDATA[#技巧2# 强制旋转应用当前屏幕]]></title>
+    <link href="http://mokai.github.io/2015/10/ios-tip-screen_rotate/"/>
+    <id>http://mokai.github.io/2015/10/ios-tip-screen_rotate/</id>
     <published>2015-10-30T16:00:00.000Z</published>
-    <updated>2015-11-17T05:12:26.000Z</updated>
+    <updated>2016-05-31T12:04:04.000Z</updated>
     <content type="html"><![CDATA[<p>经常有这样的需求，APP只需要竖屏，但是一些特殊的场景下需要横屏。</p>
 <p>比如说调用系统的<code>MPMovieViewController</code>播放视频时，我们会在AppDelegate中或者UIViewController中更新允许横屏的配置，当播放器旋转到横屏（此时设备应该也是处于横屏），APP现有<code>ViewController</code>也会跟着旋转，那么问题来了，当再次回到APP时，此时现有<code>ViewController</code>是处于横屏的，我们再去代理中更新为竖屏会发现代理根本不会被调用，这时我们就需要用到下面这段代码，去手动触发屏幕旋转事件 </p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let vc = <span class="built_in">UIViewController</span>();</span><br><span class="line"><span class="keyword">self</span><span class="variable">.presentViewController</span>(vc, animated: <span class="literal">false</span>, completion: <span class="literal">nil</span>)</span><br><span class="line">vc<span class="variable">.dismissViewControllerAnimated</span>(<span class="literal">false</span>, completion: <span class="literal">nil</span>)</span><br></pre></td></tr></table></figure>
@@ -484,16 +497,16 @@
 <p>比如说调用系统的<code>MPMovieViewController</code>播放视频时，我们会在AppDelegate中或者UIViewController中更新允许横屏的配置，当播放]]>
     </summary>
     
-      <category term="iOS那些坑" scheme="http://mokai.github.io/categories/iOS%E9%82%A3%E4%BA%9B%E5%9D%91/"/>
+      <category term="iOS那些技巧" scheme="http://mokai.github.io/categories/iOS%E9%82%A3%E4%BA%9B%E6%8A%80%E5%B7%A7/"/>
     
   </entry>
   
   <entry>
-    <title><![CDATA[#坑1# iOS8以后presendViewController透明效果无效]]></title>
-    <link href="http://mokai.github.io/2015/10/ios-bug-viewcontroller_translucent/"/>
-    <id>http://mokai.github.io/2015/10/ios-bug-viewcontroller_translucent/</id>
+    <title><![CDATA[#技巧1# iOS8以后presendViewController透明效果无效]]></title>
+    <link href="http://mokai.github.io/2015/10/ios-tip-viewcontroller_translucent/"/>
+    <id>http://mokai.github.io/2015/10/ios-tip-viewcontroller_translucent/</id>
     <published>2015-10-09T16:00:00.000Z</published>
-    <updated>2015-11-03T10:06:28.000Z</updated>
+    <updated>2016-05-31T12:03:44.000Z</updated>
     <content type="html"><![CDATA[<p>iOS弹出的视图背景默认是黑色，如果想去掉，以往我们使用 <code>self.modalPresentationStyle = .CurrentContext</code> 就可以实现效果，如以下半透明的代码</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let vc = <span class="function"><span class="title">UIViewController</span><span class="params">()</span></span></span><br><span class="line">vc<span class="class">.view</span><span class="class">.backgroundColor</span> = <span class="function"><span class="title">UIColor</span><span class="params">(red:<span class="number">0.000</span> , green:<span class="number">0.000</span> , blue:<span class="number">0.000</span>, alpha:<span class="number">0.5</span>)</span></span></span><br><span class="line">self<span class="class">.modalPresentationStyle</span> = <span class="class">.CurrentContext</span></span><br><span class="line">self.<span class="function"><span class="title">presentViewController</span><span class="params">(vc, animated: true, completion: nil)</span></span></span><br></pre></td></tr></table></figure>
 <p>但是你会发现这段代码在iOS8、iOS9上面运行依旧一片黑，因此iOS8以后得这么干</p>
@@ -505,7 +518,7 @@
 <figure class="highlight st]]>
     </summary>
     
-      <category term="iOS那些坑" scheme="http://mokai.github.io/categories/iOS%E9%82%A3%E4%BA%9B%E5%9D%91/"/>
+      <category term="iOS那些技巧" scheme="http://mokai.github.io/categories/iOS%E9%82%A3%E4%BA%9B%E6%8A%80%E5%B7%A7/"/>
     
   </entry>
   

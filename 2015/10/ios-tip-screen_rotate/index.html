@@ -3,28 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>#坑4# 设置statusBarStyle无效 | mokai</title>
+  <title>#技巧2# 强制旋转应用当前屏幕 | mokai</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="新的一个APP，需要设置状态栏为白色，无论通过代码设置UIApplication.sharedApplication().statusBarStyle = .LightContent还是直接在 TARGETS 中设置，发现都无效。
-
-我们只需要把Info.plist中的View controller-based status bar appearance改为NO就行了，默认为YES
-参考:(iOS">
+  <meta name="description" content="经常有这样的需求，APP只需要竖屏，但是一些特殊的场景下需要横屏。
+比如说调用系统的MPMovieViewController播放视频时，我们会在AppDelegate中或者UIViewController中更新允许横屏的配置，当播放器旋转到横屏（此时设备应该也是处于横屏），APP现有ViewController也会跟着旋转，那么问题来了，当再次回到APP时，此时现有ViewController是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="#坑4# 设置statusBarStyle无效">
-<meta property="og:url" content="http://mokai.github.io/2015/11/ios-bug-status_bar_style_not_working/index.html">
+<meta property="og:title" content="#技巧2# 强制旋转应用当前屏幕">
+<meta property="og:url" content="http://mokai.github.io/2015/10/ios-tip-screen_rotate/index.html">
 <meta property="og:site_name" content="mokai">
-<meta property="og:description" content="新的一个APP，需要设置状态栏为白色，无论通过代码设置UIApplication.sharedApplication().statusBarStyle = .LightContent还是直接在 TARGETS 中设置，发现都无效。
-
-我们只需要把Info.plist中的View controller-based status bar appearance改为NO就行了，默认为YES
-参考:(iOS">
-<meta property="og:image" content="http://i.stack.imgur.com/NoSiZ.png">
-<meta property="og:updated_time" content="2016-01-07T10:04:10.000Z">
+<meta property="og:description" content="经常有这样的需求，APP只需要竖屏，但是一些特殊的场景下需要横屏。
+比如说调用系统的MPMovieViewController播放视频时，我们会在AppDelegate中或者UIViewController中更新允许横屏的配置，当播放器旋转到横屏（此时设备应该也是处于横屏），APP现有ViewController也会跟着旋转，那么问题来了，当再次回到APP时，此时现有ViewController是">
+<meta property="og:updated_time" content="2016-05-31T12:04:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="#坑4# 设置statusBarStyle无效">
-<meta name="twitter:description" content="新的一个APP，需要设置状态栏为白色，无论通过代码设置UIApplication.sharedApplication().statusBarStyle = .LightContent还是直接在 TARGETS 中设置，发现都无效。
-
-我们只需要把Info.plist中的View controller-based status bar appearance改为NO就行了，默认为YES
-参考:(iOS">
+<meta name="twitter:title" content="#技巧2# 强制旋转应用当前屏幕">
+<meta name="twitter:description" content="经常有这样的需求，APP只需要竖屏，但是一些特殊的场景下需要横屏。
+比如说调用系统的MPMovieViewController播放视频时，我们会在AppDelegate中或者UIViewController中更新允许横屏的配置，当播放器旋转到横屏（此时设备应该也是处于横屏），APP现有ViewController也会跟着旋转，那么问题来了，当再次回到APP时，此时现有ViewController是">
   
     <link rel="alternative" href="/atom.xml" title="mokai" type="application/atom+xml">
   
@@ -63,7 +56,7 @@ var _hmt = _hmt || [];
 		</hgroup>
 
 		
-		<p class="header-subtitle">爱Swift，不爱OC</p>
+		<p class="header-subtitle">SOHO ing...</p>
 		
 
 		
@@ -152,7 +145,7 @@ var _hmt = _hmt || [];
 			  <h1 class="header-author">kk</h1>
 			</hgroup>
 			
-			<p class="header-subtitle">爱Swift，不爱OC</p>
+			<p class="header-subtitle">SOHO ing...</p>
 			
 			<nav class="header-menu">
 				<ul>
@@ -180,11 +173,11 @@ var _hmt = _hmt || [];
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-ios-bug-status_bar_style_not_working" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ios-tip-screen_rotate" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/11/ios-bug-status_bar_style_not_working/" class="article-date">
-  	<time datetime="2015-11-17T16:00:00.000Z" itemprop="datePublished">2015-11-18</time>
+      <a href="/2015/10/ios-tip-screen_rotate/" class="article-date">
+  	<time datetime="2015-10-30T16:00:00.000Z" itemprop="datePublished">2015-10-31</time>
 </a>
     </div>
   
@@ -197,7 +190,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      #坑4# 设置statusBarStyle无效
+      #技巧2# 强制旋转应用当前屏幕
     </h1>
   
 
@@ -207,7 +200,7 @@ var _hmt = _hmt || [];
         
         
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/iOS那些坑/">iOS那些坑</a>
+	<a class="article-category-link" href="/categories/iOS那些技巧/">iOS那些技巧</a>
 	</div>
 
 
@@ -217,10 +210,10 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>新的一个APP，需要设置状态栏为白色，无论通过代码设置<code>UIApplication.sharedApplication().statusBarStyle = .LightContent</code><br>还是直接在 <code>TARGETS</code> 中设置，发现都无效。</p>
-<p><img src="http://i.stack.imgur.com/NoSiZ.png" alt=""></p>
-<p>我们只需要把<code>Info.plist</code>中的<code>View controller-based status bar appearance</code>改为NO就行了，默认为YES</p>
-<h4 id="参考:">参考:</h4><p><a href="http://stackoverflow.com/questions/26372684/ios8-set-the-status-bar-to-light-content" target="_blank" rel="external">(iOS8) set the status bar to light content</a></p>
+        <p>经常有这样的需求，APP只需要竖屏，但是一些特殊的场景下需要横屏。</p>
+<p>比如说调用系统的<code>MPMovieViewController</code>播放视频时，我们会在AppDelegate中或者UIViewController中更新允许横屏的配置，当播放器旋转到横屏（此时设备应该也是处于横屏），APP现有<code>ViewController</code>也会跟着旋转，那么问题来了，当再次回到APP时，此时现有<code>ViewController</code>是处于横屏的，我们再去代理中更新为竖屏会发现代理根本不会被调用，这时我们就需要用到下面这段代码，去手动触发屏幕旋转事件 </p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let vc = <span class="built_in">UIViewController</span>();</span><br><span class="line"><span class="keyword">self</span><span class="variable">.presentViewController</span>(vc, animated: <span class="literal">false</span>, completion: <span class="literal">nil</span>)</span><br><span class="line">vc<span class="variable">.dismissViewControllerAnimated</span>(<span class="literal">false</span>, completion: <span class="literal">nil</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="参考:参考：">参考:参考：</h4><p><a href="http://foggry.com/blog/2014/08/08/ping-mu-xuan-zhuan-xue-xi-bi-ji/" target="_blank" rel="external">iOS屏幕旋转学习笔记</a></p>
 
       
     </div>
@@ -230,18 +223,18 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/01/ios-tips/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/11/3d-touch/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          iOS技巧
+          3D Touch大法
         
       </div>
     </a>
   
   
-    <a href="/2015/11/ios-bug-postNoficationName/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">#坑3# postNotificationName触发后的监听代码是同步还是异步执行的？</div>
+    <a href="/2015/10/ios-tip-viewcontroller_translucent/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">#技巧1# iOS8以后presendViewController透明效果无效</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -255,7 +248,7 @@ var _hmt = _hmt || [];
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="ios-bug-status_bar_style_not_working" data-title="#坑4# 设置statusBarStyle无效" data-url="http://mokai.github.io/2015/11/ios-bug-status_bar_style_not_working/"></div>
+	<div class="ds-thread" data-thread-key="ios-tip-screen_rotate" data-title="#技巧2# 强制旋转应用当前屏幕" data-url="http://mokai.github.io/2015/10/ios-tip-screen_rotate/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
