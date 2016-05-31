@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "iOS技巧"
-date: 2016-1-27
+title: "iOS记录"
+date: 2016-5-31
 comments: true
 categories: 记录
 sharing: false
 ---
 
-记录平时开发中的技巧，持续更新！
+记录平时开发中的技巧与代码片段，持续更新！
 
 ##Xcode技巧
 
@@ -22,7 +22,10 @@ sharing: false
 			
 		$(SRCROOT) 工程文件（比如Nuno.xcodeproj）的路径
 			
-		$(PROJECT_DIR) 项目目录		
+		$(PROJECT_DIR) 项目目录	
+
+<!--more-->
+
 * Xcode常见编译错误
 	* `could not build module 'Foundation'`
 	
@@ -35,8 +38,6 @@ sharing: false
 		#endif 
 		    #import "ddddd.h"  //此处移动上面 __OBJC__ 中就好了
 		```
-
-<!--more-->
 
 * IB技巧
 	* 可视化坐标距离    选中一个View，然后按住`option`并将鼠标移动到其他View上
@@ -560,6 +561,7 @@ rm -rf ~/Library/Application\ Support/Alcatraz
 
 * 常用插件
 
+	* Injection 重量级插件，代码修改后不用build即可实现生效
 	* OMColorSense 可视化设置Color
 	* VVDocumenter-Xcode  生成java风格的注释
 	* KSImageNamed-Xcode  可视化设置Image
@@ -609,3 +611,5 @@ pod 'Alamofire', '~> 3.0'
 #### 利器
   
   * `cloc` 代码行数统计  `npm install -g cloc`
+  
+

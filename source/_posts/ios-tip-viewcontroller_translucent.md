@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "#坑1# iOS8以后presendViewController透明效果无效"
+title: "#技巧1# iOS8以后presendViewController透明效果无效"
 date: 2015-10-10
 comments: true
-categories: iOS那些坑
+categories: iOS那些技巧
 sharing: false
 ---
 iOS弹出的视图背景默认是黑色，如果想去掉，以往我们使用 `self.modalPresentationStyle = .CurrentContext` 就可以实现效果，如以下半透明的代码

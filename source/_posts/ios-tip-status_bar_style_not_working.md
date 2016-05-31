@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "#坑4# 设置statusBarStyle无效"
+title: "#技巧4# 设置statusBarStyle无效"
 date: 2015-11-18
 comments: true
-categories: iOS那些坑
+categories: iOS那些技巧
 sharing: false
 ---
 

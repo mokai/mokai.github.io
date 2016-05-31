@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "#坑2# 强制旋转应用当前屏幕"
+title: "#技巧2# 强制旋转应用当前屏幕"
 date: 2015-10-31
 comments: true
-categories: iOS那些坑
+categories: iOS那些技巧
 sharing: false
 ---
 
@@ -20,3 +20,4 @@ vc.dismissViewControllerAnimated(false, completion: nil)
 ####参考:参考：
 
 [iOS屏幕旋转学习笔记](http://foggry.com/blog/2014/08/08/ping-mu-xuan-zhuan-xue-xi-bi-ji/)
+

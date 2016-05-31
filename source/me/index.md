@@ -33,14 +33,13 @@ footer: false
 
 10年入坑
 
-技能get√  `Java`  `Android`  `💗iOS`	
-目前专注`iOS`
+技能get√  `Java`  `Android`  `💗iOS`
 
 从后台到Web&移动平台，可谓是通通玩了一遍，也算是半个全栈了吧😁
 
 喜欢追求新事物
 
-
+目前在SOHO中，如果您有合适的工作机会可以联系我扣扣865425695
 
 
 

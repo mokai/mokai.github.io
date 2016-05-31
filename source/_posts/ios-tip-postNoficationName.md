@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "#坑3# postNotificationName触发后的监听代码是同步还是异步执行的？"
+title: "#技巧3# postNotificationName触发后的监听代码是同步还是异步执行的？"
 date: 2015-11-17
 comments: true
-categories: iOS那些坑
+categories: iOS那些技巧
 sharing: false
 ---
-昨天去酷狗面试，被问到`postNotificationName触发后的监听代码是同步还是异步执行的？`，我当时知道`触发后的监听代码和触发的代码是在同一线程上执行的你`，但却回答了是异步，哎，我这逻辑又下降了。。。。
+昨天去酷狗面试，被问到`postNotificationName触发后的监听代码是同步还是异步执行的？`，我当时知道`触发后的监听代码和触发的代码是在同一线程上执行的`，但却回答了是异步，哎，我这逻辑又下降了。。。。
 
 举个栗子，比如说HTTP异步请求返回代码中我们触发一个通知，这个时候在监听的代码中直接去设置视图就会报错，因为当前线程不是主线程，正确的姿态应该是
 
