@@ -307,7 +307,7 @@
     <link href="http://mokai.github.io/2015/11/ios-tip-status_bar_style_not_working/"/>
     <id>http://mokai.github.io/2015/11/ios-tip-status_bar_style_not_working/</id>
     <published>2015-11-17T16:00:00.000Z</published>
-    <updated>2016-05-31T12:03:54.000Z</updated>
+    <updated>2016-05-31T12:04:32.000Z</updated>
     <content type="html"><![CDATA[<p>新的一个APP，需要设置状态栏为白色，无论通过代码设置<code>UIApplication.sharedApplication().statusBarStyle = .LightContent</code><br>还是直接在 <code>TARGETS</code> 中设置，发现都无效。</p>
 <p><img src="http://i.stack.imgur.com/NoSiZ.png" alt=""></p>
 <p>我们只需要把<code>Info.plist</code>中的<code>View controller-based status bar appearance</code>改为NO就行了，默认为YES</p>
@@ -322,31 +322,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[#坑3# postNotificationName触发后的监听代码是同步还是异步执行的？]]></title>
-    <link href="http://mokai.github.io/2015/11/ios-bug-postNoficationName/"/>
-    <id>http://mokai.github.io/2015/11/ios-bug-postNoficationName/</id>
-    <published>2015-11-16T16:00:00.000Z</published>
-    <updated>2015-11-17T05:35:12.000Z</updated>
-    <content type="html"><![CDATA[<p>昨天去酷狗面试，被问到<code>postNotificationName触发后的监听代码是同步还是异步执行的？</code>，我当时知道<code>触发后的监听代码和触发的代码是在同一线程上执行的你</code>，但却回答了是异步，哎，我这逻辑又下降了。。。。</p>
-<p>举个栗子，比如说HTTP异步请求返回代码中我们触发一个通知，这个时候在监听的代码中直接去设置视图就会报错，因为当前线程不是主线程，正确的姿态应该是</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_async<span class="list">(<span class="keyword">dispatch_get_main_queue</span><span class="list">()</span>, &#123; <span class="list">()</span> -&gt; Void in</span><br><span class="line">    NSNotificationCenter.defaultCenter<span class="list">()</span>.postNotificationName<span class="list">(<span class="keyword">kNotificationName</span>, object: <span class="literal">nil</span>)</span></span><br><span class="line">&#125;)</span></span><br></pre></td></tr></table></figure>
-<p>当然你也可以选择另一种方式，<code>NSNotificationQueue</code>通知队列，我们可以通过它做很多基于Runloop的需求，最重要的是它是异步执行的。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let queue = NSNotificationQueue.<span class="function"><span class="title">defaultQueue</span><span class="params">()</span></span></span><br><span class="line">queue.<span class="function"><span class="title">enqueueNotification</span><span class="params">(NSNotification(name: kNotificationName, object: nil)</span></span>, postingStyle: NSPostingStyle.PostNow)</span><br></pre></td></tr></table></figure>
-<h4 id="参考:">参考:</h4><p><a href="http://www.cnblogs.com/xiaouisme/archive/2012/04/06/2434753.html" target="_blank" rel="external">cocoa的NSNotification通知</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>昨天去酷狗面试，被问到<code>postNotificationName触发后的监听代码是同步还是异步执行的？</code>，我当时知道<code>触发后的监听代码和触发的代码是在同一线程上执行的你</code>，但却回答了是异步，哎，我这逻辑又下降了。。。。</p>
-<]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[#技巧3# postNotificationName触发后的监听代码是同步还是异步执行的？]]></title>
     <link href="http://mokai.github.io/2015/11/ios-tip-postNoficationName/"/>
     <id>http://mokai.github.io/2015/11/ios-tip-postNoficationName/</id>
     <published>2015-11-16T16:00:00.000Z</published>
-    <updated>2016-05-31T12:03:04.000Z</updated>
+    <updated>2016-05-31T12:05:32.000Z</updated>
     <content type="html"><![CDATA[<p>昨天去酷狗面试，被问到<code>postNotificationName触发后的监听代码是同步还是异步执行的？</code>，我当时知道<code>触发后的监听代码和触发的代码是在同一线程上执行的</code>，但却回答了是异步，哎，我这逻辑又下降了。。。。</p>
 <p>举个栗子，比如说HTTP异步请求返回代码中我们触发一个通知，这个时候在监听的代码中直接去设置视图就会报错，因为当前线程不是主线程，正确的姿态应该是</p>
 <figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_async<span class="list">(<span class="keyword">dispatch_get_main_queue</span><span class="list">()</span>, &#123; <span class="list">()</span> -&gt; Void in</span><br><span class="line">    NSNotificationCenter.defaultCenter<span class="list">()</span>.postNotificationName<span class="list">(<span class="keyword">kNotificationName</span>, object: <span class="literal">nil</span>)</span></span><br><span class="line">&#125;)</span></span><br></pre></td></tr></table></figure>
@@ -360,42 +340,6 @@
     </summary>
     
       <category term="iOS那些技巧" scheme="http://mokai.github.io/categories/iOS%E9%82%A3%E4%BA%9B%E6%8A%80%E5%B7%A7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Raywenderlich指南收集【持续更新】]]></title>
-    <link href="http://mokai.github.io/2015/11/raywenderlichs/"/>
-    <id>http://mokai.github.io/2015/11/raywenderlichs/</id>
-    <published>2015-11-10T16:00:00.000Z</published>
-    <updated>2016-02-17T06:34:31.000Z</updated>
-    <content type="html"><![CDATA[<p>最近在啃字<a href="http://www.raywenderlich.com" target="_blank" rel="external">raywenderlich</a>中，顺便把一些Totorials收集，包括原文以及译文。</p>
-<a id="more"></a>
-<table>
-<thead>
-<tr>
-<th>原文</th>
-<th>译文</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://www.raywenderlich.com/90488/calayer-in-ios-with-swift-10-examples" target="_blank" rel="external">CALayer Tutorial</a></td>
-<td>暂无</td>
-</tr>
-<tr>
-<td>Introduction to C++ for iOS Developers <a href="http://www.raywenderlich.com/?p=62989" target="_blank" rel="external">Part 1</a>、<a href="http://www.raywenderlich.com/62990/introduction-c-ios-developers-part-2" target="_blank" rel="external">Part 2</a></td>
-<td>向iOS开发者介绍C++<a href="http://www.cocoachina.com/industry/20140415/8163.html" target="_blank" rel="external">一</a>、<a href="http://www.cocoachina.com/ios/20140417/8182.html" target="_blank" rel="external">二</a></td>
-</tr>
-</tbody>
-</table>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>最近在啃字<a href="http://www.raywenderlich.com">raywenderlich</a>中，顺便把一些Totorials收集，包括原文以及译文。</p>]]>
-    
-    </summary>
-    
-      <category term="raywenderlich" scheme="http://mokai.github.io/categories/raywenderlich/"/>
     
   </entry>
   
@@ -486,7 +430,7 @@
     <link href="http://mokai.github.io/2015/10/ios-tip-screen_rotate/"/>
     <id>http://mokai.github.io/2015/10/ios-tip-screen_rotate/</id>
     <published>2015-10-30T16:00:00.000Z</published>
-    <updated>2016-05-31T12:04:04.000Z</updated>
+    <updated>2016-05-31T12:04:17.000Z</updated>
     <content type="html"><![CDATA[<p>经常有这样的需求，APP只需要竖屏，但是一些特殊的场景下需要横屏。</p>
 <p>比如说调用系统的<code>MPMovieViewController</code>播放视频时，我们会在AppDelegate中或者UIViewController中更新允许横屏的配置，当播放器旋转到横屏（此时设备应该也是处于横屏），APP现有<code>ViewController</code>也会跟着旋转，那么问题来了，当再次回到APP时，此时现有<code>ViewController</code>是处于横屏的，我们再去代理中更新为竖屏会发现代理根本不会被调用，这时我们就需要用到下面这段代码，去手动触发屏幕旋转事件 </p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let vc = <span class="built_in">UIViewController</span>();</span><br><span class="line"><span class="keyword">self</span><span class="variable">.presentViewController</span>(vc, animated: <span class="literal">false</span>, completion: <span class="literal">nil</span>)</span><br><span class="line">vc<span class="variable">.dismissViewControllerAnimated</span>(<span class="literal">false</span>, completion: <span class="literal">nil</span>)</span><br></pre></td></tr></table></figure>
@@ -765,40 +709,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[Swift技巧]]></title>
-    <link href="http://mokai.github.io/2015/04/swift-tips/"/>
-    <id>http://mokai.github.io/2015/04/swift-tips/</id>
-    <published>2015-04-16T16:00:00.000Z</published>
-    <updated>2016-01-07T09:42:35.000Z</updated>
-    <content type="html"><![CDATA[<p>1、[UIView class]在swift中怎么写  <code>UIView.self</code></p>
-<p>2、String类型无count、length检测长度方法，使用<code>countElements</code>来使用，我们可以为String扩展一个属性</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span></span>&#123;</span><br><span class="line">    <span class="comment">//字符长度</span></span><br><span class="line">    <span class="keyword">var</span> <span class="built_in">count</span>:<span class="type">Int</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">countElements</span>(<span class="keyword">self</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>3、@synchronized 在swift中怎么写</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">objc_sync_enter</span><span class="params">(lock)</span></span></span><br><span class="line"><span class="comment">//code</span></span><br><span class="line"><span class="function"><span class="title">objc_sync_exit</span><span class="params">(lock)</span></span></span><br></pre></td></tr></table></figure>
-<p>但是 <a href="http://stackoverflow.com/questions/24045895/what-is-the-swift-equivalent-to-objective-cs-synchronized" target="_blank" rel="external">stackoverflow</a>上说这种方式有bug，用dispatch_sync代替</p>
-<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> lockQueue = dispatch_queue_create<span class="params">(<span class="string">"com.test.LockQueue"</span>, nil)</span></span><br><span class="line">dispatch_sync<span class="params">(lockQueue)</span> &#123;</span><br><span class="line">    <span class="comment">// code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>或者使用<a href="https://github.com/ide/Synchronized" target="_blank" rel="external">Synchronized开源库</a>也可以</p>
-<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">import</span> Synchronized</span><br><span class="line"><span class="built_in">let</span> x = synchronized<span class="params">(NSObject<span class="params">()</span>)</span> &#123; <span class="number">0</span> &#125;</span><br></pre></td></tr></table></figure>
-<h1 id="资源">资源</h1><p>1、<a href="https://github.com/burczyk/XcodeSwiftSnippets" target="_blank" rel="external"><code>XcodeSwiftSnippets</code></a> Swift代码片段</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>1、[UIView class]在swift中怎么写  <code>UIView.self</code></p>
-<p>2、String类型无count、length检测长度方法，使用<code>countElements</code>来使用，我们可以为String扩展一个属性</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span></span>&#123;</span><br><span class="line">    <span class="comment">//字符长度</span></span><br><span class="line">    <span class="keyword">var</span> <span class="built_in">count</span>:<span class="type">Int</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">countElements</span>(<span class="keyword">self</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]>
-    
-    </summary>
-    
-      <category term="记录" scheme="http://mokai.github.io/categories/%E8%AE%B0%E5%BD%95/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[IB中Runtime Attributes个别属性无效]]></title>
     <link href="http://mokai.github.io/2015/04/IB%E4%B8%ADRuntime%20Attributes%E4%B8%AA%E5%88%AB%E5%B1%9E%E6%80%A7%E6%97%A0%E6%95%88/"/>
     <id>http://mokai.github.io/2015/04/IB中Runtime Attributes个别属性无效/</id>
     <published>2015-04-06T16:00:00.000Z</published>
-    <updated>2015-11-03T10:06:28.000Z</updated>
+    <updated>2016-05-31T12:02:12.000Z</updated>
     <content type="html"><![CDATA[<p>在使用Xcode IB方式编码中，经常会使用到属性列表中没有的属性，这时则需要通过<code>Runtime Attributes</code>来动态注入(实则为<code>KVO</code>实现)</p>
 <a id="more"></a>
 <p><img src="http://7xiew0.com1.z0.glb.clouddn.com/2015-04-07_1.png" alt=""></p>
