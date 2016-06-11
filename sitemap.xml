@@ -2,12 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://mokai.github.io/me/new_resume.html</loc>
-    <lastmod>2016-06-03T13:48:51.000Z</lastmod>
+    <loc>http://mokai.github.io/me/resume.html</loc>
+    <lastmod>2016-06-11T07:37:01.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://mokai.github.io/me/resume.html</loc>
+    <loc>http://mokai.github.io/me/resume1.html</loc>
     <lastmod>2016-06-03T09:07:43.000Z</lastmod>
   </url>
   
@@ -57,17 +57,17 @@
   </url>
   
   <url>
+    <loc>http://mokai.github.io/2015/04/hello/</loc>
+    <lastmod>2015-11-03T10:06:28.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://mokai.github.io/404.html</loc>
     <lastmod>2015-11-03T10:06:28.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://mokai.github.io/projects/index.html</loc>
-    <lastmod>2015-11-03T10:06:28.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.github.io/2015/04/hello/</loc>
     <lastmod>2015-11-03T10:06:28.000Z</lastmod>
   </url>
   
