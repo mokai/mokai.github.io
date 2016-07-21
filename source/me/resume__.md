@@ -1,5 +1,5 @@
 ---
-title: "龚凯的简历"
+title: "我的简历"
 layout: page
 noDate: "true"
 comments: false
@@ -7,40 +7,42 @@ share: false
 footer: false
 ---
 
+##龚凯
 * 期望职位：iOS工程师（广州）
-* 3年半工作经验 (近3年从事iOS开发)
+* 3年工作经验 (近2年半从事iOS开发)
 * 手机 / 微信：18565593042
 * 邮箱：865425695@qq.com
 * 技术博客：http://mokai.me
 * Github：https://github.com/mokai 
 
 ###自我简介
-参与过多款APP开发，涉及到运动、金融、物联网多方面。为人谦虚谨慎，求知欲望强烈，喜欢追求新事物，对待工作一丝不苟
+3年开发经验，最近2年半从事iOS开发，参与过多款APP开发，涉及到运动、金融、物联网多方面。为人谦虚谨慎，求知欲望强烈，喜欢追求新事物，对待工作一丝不苟
 
 ###技能清单
 * 精通iOS平台开发，熟练持续定位、蓝牙、音频等相关技术
 * 精通Swift开发，开发过多款线上APP
 * 熟练Android SDK开发，有完整的 Android 项目开发经验
+* 熟悉服务端开发，如，Java、PHP
+* 熟悉标准SQL语句，使用过MySQL、Oracle、SQLite
+* 熟悉一些前端技术 HTML、CSS、JavaScript 等，以及VueJs相关框架
 * 熟练使用 Git 等版本控制工具
-* 曾经的技能
-	
-	* 熟悉服务端开发，如，Java、PHP
-	* 熟悉标准SQL语句，使用过MySQL、Oracle、SQLite
-	* 熟悉一些前端技术 HTML、CSS、JavaScript 等，以及VueJs相关框架
-
 
 ###工作经历
-* [美骑网络科技股份有限公司](http://www.biketo.com)（2015年2月 ~ 2016年4月）
+* [美骑网络科技股份有限公司](http://www.biketo.com)
   
   > 担任iOS工程师，主导美骑APP的开发，为公司iOS工程师们培训Swift，并且成功说服使用Swift来开发产品。
  
-* 云悠科技（2013年4月 ~ 2014年12月）
+* 吉太云
+	
+	>担任iOS工程师，独立开发《吉车宝》与《吉安宝》两款APP的开发
+ 
+* 云悠科技
  
  >因专业为Java，进公司后从事的网站开发，后因公司需求发展转iOS端开发，主要负责iOS端的基础代码封装与功能开发。
 
 ###项目经验
 
-* [美骑](https://itunes.apple.com/cn/app/id852965719)，3人团队开发（2015年3月 - 2016年3月）
+* [美骑](https://itunes.apple.com/cn/app/id852965719)，3人团队开发
  	> 美骑app是一款互联网自行车服务平台，提供从资讯、网上购物到线下活动等一站式全面服务。
 	
 	项目职责：
@@ -56,7 +58,7 @@ footer: false
 	* 组件化开发，使用URI路由进行模块解耦
 	* 使用DTCoreText绘制论坛帖子页面
 
-* [兔子骑行](https://itunes.apple.com/cn/app/tu-zi-qi-xing-qi-xing-ji-lu/id1062196764?mt=8)，3人团队开发（2015年9月 - 2016年3月）
+* [兔子骑行](https://itunes.apple.com/cn/app/tu-zi-qi-xing-qi-xing-ji-lu/id1062196764?mt=8)，3人团队开发
 	> 实时记录骑行途中的速度、里程、海拔骑行轨迹，致力于打造专业的骑行工具应用。
 	
 	项目职责：
@@ -69,7 +71,7 @@ footer: false
 	* 采用自定义格式的压缩文件来封装数据，以及压缩文件的断点续传与下载
 	* 基于JBChartView定制的图表显示统计数据
 
-* [泰麟资本P2P](http://fir.im/tp2p)，2人团队开发（2013年12月 - 2014年10月）
+* [泰麟资本P2P](http://fir.im/tp2p)，2人团队开发
 	> 泰麟资本是一款P2P网贷理财的平台。 
 	
 	项目职责：

@@ -52,9 +52,9 @@ find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins -name Info.p
 
 
 
-* [Chisel-LLDB命令插件](https://github.com/facebook/chisel)
+* Facebook开源的LLDB命令插件：[Chisel-LLDB](https://github.com/facebook/chisel)
 
-```	
+```
 brew update
 brew install chisel
 ```
@@ -77,7 +77,6 @@ rm -rf ~/Library/Developer/CoreSimulator/Devices
 * 指定文件不使用arc，在`Build Phase` -> `Compile Source`指定文件`Compile Flags`中加入`-fno-objc-arc`
 * OC语法简写
 
-	
 ```
 	* NSNumber
 		* [NSNumber numberWithChar:‘X’] 简写为 @‘X’;
@@ -611,9 +610,5 @@ pod 'Alamofire', '~> 3.0'
 #### 利器
   
   * `cloc` 代码行数统计  `npm install -g cloc`
-<<<<<<< HEAD:source/_posts/ios-note.md
-  
 
-=======
-  
->>>>>>> 690b8f8de36a5d5addd16fdb1b177e0a9d6dae32:source/_posts/ios-tips.md
+
