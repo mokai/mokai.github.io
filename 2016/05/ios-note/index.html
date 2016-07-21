@@ -23,7 +23,7 @@ Xcode技巧
 
 .a静态库编译
   lipo -info xxx.a 查看静态库支持的平台，目前有armv7、arm64、">
-<meta property="og:updated_time" content="2016-06-13T13:50:51.000Z">
+<meta property="og:updated_time" content="2016-07-14T10:07:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS记录">
 <meta name="twitter:description" content="记录平时开发中的技巧与代码片段，持续更新！
@@ -263,7 +263,7 @@ var _hmt = _hmt || [];
 </ul>
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find</span> ~<span class="regexp">/Library/</span>Application\ Support<span class="regexp">/Developer/</span>Shared<span class="regexp">/Xcode/</span>Plug-ins -name Info.plist -maxdepth <span class="number">3</span> | xargs -I&#123;&#125; defaults <span class="keyword">write</span> &#123;&#125; DVTPlugInCompatibilityUUIDs -array-add `defaults <span class="keyword">read</span> <span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/I</span>nfo.plist DVTPlugInCompatibilityUUID`</span><br></pre></td></tr></table></figure>
 <ul>
-<li><a href="https://github.com/facebook/chisel" target="_blank" rel="external">Chisel-LLDB命令插件</a></li>
+<li>Facebook开源的LLDB命令插件：<a href="https://github.com/facebook/chisel" target="_blank" rel="external">Chisel-LLDB</a></li>
 </ul>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span>update</span><br><span class="line"><span class="keyword">brew </span>install chisel</span><br></pre></td></tr></table></figure>
 <ul>
