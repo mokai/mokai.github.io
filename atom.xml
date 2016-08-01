@@ -5,7 +5,7 @@
   <subtitle><![CDATA[修炼中...]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://mokai.github.io//"/>
-  <updated>2016-07-14T10:07:52.000Z</updated>
+  <updated>2016-07-28T08:24:16.000Z</updated>
   <id>http://mokai.github.io//</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://mokai.github.io/2016/05/ios-note/"/>
     <id>http://mokai.github.io/2016/05/ios-note/</id>
     <published>2016-05-30T16:00:00.000Z</published>
-    <updated>2016-07-14T10:07:52.000Z</updated>
+    <updated>2016-07-28T08:24:16.000Z</updated>
     <content type="html"><![CDATA[<p>记录平时开发中的技巧与代码片段，持续更新！</p>
 <h2 id="Xcode技巧">Xcode技巧</h2><ul>
 <li>当真机升级了iOS，但对应Xcode未升级时，device会出现ineligible device，这时通过xocde菜单-&gt;Product-&gt;Destination-&gt;选择对应的device 即可解决</li>
@@ -164,7 +164,12 @@
 <pre><code>* 显示消除图标 
 
 <span class="comment"><figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textField.clearButtonMode = UITextFieldViewModeWhileEditing<span class="comment">;</span></span><br></pre></td></tr></table></figure></span>
-</code></pre><h5 id="UITextView">UITextView</h5><ul>
+
+
+* 做字符个数限制时防止联想输入超过
+
+<span class="comment"><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//防止联想输入超过</span></span><br><span class="line"><span class="keyword">if</span> (textView.<span class="keyword">text</span>.length &gt; maxLength) &#123;</span><br><span class="line">      textView.<span class="keyword">text</span> = [textView.<span class="keyword">text</span> substringToIndex:maxLength];</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></span>
+</code></pre><h4 id="UITextView">UITextView</h4><ul>
 <li>默认显示为最底下的内容，如果想显示最上面的内容使用</li>
 </ul>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">private <span class="keyword">var</span> firstFlag = <span class="literal">true</span></span><br><span class="line"><span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">viewDidLayoutSubviews</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.viewDidLayoutSubviews()</span><br><span class="line">    guard firstFlag <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    firstFlag = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">self</span>.textView.scrollRangeToVisible(<span class="type">NSMakeRange</span>(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -214,6 +219,14 @@
 </li>
 </ul>
 <figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tableView.sectionIndexBackgroundColor = [UIColor clearColor]<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置背景色</li>
+</ul>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">self</span>.<span class="built_in">table</span>View.backgroundColor = [UIColor blueColor];</span><br><span class="line"><span class="literal">self</span>.<span class="built_in">table</span>View.backgroundView.backgroundColor = <span class="literal">self</span>.<span class="built_in">table</span>View.backgroundColor ;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Section禁止吸附</li>
+</ul>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>scrollViewDidScroll:<span class="params">(UIScrollView *)</span>scrollView &#123;</span><br><span class="line">    CGFloat sectionHeaderHeight = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">if</span> <span class="params">(scrollView.contentOffset.y &lt;= sectionHeaderHeight &amp;&amp; scrollView.contentOffset.y &gt;= <span class="number">0</span>)</span> &#123;</span><br><span class="line">        scrollView.contentInset = UIEdgeInsetsMake<span class="params">(-scrollView.contentOffset.y, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="params">(scrollView.contentOffset.y &gt;= sectionHeaderHeight)</span> &#123;</span><br><span class="line">        scrollView.contentInset = UIEdgeInsetsMake<span class="params">(-sectionHeaderHeight, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="UINavigationController">UINavigationController</h4><ul>
 <li>设置主题颜色</li>
 </ul>
@@ -699,23 +712,6 @@
 ]]></content>
     <summary type="html">
     <![CDATA[<p>蓝牙技术，很早以前就被有了，如今已更新4.0版本。很多热门技术都是基于它工作的，如Android平台的NFC，iOS的iBeancon，Apple Watch的WatchConnectivity框架等，现在的智能家居基本也是基于蓝牙4.0与APP进行通信，可见蓝牙在实践工作中的重要性。在iOS中，蓝牙是基于4.0标准的，设备间低功耗通信。</p>]]>
-    
-    </summary>
-    
-      <category term="蓝牙" scheme="http://mokai.github.io/tags/%E8%93%9D%E7%89%99/"/>
-    
-      <category term="记录" scheme="http://mokai.github.io/categories/%E8%AE%B0%E5%BD%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[蓝牙编程]]></title>
-    <link href="http://mokai.github.io/2015/09/android-weixin-no-response/"/>
-    <id>http://mokai.github.io/2015/09/android-weixin-no-response/</id>
-    <published>2015-09-07T16:00:00.000Z</published>
-    <updated>2016-06-30T12:40:59.000Z</updated>
-    <content type="html"></content>
-    <summary type="html">
     
     </summary>
     
