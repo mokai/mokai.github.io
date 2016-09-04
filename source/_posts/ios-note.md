@@ -300,7 +300,7 @@ m_titleLabel.minimumFontSize = 6;
 [lab setNumberOfLines:0];
 lab.lineBreakMode = UILineBreakModeWordWrap;
 CGSize maxSize = CGSizeMake(lab.width, SCREEN_HEIGHT - lab.top);
-lab.size = [_descLab.text sizeWithFont:_descLab.font constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
+lab.size = [_descLab.text sizeWithFont:_descLab.font constrainedToSize:maxSize lineBreakMode:NSLineBreakByWordWrapping];
 ```
 
 ####UITextField
@@ -380,7 +380,7 @@ func textFieldShouldReturn(textField: UITextField) -> Bool{
 	} UIReturnKeyType;  
 	```
 
-	* 自动大写
+* 自动大写
 	
 	```
 	textField.autocapitalizationType = UITextAutocapitalizationTypeWords
@@ -392,7 +392,7 @@ func textFieldShouldReturn(textField: UITextField) -> Bool{
 	} UITextAutocapitalizationType;  
 	```
 
-	* 自动更正
+* 自动更正
 	
 	```
 	textField.autocorrectionType= UITextAutocorrectionTypeYes;
@@ -403,18 +403,29 @@ func textFieldShouldReturn(textField: UITextField) -> Bool{
 	} UITextAutocorrectionType; 
 	```
 
-	* 安全文本输入
+* 安全文本输入
 
 	```
 	textField.secureTextEntry=YES;
 	```
 	
-	* 显示消除图标 
+* 显示消除图标 
 
 	```
 	textField.clearButtonMode = UITextFieldViewModeWhileEditing;
 	```
-#####UITextView
+	
+* 做字符个数限制时防止联想输入超过
+	
+	```
+  //防止联想输入超过
+  if (textView.text.length > maxLength) {
+        textView.text = [textView.text substringToIndex:maxLength];
+        return;
+   }
+	```
+
+####UITextView
 * 默认显示为最底下的内容，如果想显示最上面的内容使用
 
 ```
@@ -507,6 +518,25 @@ self.tView.tableFooterView = [UIView new];
 tableView.sectionIndexBackgroundColor = [UIColor clearColor];
 ```
 
+* 设置背景色
+
+```
+self.tableView.backgroundColor = [UIColor blueColor];
+self.tableView.backgroundView.backgroundColor = self.tableView.backgroundColor ;
+```
+
+* Section禁止吸附
+
+```
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat sectionHeaderHeight = 10;
+    if (scrollView.contentOffset.y <= sectionHeaderHeight && scrollView.contentOffset.y >= 0) {
+        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+    } else if (scrollView.contentOffset.y >= sectionHeaderHeight) {
+        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+    }
+}
+```
 #### UINavigationController
 * 设置主题颜色
 
