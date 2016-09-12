@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   
   <title><![CDATA[mokai]]></title>
-  <subtitle><![CDATA[修炼中...]]></subtitle>
+  <subtitle><![CDATA[目前在找iOS的工作，您有好的机会推荐给我，可加QQ865425695]]></subtitle>
   <link href="/atom.xml" rel="self"/>
-  <link href="http://mokai.github.io//"/>
-  <updated>2016-09-11T11:53:42.000Z</updated>
-  <id>http://mokai.github.io//</id>
+  <link href="http://mokai.me//"/>
+  <updated>2016-09-12T06:29:58.000Z</updated>
+  <id>http://mokai.me//</id>
   
   <author>
     <name><![CDATA[kk]]></name>
@@ -17,10 +17,10 @@
   
   <entry>
     <title><![CDATA[3D Touch大法]]></title>
-    <link href="http://mokai.github.io/2016/09/3d-touch/"/>
-    <id>http://mokai.github.io/2016/09/3d-touch/</id>
+    <link href="http://mokai.me/2016/09/3d-touch/"/>
+    <id>http://mokai.me/2016/09/3d-touch/</id>
     <published>2016-09-10T16:00:00.000Z</published>
-    <updated>2016-09-11T11:53:42.000Z</updated>
+    <updated>2016-09-12T06:29:58.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>Demo同步更新到Swift2.3</p>
 </blockquote>
@@ -30,20 +30,20 @@
 <video src="http://images.apple.com/media/us/iphone-6s/2015/dhs3b549_75f9_422a_9470_4a09e709b350/films/feature/iphone6s-feature-cc-us-20150909_r848-9dwc.mov" controls><br></video>
 
 
-<h2 id="环境">环境</h2><p>系统环境: iOS9 or later</p>
+<h3 id="环境">环境</h3><p>系统环境: iOS9 or later</p>
 <p>开发环境: Swift2.3 &amp; Xcode7.3.1 </p>
 <p>Demo: <a href="https://github.com/mokai/3DTouchDemo" target="_blank" rel="external">3DTouchDemo</a></p>
 <p>效果：</p>
 <video src="http://7xiew0.com1.z0.glb.clouddn.com/3dtouch.mov" controls width="320"><br></video>
 
 
-<h2 id="开始">开始</h2><p>3D Touch可以分为三种：</p>
+<h3 id="开始">开始</h3><p>3D Touch可以分为三种：</p>
 <ul>
 <li>Quick Actions【可以理解PC桌面的快捷方式】</li>
 <li>Peek&amp;Pop【应用内快速预览内容】</li>
 <li>UITouch【自定义3D Touch事件】</li>
 </ul>
-<h2 id="Quick_Actions_快捷方式">Quick Actions 快捷方式</h2><p><img src="http://7xiew0.com1.z0.glb.clouddn.com/3dtouch_homeshorctquickactions.gif" alt=""></p>
+<h3 id="Quick_Actions_快捷方式">Quick Actions 快捷方式</h3><p><img src="http://7xiew0.com1.z0.glb.clouddn.com/3dtouch_homeshorctquickactions.gif" alt=""></p>
 <p>配置Actions可以通过工程<code>Info.plist</code>文件静态配置，也可以在运行时动态添加，两者可以一起使用。</p>
 <p>静态配置在<code>Info.plist</code>中<code>UIApplicationShortcutItems</code>节点数组下添加相应Actions Item信息</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">key</span>&gt;</span>UIApplicationShortcutItems<span class="tag">&lt;/<span class="title">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">array</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">dict</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">key</span>&gt;</span>UIApplicationShortcutItemIconType<span class="tag">&lt;/<span class="title">key</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">string</span>&gt;</span>UIApplicationShortcutIconTypeSearch<span class="tag">&lt;/<span class="title">string</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">key</span>&gt;</span>UIApplicationShortcutItemTitle<span class="tag">&lt;/<span class="title">key</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">string</span>&gt;</span>搜索<span class="tag">&lt;/<span class="title">string</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">key</span>&gt;</span>UIApplicationShortcutItemType<span class="tag">&lt;/<span class="title">key</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="title">string</span>&gt;</span>me.mokai.TouchDemo.action.search<span class="tag">&lt;/<span class="title">string</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="title">dict</span>&gt;</span></span><br><span class="line">	...</span><br><span class="line"><span class="tag">&lt;/<span class="title">array</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -56,7 +56,7 @@
 <li>当APP启动时，shortcutItems的值是上次动态添加的，如果是第一次启动则为空数组。</li>
 <li>Actions最多显示4个，优先显示静态Actions，然后剩余个数显示shortcutItems的前几个。</li>
 </ul>
-<h2 id="Peek&amp;POP_快速预览">Peek&amp;POP 快速预览</h2><p>好了，下面介绍本文重头戏，先上效果</p>
+<h3 id="Peek&amp;POP_快速预览">Peek&amp;POP 快速预览</h3><p>好了，下面介绍本文重头戏，先上效果</p>
 <p><img src="http://7xiew0.com1.z0.glb.clouddn.com/3dtouch_peek.gif" alt=""></p>
 <p>Peek窗口的内容其实是目标VC【ps即将要显示的ViewController】的一个实时快照，但它不可以点击。Peek触发阶段有三种：</p>
 <ul>
@@ -84,8 +84,8 @@
 <li>对于直接使用<code>registerForPreviewingWithDelegate</code>注册VC的self.view，虽然可以自动注册subviews，但是如果说你的VC中不止一种视图要触发Peek，那么它会分分钟教你做人的道理。</li>
 </ul>
 <p><img src="http://7xiew0.com1.z0.glb.clouddn.com/funny_nonono.gif" alt=""></p>
-<h2 id="UITouch">UITouch</h2><p>高级玩法，绘图、游戏，把3D Touch发挥到极致。不过我也唔知玩也暂时没这方面需求，有需求看<a href="https://developer.apple.com/library/prerelease/ios/samplecode/TouchCanvas/" target="_blank" rel="external">官方绘图demo</a></p>
-<h2 id="参考">参考</h2><p><a href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/Adopting3DTouchOniPhone/" target="_blank" rel="external">Adopting 3D Touch on iPhone</a></p>
+<h3 id="UITouch">UITouch</h3><p>高级玩法，绘图、游戏，把3D Touch发挥到极致。不过我也唔知玩也暂时没这方面需求，有需求看<a href="https://developer.apple.com/library/prerelease/ios/samplecode/TouchCanvas/" target="_blank" rel="external">官方绘图demo</a></p>
+<h3 id="参考">参考</h3><p><a href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/Adopting3DTouchOniPhone/" target="_blank" rel="external">Adopting 3D Touch on iPhone</a></p>
 <p><a href="https://developer.apple.com/library/ios/samplecode/ApplicationShortcuts/Introduction/Intro.html#//apple_ref/doc/uid/TP40016545" target="_blank" rel="external">ApplicationShortcuts Demo</a></p>
 <p><a href="https://developer.apple.com/library/ios/samplecode/ViewControllerPreviews/Introduction/Intro.html#//apple_ref/doc/uid/TP40016546" target="_blank" rel="external">ViewControllerPreviews Demo</a></p>
 <h3 id="小小广告">小小广告</h3><p>本人目前是一名自由职业者，接受移动两端的项目开发，如果你有需求或者有资源请速与我联系吧，QQ865425695</p>
@@ -98,318 +98,16 @@
     
     </summary>
     
-      <category term="3D Touch" scheme="http://mokai.github.io/tags/3D-Touch/"/>
+      <category term="3D Touch" scheme="http://mokai.me/tags/3D-Touch/"/>
     
-      <category term="记录" scheme="http://mokai.github.io/categories/%E8%AE%B0%E5%BD%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[iOS记录]]></title>
-    <link href="http://mokai.github.io/2016/05/ios-note/"/>
-    <id>http://mokai.github.io/2016/05/ios-note/</id>
-    <published>2016-05-30T16:00:00.000Z</published>
-    <updated>2016-09-11T10:38:48.000Z</updated>
-    <content type="html"><![CDATA[<p>记录平时开发中的技巧与代码片段，持续更新！</p>
-<h2 id="Xcode技巧">Xcode技巧</h2><ul>
-<li>当真机升级了iOS，但对应Xcode未升级时，device会出现ineligible device，这时通过xocde菜单-&gt;Product-&gt;Destination-&gt;选择对应的device 即可解决</li>
-<li><p>编译相关</p>
-<ul>
-<li><p>.a静态库编译</p>
-<p>  <code>lipo -info xxx.a</code> 查看静态库支持的平台，目前有armv7、arm64、armv7s、i386 前三者为真机平台，后者为iphone Simulator</p>
-<p>  <code>lipo -create libXXX-armv7s.a libXXX-i138.a -output libXXX.a</code> 合并生成通用平台的静态库</p>
-</li>
-<li><p>环境变量</p>
-<p>  $(SRCROOT) 工程文件（比如Nuno.xcodeproj）的路径</p>
-<p>  $(PROJECT_DIR) 项目目录    </p>
-</li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-<ul>
-<li><p>Xcode常见编译错误</p>
-<ul>
-<li><p><code>could not build module &#39;Foundation&#39;</code></p>
-<p>  原因在于，在pch文件中没有把import放在<code>#ifdef_OBJC_</code></p>
-  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#ifdef</span> __OBJC__ </span><br><span class="line">    <span class="id">#import</span> &lt;UIKit/UIKit.h&gt; </span><br><span class="line">    <span class="id">#import</span> &lt;Foundation/Foundation.h&gt; </span><br><span class="line"><span class="id">#endif</span> </span><br><span class="line">    <span class="id">#import</span> <span class="string">"ddddd.h"</span>  <span class="comment">//此处移动上面 __OBJC__ 中就好了</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>IB技巧</p>
-<ul>
-<li>可视化坐标距离    选中一个View，然后按住<code>option</code>并将鼠标移动到其他View上</li>
-<li>多个View层次选择 按住<code>Cmd</code>和<code>Shift</code>，然后在需要选择的view上方按右键</li>
-<li>添加辅助线  在左边的层级列表中双击某个view，然后<code>Cmd+_</code>或者<code>Cmd+|</code>即可在选中的view上添加一条水平或者垂直中心的辅助线</li>
-</ul>
-</li>
-<li><p>Xcode升级后插件失效修复</p>
-</li>
-</ul>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find</span> ~<span class="regexp">/Library/</span>Application\ Support<span class="regexp">/Developer/</span>Shared<span class="regexp">/Xcode/</span>Plug-ins -name Info.plist -maxdepth <span class="number">3</span> | xargs -I&#123;&#125; defaults <span class="keyword">write</span> &#123;&#125; DVTPlugInCompatibilityUUIDs -array-add `defaults <span class="keyword">read</span> <span class="regexp">/Applications/</span>Xcode.app<span class="regexp">/Contents/I</span>nfo.plist DVTPlugInCompatibilityUUID`</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Facebook开源的LLDB命令插件：<a href="https://github.com/facebook/chisel" target="_blank" rel="external">Chisel-LLDB</a></li>
-</ul>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">brew </span>update</span><br><span class="line"><span class="keyword">brew </span>install chisel</span><br></pre></td></tr></table></figure>
-<ul>
-<li>LLDB中import UIKit</li>
-</ul>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch ~/<span class="class">.lldbinit</span> echo <span class="attribute">display</span> <span class="at_rule">@import</span> UIKit &gt;&gt; ~/<span class="class">.lldbinit</span> echo target stop-hook add -o \<span class="string">"target stop-hook disable\" &gt;&gt; ~/.lldbinit</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>修复多个Xcode导致的N个模拟器问题</li>
-</ul>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo killall -<span class="number">9</span> com<span class="class">.apple</span><span class="class">.CoreSimulator</span><span class="class">.CoreSimulatorService</span></span><br><span class="line">rm -rf ~/Library/Developer/CoreSimulator/Devices</span><br></pre></td></tr></table></figure>
-<h2 id="常用技巧">常用技巧</h2><ul>
-<li>Frame枚举类型转换为string通过 <code>NSStringFromCGRect</code></li>
-<li>指定文件不使用arc，在<code>Build Phase</code> -&gt; <code>Compile Source</code>指定文件<code>Compile Flags</code>中加入<code>-fno-objc-arc</code></li>
-<li>OC语法简写</li>
-</ul>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">*</span> NSNumber</span><br><span class="line">	<span class="keyword">*</span> [NSNumber numberWithChar:‘X’] 简写为 <span class="comment">@‘X’;</span></span><br><span class="line">	<span class="keyword">*</span> [NSNumber numberWithInt:12345] 简写为 <span class="comment">@12345</span></span><br><span class="line">	<span class="keyword">*</span> [NSNumber numberWithUnsignedLong:12345ul] 简写为 <span class="comment">@12345ul</span></span><br><span class="line">	<span class="keyword">*</span> [NSNumber numberWithLongLong:12345ll] 简写为 <span class="comment">@12345ll</span></span><br><span class="line">	<span class="keyword">*</span> [NSNumber numberWithFloat:123.45f] 简写为 <span class="comment">@123.45f</span></span><br><span class="line">	<span class="keyword">*</span> [NSNumber numberWithDouble:123.45] 简写为 <span class="comment">@123.45</span></span><br><span class="line">	<span class="keyword">*</span> [NSNumber numberWithBool:YES] 简写为 <span class="comment">@YES</span></span><br><span class="line"><span class="keyword">*</span> NSArray</span><br><span class="line">	<span class="keyword">*</span> [NSArray array] 简写为 <span class="comment">@[]</span></span><br><span class="line">	<span class="keyword">*</span> [NSArray arrayWithObject:a] 简写为 <span class="comment">@[ a ]</span></span><br><span class="line">	<span class="keyword">*</span> [NSArray arrayWithObjects:a, b, c, nil] 简写为 <span class="comment">@[ a, b, c ]</span></span><br><span class="line"><span class="keyword">*</span> NSDictionary</span><br><span class="line">	<span class="keyword">*</span> [NSDictionary dictionary] 简写为 <span class="comment">@&#123;&#125;</span></span><br><span class="line">	<span class="keyword">*</span> [NSDictionary dictionaryWithObject:o1 forKey:k1] 简写为 <span class="comment">@&#123; k1 : o1 &#125;</span></span><br><span class="line">	<span class="keyword">*</span> [NSDictionary dictionaryWithObjectsAndKeys:o1, k1, o2, k2, o3, k3, nil] 简写为 <span class="comment">@&#123; k1 : o1, k2 : o2, k3 : o3 &#125;</span></span><br><span class="line"><span class="keyword">*</span> 下标</span><br><span class="line">	<span class="keyword">*</span> [array objectAtIndex:idx] 简写为 array[idx];</span><br><span class="line">	<span class="keyword">*</span> [array replaceObjectAtIndex:idx withObject:newObj] 简写为 array[idx] = newObj</span><br><span class="line">	<span class="keyword">*</span> [dic objectForKey:key] 简写为 dic[key]</span><br><span class="line">	<span class="keyword">*</span> [dic setObject:object forKey:key] 简写为 dic[key] = newObject</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>如果想生成Mutable版本，直接调用 [@[] mutableCopy] 就行了</p>
-</blockquote>
-<ul>
-<li><p>[NSDate date]获取的是GMT时间，和北京时间相差8个小时</p>
-</li>
-<li><p>拨打电话</p>
-</li>
-</ul>
-<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="collection">[<span class="collection">[UIApplication sharedApplication]</span> openURL:<span class="collection">[NSURL URLWithString:@<span class="string">"tel:466453"</span>]</span>]</span><span class="comment">;</span></span><br><span class="line"><span class="collection">[<span class="collection">[<span class="collection">[UIWebView alloc]</span> init]</span> loadRequest:<span class="collection">[NSURLRequest requestWithURL:<span class="collection">[NSURL URLWithString:@<span class="string">"tel:466453"</span>]</span>]</span>]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>调用照相或者相册</li>
-</ul>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)takePicture:(<span class="built_in">UIButton</span> *)btn&#123;</span><br><span class="line">    _currentCardBtn = btn;</span><br><span class="line">    IBActionSheet *sheet = [[IBActionSheet alloc] initWithTitle:<span class="literal">nil</span> delegate:<span class="keyword">self</span> cancelButtonTitle:<span class="string">@"取消"</span> destructiveButtonTitle:<span class="literal">nil</span> otherButtonTitles:<span class="string">@"相册"</span>,<span class="string">@"拍照"</span>, <span class="literal">nil</span>];</span><br><span class="line">    [sheet showInView:<span class="keyword">self</span><span class="variable">.view</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)actionSheet:(IBActionSheet *)actionSheet clickedButtonAtIndex:(<span class="built_in">NSInteger</span>)buttonIndex&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,buttonIndex);</span><br><span class="line">    <span class="keyword">if</span> (buttonIndex==<span class="number">0</span>) &#123;<span class="comment">//相册</span></span><br><span class="line">        [<span class="keyword">self</span> takePicker:<span class="built_in">UIImagePickerControllerSourceTypePhotoLibrary</span>];</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(buttonIndex==<span class="number">1</span>)&#123;<span class="comment">//拍照</span></span><br><span class="line">        [<span class="keyword">self</span> takePicker:<span class="built_in">UIImagePickerControllerSourceTypeCamera</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)takePicker:(<span class="built_in">UIImagePickerControllerSourceType</span>)sourceType</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSArray</span> *mediatypes=[<span class="built_in">UIImagePickerController</span> availableMediaTypesForSourceType:sourceType];</span><br><span class="line">    <span class="keyword">if</span>([<span class="built_in">UIImagePickerController</span> isSourceTypeAvailable:sourceType] &amp;&amp;[mediatypes count]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">NSArray</span> *mediatypes=[<span class="built_in">UIImagePickerController</span> availableMediaTypesForSourceType:sourceType];</span><br><span class="line">        <span class="built_in">UIImagePickerController</span> *picker=[[<span class="built_in">UIImagePickerController</span> alloc] init];</span><br><span class="line">        picker<span class="variable">.mediaTypes</span>=mediatypes;</span><br><span class="line">        picker<span class="variable">.delegate</span>=<span class="keyword">self</span>;</span><br><span class="line">        picker<span class="variable">.allowsEditing</span>=<span class="literal">YES</span>;</span><br><span class="line">        picker<span class="variable">.sourceType</span>=sourceType;</span><br><span class="line">        <span class="built_in">NSString</span> *requiredmediatype=(<span class="built_in">NSString</span> *)kUTTypeImage;</span><br><span class="line">        <span class="built_in">NSArray</span> *arrmediatypes=[<span class="built_in">NSArray</span> arrayWithObject:requiredmediatype];</span><br><span class="line">        [picker setMediaTypes:arrmediatypes];</span><br><span class="line">        [<span class="keyword">self</span> presentViewController:picker animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        [AlertUtils showAlert:<span class="string">@"当前设备不支持拍摄功能"</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)imagePickerController:(<span class="built_in">UIImagePickerController</span> *)picker didFinishPickingMediaWithInfo:(<span class="built_in">NSDictionary</span> *)info&#123;</span><br><span class="line">    <span class="comment">//self.lastChosenMediaType=[info objectForKey:UIImagePickerControllerMediaType];</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UIImage</span> *chosenImage=[info objectForKey:<span class="built_in">UIImagePickerControllerEditedImage</span>];</span><br><span class="line">    <span class="comment">//_avatarImageView.image=chosenImage;</span></span><br><span class="line">    <span class="comment">//_currentCardBtn.imageView.image = chosenImage;</span></span><br><span class="line">    [_currentCardBtn setBackgroundImage:chosenImage forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    [_currentCardBtn setTitle:<span class="string">@""</span> forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//    if([lastChosenMediaType isEqual:(NSString *) kUTTypeMovie])</span></span><br><span class="line">    <span class="comment">//    &#123;</span></span><br><span class="line">    <span class="comment">//        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示信息!" message:@"系统只支持图片格式" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles: nil];</span></span><br><span class="line">    <span class="comment">//        [alert show];</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">//    &#125;</span></span><br><span class="line">    [picker dismissModalViewControllerAnimated:<span class="literal">YES</span>];</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="keyword">void</span>) imagePickerControllerDidCancel:(<span class="built_in">UIImagePickerController</span> *)picker&#123;</span><br><span class="line">    [picker dismissModalViewControllerAnimated:<span class="literal">YES</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>实现截屏的方法</li>
-</ul>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导入头文件</span></span><br><span class="line"><span class="id">#import</span> QuartzCore/QuartzCore<span class="class">.h</span></span><br><span class="line"><span class="comment">//将整个self.view大小的图层形式创建一张图片image 	UIGraphicsBeginImageContext(self.view.bounds.size)；</span></span><br><span class="line">[self<span class="class">.view</span><span class="class">.layer</span> renderInContext：<span class="function"><span class="title">UIGraphicsGetCurrentContext</span><span class="params">()</span></span>]；</span><br><span class="line">UIImage*image=<span class="function"><span class="title">UIGraphicsGetImageFromCurrentImageContext</span><span class="params">()</span></span>；</span><br><span class="line"><span class="function"><span class="title">UIGraphicsEndImageContext</span><span class="params">()</span></span>；</span><br><span class="line"><span class="comment">//然后将该图片保存到图片图</span></span><br><span class="line"><span class="function"><span class="title">UIImageWriteToSavedPhotosAlbum</span><span class="params">(image,self,nil,nil)</span></span>；</span><br></pre></td></tr></table></figure>
-<ul>
-<li>NSDictionary排序</li>
-</ul>
-<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NSMutableDictionary</span> *dict = [@&#123;&#125;mutableCopy];</span><br><span class="line">dict[@(<span class="number">1</span>)] = @<span class="string">"1"</span>;</span><br><span class="line">dict[@(<span class="number">2</span>)] = @<span class="string">"2"</span>;</span><br><span class="line">dict[@(<span class="number">3</span>)] = @<span class="string">"3"</span>;</span><br><span class="line">dict[@(<span class="number">5</span>)] = @<span class="string">"4"</span>;</span><br><span class="line">dict[@(<span class="number">4</span>)] = @<span class="string">"5"</span>;</span><br><span class="line"><span class="type">NSArray</span> *arr = [dict.allKeys sortedArrayUsingComparator:^<span class="type">NSComparisonResult</span>(id obj1, id obj2)&#123;</span><br><span class="line">    <span class="type">NSComparisonResult</span> <span class="literal">result</span> = [obj1 compare:obj2];</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">result</span>==<span class="type">NSOrderedDescending</span>;</span><br><span class="line">&#125;];</span><br><span class="line"><span class="type">NSLog</span>(@<span class="string">"%@"</span>,arr);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用OpenURL打开设置页面</li>
-</ul>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">* 网路设置项</span><br><span class="line">[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@<span class="string">"prefs:root=General&amp;path=Network"</span>]];  </span><br><span class="line">	</span><br><span class="line">* 定位设置</span><br><span class="line">[NSURL URLWithString:@<span class="string">"prefs:root=LOCATION_SERVICES"</span>];</span><br><span class="line">	</span><br><span class="line">* 设置Twitter</span><br><span class="line">[NSURL URLWithString:@<span class="string">"prefs:root=TWITTER"</span>];</span><br><span class="line">	</span><br><span class="line">* 蓝牙	</span><br><span class="line">[NSURL URLWithString:@<span class="string">"prefs:root=General&amp;path=Bluetooth"</span>];</span><br><span class="line">	</span><br><span class="line">* 其他</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>About</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>ACCESSIBILITY</span><br><span class="line">prefs:<span class="variable">root=</span>AIRPLANE_MODE</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>AUTOLOCK</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>USAGE/CELLULAR_USAGE</span><br><span class="line">prefs:<span class="variable">root=</span>Brightness</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Bluetooth</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>DATE_AND_TIME</span><br><span class="line">prefs:<span class="variable">root=</span>FACETIME</span><br><span class="line">prefs:<span class="variable">root=</span>General</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Keyboard</span><br><span class="line">prefs:<span class="variable">root=</span>CASTLE</span><br><span class="line">prefs:<span class="variable">root=</span>CASTLE&amp;<span class="variable">path=</span>STORAGE_AND_BACKUP</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>INTERNATIONAL</span><br><span class="line">prefs:<span class="variable">root=</span>LOCATION_SERVICES</span><br><span class="line">prefs:<span class="variable">root=</span>ACCOUNT_SETTINGS</span><br><span class="line">prefs:<span class="variable">root=</span>MUSIC</span><br><span class="line">prefs:<span class="variable">root=</span>MUSIC&amp;<span class="variable">path=</span>EQ</span><br><span class="line">prefs:<span class="variable">root=</span>MUSIC&amp;<span class="variable">path=</span>VolumeLimit</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Network</span><br><span class="line">prefs:<span class="variable">root=</span>NIKE_PLUS_IPOD</span><br><span class="line">prefs:<span class="variable">root=</span>NOTES</span><br><span class="line">prefs:<span class="variable">root=</span>NOTIFICATIONS_ID</span><br><span class="line">prefs:<span class="variable">root=</span>Phone</span><br><span class="line">prefs:<span class="variable">root=</span>Photos</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>ManagedConfigurationList</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Reset</span><br><span class="line">prefs:<span class="variable">root=</span>Sounds&amp;<span class="variable">path=</span>Ringtone</span><br><span class="line">prefs:<span class="variable">root=</span>Safari</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Assistant</span><br><span class="line">prefs:<span class="variable">root=</span>Sounds</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>SOFTWARE_UPDATE_LINK</span><br><span class="line">prefs:<span class="variable">root=</span>STORE</span><br><span class="line">prefs:<span class="variable">root=</span>TWITTER</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>USAGE</span><br><span class="line">prefs:<span class="variable">root=</span>VIDEO</span><br><span class="line">prefs:<span class="variable">root=</span>General&amp;<span class="variable">path=</span>Network/VPN</span><br><span class="line">prefs:<span class="variable">root=</span>Wallpaper</span><br><span class="line">prefs:<span class="variable">root=</span>WIFI</span><br><span class="line">prefs:<span class="variable">root=</span>INTERNET_TETHERING</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p><code>No known instance method for selector &#39;respondsToSelector:&#39;</code><br>这种情况是声明的协议protocol没有继承NSObject导致 </p>
-</li>
-<li><p>复制字符串到剪贴板</p>
-</li>
-</ul>
-<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UIPasteboard *pasteboard = [UIPasteboard generalPasteboard]<span class="comment">;</span></span><br><span class="line">pasteboard.string = xxx<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<h2 id="常用组件">常用组件</h2><h4 id="UIView">UIView</h4><ul>
-<li>圆角</li>
-</ul>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">outLable.layer.<span class="variable">masksToBounds =</span> YES;</span><br><span class="line">outLable.layer.<span class="variable">cornerRadius =</span> <span class="number">5</span>;//如果要设置为圆，view的width与height一样，然后设置view.width/<span class="number">2</span></span><br><span class="line">outLable.layer.<span class="variable">borderWidth =</span> <span class="number">1</span>;</span><br><span class="line">outLable.layer.<span class="variable">borderColor =</span> TYPE_OUT</span><br></pre></td></tr></table></figure>
-<h4 id="UILabel">UILabel</h4><ul>
-<li>换行  内容加<code>\n</code>，然后设置label.numberOfLines = 0; </li>
-<li>文本自适应</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">m_t</span>itleLabel.font = [UIFont systemFontOfSize:<span class="number">20</span>];</span><br><span class="line"><span class="keyword">m_t</span>itleLabel.adjustsFontSizeToFitWidth = YES;</span><br><span class="line"><span class="keyword">m_t</span>itleLabel.minimumFontSize = <span class="number">6</span>;</span><br></pre></td></tr></table></figure>
-<p>就是在空间够的情况下，使用20号字体，如果空间不够，那么就会自动将字体向下调整，但是也不会少于6号字体，<br>如果6号字体也显示不完，后续显示省略号。。。</p>
-<ul>
-<li>计算文本高度</li>
-</ul>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">lab</span> setNumberOfLines:0];</span><br><span class="line"><span class="keyword">lab</span>.lineBreakMode = UILineBreakModeWordWrap;</span><br><span class="line">CGSize maxSize = CGSizeMake(<span class="keyword">lab</span>.width, SCREEN_HEIGHT - <span class="keyword">lab</span>.top);</span><br><span class="line"><span class="keyword">lab</span>.size = [_descLab.text sizeWithFont:_descLab.font constrainedToSize:maxSize lineBreakMode:NSLineBreakByWordWrapping];</span><br></pre></td></tr></table></figure>
-<h4 id="UITextField">UITextField</h4><ul>
-<li>居中 </li>
-</ul>
-<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">field.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>获得焦点 </li>
-</ul>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[field becomeFirstResponder]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>在<code>textFieldShouldReturn</code>中becomeFirstResponder的正确姿势</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">textFieldShouldReturn</span><span class="params">(textField: UITextField)</span></span> -&gt; <span class="type">Bool</span>&#123;</span><br><span class="line">   textField.resignFirstResponder()</span><br><span class="line">   nextTextField.becomeFirstResponder()</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>隐藏输入法 </li>
-</ul>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[self.view endEditing:YES]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>键盘样式</p>
-<ul>
-<li><p>风格:</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">textView<span class="variable">.keyboardType</span> = <span class="built_in">UIKeyboardTypeNumberPad</span>;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">enum</span>  &#123;  </span><br><span class="line">    <span class="built_in">UIKeyboardTypeDefault</span>,                 <span class="comment">// 默认键盘：支持所有字符   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeASCIICapable</span>,            <span class="comment">// 支持ASCII的默认键盘   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeNumbersAndPunctuation</span>,   <span class="comment">// 标准电话键盘，支持+*#等符号   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeURL</span>,                     <span class="comment">// URL键盘，有.com按钮；只支持URL字符   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeNumberPad</span>,               <span class="comment">//数字键盘   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypePhonePad</span>,                <span class="comment">// 电话键盘   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeNamePhonePad</span>,            <span class="comment">// 电话键盘，也支持输入人名字   </span></span><br><span class="line">    <span class="built_in">UIKeyboardTypeEmailAddress</span>,            <span class="comment">// 用于输入电子邮件地址的键盘   </span></span><br><span class="line">&#125; <span class="built_in">UIKeyboardType</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>键盘外观:</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">textView<span class="variable">.keyboardAppearance</span>=<span class="built_in">UIKeyboardAppearanceDefault</span>;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">enum</span>  &#123;  </span><br><span class="line">    <span class="built_in">UIKeyboardAppearanceDefault</span>,     <span class="comment">// 默认外观：浅灰色   </span></span><br><span class="line">    <span class="built_in">UIKeyboardAppearanceAlert</span>,       <span class="comment">//深灰/石墨色   </span></span><br><span class="line">&#125; <span class="built_in">UIKeyboardAppearance</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>回车键</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">textView<span class="variable">.returnKeyType</span>=<span class="built_in">UIReturnKeyGo</span>;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">enum</span>  &#123;  </span><br><span class="line">    <span class="built_in">UIReturnKeyDefault</span>,  <span class="comment">//默认：灰色按钮，标有Return</span></span><br><span class="line">    <span class="built_in">UIReturnKeyGo</span>,  <span class="comment">//标有Go的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyGoogle</span>,  <span class="comment">//标有Google的蓝色按钮，用于搜索</span></span><br><span class="line">    <span class="built_in">UIReturnKeyJoin</span>,  <span class="comment">//标有Join的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyNext</span>,  <span class="comment">//标有Next的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyRoute</span>,  <span class="comment">//标有Route的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeySearch</span>,  <span class="comment">//标有Search的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeySend</span>,  <span class="comment">//标有Send的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyYahoo</span>,  <span class="comment">//标有Yahoo!的蓝色按钮，用于搜索</span></span><br><span class="line">    <span class="built_in">UIReturnKeyDone</span>,  <span class="comment">//标有Done的蓝色按钮</span></span><br><span class="line">    <span class="built_in">UIReturnKeyEmergencyCall</span>,  <span class="comment">//紧急呼叫按钮</span></span><br><span class="line">&#125; <span class="built_in">UIReturnKeyType</span>;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>自动大写</p>
-  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">textField<span class="variable">.autocapitalizationType</span> = <span class="built_in">UITextAutocapitalizationTypeWords</span></span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">enum</span>  &#123;  </span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeNone</span>,  <span class="comment">//不自动大写   </span></span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeWords</span>,  <span class="comment">//单词首字母大写   </span></span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeSentences</span>,  <span class="comment">//句子首字母大写   </span></span><br><span class="line">    <span class="built_in">UITextAutocapitalizationTypeAllCharacters</span>,  <span class="comment">//所有字母大写   </span></span><br><span class="line">&#125; <span class="built_in">UITextAutocapitalizationType</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>自动更正</p>
-  <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">textField<span class="variable">.autocorrectionType</span>= <span class="built_in">UITextAutocorrectionTypeYes</span>;</span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">enum</span>  &#123;  </span><br><span class="line">    <span class="built_in">UITextAutocorrectionTypeDefault</span>, <span class="comment">//默认   </span></span><br><span class="line">    <span class="built_in">UITextAutocorrectionTypeNo</span>, <span class="comment">//不自动更正   </span></span><br><span class="line">    <span class="built_in">UITextAutocorrectionTypeYes</span>, <span class="comment">//自动更正   </span></span><br><span class="line">&#125; <span class="built_in">UITextAutocorrectionType</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安全文本输入</p>
-  <figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textField.secureTextEntry=YES<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>显示消除图标 </p>
-  <figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textField.clearButtonMode = UITextFieldViewModeWhileEditing<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li><p>做字符个数限制时防止联想输入超过</p>
-  <figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//防止联想输入超过</span></span><br><span class="line"><span class="keyword">if</span> (textView.<span class="keyword">text</span>.length &gt; maxLength) &#123;</span><br><span class="line">      textView.<span class="keyword">text</span> = [textView.<span class="keyword">text</span> substringToIndex:maxLength];</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="UITextView">UITextView</h4><ul>
-<li>默认显示为最底下的内容，如果想显示最上面的内容使用</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">private <span class="keyword">var</span> firstFlag = <span class="literal">true</span></span><br><span class="line"><span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">viewDidLayoutSubviews</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.viewDidLayoutSubviews()</span><br><span class="line">    guard firstFlag <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    firstFlag = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">self</span>.textView.scrollRangeToVisible(<span class="type">NSMakeRange</span>(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="UIScrollView">UIScrollView</h4><ul>
-<li>去掉弹簧效果    </li>
-</ul>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sView.bounces ＝ <span class="literal">no</span>;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>动态改变内容区大小  contentSize </li>
-<li>隐藏滑动条</li>
-</ul>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scrollView.<span class="variable">showsVerticalScrollIndicator =</span> <span class="constant">false</span>;</span><br><span class="line">scrollView.<span class="variable">showsHorizontalScrollIndicator =</span> <span class="constant">false</span>;</span><br></pre></td></tr></table></figure>
-<h4 id="UITableView">UITableView</h4><ul>
-<li>去掉默认分割线  </li>
-</ul>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">list</span>.separatorStyle = <span class="keyword">NO</span>;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>UITableViewCell去掉点击效果  </li>
-</ul>
-<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cell.selectionStyle = UITableViewCellSelectionStyleNone<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用UITableViewCellStyleGrouped要注意，ios6与ios7下的效果是不同的</li>
-<li>显示右按钮 accessoryType</li>
-<li>去掉UITableview headerview黏性(sticky)</li>
-</ul>
-<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>scrollViewDidScroll:<span class="params">(UIScrollView *)</span>scrollView &#123;</span><br><span class="line">    CGFloat sectionHeaderHeight = <span class="number">40</span>;</span><br><span class="line">    <span class="keyword">if</span> <span class="params">(scrollView.contentOffset.y&lt;=sectionHeaderHeight&amp;&amp;scrollView.contentOffset.y&gt;=<span class="number">0</span>)</span> &#123;</span><br><span class="line">        scrollView.contentInset = UIEdgeInsetsMake<span class="params">(-scrollView.contentOffset.y, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="params">(scrollView.contentOffset.y&gt;=sectionHeaderHeight)</span> &#123;</span><br><span class="line">        scrollView.contentInset = UIEdgeInsetsMake<span class="params">(-sectionHeaderHeight, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>UITableViewCell自动滚动到顶部 </li>
-</ul>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[tableView <span class="string">scrollToRowAtIndexPath:</span>[NSIndexPath <span class="string">indexPathForRow:</span><span class="number">0</span> <span class="string">inSection:</span><span class="number">0</span>] <span class="string">atScrollPosition:</span>UITableViewScrollPositionTop <span class="string">animated:</span>YES];</span><br></pre></td></tr></table></figure>
-<ul>
-<li>取消选中状态 </li>
-</ul>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">NSIndexPath</span> *<span class="keyword">selected </span>= [_tView indexPathForSelectedRow]<span class="comment">;</span></span><br><span class="line"><span class="label">if</span>(<span class="keyword">selected) </span>&#123;</span><br><span class="line">	[_tView deselectRowAtIndexPath:<span class="keyword">selected </span>animated:NO]<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>选中一行</li>
-</ul>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self.tView <span class="string">selectRowAtIndexPath:</span>[NSIndexPath <span class="string">indexPathForRow:</span><span class="number">0</span> <span class="string">inSection:</span><span class="number">0</span>]  <span class="string">animated:</span>YES <span class="string">scrollPosition:</span>UITableViewScrollPositionTop];</span><br></pre></td></tr></table></figure>
-<ul>
-<li>TableView不显示没内容的Cell怎么办</li>
-</ul>
-<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">self</span><span class="built_in">.</span>tView<span class="built_in">.</span>tableFooterView <span class="subst">=</span> <span class="preprocessor">[</span>UIView <span class="literal">new</span><span class="preprocessor">]</span><span class="markup">;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>手动调用<code>tableView:cellForRowAtIndexPath:</code>方法不会参与复用</p>
-</li>
-<li><p>在使用sectionIndex时，如果不想要indexView占位设置 </p>
-</li>
-</ul>
-<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tableView.sectionIndexBackgroundColor = [UIColor clearColor]<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>设置背景色</li>
-</ul>
-<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">self</span>.<span class="built_in">table</span>View.backgroundColor = [UIColor blueColor];</span><br><span class="line"><span class="literal">self</span>.<span class="built_in">table</span>View.backgroundView.backgroundColor = <span class="literal">self</span>.<span class="built_in">table</span>View.backgroundColor ;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Section禁止吸附</li>
-</ul>
-<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>scrollViewDidScroll:<span class="params">(UIScrollView *)</span>scrollView &#123;</span><br><span class="line">    CGFloat sectionHeaderHeight = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">if</span> <span class="params">(scrollView.contentOffset.y &lt;= sectionHeaderHeight &amp;&amp; scrollView.contentOffset.y &gt;= <span class="number">0</span>)</span> &#123;</span><br><span class="line">        scrollView.contentInset = UIEdgeInsetsMake<span class="params">(-scrollView.contentOffset.y, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="params">(scrollView.contentOffset.y &gt;= sectionHeaderHeight)</span> &#123;</span><br><span class="line">        scrollView.contentInset = UIEdgeInsetsMake<span class="params">(-sectionHeaderHeight, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="UINavigationController">UINavigationController</h4><ul>
-<li>设置主题颜色</li>
-</ul>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">navCtr<span class="variable">.navigationBar</span><span class="variable">.barTintColor</span> = app_theme_color;<span class="comment">//背景色</span></span><br><span class="line">navCtr<span class="variable">.navigationBar</span><span class="variable">.tintColor</span> = [<span class="built_in">UIColor</span> blackColor];<span class="comment">//文字</span></span><br><span class="line"><span class="built_in">NSDictionary</span> * dict=[<span class="built_in">NSDictionary</span> dictionaryWithObject:[<span class="built_in">UIColor</span> blackColor] forKey:<span class="built_in">UITextAttributeTextColor</span>];</span><br><span class="line">navCtr<span class="variable">.navigationBar</span><span class="variable">.titleTextAttributes</span> = dict;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>改变返回标题</li>
-</ul>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在前一个页面执行</span></span><br><span class="line"><span class="built_in">UIBarButtonItem</span> *backItem = [[<span class="built_in">UIBarButtonItem</span> alloc] init];</span><br><span class="line"><span class="keyword">self</span><span class="variable">.navigationItem</span><span class="variable">.backBarButtonItem</span> = backItem;</span><br><span class="line">backItem<span class="variable">.title</span> = <span class="string">@""</span>;    </span><br><span class="line"></span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line">[[<span class="built_in">UIBarButtonItem</span> appearance] setBackButtonTitlePositionAdjustment:<span class="built_in">UIOffsetMake</span>(<span class="number">0</span>, -<span class="number">60</span>)  forBarMetrics:<span class="built_in">UIBarMetricsDefault</span>];</span><br></pre></td></tr></table></figure>
-<ul>
-<li>当translucent打开时view.frame.orgin.y在iOS7与iOS8下的64个高度兼容</li>
-</ul>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ([<span class="keyword">self</span> respondsToSelector:<span class="keyword">@selector</span>(edgesForExtendedLayout)])</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.edgesForExtendedLayout</span> = <span class="built_in">UIRectEdgeNone</span>;   <span class="comment">// iOS 7 specific</span></span><br></pre></td></tr></table></figure>
-<h2 id="资源">资源</h2><h4 id="Alcatraz_管理和发现插件">Alcatraz  管理和发现插件</h4><ul>
-<li>安装 </li>
-</ul>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL http<span class="variable">s:</span>//raw.githubusercontent.<span class="keyword">com</span>/supermarin/Alcatraz/master/Scripts/install.<span class="keyword">sh</span> | <span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>卸载 </li>
-</ul>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ~<span class="regexp">/Library/</span>Application\ Support<span class="regexp">/Developer/</span>Shared<span class="regexp">/Xcode/</span>Plug-ins<span class="regexp">/Alcatraz.xcplugin</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>卸载所有插件 </li>
-</ul>
-<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ~/<span class="keyword">Library</span>/Application\ Support/Alcatraz</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>常用插件</p>
-<ul>
-<li>Injection 重量级插件，代码修改后不用build即可实现生效</li>
-<li>OMColorSense 可视化设置Color</li>
-<li>VVDocumenter-Xcode  生成java风格的注释</li>
-<li>KSImageNamed-Xcode  可视化设置Image</li>
-<li>XAlign 代码对齐</li>
-<li>XcodeBoost 粘贴m文件的代码到h文件即可自动生成定义方法</li>
-<li>Auto-Import 自动import头文件</li>
-<li>DerivedData Exterminator 清除设备数据</li>
-<li>ESJsonFormat 根据Json自动生成Model</li>
-<li>FuzzyAutocomplete 自动补全，方法过长时能缩写</li>
-<li>HOStringSense 字符串工具</li>
-<li>NJHMultiTheme 代码主题</li>
-<li>RTImageAssets 根据3x图片自动生成2x、1x图片</li>
-<li>SCXcodeSwitchExpander 自动生成每项case 枚举值</li>
-</ul>
-</li>
-</ul>
-<h4 id="Cocospod库管理">Cocospod库管理</h4><ul>
-<li>安装 </li>
-</ul>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem <span class="keyword">install</span> cocoapods</span><br></pre></td></tr></table></figure>
-<ul>
-<li>更改源</li>
-</ul>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gem sources --remove <span class="string">https:</span><span class="comment">//rubygems.org/</span></span><br><span class="line">gem sources -a <span class="string">http:</span><span class="comment">//ruby.taobao.org/</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>基本模板</li>
-</ul>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">platform <span class="symbol">:ios</span>, <span class="string">"7.0"</span></span><br><span class="line">inhibit_all_warnings!<span class="regexp">//pod</span>的工程不显示任何警告</span><br></pre></td></tr></table></figure>
-<ul>
-<li>常用Lib</li>
-</ul>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">pod</span> <span class="string">"MBProgressHUD"</span></span><br><span class="line">pod <span class="string">"SIAlertView"</span></span><br><span class="line">pod <span class="string">"FMDB"</span></span><br><span class="line">pod <span class="string">"AFNetworking"</span></span><br><span class="line">pod <span class="string">'Alamofire'</span>, <span class="string">'~&gt; 3.0'</span></span><br></pre></td></tr></table></figure>
-<h4 id="利器">利器</h4><ul>
-<li><code>cloc</code> 代码行数统计  <code>npm install -g cloc</code></li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>记录平时开发中的技巧与代码片段，持续更新！</p>
-<h2 id="Xcode技巧">Xcode技巧</h2><ul>
-<li>当真机升级了iOS，但对应Xcode未升级时，device会出现ineligible device，这时通过xocde菜单-&gt;Product-&gt;Destination-&gt;选择对应的device 即可解决</li>
-<li><p>编译相关</p>
-<ul>
-<li><p>.a静态库编译</p>
-<p>  <code>lipo -info xxx.a</code> 查看静态库支持的平台，目前有armv7、arm64、armv7s、i386 前三者为真机平台，后者为iphone Simulator</p>
-<p>  <code>lipo -create libXXX-armv7s.a libXXX-i138.a -output libXXX.a</code> 合并生成通用平台的静态库</p>
-</li>
-<li><p>环境变量</p>
-<p>  $(SRCROOT) 工程文件（比如Nuno.xcodeproj）的路径</p>
-<p>  $(PROJECT_DIR) 项目目录    </p>
-</li>
-</ul>
-</li>
-</ul>]]>
-    
-    </summary>
-    
-      <category term="记录" scheme="http://mokai.github.io/categories/%E8%AE%B0%E5%BD%95/"/>
+      <category term="记录" scheme="http://mokai.me/categories/%E8%AE%B0%E5%BD%95/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[#技巧4# 设置statusBarStyle无效]]></title>
-    <link href="http://mokai.github.io/2015/11/ios-tip-status_bar_style_not_working/"/>
-    <id>http://mokai.github.io/2015/11/ios-tip-status_bar_style_not_working/</id>
+    <link href="http://mokai.me/2015/11/ios-tip-status_bar_style_not_working/"/>
+    <id>http://mokai.me/2015/11/ios-tip-status_bar_style_not_working/</id>
     <published>2015-11-17T16:00:00.000Z</published>
     <updated>2016-09-11T05:07:55.000Z</updated>
     <content type="html"><![CDATA[<p>新的一个APP，需要设置状态栏为白色，无论通过代码设置<code>UIApplication.sharedApplication().statusBarStyle = .LightContent</code><br>还是直接在 <code>TARGETS</code> 中设置，发现都无效。</p>
@@ -421,14 +119,14 @@
     <![CDATA[<p>新的一个APP，需要设置状态栏为白色，无论通过代码设置<code>UIApplication.sharedApplication().statusBarStyle = .LightContent</code><br>还是直接在 <code>TARGETS</code> 中设]]>
     </summary>
     
-      <category term="iOS那些技巧" scheme="http://mokai.github.io/categories/iOS%E9%82%A3%E4%BA%9B%E6%8A%80%E5%B7%A7/"/>
+      <category term="iOS那些技巧" scheme="http://mokai.me/categories/iOS%E9%82%A3%E4%BA%9B%E6%8A%80%E5%B7%A7/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[#技巧3# postNotificationName触发后的监听代码是同步还是异步执行的？]]></title>
-    <link href="http://mokai.github.io/2015/11/ios-tip-postNoficationName/"/>
-    <id>http://mokai.github.io/2015/11/ios-tip-postNoficationName/</id>
+    <link href="http://mokai.me/2015/11/ios-tip-postNoficationName/"/>
+    <id>http://mokai.me/2015/11/ios-tip-postNoficationName/</id>
     <published>2015-11-16T16:00:00.000Z</published>
     <updated>2016-09-11T05:08:56.000Z</updated>
     <content type="html"><![CDATA[<p>昨天去酷狗面试，被问到<code>postNotificationName触发后的监听代码是同步还是异步执行的？</code>，我当时知道<code>触发后的监听代码和触发的代码是在同一线程上执行的</code>，但却回答了是异步，哎，我这逻辑又下降了。。。。</p>
@@ -443,14 +141,14 @@
 <p]]>
     </summary>
     
-      <category term="iOS那些技巧" scheme="http://mokai.github.io/categories/iOS%E9%82%A3%E4%BA%9B%E6%8A%80%E5%B7%A7/"/>
+      <category term="iOS那些技巧" scheme="http://mokai.me/categories/iOS%E9%82%A3%E4%BA%9B%E6%8A%80%E5%B7%A7/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[#技巧2# 强制旋转应用当前屏幕]]></title>
-    <link href="http://mokai.github.io/2015/10/ios-tip-screen_rotate/"/>
-    <id>http://mokai.github.io/2015/10/ios-tip-screen_rotate/</id>
+    <link href="http://mokai.me/2015/10/ios-tip-screen_rotate/"/>
+    <id>http://mokai.me/2015/10/ios-tip-screen_rotate/</id>
     <published>2015-10-30T16:00:00.000Z</published>
     <updated>2016-09-11T05:08:07.000Z</updated>
     <content type="html"><![CDATA[<p>经常有这样的需求，APP只需要竖屏，但是一些特殊的场景下需要横屏。</p>
@@ -463,14 +161,14 @@
 <p>比如说调用系统的<code>MPMovieViewController</code>播放视频时，我们会在AppDelegate中或者UIViewController中更新允许横屏的配置，当播放]]>
     </summary>
     
-      <category term="iOS那些技巧" scheme="http://mokai.github.io/categories/iOS%E9%82%A3%E4%BA%9B%E6%8A%80%E5%B7%A7/"/>
+      <category term="iOS那些技巧" scheme="http://mokai.me/categories/iOS%E9%82%A3%E4%BA%9B%E6%8A%80%E5%B7%A7/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[#技巧1# iOS8以后presendViewController透明效果无效]]></title>
-    <link href="http://mokai.github.io/2015/10/ios-tip-viewcontroller_translucent/"/>
-    <id>http://mokai.github.io/2015/10/ios-tip-viewcontroller_translucent/</id>
+    <link href="http://mokai.me/2015/10/ios-tip-viewcontroller_translucent/"/>
+    <id>http://mokai.me/2015/10/ios-tip-viewcontroller_translucent/</id>
     <published>2015-10-09T16:00:00.000Z</published>
     <updated>2016-09-11T05:07:43.000Z</updated>
     <content type="html"><![CDATA[<p>iOS弹出的视图背景默认是黑色，如果想去掉，以往我们使用 <code>self.modalPresentationStyle = .CurrentContext</code> 就可以实现效果，如以下半透明的代码</p>
@@ -484,16 +182,16 @@
 <figure class="highlight st]]>
     </summary>
     
-      <category term="iOS那些技巧" scheme="http://mokai.github.io/categories/iOS%E9%82%A3%E4%BA%9B%E6%8A%80%E5%B7%A7/"/>
+      <category term="iOS那些技巧" scheme="http://mokai.me/categories/iOS%E9%82%A3%E4%BA%9B%E6%8A%80%E5%B7%A7/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[iOS国际化]]></title>
-    <link href="http://mokai.github.io/2015/10/iOS-i18n/"/>
-    <id>http://mokai.github.io/2015/10/iOS-i18n/</id>
+    <link href="http://mokai.me/2015/10/iOS-i18n/"/>
+    <id>http://mokai.me/2015/10/iOS-i18n/</id>
     <published>2015-10-03T16:00:00.000Z</published>
-    <updated>2016-09-12T06:26:00.000Z</updated>
+    <updated>2016-09-12T06:33:27.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>Demo同步更新到Swift2.3</p>
 </blockquote>
@@ -621,12 +319,12 @@
 <p> 很遗憾，到目前为止，还不支持LaunchScreen.xib的国际化，我们只能通过自定义一个LaunchViewController来完成此需求，但也有些不足，就是应用启动时会黑屏一段时间，所以建议启动页面不要弄国际化</p>
 </li>
 </ul>
-<h3 id="总结">总结</h3><p>参考:</p>
-<ul>
+<h3 id="参考">参考</h3><ul>
 <li><a href="http://www.cnblogs.com/levilinxi/p/4296712.html" target="_blank" rel="external">iOS国际化——通过脚本使storyboard翻译自增</a></li>
 <li><a href="https://medium.com/ios-apprentice/working-with-localization-905e4052b9de" target="_blank" rel="external">Working with Localization</a></li>
 <li><a href="http://stackoverflow.com/questions/1669645/how-to-force-nslocalizedstring-to-use-a-specific-language" target="_blank" rel="external">How to force NSLocalizedString to use a specific language</a></li>
 </ul>
+<h3 id="小小广告">小小广告</h3><p>本人目前是一名自由职业者，接受移动两端的项目开发，如果你有需求或者有资源请速与我联系吧，QQ865425695</p>
 ]]></content>
     <summary type="html">
     <![CDATA[<blockquote>
@@ -636,21 +334,21 @@
     
     </summary>
     
-      <category term="国际化" scheme="http://mokai.github.io/tags/%E5%9B%BD%E9%99%85%E5%8C%96/"/>
+      <category term="国际化" scheme="http://mokai.me/tags/%E5%9B%BD%E9%99%85%E5%8C%96/"/>
     
-      <category term="记录" scheme="http://mokai.github.io/categories/%E8%AE%B0%E5%BD%95/"/>
+      <category term="记录" scheme="http://mokai.me/categories/%E8%AE%B0%E5%BD%95/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[蓝牙编程]]></title>
-    <link href="http://mokai.github.io/2015/09/bluetooth-guide/"/>
-    <id>http://mokai.github.io/2015/09/bluetooth-guide/</id>
+    <link href="http://mokai.me/2015/09/bluetooth-guide/"/>
+    <id>http://mokai.me/2015/09/bluetooth-guide/</id>
     <published>2015-09-07T16:00:00.000Z</published>
-    <updated>2016-09-11T13:40:11.000Z</updated>
+    <updated>2016-09-12T06:31:21.000Z</updated>
     <content type="html"><![CDATA[<p>蓝牙技术，很早以前就被有了，如今已更新4.0版本。很多热门技术都是基于它工作的，如Android平台的NFC，iOS的iBeancon，Apple Watch的WatchConnectivity框架等，现在的智能家居基本也是基于蓝牙4.0与APP进行通信，可见蓝牙在实践工作中的重要性。在iOS中，蓝牙是基于4.0标准的，设备间低功耗通信。</p>
 <a id="more"></a>
-<h2 id="核心成员">核心成员</h2><p>在开始前我们回忆下传统的Socket编程，里面有Server服务端与Client端的区别。那么在蓝牙编程也是如此，其中<code>Peripheral</code>外设相当于Socket编程中的Server服务端，<code>Central</code>中心相当于Client客户端(ps吐槽下，Central中心，作为服务端，不更适合吗！)</p>
+<h3 id="核心成员">核心成员</h3><p>在开始前我们回忆下传统的Socket编程，里面有Server服务端与Client端的区别。那么在蓝牙编程也是如此，其中<code>Peripheral</code>外设相当于Socket编程中的Server服务端，<code>Central</code>中心相当于Client客户端(ps吐槽下，Central中心，作为服务端，不更适合吗！)</p>
 <p><img src="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/Art/CBDevices1_2x.png" width="600" height="400"></p>
 <p>你可以理解外设是一个广播数据的设备，它开始告诉外面的世界说它这儿有一些数据，并且能提供一些服务。另一边中心开始扫描周边有没有合适的设备，如果发现后，会和外设做连接请求，一旦连接确定后，两个设备就可以传输数据了。</p>
 <p>在iOS6之后，iOS 设备可以是外设，也可以是中心，就像Socket编程中一样，你可以是服务端也可以是客户端。</p>
@@ -664,7 +362,7 @@
 <li>本地外设 -&gt; 远程中心 </li>
 </ul>
 <p>不过在智能家居开发中，大部分硬件蓝牙都是担任外设的角色，也就是说我们应用只要扮演中心即可了。</p>
-<h2 id="开始">开始</h2><p>本篇只讲述第一种模式的本地中心，远程外设端可借助 <del><a href="https://itunes.apple.com/cn/app/lightblue/id639944780?mt=12" target="_blank" rel="external">蓝牙调试神器LightBlue For Mac</a></del>。需要了解第二种模式可以移步<a href="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/PerformingCommonPeripheralRoleTasks/PerformingCommonPeripheralRoleTasks.html#//apple_ref/doc/uid/TP40013257-CH4-SW1" target="_blank" rel="external">创建外设</a> </p>
+<h3 id="开始">开始</h3><p>本篇只讲述第一种模式的本地中心，远程外设端可借助 <del><a href="https://itunes.apple.com/cn/app/lightblue/id639944780?mt=12" target="_blank" rel="external">蓝牙调试神器LightBlue For Mac</a></del>。需要了解第二种模式可以移步<a href="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/PerformingCommonPeripheralRoleTasks/PerformingCommonPeripheralRoleTasks.html#//apple_ref/doc/uid/TP40013257-CH4-SW1" target="_blank" rel="external">创建外设</a> </p>
 <blockquote>
 <p>更新：LightBlue For Mac只可以做为Central，不可以做为Peripheral，如需模拟请下载<a href="https://itunes.apple.com/cn/app/lightblue-explorer-bluetooth/id557428110?mt=8" target="_blank" rel="external">iOS版本</a></p>
 </blockquote>
@@ -673,20 +371,20 @@
 <p>建立中心角色 —&gt; 扫描外设（discover）—&gt; 发现外设后连接外设(connect) —&gt; 扫描外设中的服务和特征(discover) —&gt; 与外设做数据交互(explore and interact) —&gt; 断开连接(disconnect)。</p>
 </blockquote>
 <p>下面我们一一讲到</p>
-<h2 id="建立中心角色">建立中心角色</h2><p>在本地中心角色中，使用CBCentralManager类管理，我们创建一个CBCentralManager类</p>
+<h3 id="建立中心角色">建立中心角色</h3><p>在本地中心角色中，使用CBCentralManager类管理，我们创建一个CBCentralManager类</p>
 <figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="built_in">queue</span> <span class="subst">=</span> dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">let</span> centralMgr <span class="subst">=</span> CBCentralManager(delegate: <span class="built_in">self</span>, <span class="built_in">queue</span>: <span class="built_in">queue</span>)</span><br></pre></td></tr></table></figure>
 <p>上面的delegate为CBCentralManagerDelegate，后续蓝牙相关的回调都会在此。Queue代表蓝牙在哪个队列里面操作，如果传入nil默认为主队列，值得注意的是后续的回调也是在传入的队列中调用的，所以如果传入的是非主线程的队列，在delegate中需要操作UI时需要手动切换到主线程</p>
 <p>CBCentralManager对象创建后会回调到<code>centralManagerDidUpdateState</code>方法来检测蓝牙可用状态，这时我们可以提醒用户设备是否支持蓝牙，是否打开了蓝牙</p>
-<h2 id="扫描外设">扫描外设</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let serviceUUIDS: Array&lt;CBUUID&gt; = [<span class="function"><span class="title">CBUUID</span><span class="params">(string: <span class="string">"FFDD"</span>)</span></span>]</span><br><span class="line">self<span class="class">.centralMgr</span><span class="class">.scanForPeripheralsWithServices</span>(serviceUUIDS, options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])</span><br><span class="line"></span><br><span class="line"><span class="comment">//停止扫描</span></span><br><span class="line">self<span class="class">.centralMgr</span><span class="class">.stopScan</span>()</span><br></pre></td></tr></table></figure>
+<h3 id="扫描外设">扫描外设</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let serviceUUIDS: Array&lt;CBUUID&gt; = [<span class="function"><span class="title">CBUUID</span><span class="params">(string: <span class="string">"FFDD"</span>)</span></span>]</span><br><span class="line">self<span class="class">.centralMgr</span><span class="class">.scanForPeripheralsWithServices</span>(serviceUUIDS, options: [CBCentralManagerScanOptionAllowDuplicatesKey : true])</span><br><span class="line"></span><br><span class="line"><span class="comment">//停止扫描</span></span><br><span class="line">self<span class="class">.centralMgr</span><span class="class">.stopScan</span>()</span><br></pre></td></tr></table></figure>
 <p>如果serviceUUIDS为nil则会扫描周围所有的设外设，否则只会扫描UUID匹配的外设。CBCentralManagerScanOptionAllowDuplicatesKey默认为false，表示扫描中发现过设备则跳过不回调，我们这里传入true，因为下面做外设掉线的处理时需要用到</p>
 <blockquote>
 <p>传入的serviceUUIDS数组元素为CBUUID类型，千万不要传入String，后面的操作也是如此，不然会碰到很多奇葩问题</p>
 </blockquote>
 <p>发现外设后会回调到<code>centralManager(central:didDiscoverPeripheral:advertisementData:RSSI:)</code> ，perpheral则代表着外设，我们需要保存起来，后续的对外设的操作都是基于perpheral对象的</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">centralManager</span><span class="params">(central: CBCentralManager!, didDiscoverPeripheral peripheral: CBPeripheral!, advertisementData: [NSObject : AnyObject]!, RSSI: NSNumber!)</span></span> &#123;</span><br><span class="line">   <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;discoveredPeripheralers.<span class="built_in">count</span> &#123;</span><br><span class="line">       <span class="keyword">var</span> peripheraler = discoveredPeripheralers[i]</span><br><span class="line">       <span class="keyword">if</span>(!peripheral.identifier.isEqual(peripheraler.peripheral.identifier))&#123; <span class="comment">//未发现过才保存</span></span><br><span class="line">          discoveredPeripheralers.append(peripheraler)</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="连接外设">连接外设</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">self</span><span class="class">.centralMgr</span><span class="class">.connectPeripheral</span>(<span class="tag">peripheral</span>, <span class="rule"><span class="attribute">options</span>:<span class="value"> nil)</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="连接外设">连接外设</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">self</span><span class="class">.centralMgr</span><span class="class">.connectPeripheral</span>(<span class="tag">peripheral</span>, <span class="rule"><span class="attribute">options</span>:<span class="value"> nil)</span></span></span><br></pre></td></tr></table></figure>
 <p>传入上面保存的外设对象，如果连接失败后会回调到 <code>centralManager(central:didFailToConnectPeripheral:error:)</code>，连接成功后会回调到 <code>centralManager(central:didConnectPeripheral:)</code>，这个时候我们只是连接上外设而已，还需要发现外设中的服务与特征</p>
-<h2 id="发现服务与特征">发现服务与特征</h2><p>外设连接成功后我们把peripheral保存好，并设置好peripheral的delegate(CBPeripheralDelegate)，然后调用discoverServices来发现服务，同扫描外设时一样，discoverServices也可以传入一个serviceUUIDs参数来只获取需要的服务</p>
+<h3 id="发现服务与特征">发现服务与特征</h3><p>外设连接成功后我们把peripheral保存好，并设置好peripheral的delegate(CBPeripheralDelegate)，然后调用discoverServices来发现服务，同扫描外设时一样，discoverServices也可以传入一个serviceUUIDs参数来只获取需要的服务</p>
 <blockquote>
 <p>注意，注意，注意，重要的话说三遍。以下的回调都是CBPeripheralDelegate的了，不再是CBCentralManagerDelegate的回调</p>
 </blockquote>
@@ -696,24 +394,24 @@
 <p>同样特征也可以传入characteristicUUIDs数组来过滤，发现特征后回调</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">peripheral</span><span class="params">(peripheral: CBPeripheral!, didDiscoverCharacteristicsForService service: CBService!, error: NSError!)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(error != <span class="literal">nil</span>)&#123;</span><br><span class="line">        log(error)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> service.characteristics &#123;</span><br><span class="line">        <span class="keyword">let</span> characteristic = item <span class="keyword">as</span>! <span class="type">CBCharacteristic</span></span><br><span class="line">        <span class="keyword">if</span>(characteristic.properties == .<span class="type">Notify</span>) &#123; <span class="comment">//如果特征为订阅属性则开启订阅</span></span><br><span class="line">            peripheral.setNotifyValue(<span class="literal">true</span>, forCharacteristic: characteristic)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>每进入一次回调代表发现一个服务中的特征而不是外设所有的特征，外设、服务、特征从左至右都是上下级一对多的关系。<br>每个特征都有个属性，代表着它是可写、可读等，一个特征可同时拥有读写权限，如上面的订阅其实是一种订阅者模式的读取数据</p>
-<h2 id="发送数据">发送数据</h2><p>拿到可写的特征后，通过writeValue发送数据包</p>
+<h3 id="发送数据">发送数据</h3><p>拿到可写的特征后，通过writeValue发送数据包</p>
 <figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="built_in">data</span> <span class="subst">=</span> <span class="string">"hello"</span><span class="built_in">.</span>dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: <span class="literal">true</span>)</span><br><span class="line"><span class="comment">//自动判断写特征的类型</span></span><br><span class="line"><span class="built_in">var</span> <span class="keyword">type</span>: CBCharacteristicWriteType <span class="subst">=</span> <span class="built_in">.</span>WithoutResponse</span><br><span class="line"><span class="keyword">if</span>(writeCharacteristic<span class="built_in">.</span>properties <span class="subst">==</span> CBCharacteristicProperties<span class="built_in">.</span>Write) &#123;</span><br><span class="line">    <span class="keyword">type</span> <span class="subst">=</span> <span class="built_in">.</span>WithResponse</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">self</span><span class="built_in">.</span>peripheral<span class="subst">!</span><span class="built_in">.</span>writeValue(<span class="built_in">data</span>, forCharacteristic: writeCharacteristic, <span class="keyword">type</span>: <span class="keyword">type</span>)</span><br></pre></td></tr></table></figure>
 <p>把要发送的文本转换为二进制，发送到相应的特征即可。值得注意的是第三个参数type写类型需要与特征的属性一致，其中WithoutResponse与WithResponse区别在于前者发送数据后是没有回调的，后者会回调到  <code>peripheral(peripheral:didWriteValueForCharacteristic:error:)</code> 来检测是否发送成功，如果发送数据传入的类型与特征不同时总是会失败</p>
 <blockquote>
 <p>由于蓝牙的缓冲大小只有20bytes，那么如果我们发送的数据包大小不能大于20bytes，所以得分多次发送</p>
 </blockquote>
 <figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">func writeValue(<span class="built_in">data</span>: NSData, withCharacteristic characteristic: CBCharacteristic) <span class="subst">-&gt; </span>Bool &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">self</span><span class="built_in">.</span>peripheral <span class="subst">==</span> nil) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">var</span> didSend <span class="subst">=</span> <span class="literal">false</span></span><br><span class="line">    <span class="built_in">var</span> sendDataIndex <span class="subst">=</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span>  NOTIFY_MTU <span class="subst">=</span> <span class="number">20</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">data</span><span class="built_in">.</span>length <span class="subst">-</span> sendDataIndex <span class="subst">!=</span> <span class="number">0</span>) &#123;</span><br><span class="line">   		<span class="comment">//剩下的数据大小</span></span><br><span class="line">        <span class="built_in">var</span> amountToSend <span class="subst">=</span> <span class="built_in">data</span><span class="built_in">.</span>length <span class="subst">-</span> sendDataIndex</span><br><span class="line">        <span class="comment">// 不能大于20bytes</span></span><br><span class="line">        <span class="keyword">if</span> (amountToSend <span class="subst">&gt;</span> NOTIFY_MTU) &#123;</span><br><span class="line">            amountToSend <span class="subst">=</span> NOTIFY_MTU</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> chunk <span class="subst">=</span> NSData(<span class="built_in">bytes</span>: <span class="built_in">data</span><span class="built_in">.</span><span class="built_in">bytes</span> <span class="subst">+</span> sendDataIndex, length: amountToSend)</span><br><span class="line">        <span class="built_in">var</span> <span class="keyword">type</span>: CBCharacteristicWriteType <span class="subst">=</span> <span class="built_in">.</span>WithoutResponse</span><br><span class="line">        <span class="keyword">if</span>(characteristic<span class="built_in">.</span>properties <span class="subst">==</span> CBCharacteristicProperties<span class="built_in">.</span>Write) &#123;</span><br><span class="line">            <span class="keyword">type</span> <span class="subst">=</span> <span class="built_in">.</span>WithResponse</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">self</span><span class="built_in">.</span>peripheral<span class="subst">!</span><span class="built_in">.</span>writeValue(chunk, forCharacteristic: characteristic, <span class="keyword">type</span>: <span class="keyword">type</span>)</span><br><span class="line">        sendDataIndex <span class="subst">+=</span> amountToSend</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="读取数据">读取数据</h2><p>分为二种，直接读、订阅，顾名思义，直接读就是手动调用API读取，订阅则只要开启后，外设有消息都可以收到</p>
+<h3 id="读取数据">读取数据</h3><p>分为二种，直接读、订阅，顾名思义，直接读就是手动调用API读取，订阅则只要开启后，外设有消息都可以收到</p>
 <p>直接读</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.peripheral!.<span class="function"><span class="title">readValueForCharacteristic</span><span class="params">(characteristic)</span></span></span><br></pre></td></tr></table></figure>
 <p>订阅</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">self</span><span class="class">.peripheral</span>!<span class="class">.setNotifyValue</span>(<span class="tag">true</span>, <span class="rule"><span class="attribute">forCharacteristic</span>:<span class="value"> characteristic)</span></span></span><br></pre></td></tr></table></figure>
 <p>两种回调都会回调到 <code>peripheral(peripheral:didUpdateValueForCharacteristic:error:)</code>，上面也提到因为蓝牙的缓冲大小，需要发送多次，那么在读取时也需要接收多次，才能保证数据的一体性，所以通常都会在数据包的开始用 <code>EOM</code> 来标识一段数据的开始，数据结束后再次用 <code>EOM</code> 来标识，所以我们接收数据时会这样</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> updatingEOMFlag = <span class="string">"EOM"</span></span><br><span class="line"><span class="func"><span class="keyword">func</span> <span class="title">peripheral</span><span class="params">(peripheral: CBPeripheral!, didUpdateValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(error != <span class="literal">nil</span>) &#123;</span><br><span class="line">        log(error)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(characteristic.value != <span class="literal">nil</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> data = characteristic.value!</span><br><span class="line">        <span class="keyword">var</span> string = <span class="type">NSString</span>(data: data, encoding: <span class="type">NSUTF8StringEncoding</span>)</span><br><span class="line">        log(string)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//接收多段数据</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">self</span>.updatingEOMFlag != <span class="literal">nil</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">self</span>.updatingEOMFlag == string) &#123;</span><br><span class="line">                <span class="keyword">var</span> <span class="type">EOMEndFlag</span> = <span class="literal">false</span></span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="keyword">self</span>.updatingDatas.<span class="built_in">count</span> &#123; <span class="comment">//数据结束</span></span><br><span class="line">                    <span class="keyword">var</span> updatingData = <span class="keyword">self</span>.updatingDatas[i]</span><br><span class="line">                    <span class="keyword">if</span>(updatingData.characteristic.<span class="type">UUID</span>.isEqual(characteristic.<span class="type">UUID</span>)) &#123;</span><br><span class="line">                        data = updatingData.data</span><br><span class="line">                        string = <span class="type">NSString</span>(data: data, encoding: <span class="type">NSUTF8StringEncoding</span>)</span><br><span class="line">                        <span class="keyword">self</span>.updatingDatas.removeAtIndex(i) <span class="comment">//删除缓存数据</span></span><br><span class="line">                        <span class="type">EOMEndFlag</span> = <span class="literal">true</span></span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(!<span class="type">EOMEndFlag</span>) &#123;<span class="comment">//数据开始</span></span><br><span class="line">                    <span class="keyword">let</span> updatingData = <span class="type">UpdatingDataer</span>(characteristic: characteristic, data: <span class="type">NSMutableData</span>())</span><br><span class="line">                    <span class="keyword">self</span>.updatingDatas!.append(updatingData)</span><br><span class="line">                    <span class="keyword">return</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">var</span> updatingData = (<span class="keyword">self</span>.updatingDatas?.<span class="built_in">filter</span>&#123; $<span class="number">0</span>.characteristic.<span class="type">UUID</span>.isEqual(characteristic.<span class="type">UUID</span>) &#125;) <span class="keyword">where</span> updatingData.<span class="built_in">count</span> == <span class="number">1</span> &amp;&amp; updatingData[<span class="number">0</span>].data != <span class="literal">nil</span> &#123; <span class="comment">//数据中间</span></span><br><span class="line">                    updatingData[<span class="number">0</span>].data.appendData(data)</span><br><span class="line">                    <span class="keyword">return</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//在此最终得到完整数据</span></span><br><span class="line">        <span class="keyword">let</span> stringData = <span class="type">StringData</span>(string: string <span class="keyword">as</span>? <span class="type">String</span>, data: data)</span><br><span class="line"></span><br><span class="line">        <span class="comment">//触发delegate与通知回调</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="断开连接">断开连接</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">self</span><span class="class">.centralMgr</span><span class="class">.cancelPeripheralConnection</span>(<span class="tag">self</span><span class="class">.peripheral</span>!)</span><br></pre></td></tr></table></figure>
+<h3 id="断开连接">断开连接</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">self</span><span class="class">.centralMgr</span><span class="class">.cancelPeripheralConnection</span>(<span class="tag">self</span><span class="class">.peripheral</span>!)</span><br></pre></td></tr></table></figure>
 <p>至此，整个流程就完了</p>
-<h2 id="高级需求~">高级需求~</h2><h4 id="外设掉线检测">外设掉线检测</h4><p>所谓掉线就是外设发现了后，过了一段时间失去信号了。喵了下系统框架，没有找到相关外设掉线的检测，唯一有点像的就是发现外设里面的RSSI,代表设备信号强度，值越小信息越好。</p>
-<h2 id="总结">总结</h2><ul>
+<h3 id="高级需求~">高级需求~</h3><h4 id="外设掉线检测">外设掉线检测</h4><p>所谓掉线就是外设发现了后，过了一段时间失去信号了。喵了下系统框架，没有找到相关外设掉线的检测，唯一有点像的就是发现外设里面的RSSI,代表设备信号强度，值越小信息越好。</p>
+<h3 id="总结">总结</h3><ul>
 <li>在蓝牙交互的二种角色中，通常APP端扮演<code>中央Central</code>的角色，设备扮演<code>外设Peripheral</code>的角色</li>
 <li>创建CBCentralManager对象时传入的Queue决定了后续CBCentralManagerDelegate、CBPeripheralDelegate等回调的所在线程</li>
 <li>一个外设设备可包含一个或多个服务，一个服务可包含一个或多个特征，读写操作最终是针对特征。</li>
@@ -722,24 +420,25 @@
 <blockquote>
 <p> 更新: 提供了一个读写的<a href="https://github.com/mokai/BluetoothDemos" target="_blank" rel="external">Central端Demo</a>，Peripheral端请用上述iOS版LightBlue模拟</p>
 </blockquote>
-<h2 id="参考">参考</h2><p><a href="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html" target="_blank" rel="external">Core Bluetooth Programming Guide</a></p>
+<h3 id="参考">参考</h3><p><a href="https://developer.apple.com/library/ios/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/AboutCoreBluetooth/Introduction.html" target="_blank" rel="external">Core Bluetooth Programming Guide</a></p>
 <p><a href="http://www.jianshu.com/p/760f042a1d81" target="_blank" rel="external">译-iOS蓝牙编程指南</a></p>
+<h3 id="小小广告">小小广告</h3><p>本人目前是一名自由职业者，接受移动两端的项目开发，如果你有需求或者有资源请速与我联系吧，QQ865425695</p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>蓝牙技术，很早以前就被有了，如今已更新4.0版本。很多热门技术都是基于它工作的，如Android平台的NFC，iOS的iBeancon，Apple Watch的WatchConnectivity框架等，现在的智能家居基本也是基于蓝牙4.0与APP进行通信，可见蓝牙在实践工作中的重要性。在iOS中，蓝牙是基于4.0标准的，设备间低功耗通信。</p>]]>
     
     </summary>
     
-      <category term="蓝牙" scheme="http://mokai.github.io/tags/%E8%93%9D%E7%89%99/"/>
+      <category term="蓝牙" scheme="http://mokai.me/tags/%E8%93%9D%E7%89%99/"/>
     
-      <category term="记录" scheme="http://mokai.github.io/categories/%E8%AE%B0%E5%BD%95/"/>
+      <category term="记录" scheme="http://mokai.me/categories/%E8%AE%B0%E5%BD%95/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[IB中Runtime Attributes个别属性无效]]></title>
-    <link href="http://mokai.github.io/2015/04/IB%E4%B8%ADRuntime%20Attributes%E4%B8%AA%E5%88%AB%E5%B1%9E%E6%80%A7%E6%97%A0%E6%95%88/"/>
-    <id>http://mokai.github.io/2015/04/IB中Runtime Attributes个别属性无效/</id>
+    <link href="http://mokai.me/2015/04/IB%E4%B8%ADRuntime%20Attributes%E4%B8%AA%E5%88%AB%E5%B1%9E%E6%80%A7%E6%97%A0%E6%95%88/"/>
+    <id>http://mokai.me/2015/04/IB中Runtime Attributes个别属性无效/</id>
     <published>2015-04-06T16:00:00.000Z</published>
     <updated>2016-09-11T05:10:12.000Z</updated>
     <content type="html"><![CDATA[<p>在使用Xcode IB方式编码中，经常会使用到属性列表中没有的属性，这时则需要通过<code>Runtime Attributes</code>来动态注入(实则为<code>KVO</code>实现)</p>
@@ -763,14 +462,14 @@
     
     </summary>
     
-      <category term="iBug" scheme="http://mokai.github.io/categories/iBug/"/>
+      <category term="iBug" scheme="http://mokai.me/categories/iBug/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[hello]]></title>
-    <link href="http://mokai.github.io/2015/04/hello/"/>
-    <id>http://mokai.github.io/2015/04/hello/</id>
+    <link href="http://mokai.me/2015/04/hello/"/>
+    <id>http://mokai.me/2015/04/hello/</id>
     <published>2015-03-31T16:00:00.000Z</published>
     <updated>2015-11-03T10:06:28.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/2015-04-01-hello_just_do_it.jpg" alt=""></p>
@@ -787,7 +486,7 @@
     
     </summary>
     
-      <category term="记录" scheme="http://mokai.github.io/categories/%E8%AE%B0%E5%BD%95/"/>
+      <category term="记录" scheme="http://mokai.me/categories/%E8%AE%B0%E5%BD%95/"/>
     
   </entry>
   
