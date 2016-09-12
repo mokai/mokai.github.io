@@ -17,9 +17,9 @@
 3D Touch最先应用在Apple Watch上面，但叫Force Touch，后在iPhone6s上加入了此特性，并改名3D Touch。值得注意的是目前3D Touch只支持iPhone6S以后的机型，包括现有Xcode7中6s的模拟器也不支持，不过Github上的SBShortcutMenuSimulator项目通过Hack方式已经实现了Quick A">
 <meta property="og:image" content="http://7xiew0.com1.z0.glb.clouddn.com/3dtouch_homeshorctquickactions.gif">
 <meta property="og:image" content="http://7xiew0.com1.z0.glb.clouddn.com/3dtouch_peek.gif">
-<meta property="og:image" content="http://7xiew0.com1.z0.glb.clouddn.com/3dtouch_segue_peek.png">
+<meta property="og:image" content="http://7xiew0.com1.z0.glb.clouddn.com/3dtouch_segue_peek.png.jpeg">
 <meta property="og:image" content="http://7xiew0.com1.z0.glb.clouddn.com/funny_nonono.gif">
-<meta property="og:updated_time" content="2016-09-12T06:29:58.000Z">
+<meta property="og:updated_time" content="2016-09-12T07:05:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="3D Touch大法">
 <meta name="twitter:description" content="Demo同步更新到Swift2.3
@@ -33,18 +33,6 @@
   
   <link rel="stylesheet" href="/css/style.css" type="text/css">
   
-<!-- Baidu Analytics -->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?784317cc3d2ac396e4f189a6ee51277b";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-<!-- End Baidu Analytics -->
-
 </head>
 <body>
   <div id="container">
@@ -270,7 +258,7 @@ var _hmt = _hmt || [];
 <p>如果Peek窗口需要Quick Actions菜单，在目标VC中重写<code>previewActionItems</code>方法返回一个<code>UIPreviewActionItem</code>或者一个<code>UIPreviewActionGroup</code>数组就行了。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//目标VC</span></span><br><span class="line">lazy <span class="keyword">var</span> previewActions: [<span class="type">UIPreviewActionItem</span>] = &#123;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">previewActionForTitle</span><span class="params">(title: String, style:  UIPreviewActionStyle = .Default)</span></span> -&gt; <span class="type">UIPreviewAction</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">UIPreviewAction</span>(title: title, style: style) &#123; previewAction, viewController <span class="keyword">in</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"点击了<span class="subst">\(title)</span>"</span>) <span class="comment">//这里是Actions响应</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> action1 = previewActionForTitle(<span class="string">"关注TA"</span>,style: .<span class="type">Destructive</span>) <span class="comment">//显示红色，代表重要Action</span></span><br><span class="line">    <span class="keyword">let</span> action2 = previewActionForTitle(<span class="string">"私信TA"</span>)</span><br><span class="line">    <span class="comment">//子Actioons</span></span><br><span class="line">    <span class="keyword">let</span> subAction1 = previewActionForTitle(<span class="string">"微博"</span>)</span><br><span class="line">    <span class="keyword">let</span> subAction2 = previewActionForTitle(<span class="string">"好友圈"</span>)</span><br><span class="line">    <span class="keyword">let</span> subAction3 = previewActionForTitle(<span class="string">"QQ"</span>)</span><br><span class="line">    <span class="keyword">let</span> subAction4 = previewActionForTitle(<span class="string">"微信"</span>)</span><br><span class="line">    <span class="keyword">let</span> groupedActions = <span class="type">UIPreviewActionGroup</span>(title: <span class="string">"分享…"</span>, style: .<span class="type">Default</span>, actions: [subAction1, subAction2, subAction3, subAction4] )</span><br><span class="line">    <span class="keyword">return</span> [action1, action2, groupedActions]</span><br><span class="line">&#125;()</span><br><span class="line"><span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">previewActionItems</span><span class="params">()</span></span> -&gt; [<span class="type">UIPreviewActionItem</span>] &#123;</span><br><span class="line">    <span class="keyword">return</span> previewActions</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="更快速的方法">更快速的方法</h4><p>上面是代码激活Peek的方式，还有更Peek的方式：直接在Storyboard中使用Segue，在Segue属性面板中把Peek &amp; Pop 勾选上就完事了。</p>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/3dtouch_segue_peek.png" alt=""></p>
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/3dtouch_segue_peek.png.jpeg" alt=""></p>
 <p>使用这种方式指定我们在代码中连注册都不用，所以使用SB的项目适配3D Touch那是分分钟搞定的事，尤其在Xcode7出了<code>Storyboard References</code>后，我大 <code>Swift + Storyboard</code> 组合势必统一iOS界~</p>
 <p>好了，有点小激动了，继续回到正文</p>
 <p>在正常情况下，Peek窗口默认显示目标VC的整个View，但在实际应用中，可能会有更多的需求，比如说二个Button Push的是同一个VC，但是需要分别显示不同的Peek窗口。</p>
@@ -370,6 +358,11 @@ var _hmt = _hmt || [];
 
 
 
+
+
+<!-- Umeng Analytics -->
+<script src="http://s11.cnzz.com/z_stat.php?id=1260371973&web_id=1260371973" language="JavaScript"></script>
+<!-- End Umeng Analytics -->
 
 
 

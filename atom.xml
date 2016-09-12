@@ -5,7 +5,7 @@
   <subtitle><![CDATA[目前在找iOS的工作，您有好的机会推荐给我，可加QQ865425695]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://mokai.me//"/>
-  <updated>2016-09-12T06:29:58.000Z</updated>
+  <updated>2016-09-12T07:05:34.000Z</updated>
   <id>http://mokai.me//</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://mokai.me/2016/09/3d-touch/"/>
     <id>http://mokai.me/2016/09/3d-touch/</id>
     <published>2016-09-10T16:00:00.000Z</published>
-    <updated>2016-09-12T06:29:58.000Z</updated>
+    <updated>2016-09-12T07:05:34.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>Demo同步更新到Swift2.3</p>
 </blockquote>
@@ -70,7 +70,7 @@
 <p>如果Peek窗口需要Quick Actions菜单，在目标VC中重写<code>previewActionItems</code>方法返回一个<code>UIPreviewActionItem</code>或者一个<code>UIPreviewActionGroup</code>数组就行了。</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//目标VC</span></span><br><span class="line">lazy <span class="keyword">var</span> previewActions: [<span class="type">UIPreviewActionItem</span>] = &#123;</span><br><span class="line">    <span class="func"><span class="keyword">func</span> <span class="title">previewActionForTitle</span><span class="params">(title: String, style:  UIPreviewActionStyle = .Default)</span></span> -&gt; <span class="type">UIPreviewAction</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="type">UIPreviewAction</span>(title: title, style: style) &#123; previewAction, viewController <span class="keyword">in</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">"点击了<span class="subst">\(title)</span>"</span>) <span class="comment">//这里是Actions响应</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> action1 = previewActionForTitle(<span class="string">"关注TA"</span>,style: .<span class="type">Destructive</span>) <span class="comment">//显示红色，代表重要Action</span></span><br><span class="line">    <span class="keyword">let</span> action2 = previewActionForTitle(<span class="string">"私信TA"</span>)</span><br><span class="line">    <span class="comment">//子Actioons</span></span><br><span class="line">    <span class="keyword">let</span> subAction1 = previewActionForTitle(<span class="string">"微博"</span>)</span><br><span class="line">    <span class="keyword">let</span> subAction2 = previewActionForTitle(<span class="string">"好友圈"</span>)</span><br><span class="line">    <span class="keyword">let</span> subAction3 = previewActionForTitle(<span class="string">"QQ"</span>)</span><br><span class="line">    <span class="keyword">let</span> subAction4 = previewActionForTitle(<span class="string">"微信"</span>)</span><br><span class="line">    <span class="keyword">let</span> groupedActions = <span class="type">UIPreviewActionGroup</span>(title: <span class="string">"分享…"</span>, style: .<span class="type">Default</span>, actions: [subAction1, subAction2, subAction3, subAction4] )</span><br><span class="line">    <span class="keyword">return</span> [action1, action2, groupedActions]</span><br><span class="line">&#125;()</span><br><span class="line"><span class="keyword">override</span> <span class="func"><span class="keyword">func</span> <span class="title">previewActionItems</span><span class="params">()</span></span> -&gt; [<span class="type">UIPreviewActionItem</span>] &#123;</span><br><span class="line">    <span class="keyword">return</span> previewActions</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="更快速的方法">更快速的方法</h4><p>上面是代码激活Peek的方式，还有更Peek的方式：直接在Storyboard中使用Segue，在Segue属性面板中把Peek &amp; Pop 勾选上就完事了。</p>
-<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/3dtouch_segue_peek.png" alt=""></p>
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/3dtouch_segue_peek.png.jpeg" alt=""></p>
 <p>使用这种方式指定我们在代码中连注册都不用，所以使用SB的项目适配3D Touch那是分分钟搞定的事，尤其在Xcode7出了<code>Storyboard References</code>后，我大 <code>Swift + Storyboard</code> 组合势必统一iOS界~</p>
 <p>好了，有点小激动了，继续回到正文</p>
 <p>在正常情况下，Peek窗口默认显示目标VC的整个View，但在实际应用中，可能会有更多的需求，比如说二个Button Push的是同一个VC，但是需要分别显示不同的Peek窗口。</p>
@@ -191,15 +191,13 @@
     <link href="http://mokai.me/2015/10/iOS-i18n/"/>
     <id>http://mokai.me/2015/10/iOS-i18n/</id>
     <published>2015-10-03T16:00:00.000Z</published>
-    <updated>2016-09-12T06:33:27.000Z</updated>
+    <updated>2016-09-12T08:32:49.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>Demo同步更新到Swift2.3</p>
 </blockquote>
 <p>在真正将国际化实践前，只知道通过<code>NSLocalizedString</code>方法将相应语言的字符串加载进来即可。但项目的新需求增加英文版本，并支持应用内无死角切换~，这才跳过各种坑实现了应用内切换语言，并记录至此。</p>
 <a id="more"></a>
-<h3 id="环境">环境</h3><p>系统环境: iOS7 or later</p>
-<p>开发环境: Swift2.3 &amp; Xcode7.3.1</p>
-<p>DEMO: <a href="https://github.com/mokai/LocalDemo" target="_blank" rel="external">LocalDemo</a></p>
+<h3 id="环境">环境</h3><p>系统环境: iOS7 or later<br>开发环境: Swift2.3 &amp; Xcode7.3.1<br>DEMO: <a href="https://github.com/mokai/LocalDemo" target="_blank" rel="external">LocalDemo</a></p>
 <p><img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_0.gif" alt=""></p>
 <p>这个Demo的功能主要是切换语言后相应的界面文字&amp;图片以及搜索引擎都会随语言变化。我们会围绕这个DEMO进行讲解，读者可以先下载这个Demo运行看下效果再往下</p>
 <p><br></p>
@@ -345,7 +343,7 @@
     <link href="http://mokai.me/2015/09/bluetooth-guide/"/>
     <id>http://mokai.me/2015/09/bluetooth-guide/</id>
     <published>2015-09-07T16:00:00.000Z</published>
-    <updated>2016-09-12T06:31:21.000Z</updated>
+    <updated>2016-09-12T07:22:40.000Z</updated>
     <content type="html"><![CDATA[<p>蓝牙技术，很早以前就被有了，如今已更新4.0版本。很多热门技术都是基于它工作的，如Android平台的NFC，iOS的iBeancon，Apple Watch的WatchConnectivity框架等，现在的智能家居基本也是基于蓝牙4.0与APP进行通信，可见蓝牙在实践工作中的重要性。在iOS中，蓝牙是基于4.0标准的，设备间低功耗通信。</p>
 <a id="more"></a>
 <h3 id="核心成员">核心成员</h3><p>在开始前我们回忆下传统的Socket编程，里面有Server服务端与Client端的区别。那么在蓝牙编程也是如此，其中<code>Peripheral</code>外设相当于Socket编程中的Server服务端，<code>Central</code>中心相当于Client客户端(ps吐槽下，Central中心，作为服务端，不更适合吗！)</p>
