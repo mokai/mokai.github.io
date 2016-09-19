@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://mokai.me/me/iOS.html</loc>
+    <lastmod>2016-09-19T05:29:51.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://mokai.me/me/android.html</loc>
+    <lastmod>2016-09-19T03:02:26.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://mokai.me/2015/10/iOS-i18n/</loc>
     <lastmod>2016-09-12T08:32:49.000Z</lastmod>
   </url>
@@ -14,11 +24,6 @@
   <url>
     <loc>http://mokai.me/2016/09/3d-touch/</loc>
     <lastmod>2016-09-12T07:05:34.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/me/resume.html</loc>
-    <lastmod>2016-09-12T04:40:22.000Z</lastmod>
   </url>
   
   <url>
@@ -67,12 +72,12 @@
   </url>
   
   <url>
-    <loc>http://mokai.me/404.html</loc>
+    <loc>http://mokai.me/projects/index.html</loc>
     <lastmod>2015-11-03T10:06:28.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://mokai.me/projects/index.html</loc>
+    <loc>http://mokai.me/404.html</loc>
     <lastmod>2015-11-03T10:06:28.000Z</lastmod>
   </url>
   
