@@ -2,13 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://mokai.me/me/mobile-full-stack.html</loc>
+    <lastmod>2016-10-09T07:32:01.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://mokai.me/me/android.html</loc>
-    <lastmod>2016-10-06T07:13:29.000Z</lastmod>
+    <lastmod>2016-10-08T10:55:27.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://mokai.me/me/resume.html</loc>
-    <lastmod>2016-10-01T02:31:04.000Z</lastmod>
+    <lastmod>2016-10-08T10:54:09.000Z</lastmod>
   </url>
   
   <url>
@@ -77,12 +82,12 @@
   </url>
   
   <url>
-    <loc>http://mokai.me/404.html</loc>
+    <loc>http://mokai.me/2015/04/hello/</loc>
     <lastmod>2015-11-03T10:06:28.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://mokai.me/2015/04/hello/</loc>
+    <loc>http://mokai.me/404.html</loc>
     <lastmod>2015-11-03T10:06:28.000Z</lastmod>
   </url>
   
