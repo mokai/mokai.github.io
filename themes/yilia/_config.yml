@@ -35,7 +35,7 @@ open_in_new: false
 
 # Miscellaneous
 google_analytics: ''
-baidu_analytics: '784317cc3d2ac396e4f189a6ee51277b'
+umeng_analytics: '1260371973'
 favicon: /favicon.png
 
 #你的头像url

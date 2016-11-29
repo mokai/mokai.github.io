@@ -25,19 +25,19 @@ categories: iBug
 ###解决方案：利用扩展自定义一个`中间属性器`来转换一下类型就OK了
 
 1、自定义代码
+
 ```
-	import Foundation
-	extension CALayer{
-	    //解决IB中runtime attribute中layer.borderColor不能转换UIColor为CGColor
-	    var borderColorFromUIColor:UIColor{
-	        set(color){
-	            self.borderColor = color.CGColor;
-	        }
-	        get{
-	            return UIColor(CGColor: self.borderColor)
-	        }
-	    }
-	}
+extension CALayer{
+    //解决IB中runtime attribute中layer.borderColor不能转换UIColor为CGColor
+    var borderColorFromUIColor: UIColor {
+        set(color){
+            self.borderColor = color.CGColor;
+        }
+        get{
+            return UIColor(CGColor: self.borderColor)
+        }
+    }
+}
 ```
 > 注意,swift与OC的属性设置器不同，OC中是setXXX，而swift是有内部setter
 

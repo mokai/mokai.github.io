@@ -6,16 +6,15 @@ comments: true
 categories: 记录
 tags: "国际化"
 ---
-
-在真正将国际化实践前，只知道通过`NSLocalizedString`方法将相应语言的字符串加载进来即可。但最近公司项目的新需求增加英文版本，并支持应用内无死角切换~，这才跳过各种坑实现了应用内切换语言，并记录至此。
+> Demo同步更新到Swift2.3
+ 
+在真正将国际化实践前，只知道通过`NSLocalizedString`方法将相应语言的字符串加载进来即可。但项目的新需求增加英文版本，并支持应用内无死角切换~，这才跳过各种坑实现了应用内切换语言，并记录至此。
 
 <!--more-->
 
 ###环境
-系统环境: iOS7 - iOS9
-
-开发环境: Swift2 & Xcode7
-
+系统环境: iOS7 or later
+开发环境: Swift2.3 & Xcode7.3.1
 DEMO: [LocalDemo](https://github.com/mokai/LocalDemo)
 
 ![](http://7xiew0.com1.z0.glb.clouddn.com/locale_0.gif)
@@ -23,10 +22,6 @@ DEMO: [LocalDemo](https://github.com/mokai/LocalDemo)
 这个Demo的功能主要是切换语言后相应的界面文字&图片以及搜索引擎都会随语言变化。我们会围绕这个DEMO进行讲解，读者可以先下载这个Demo运行看下效果再往下
 
 <br/>
-
-
-
-
 
 ###iOS国际化原理分析	
 
@@ -86,6 +81,7 @@ English
 在上图可以看到其实就是为每一套语言新建一份strings，其内容采用`"key" = "value";`的格式，注意有`;`号
 
 我们在代码中这样写就行了
+
 ```
 NSLocalizedString("首页",comment: "")
 NSLocalizedString("好友",comment: "")
@@ -93,8 +89,6 @@ NSLocalizedString("我",comment: "")
 ```
 
 >另外中文strings【Localizable.strings(Simplified)】可以不要的(可以理解为中文为APP的默认语言)，因为key就是value，当找不到相应的语言strings或value时会直接返回key。nice！这样一来我们做文本的国际化就只要维护一个英文副本strings就O了
-
-
 
 
 
@@ -116,7 +110,7 @@ NSLocalizedString("我",comment: "")
 
 	>不推荐，一是因为做法太low了，工作量明显加大。二是不能在Storyboard或XIB中使用
 
-* ###### 方案二：原生支持
+* 方案二：原生支持
 ![](http://7xiew0.com1.z0.glb.clouddn.com/locale_4_1.png)
 >同上，Base副本去掉。另外需要注意的是，使用这种方式，在XIB或Storyboard中引用图片时如果只使用名称是实时显示不了的，一定要加上后缀名。如avater.png
 
@@ -162,7 +156,8 @@ ibtool Main.storyboard --generate-strings-file ./NewTemp.string
 ![](http://7xiew0.com1.z0.glb.clouddn.com/locale_5_2.png)
 
 <br/>
-####应用内切换语言
+
+###应用内切换语言
 应用启动时，首先会读取NSUserDefaults中的key为`AppleLanguages`的内容，该key返回一个String数组，存储着APP支持的语言列表，数组的第一项为APP当前默认的语言。
 
 在安装后第一次打开APP时，会自动初始化该key为当前系统的语言编码，如简体中文就是zh-Hans。
@@ -183,7 +178,7 @@ def.synchronize()
 
 那么问题来了，如何做到改变`AppleLanguages`的值就加载相应语言的lproj资源？
 
-其实，APP中的Storyboard的加载，图片与字符串的加载都是在`NSBundle.mainBundle()`上操作的，那么我们只要在语言切换后把`NSBundle.mainBundle()`替换成当前语言的bundle就行了，这样系统通过`NSBundle.mainBundle()`去加载资源时实则是加载的当前语言bundle中的资源
+其实，APP中的资源加载（Storyboard、图片、字符串）都是在`NSBundle.mainBundle()`上操作的，那么我们只要在语言切换后把`NSBundle.mainBundle()`替换成当前语言的bundle就行了，这样系统通过`NSBundle.mainBundle()`去加载资源时实则是加载的当前语言bundle中的资源
 
 > lproj目录可以用一个NSBundle表示
 
@@ -193,7 +188,7 @@ import Foundation
 /**
 *  当调用onLanguage后替换掉mainBundle为当前语言的bundle
 */
-private  let _bundle:UnsafePointer<Void> =  unsafeBitCast(0,UnsafePointer<Void>.self)
+private let _bundle:UnsafePointer<Void> =  unsafeBitCast(0,UnsafePointer<Void>.self)
 class BundleEx: NSBundle {
     override func localizedStringForKey(key: String, value: String?, table tableName: String?) -> String {
         if let bundle = languageBundle() {
@@ -204,7 +199,7 @@ class BundleEx: NSBundle {
     }
 }
 
-extension NSBundle{
+extension NSBundle {
     private struct Static {
         static var onceToken : dispatch_once_t = 0
     }
@@ -222,7 +217,6 @@ extension NSBundle{
 }
 ```
 
-以上`Languager`是 [iOS-i18n](https://github.com/mokai/iOS-i18n) 开源库的一部分，我把项目中国际化部分封装了下，有兴趣的童鞋可以去看看 
 
 ###其他
 * 设置运行语言环境
@@ -244,12 +238,12 @@ extension NSBundle{
 
   ```
   extension UIImageView{
-      var locale:String{
+      var local: String {
           get{
               return ""
           }
-          set(newlocale){
-              self.image = localizedImage(newlocale)
+          set(newlocal) {
+              self.image = localizedImage(newlocal)
           }
       }
   }
@@ -262,12 +256,12 @@ extension NSBundle{
   解决办法和UIImageView类似，扩展一个方法，然后把self.text做为key去strings文件中拿相应语言的value
 
   ```
-  extension UITextView{
-      var locale:Bool{
+  extension UITextView {
+      var local: Bool {
           get{
               return true
           }
-          set(newlocale){
+          set(newlocale) {
               self.text = localized(self.text)
           }
       }
@@ -282,8 +276,13 @@ extension NSBundle{
    很遗憾，到目前为止，还不支持LaunchScreen.xib的国际化，我们只能通过自定义一个LaunchViewController来完成此需求，但也有些不足，就是应用启动时会黑屏一段时间，所以建议启动页面不要弄国际化
 
 
-参考:
+###参考
 
 * [iOS国际化——通过脚本使storyboard翻译自增](http://www.cnblogs.com/levilinxi/p/4296712.html)
 * [Working with Localization](https://medium.com/ios-apprentice/working-with-localization-905e4052b9de)
 * [How to force NSLocalizedString to use a specific language](http://stackoverflow.com/questions/1669645/how-to-force-nslocalizedstring-to-use-a-specific-language)
+
+
+###小小广告
+本人目前是一名自由职业者，接受移动两端的项目开发，如果你有需求或者有资源请速与我联系吧，QQ865425695
+
