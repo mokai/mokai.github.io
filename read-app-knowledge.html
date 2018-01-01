@@ -1,0 +1,608 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  阅读类APP涉及的技术 - GKK
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="GKK" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:mokai.me ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">HOME</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">以往</a></li>
+        
+        <li id=""><a target="_self" href="me.html">我</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; GKK</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">HOME</a></li>
+        
+        <li><a target="_self" href="archives.html">以往</a></li>
+        
+        <li><a target="_self" href="me.html">我</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>阅读类APP涉及的技术</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2017/12/19</span>
+
+          
+           
+         
+          <span class="comments">
+            
+              <a href="https://mokai.me/read-app-knowledge.html#disqus_thread">comments</a>
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <p><a href="https://itunes.apple.com/cn/app/%E9%A3%9E%E5%9C%B0-%E6%96%87%E8%89%BA%E9%9D%92%E5%B9%B4%E7%9A%84%E9%AB%98%E5%93%81%E8%B4%A8%E6%96%87%E5%AD%A6%E8%89%BA%E6%9C%AF%E9%98%85%E8%AF%BB%E7%A4%BE%E5%8C%BA/id1179249797?mt=8">飞地</a>是一款诗歌<code>轻阅读</code>产品，在技术选型时内容的载体采用了HTML，这样内容可以适用于全平台显示。</p>
+
+<blockquote>
+<p>轻阅读是从技术角度分析的，因为没有像微信读书这类应用有长篇文字的书籍，需要实现各种PDF和ePub格式解析以及排版，我们只需要用UIWebView即可解决。</p>
+</blockquote>
+
+<span id="more"></span><!-- more -->
+
+<p>首先<code>内容</code>是<code>body</code>中的一段HTML，通过接口拿到文章的<code>内容</code>后替换到完整的HTML模板中</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot; &gt;
+        {css}
+    &lt;/head&gt;    
+    &lt;body id=&#39;articleCon&#39;&gt;
+        {body}
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p><code>{css}</code>是内容的样式，如标题、段落、脚注等，<code>articleCon</code>是为了样式选择器。</p>
+
+<blockquote>
+<p>css来源有二种情况，启动时加载服务器最新的，如果失败则使用本地的备份css</p>
+</blockquote>
+
+<p>最后使用<code>loadHTMLString</code>来加载替换后的HTML。</p>
+
+<h4 id="toc_0">页面结构</h4>
+
+<p>飞地有几个内容模块都是基于HTML来做为内容的载体，但页面一般不只是纯内容，会有一些其它元数据，这些使用原生视图显示。</p>
+
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/15140228637358.jpg" alt=""/></p>
+
+<p>如上图文章详情页，整个页面的容器是<code>UITableView</code>，封面图、作者、日期、内容WebView都是tableHeaderView，评论列表为Cell。</p>
+
+<p>tableHeaderView的高度我们需要自己计算，而WebView的高度可以在webViewDidFinishLoad后获取，并重新设置tableHeaderView的高度。</p>
+
+<pre><code class="language-swift">//原生代码
+
+var contentHeight = webView.scrollView.contentSize.height
+let fitHeight = webView.sizeThatFits(CGSize(width: 1.0, height: 1.0)).height
+if fitHeight &gt; contentHeight {
+    contentHeight = fitHeight
+}
+if let documentHeight = jsBridge.getContentHeight(),
+    documentHeight &gt; contentHeight {
+    contentHeight = documentHeight
+}
+</code></pre>
+
+<p><code>jsBridge.getContentHeight()</code>是执行JS层的代码<code>document.body.scrollHeight * window.scale</code>获取高度</p>
+
+<blockquote>
+<p>Tip：直接设置<code>tableView.tableHeaderView.frame.height</code>时可能不会生效，需要重新<code>tableView.tableHeaderView = tableHeaderView</code>渲染一次。</p>
+</blockquote>
+
+<h4 id="toc_1">rem</h4>
+
+<p>文章有各种各样的样式，移动设备碎片化，使用px明显已经不满足需求了，所以我们使用rem。</p>
+
+<pre><code class="language-html">//JS代码
+
+window.scale = 1.0; //标志当前viewport使用的scale
+!function(e){function t(a){if(i[a])return i[a].exports;var n=i[a]={exports:{},id:a,loaded:!1};return e[a].call(n.exports,n,n.exports,t),n.loaded=!0,n.exports}var i={};return t.m=e,t.c=i,t.p=&quot;&quot;,t(0)}([function(e,t){&quot;use strict&quot;;Object.defineProperty(t,&quot;__esModule&quot;,{value:!0});var i=window;t[&quot;default&quot;]=i.flex=function(normal,e,t){var a=e||100,n=t||1,r=i.document,o=navigator.userAgent,d=o.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i),l=o.match(/U3\/((\d+|\.){5,})/i),c=l&amp;&amp;parseInt(l[1].split(&quot;.&quot;).join(&quot;&quot;),10)&gt;=80,p=navigator.appVersion.match(/(iphone|ipad|ipod)/gi),s=i.devicePixelRatio||1;p||d&amp;&amp;d[1]&gt;534||c||(s=1);var u=normal?1:1/s,m=r.querySelector(&#39;meta[name=&quot;viewport&quot;]&#39;);m||(m=r.createElement(&quot;meta&quot;),m.setAttribute(&quot;name&quot;,&quot;viewport&quot;),r.head.appendChild(m)),m.setAttribute(&quot;content&quot;,&quot;width=device-width,user-scalable=no,initial-scale=&quot;+u+&quot;,maximum-scale=&quot;+u+&quot;,minimum-scale=&quot;+u),i.scale=u,r.documentElement.style.fontSize=normal?&quot;50px&quot;: a/2*s*n+&quot;px&quot;},e.exports=t[&quot;default&quot;]}]); flex(false,100, 1);
+</code></pre>
+
+<pre><code class="language-css">html {
+    font-size: 62.5%;
+}
+</code></pre>
+
+<p>上述代码分别加在文章内容HTML模板中与文章css中，而飞地的设计图输出是<code>375pt * 667pt</code>，所以我们只需要把设计上的<code>pt/50</code>转换成rem就行了(<code>50是设备缩放基准值</code>)，如设计图上的正文字体是<code>17pt</code>，那么对应css的rem应该是 <code>17pt /50 = 0.34rem</code></p>
+
+<pre><code>#articleCon n p {
+    font-size: 0.34rem;
+}
+</code></pre>
+
+<h4 id="toc_2">缓存</h4>
+
+<p>由于有离线阅读需求，app启动时会提前缓存文章，其实也就是存储文章的封面图、内容HTML等，但html中也有图片，所以我们需要用<code>正则</code>拿到所有<code>img.src</code>，然后缓存在本地，并将文章标识为已缓存。</p>
+
+<pre><code>&lt;img\\s[\\s\\S]*?src\\s*?=\\s*?[&#39;\&quot;](.*?)[&#39;\&quot;][\\s\\S]*?&gt;*
+</code></pre>
+
+<p>前期我们采用的方式是将所有<code>img.src</code>保持相对路径，<code>loadHTMLString</code>时如果文章标识已缓存则baseURL使用本地Path，否则使用线上URL。</p>
+
+<p>优化后统一换成<code>URLProtocol</code>处理，提前缓存文章时用<code>第三方图片加载库</code>下载好图片，等阅读文章时利用<code>URLProtocol</code>机制拦截，如果是WebView的图片，判断该图片是否缓存在<code>第三方图片加载库</code>中，否则手动加载图片Data并且保存在<code>第三方图片加载库</code>，下次再拦截到此图片的请求直接从<code>第三方图片加载库</code>缓存中取。</p>
+
+<blockquote>
+<p><code>URLProtocol</code>是全局拦截，判断请求是否为WebView的图片可在<code>shouldStartLoadWith</code>时附加自定义Header，在<code>URLProtocol</code>识别Header就行</p>
+</blockquote>
+
+<h4 id="toc_3">原生与JS交互</h4>
+
+<p>有二种方式，原生提供的JavaScriptCore、JS层通过iFrame加载URI（URI包括scheme与参数）原生在<code>shouldStartLoadWith</code>中拦截，飞地使用了第一种。</p>
+
+<pre><code class="language-swift">//原生代码
+
+/// 原生JavaScriptCore暴露给JS层的对象
+@objc protocol ContentWebViewJavaScriptBridgeProtocol: JSExport {
+    
+    /// 图片点击回调
+    func onImageClick(_ currentImageIndex: Int, _ images: [String])
+    
+}
+
+/// 原生与JS桥接
+class ContentWebViewJavaScriptBridge: NSObject, ContentWebViewJavaScriptBridgeProtocol {
+    //原生暴露给JS层的对象名
+    static let name = &quot;EnclaveNative&quot;
+    fileprivate var jsContext: JSContext?
+    fileprivate weak var webView: UIWebView?
+    
+    var imageClickCallback: ((_ currentImageIndex: Int, _ images: [String])-&gt;())?
+    
+    convenience init(webView: UIWebView) {
+        self.init()
+        guard let jsContext = webView.value(forKeyPath: &quot;documentView.webView.mainFrame.javaScriptContext&quot;) as? JSContext else { return }
+        self.jsContext = jsContext
+        self.webView = webView
+        jsContext.setObject(self, forKeyedSubscript: ContentWebViewJavaScriptBridge.name as NSCopying &amp; NSObjectProtocol)
+        
+        jsContext.exceptionHandler = { (ctx, value) in
+            L.debug(value?.description ?? &quot;exception&quot;)
+        }
+    }
+    
+    func onImageClick(_ currentImageIndex: Int, _ images: [String]) {
+        //回调在UI线程
+        DispatchQueue.main.async {
+            self.imageClickCallback?(currentImageIndex, images)
+        }
+    }
+}
+
+//MARK: - Public
+extension ContentWebViewJavaScriptBridge {
+    
+    /// 获取html中所有图片地址
+    func getImages() -&gt; [String]? {
+        guard let jsContext = jsContext else { return nil }
+        
+        guard let jsValue = jsContext.evaluateScript(&quot;getImageSrcs()&quot;) else { return nil }
+        return jsValue.toArray() as? [String]
+    }
+    
+    /// 获取内容高度
+    func getContentHeight() -&gt; CGFloat? {
+        if let heightString = webView?.stringByEvaluatingJavaScript(from: &quot;Enclave.getContentHeight()&quot;),
+            let height = Float(heightString) {
+            return CGFloat(height)
+        }
+        return nil
+    }
+    
+    /// 切换主题
+    func switchTheme() {
+        if ELThemeManager.shared.style == .night {
+            switchToNightMode()
+        } else {
+            switchToLightMode()
+        }
+    }
+    
+    /// 切换至夜间模式
+    fileprivate func switchToNightMode() {
+        webView?.stringByEvaluatingJavaScript(from: &quot;Enclave.switchToNightMode()&quot;)
+    }
+    
+    /// 切换至日间模式
+    fileprivate func switchToLightMode() {
+        webView?.stringByEvaluatingJavaScript(from: &quot;Enclave.switchToLightMode()&quot;)
+    }
+}
+
+</code></pre>
+
+<ul>
+<li>JS -&gt; 原生</li>
+</ul>
+
+<pre><code class="language-js">EnclaveNative.onImageClick(currentImageIndex, srcs)
+</code></pre>
+
+<ul>
+<li>原生 -&gt; JS</li>
+</ul>
+
+<pre><code class="language-swift">webView.stringByEvaluatingJavaScript(from: &quot;xxx()&quot;)
+</code></pre>
+
+<h4 id="toc_4">图片查看</h4>
+
+<p>点击内容HTML中的图片，需要在原生端显示查看。<br/>
+首先在DOM加载完毕后为所有的有效img注册click事件，在事件触发时拿到所有img.src与当前img的index传到原生端并显示。</p>
+
+<pre><code class="language-js">//JS代码
+
+function getImageSrcs() {
+    var srcs = []
+    var imgs = document.getElementsByTagName(&#39;img&#39;)
+    for (var i = 0; i &lt; imgs.length; i++) {
+        if(imgs[i].src.indexOf(&#39;data:&#39;) == 0 || imgs[i].parentNode.nodeName.toLocaleLowerCase() == &#39;a&#39;) {
+            continue
+        }
+        srcs.push(imgs[i].src)
+    }
+    return srcs
+}
+
+function onImageClick(currentImageIndex) {
+    var srcs = getImageSrcs()
+    //原生回调
+    EnclaveNative.onImageClick(currentImageIndex, srcs)
+}
+
+function didload() {
+    var imgs = document.getElementsByTagName(&#39;img&#39;)
+    //有效图片index，因为可能会存在可跳转的图片
+    var index = 0
+    for (var i = 0; i &lt; imgs.length; i++) {
+        //加载失败时默认图，且不可点击
+        if(imgs[i].naturalWidth == &quot;undefined&quot; || imgs[i].naturalWidth == 0) {
+            imgs[i].src = &#39;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAYEBAQFBAYFBQYJBgUGCQsIBgYICwwKCgsKCgwQDAwMDAwMEAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwBBwcHDQwNGBAQGBQODg4UFA4ODg4UEQwMDAwMEREMDAwMDAwRDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDP/AABEIADIAZAMBEQACEQEDEQH/xABLAAEBAAAAAAAAAAAAAAAAAAAACBABAAAAAAAAAAAAAAAAAAAAAAEBAAAAAAAAAAAAAAAAAAAAABEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AoQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH//Z&#39;
+        }
+        //并图片本身包含链接时也不可点击
+        if(imgs[i].parentNode.nodeName.toLocaleLowerCase() == &#39;a&#39;) {
+            continue
+        }
+        imgs[i].imageIndex = index++ //给img元素设置一个index
+        imgs[i].onclick = function(e) {
+            onImageClick(e.target.imageIndex) //拿当前事件的元素index然后回调
+        }
+    }
+}
+
+window.addEventListener(&#39;load&#39;, function() {
+    didload()
+}, false)
+</code></pre>
+
+<h4 id="toc_5">夜间模式</h4>
+
+<p><a name="light-mode"></a><br/>
+关于原生iOS端实现夜间模式可查看<a href="">这里</a>，这里主要讲述web页面实现。<br/>
+由于css样式优先级的机制，最新的样式可覆盖旧的样式，所以我们只需要为每种样式添加一种夜间模式样式就行。</p>
+
+<pre><code class="language-css">/*夜间模式样式*/
+.night-mode {
+    background-color: #333333;
+}
+.night-mode #articleCon p,
+.night-mode #articleCon ol li,
+.night-mode #articleCon ul li {
+    color: #CDCDCD;
+}
+</code></pre>
+
+<p>在原生端切换样式时，通过JS函数把夜间模式的css附加上去就行了，切换回默认主题删除样式即可。</p>
+
+<pre><code class="language-js">//JS代码
+
+//切换至夜间模式
+Enclave.switchToNightMode = function() {
+    document.querySelector(&#39;html&#39;).classList.add(&#39;night-mode&#39;)
+}
+
+//切换至白天模式
+Enclave.switchToLightMode = function() {
+    document.querySelector(&#39;html&#39;).classList.remove(&#39;night-mode&#39;)
+}
+</code></pre>
+
+<h4 id="toc_6">参考</h4>
+
+<p><a href="https://github.com/amfe/article/issues/17">使用Flexible实现手淘H5页面的终端适配</a></p>
+
+<p>有何错误还望指教，谢谢~</p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="theme.html" 
+          title="Previous Post: iOS实现夜间模式">&laquo; iOS实现夜间模式</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15136777080241.html" 
+          title="Next Post: MacBook Air内置显示器旋转Bug">MacBook Air内置显示器旋转Bug &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+            <div id="disqus_thread"></div>
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="http://7xiew0.com1.z0.glb.clouddn.com/avatar.jpeg" /></div>
+            
+                <h1>GKK</h1>
+                <div class="site-des">沉淀</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+<a target="_blank" class="github" target="_blank" href="https://github.com/mokai" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:865425695@qq.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="theme.html">iOS实现夜间模式</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="read-app-knowledge.html">阅读类APP涉及的技术</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15136777080241.html">MacBook Air内置显示器旋转Bug</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="3d-touch.html">3D Touch大法</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15136777080181.html">#技巧4# 设置statusBarStyle无效</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+<script type="text/javascript">
+    var disqus_shortname = 'mokai'; 
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+<script type="text/javascript">
+var disqus_shortname = 'mokai'; 
+
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    
+
+
+
+  </body>
+</html>

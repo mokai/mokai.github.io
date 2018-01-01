@@ -1,94 +1,76 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <url>
-    <loc>http://mokai.me/me/mobile-full-stack.html</loc>
-    <lastmod>2016-10-09T07:32:01.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/me/android.html</loc>
-    <lastmod>2016-10-08T10:55:27.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/me/resume.html</loc>
-    <lastmod>2016-10-08T10:54:09.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/2015/10/iOS-i18n/</loc>
-    <lastmod>2016-09-12T08:32:49.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/2015/09/bluetooth-guide/</loc>
-    <lastmod>2016-09-12T07:22:40.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/2016/09/3d-touch/</loc>
-    <lastmod>2016-09-12T07:05:34.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/2015/04/IB%E4%B8%ADRuntime%20Attributes%E4%B8%AA%E5%88%AB%E5%B1%9E%E6%80%A7%E6%97%A0%E6%95%88/</loc>
-    <lastmod>2016-09-11T05:10:12.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/2015/11/ios-tip-postNoficationName/</loc>
-    <lastmod>2016-09-11T05:08:56.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/2015/10/ios-tip-screen_rotate/</loc>
-    <lastmod>2016-09-11T05:08:07.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/2015/11/ios-tip-status_bar_style_not_working/</loc>
-    <lastmod>2016-09-11T05:07:55.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/2015/10/ios-tip-viewcontroller_translucent/</loc>
-    <lastmod>2016-09-11T05:07:43.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/me/resume___.html</loc>
-    <lastmod>2016-09-05T15:30:57.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/me/resume__.html</loc>
-    <lastmod>2016-07-14T09:23:30.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/me/index.html</loc>
-    <lastmod>2016-07-08T07:31:58.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/me/resume_copy.html</loc>
-    <lastmod>2016-06-03T09:07:43.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/projects/index.html</loc>
-    <lastmod>2015-11-03T10:06:28.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/2015/04/hello/</loc>
-    <lastmod>2015-11-03T10:06:28.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://mokai.me/404.html</loc>
-    <lastmod>2015-11-03T10:06:28.000Z</lastmod>
-  </url>
-  
+<url>
+  <loc>https://mokai.me/</loc>
+  <lastmod>2018-01-01T17:27:59+08:00</lastmod>
+</url>
+
+<url>
+  <loc>https://mokai.me/theme.html</loc>
+  <lastmod>2018-01-01T10:00:00+08:00</lastmod>
+</url>
+
+<url>
+  <loc>https://mokai.me/read-app-knowledge.html</loc>
+  <lastmod>2017-12-19T21:00:20+08:00</lastmod>
+</url>
+
+<url>
+  <loc>https://mokai.me/15136777080241.html</loc>
+  <lastmod>2016-11-12T14:59:48+08:00</lastmod>
+</url>
+
+<url>
+  <loc>https://mokai.me/3d-touch.html</loc>
+  <lastmod>2016-09-11T08:01:48+08:00</lastmod>
+</url>
+
+<url>
+  <loc>https://mokai.me/15136777080181.html</loc>
+  <lastmod>2015-11-18T10:00:00+08:00</lastmod>
+</url>
+
+<url>
+  <loc>https://mokai.me/15136777080497.html</loc>
+  <lastmod>2015-11-17T22:00:23+08:00</lastmod>
+</url>
+
+<url>
+  <loc>https://mokai.me/15136777080114.html</loc>
+  <lastmod>2015-10-31T13:00:00+08:00</lastmod>
+</url>
+
+<url>
+  <loc>https://mokai.me/15136777080398.html</loc>
+  <lastmod>2015-10-10T06:00:00+08:00</lastmod>
+</url>
+
+<url>
+  <loc>https://mokai.me/iOS-i18n.html</loc>
+  <lastmod>2015-10-04T18:01:48+08:00</lastmod>
+</url>
+
+<url>
+  <loc>https://mokai.me/bluetooth-guide.html</loc>
+  <lastmod>2015-09-08T01:00:00+08:00</lastmod>
+</url>
+
+<url>
+  <loc>https://mokai.me/15136777080294.html</loc>
+  <lastmod>2015-04-07T13:00:00+08:00</lastmod>
+</url>
+
+<url>
+  <loc>https://mokai.me/hello.html</loc>
+  <lastmod>2015-04-01T18:01:48+08:00</lastmod>
+</url>
+
+
+<url>
+  <loc>https://mokai.me/me.html</loc>
+  <lastmod>2018-01-01T16:59:33+08:00</lastmod>
+</url>
+
+
+
 </urlset>
