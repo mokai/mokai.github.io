@@ -1,0 +1,540 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  3D Touch大法 - GKK
+  
+  </title>
+  <meta name="keywords" content="3D Touch" />
+  
+  <link href="atom.xml" rel="alternate" title="GKK" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:mokai.me ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">HOME</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">以往</a></li>
+        
+        <li id=""><a target="_self" href="me.html">我</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; GKK</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">HOME</a></li>
+        
+        <li><a target="_self" href="archives.html">以往</a></li>
+        
+        <li><a target="_self" href="me.html">我</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>3D Touch大法</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2016/9/11</span>
+
+          
+           
+         
+          <span class="comments">
+            
+              <a href="https://mokai.me/3d-touch.html#disqus_thread">comments</a>
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <blockquote>
+<p>Demo同步更新到Swift2.3</p>
+</blockquote>
+
+<p>3D Touch最先应用在Apple Watch上面，但叫<code>Force Touch</code>，后在iPhone6s上加入了此特性，并改名3D Touch。值得注意的是目前3D Touch只支持iPhone6S以后的机型，包括现有Xcode7中6s的模拟器也不支持，不过Github上的<a href="https://github.com/DeskConnect/SBShortcutMenuSimulator">SBShortcutMenuSimulator</a>项目通过Hack方式已经实现了<code>Quick Actions</code>快捷访问，但不能使用<code>Peek&amp;Pop</code>快速预览。</p>
+
+<span id="more"></span><!-- more -->
+
+<p>如果你还不知道3D Touch是什么，可以看看官方宣传视频<br/>
+<video src="http://images.apple.com/media/us/iphone-6s/2015/dhs3b549_75f9_422a_9470_4a09e709b350/films/feature/iphone6s-feature-cc-us-20150909_r848-9dwc.mov" controls ><br/>
+</video></p>
+
+<h3 id="toc_0">环境</h3>
+
+<p>系统环境: iOS9 or later</p>
+
+<p>开发环境: Swift2.3 &amp; Xcode7.3.1 </p>
+
+<p>Demo: <a href="https://github.com/mokai/3DTouchDemo">3DTouchDemo</a></p>
+
+<p>效果：<br/>
+<video src="http://7xiew0.com1.z0.glb.clouddn.com/3dtouch.mov" controls width=320 ><br/>
+</video></p>
+
+<h3 id="toc_1">开始</h3>
+
+<p>3D Touch可以分为三种：</p>
+
+<ul>
+<li>Quick Actions【可以理解PC桌面的快捷方式】</li>
+<li>Peek&amp;Pop【应用内快速预览内容】</li>
+<li>UITouch【自定义3D Touch事件】</li>
+</ul>
+
+<h3 id="toc_2">Quick Actions 快捷方式</h3>
+
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/3dtouch_homeshorctquickactions.gif" alt=""/></p>
+
+<p>配置Actions可以通过工程<code>Info.plist</code>文件静态配置，也可以在运行时动态添加，两者可以一起使用。</p>
+
+<p>静态配置在<code>Info.plist</code>中<code>UIApplicationShortcutItems</code>节点数组下添加相应Actions Item信息</p>
+
+<pre><code>&lt;key&gt;UIApplicationShortcutItems&lt;/key&gt;
+&lt;array&gt;
+    &lt;dict&gt;
+        &lt;key&gt;UIApplicationShortcutItemIconType&lt;/key&gt;
+        &lt;string&gt;UIApplicationShortcutIconTypeSearch&lt;/string&gt;
+        &lt;key&gt;UIApplicationShortcutItemTitle&lt;/key&gt;
+        &lt;string&gt;搜索&lt;/string&gt;
+        &lt;key&gt;UIApplicationShortcutItemType&lt;/key&gt;
+        &lt;string&gt;me.mokai.TouchDemo.action.search&lt;/string&gt;
+    &lt;/dict&gt;
+    ...
+&lt;/array&gt;
+</code></pre>
+
+<p>动态配置通过UIApplication的<code>shortcutItems</code>添加，shortcutItems是一个<code>UIApplicationShortcutItem</code>数组</p>
+
+<pre><code>let type = &quot;me.mokai.TouchDemo.action.identify&quot;
+let title = &quot;听歌识别&quot;
+let shortcutItem = UIApplicationShortcutItem(type: type, localizedTitle: title,
+ localizedSubtitle: nil, icon: UIApplicationShortcutIcon(templateImageName: &quot;quick_filter&quot;), userInfo: nil)
+application.shortcutItems = [shortcutItem]
+</code></pre>
+
+<p><b>Note</b></p>
+
+<ul>
+<li>Actions的图标可以使用系统预定的也可以自定义图片</li>
+<li>对于每个Actions来说<code>type</code>是必须的，它代表着我们从桌面点击Actions进入到应用调用<code>application(application, performActionForShortcutItem:, completionHandler:)</code>时的唯一标识，另外userInfo可以附加每个actions的数据，如最近听歌的歌曲id</li>
+<li>当APP启动时，shortcutItems的值是上次动态添加的，如果是第一次启动则为空数组。</li>
+<li>Actions最多显示4个，优先显示静态Actions，然后剩余个数显示shortcutItems的前几个。</li>
+</ul>
+
+<h3 id="toc_3">Peek&amp;POP 快速预览</h3>
+
+<p>好了，下面介绍本文重头戏，先上效果</p>
+
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/3dtouch_peek.gif" alt=""/></p>
+
+<p>Peek窗口的内容其实是目标VC【ps即将要显示的ViewController】的一个实时快照，但它不可以点击。Peek触发阶段有三种：</p>
+
+<ul>
+<li>长按【显示一个焦点视图，触发Peek的源视图高亮，其它视图都处于模糊状态】</li>
+<li>轻压【显示Peek窗口，此时如果Peek窗口支持Quick Actions，往上滑会显示Quick Actions菜单，此时的Peek窗口是不可以点击的】</li>
+<li>重压 【进入到真正的ViewController】</li>
+</ul>
+
+<p>Peek由一个<code>可响应事件的View</code>触发，默认是关闭的，我们需要通过控制器的<code>registerForPreviewingWithDelegate: sourceView:</code>方法注册，第一个参数为<code>UIViewControllerPreviewingDelegate</code>的代理，Peek触发轻压时会调用其<code>previewingContext:viewControllerForLocation</code>方法，重压时会调用<code>previewingContext:commitViewController:</code>方法。第二个参数为触发Peek事件的源视图</p>
+
+<pre><code>//注册
+registerForPreviewingWithDelegate(self, sourceView: userVCBtn)
+</code></pre>
+
+<pre><code>//Delegate
+//轻压，进入第二阶段，显示Peek窗口
+func previewingContext(previewingContext:  UIViewControllerPreviewing, viewControllerForLocation location:  CGPoint) -&gt; UIViewController? {
+    let userVc = self.storyboard?.instantiateViewControllerWithIdentifier(&quot;UserViewController&quot;) as! UserViewController
+    return userVc;
+}
+//重压，进入第三阶段，显示真正的ViewController
+func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+    showViewController(viewControllerToCommit, sender: self)
+}
+</code></pre>
+
+<p>如果Peek窗口需要Quick Actions菜单，在目标VC中重写<code>previewActionItems</code>方法返回一个<code>UIPreviewActionItem</code>或者一个<code>UIPreviewActionGroup</code>数组就行了。</p>
+
+<pre><code>//目标VC
+lazy var previewActions: [UIPreviewActionItem] = {
+    func previewActionForTitle(title: String, style:  UIPreviewActionStyle = .Default) -&gt; UIPreviewAction {
+        return UIPreviewAction(title: title, style: style) { previewAction, viewController in
+            print(&quot;点击了\(title)&quot;) //这里是Actions响应
+        }
+    }
+    let action1 = previewActionForTitle(&quot;关注TA&quot;,style: .Destructive) //显示红色，代表重要Action
+    let action2 = previewActionForTitle(&quot;私信TA&quot;)
+    //子Actioons
+    let subAction1 = previewActionForTitle(&quot;微博&quot;)
+    let subAction2 = previewActionForTitle(&quot;好友圈&quot;)
+    let subAction3 = previewActionForTitle(&quot;QQ&quot;)
+    let subAction4 = previewActionForTitle(&quot;微信&quot;)
+    let groupedActions = UIPreviewActionGroup(title: &quot;分享…&quot;, style: .Default, actions: [subAction1, subAction2, subAction3, subAction4] )
+    return [action1, action2, groupedActions]
+}()
+override func previewActionItems() -&gt; [UIPreviewActionItem] {
+    return previewActions
+}
+</code></pre>
+
+<h4 id="toc_4">更快速的方法</h4>
+
+<p>上面是代码激活Peek的方式，还有更Peek的方式：直接在Storyboard中使用Segue，在Segue属性面板中把Peek &amp; Pop 勾选上就完事了。</p>
+
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/3dtouch_segue_peek.png.jpeg" alt=""/></p>
+
+<p>使用这种方式指定我们在代码中连注册都不用，所以使用SB的项目适配3D Touch那是分分钟搞定的事，尤其在Xcode7出了<code>Storyboard References</code>后，我大 <code>Swift + Storyboard</code> 组合势必统一iOS界~</p>
+
+<p>好了，有点小激动了，继续回到正文</p>
+
+<p>在正常情况下，Peek窗口默认显示目标VC的整个View，但在实际应用中，可能会有更多的需求，比如说二个Button Push的是同一个VC，但是需要分别显示不同的Peek窗口。</p>
+
+<p>其实也很简单，我们只需要自定义一个Peek的生命周期扩展就行了，<code>previewingContext:viewControllerForLocation:</code>方法中代表Peek的开始，<code>previewingContext:commitViewController</code>代表Peek的结束，然后在目标VC中重写二个方法就行了</p>
+
+<pre><code>//UIViewController+PeekCycle.swift
+/**
+ Peek生命周期
+**/
+extension UIViewController {
+    //开始peek，VC为Peek显示做初始化
+    func beginPeek(){}
+    //结束peek,VC为真正显示做初始化
+    func endPeek(){}
+}
+</code></pre>
+
+<pre><code>//Delegate
+func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -&gt; UIViewController? {
+    let detailVc = self.storyboard?.instantiateViewControllerWithIdentifier(&quot;DetailViewController&quot;) as! DetailViewController
+    //指定Peek窗口类型
+    detailVc.peekType = .Image
+    //设置Peek的高度
+    detailVc.preferredContentSize = CGSize(width: 0.0, height: 320);
+    detailVc.view //先访问一下view，初始化
+    detailVc.beginPeek() //peek开始
+    return detailVc;
+}
+func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+    viewControllerToCommit.endPeek()  //peek结束
+    showViewController(viewControllerToCommit, sender: self)
+}
+</code></pre>
+
+<pre><code>//目标VC
+override func beginPeek() { 
+    if(peekType == .Comments){ //如果是评论则只显示评论视图
+        imageView.hidden = true
+    }else{ //否则显示图片
+        commentsView.hidden = true
+    }
+}
+override func endPeek() {
+    if(peekType == .Comments){
+        imageView.hidden = false
+    }else{
+        commentsView.hidden = false
+    }
+}
+</code></pre>
+
+<p><b>Note</b></p>
+
+<ul>
+<li>如果要改变Peek窗口的size可以设置目标VC的<code>preferredContentSize</code></li>
+<li>对于直接使用<code>registerForPreviewingWithDelegate</code>注册VC的self.view，虽然可以自动注册subviews，但是如果说你的VC中不止一种视图要触发Peek，那么它会分分钟教你做人的道理。</li>
+</ul>
+
+<p><img src="http://7xiew0.com1.z0.glb.clouddn.com/funny_nonono.gif" alt=""/></p>
+
+<h3 id="toc_5">UITouch</h3>
+
+<p>高级玩法，绘图、游戏，把3D Touch发挥到极致。不过我也唔知玩也暂时没这方面需求，有需求看<a href="https://developer.apple.com/library/prerelease/ios/samplecode/TouchCanvas/">官方绘图demo</a></p>
+
+<h3 id="toc_6">参考</h3>
+
+<p><a href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/Adopting3DTouchOniPhone/">Adopting 3D Touch on iPhone</a></p>
+
+<p><a href="https://developer.apple.com/library/ios/samplecode/ApplicationShortcuts/Introduction/Intro.html#//apple_ref/doc/uid/TP40016545">ApplicationShortcuts Demo</a></p>
+
+<p><a href="https://developer.apple.com/library/ios/samplecode/ViewControllerPreviews/Introduction/Intro.html#//apple_ref/doc/uid/TP40016546">ViewControllerPreviews Demo</a></p>
+
+<h3 id="toc_7">小小广告</h3>
+
+<p>本人目前是一名自由职业者，接受移动两端的项目开发，如果你有需求或者有资源请速与我联系吧，QQ865425695</p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15136777080241.html" 
+          title="Previous Post: MacBook Air内置显示器旋转Bug">&laquo; MacBook Air内置显示器旋转Bug</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15136777080181.html" 
+          title="Next Post: #技巧4# 设置statusBarStyle无效">#技巧4# 设置statusBarStyle无效 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+            <div id="disqus_thread"></div>
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="http://7xiew0.com1.z0.glb.clouddn.com/avatar.jpeg" /></div>
+            
+                <h1>GKK</h1>
+                <div class="site-des">沉淀</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+<a target="_blank" class="github" target="_blank" href="https://github.com/mokai" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:865425695@qq.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="theme.html">iOS实现夜间模式</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="read-app-knowledge.html">阅读类APP涉及的技术</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15136777080241.html">MacBook Air内置显示器旋转Bug</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="3d-touch.html">3D Touch大法</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15136777080181.html">#技巧4# 设置statusBarStyle无效</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+<script type="text/javascript">
+    var disqus_shortname = 'mokai'; 
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+<script type="text/javascript">
+var disqus_shortname = 'mokai'; 
+
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    
+
+
+
+  </body>
+</html>

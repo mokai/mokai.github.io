@@ -1,0 +1,699 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  GKK
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="GKK" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:mokai.me ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">HOME</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">以往</a></li>
+        
+        <li id=""><a target="_self" href="me.html">我</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; GKK</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">HOME</a></li>
+        
+        <li><a target="_self" href="archives.html">以往</a></li>
+        
+        <li><a target="_self" href="me.html">我</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+	$(function(){
+		$('#menu_item_index').addClass('is_active');
+	});
+</script>
+<div class="row">
+	<div class="large-8 medium-8 columns">
+		<div class="markdown-body home-categories">
+		
+			<div class="article">
+                <a class="clearlink" href="theme.html">
+                
+                  <h1>iOS实现夜间模式</h1>
+                  <div class="a-content">
+                      
+		                  <div class="a-content-img">
+                      		<img src="media/15064611549268/theme_demo.gif" />
+                      	  </div>
+		              
+                      <div class="a-content-text">
+                        
+                        	<p>本文实现思路主要参考了<a href="https://www.zhihu.com/question/25072411">这里</a>，大概就是为日间模式与夜间模式各提供一份资源文件，资源文件中包含颜色值与图标名，切换主题加载相应主题的资源并刷新页面的控件即可，这和实现国际化有点类似。</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="theme.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2018/1/1</span>
+                    
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="https://mokai.me/theme.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="read-app-knowledge.html">
+                
+                  <h1>阅读类APP涉及的技术</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p><a href="https://itunes.apple.com/cn/app/%E9%A3%9E%E5%9C%B0-%E6%96%87%E8%89%BA%E9%9D%92%E5%B9%B4%E7%9A%84%E9%AB%98%E5%93%81%E8%B4%A8%E6%96%87%E5%AD%A6%E8%89%BA%E6%9C%AF%E9%98%85%E8%AF%BB%E7%A4%BE%E5%8C%BA/id1179249797?mt=8">飞地</a>是一款诗歌<code>轻阅读</code>产品，在技术选型时内容的载体采用了HTML，这样内容可以适用于全平台显示。</p>
+
+<blockquote>
+<p>轻阅读是从技术角度分析的，因为没有像微信读书这类应用有长篇文字的书籍，需要实现各种PDF和ePub格式解析以及排版，我们只需要用UIWebView即可解决。</p>
+</blockquote>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="read-app-knowledge.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2017/12/19</span>
+                    
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="https://mokai.me/read-app-knowledge.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15136777080241.html">
+                
+                  <h1>MacBook Air内置显示器旋转Bug</h1>
+                  <div class="a-content">
+                      
+		                  <div class="a-content-img">
+                      		<img src="media/15136777080241/macbook_rotate_bug.jpg" />
+                      	  </div>
+		              
+                      <div class="a-content-text">
+                        
+                        	<p>昨天双11买了台DELL的显示器，晚上到了之后兴奋地想体验下竖屏撸码，于是在Air的桌面操作了 <code>设置 -&gt; 显示器 -&gt; 缩放 -&gt; 旋转90度</code>（注意，我操作的是Air的桌面显示器设置，应该操作外接显示器中显示的窗口），之后外接显示屏没有旋转，Air的桌面旋转了，于是就悲剧了，退出设置后重新点显示器，显示 <code>未能载入偏好设置面板 显示器</code>错误，此时Air屏幕也是旋转的，如下。。。。</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="15136777080241.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2016/11/12</span>
+                    
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="https://mokai.me/15136777080241.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="3d-touch.html">
+                
+                  <h1>3D Touch大法</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<blockquote>
+<p>Demo同步更新到Swift2.3</p>
+</blockquote>
+
+<p>3D Touch最先应用在Apple Watch上面，但叫<code>Force Touch</code>，后在iPhone6s上加入了此特性，并改名3D Touch。值得注意的是目前3D Touch只支持iPhone6S以后的机型，包括现有Xcode7中6s的模拟器也不支持，不过Github上的<a href="https://github.com/DeskConnect/SBShortcutMenuSimulator">SBShortcutMenuSimulator</a>项目通过Hack方式已经实现了<code>Quick Actions</code>快捷访问，但不能使用<code>Peek&amp;Pop</code>快速预览。</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="3d-touch.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2016/9/11</span>
+                    
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="https://mokai.me/3d-touch.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15136777080181.html">
+                
+                  <h1>#技巧4# 设置statusBarStyle无效</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>新的一个APP，需要设置状态栏为白色，无论通过代码设置<code>UIApplication.sharedApplication().statusBarStyle = .LightContent</code> <br/>
+还是直接在 <code>TARGETS</code> 中设置，发现都无效。</p>
+
+<p><img src="http://i.stack.imgur.com/NoSiZ.png" alt=""/></p>
+
+<p>我们只需要把<code>Info.plist</code>中的<code>View controller-based status bar appearance</code>改为NO就行了，默认为YES</p>
+
+<h4 id="toc_0">参考:</h4>
+
+<p><a href="http://stackoverflow.com/questions/26372684/ios8-set-the-status-bar-to-light-content">(iOS8) set the status bar to light content</a></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2015/11/18</span>
+                    
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="https://mokai.me/15136777080181.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15136777080497.html">
+                
+                  <h1>#技巧3# postNotificationName触发后的监听代码是同步还是异步执行的？</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>昨天去酷狗面试，被问到<code>postNotificationName触发后的监听代码是同步还是异步执行的？</code>，我当时知道<code>触发后的监听代码和触发的代码是在同一线程上执行的</code>，但却回答了是异步，哎，我这逻辑又下降了。。。。</p>
+
+<p>举个栗子，比如说HTTP异步请求返回代码中我们触发一个通知，这个时候在监听的代码中直接去设置视图就会报错，因为当前线程不是主线程，正确的姿态应该是</p>
+
+<pre><code>dispatch_async(dispatch_get_main_queue(), { () -&gt; Void in
+    NSNotificationCenter.defaultCenter().postNotificationName(kNotificationName, object: nil)
+})             
+</code></pre>
+
+<p>当然你也可以选择另一种方式，<code>NSNotificationQueue</code>通知队列，我们可以通过它做很多基于Runloop的需求，最重要的是它是异步执行的。</p>
+
+<pre><code>let queue = NSNotificationQueue.defaultQueue()
+queue.enqueueNotification(NSNotification(name: kNotificationName, object: nil), postingStyle: NSPostingStyle.PostNow)
+</code></pre>
+
+<h4 id="toc_0">参考:</h4>
+
+<p><a href="http://www.cnblogs.com/xiaouisme/archive/2012/04/06/2434753.html">cocoa的NSNotification通知</a></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2015/11/17</span>
+                    
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="https://mokai.me/15136777080497.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15136777080114.html">
+                
+                  <h1>#技巧2# 强制旋转应用当前屏幕</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>经常有这样的需求，APP只需要竖屏，但是一些特殊的场景下需要横屏。</p>
+
+<p>比如说调用系统的<code>MPMovieViewController</code>播放视频时，我们会在AppDelegate中或者UIViewController中更新允许横屏的配置，当播放器旋转到横屏（此时设备应该也是处于横屏），APP现有<code>ViewController</code>也会跟着旋转，那么问题来了，当再次回到APP时，此时现有<code>ViewController</code>是处于横屏的，我们再去代理中更新为竖屏会发现代理根本不会被调用，这时我们就需要用到下面这段代码，去手动触发屏幕旋转事件 </p>
+
+<pre><code>let vc = UIViewController();
+self.presentViewController(vc, animated: false, completion: nil)
+vc.dismissViewControllerAnimated(false, completion: nil)
+</code></pre>
+
+<h4 id="toc_0">参考:</h4>
+
+<p><a href="http://foggry.com/blog/2014/08/08/ping-mu-xuan-zhuan-xue-xi-bi-ji/">iOS屏幕旋转学习笔记</a></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2015/10/31</span>
+                    
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="https://mokai.me/15136777080114.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15136777080398.html">
+                
+                  <h1>#技巧1# iOS8以后presendViewController透明效果无效</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>iOS弹出的视图背景默认是黑色，如果想去掉，以往我们使用 <code>self.modalPresentationStyle = .CurrentContext</code> 就可以实现效果，如以下半透明的代码</p>
+
+<pre><code>let vc = UIViewController()
+vc.view.backgroundColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 0.5)
+self.modalPresentationStyle = .CurrentContext
+self.presentViewController(vc, animated: true, completion:  nil)
+</code></pre>
+
+<p>但是你会发现这段代码在iOS8、iOS9上面运行依旧一片黑，因此iOS8以后得这么干</p>
+
+<pre><code>let vc = UIViewController()
+vc.view.backgroundColor = UIColor(red: 0.000 , green: 0.000 , blue: 0.000, alpha: 0.5)
+if let version = Float(UIDevice.currentDevice().systemVersion) where version &gt;= 8 {
+    vc.modalPresentationStyle = .OverCurrentContext //注意此处是弹出VC对象，不是self
+} else {
+    self.modalPresentationStyle = .CurrentContext
+}
+self.presentViewController(vc, animated: true, completion: nil)
+</code></pre>
+
+<p>iOS8后增加了<code>OverCurrentContext</code>取代<code>CurrentContext</code>，并且设置的对象是弹出的VC</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2015/10/10</span>
+                    
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="https://mokai.me/15136777080398.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="iOS-i18n.html">
+                
+                  <h1>iOS国际化</h1>
+                  <div class="a-content">
+                      
+		                  <div class="a-content-img">
+                      		<img src="http://7xiew0.com1.z0.glb.clouddn.com/locale_0.gif" />
+                      	  </div>
+		              
+                      <div class="a-content-text">
+                        
+                        	<blockquote>
+<p>Demo同步更新到Swift2.3</p>
+</blockquote>
+
+<p>在真正将国际化实践前，只知道通过<code>NSLocalizedString</code>方法将相应语言的字符串加载进来即可。但项目的新需求增加英文版本，并支持应用内无死角切换~，这才跳过各种坑实现了应用内切换语言，并记录至此。</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="iOS-i18n.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2015/10/4</span>
+                    
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="https://mokai.me/iOS-i18n.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="bluetooth-guide.html">
+                
+                  <h1>蓝牙编程</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>蓝牙技术，很早以前就被有了，如今已更新4.0版本。很多热门技术都是基于它工作的，如Android平台的NFC，iOS的iBeancon，Apple Watch的WatchConnectivity框架等，现在的智能家居基本也是基于蓝牙4.0与APP进行通信，可见蓝牙在实践工作中的重要性。在iOS中，蓝牙是基于4.0标准的，设备间低功耗通信。</p>
+
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                   <a href="bluetooth-guide.html">Read more</a>&nbsp;&nbsp; 
+                    <span class="date">2015/9/8</span>
+                    
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+                        <a href="https://mokai.me/bluetooth-guide.html#disqus_thread">comments</a>
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+              
+
+
+			<div class="row">
+			  <div class="large-6 columns">
+			  <p class="text-left" style="padding-top:25px;">
+			   
+			  </p>
+			  </div>
+			  <div class="large-6 columns">
+			<p class="text-right" style="padding-top:25px;">
+			 <a href="all_1.html">&raquo; Next Page</a> 
+			</p>
+			  </div>
+			</div>
+		</div>
+	</div><!-- large 8 -->
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <div class="site-a-logo"><img src="http://7xiew0.com1.z0.glb.clouddn.com/avatar.jpeg" /></div>
+            
+                <h1>GKK</h1>
+                <div class="site-des">沉淀</div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+<a target="_blank" class="github" target="_blank" href="https://github.com/mokai" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:865425695@qq.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="theme.html">iOS实现夜间模式</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="read-app-knowledge.html">阅读类APP涉及的技术</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15136777080241.html">MacBook Air内置显示器旋转Bug</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="3d-touch.html">3D Touch大法</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15136777080181.html">#技巧4# 设置statusBarStyle无效</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+
+<script type="text/javascript">
+    var disqus_shortname = 'mokai'; 
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+<script type="text/javascript">
+var disqus_shortname = 'mokai'; 
+
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    
+
+
+
+  </body>
+</html>
