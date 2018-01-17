@@ -4,13 +4,178 @@
   <title><![CDATA[GKK]]></title>
   <link href="https://mokai.me/atom.xml" rel="self"/>
   <link href="https://mokai.me/"/>
-  <updated>2018-01-05T20:07:18+08:00</updated>
+  <updated>2018-01-18T00:19:36+08:00</updated>
   <id>https://mokai.me/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[记一次Theos开发Tweak]]></title>
+    <link href="https://mokai.me/15162018706319.html"/>
+    <updated>2018-01-17T23:11:10+08:00</updated>
+    <id>https://mokai.me/15162018706319.html</id>
+    <content type="html"><![CDATA[
+<p>最近在看《iOS逆向工程》，本篇是对Theos安装以及部署deb安装包到手机上的记录以及安装过程中遇到的坑。</p>
+
+<span id="more"></span><!-- more -->
+
+<h5 id="toc_0">安装Theos</h5>
+
+<p>书中有些步骤已经失效，所以我们按照官方安装<a href="https://github.com/theos/theos/wiki/Installation">Wiki</a>来</p>
+
+<ul>
+<li>安装ldid</li>
+</ul>
+
+<pre><code>brew install ldid dpkg-deb
+sudo cpan IO::Compress::Lzma
+</code></pre>
+
+<ul>
+<li>安装Theos</li>
+</ul>
+
+<p>把THEOS路径写进<code>~/.bash_profile</code>末尾</p>
+
+<pre><code class="language-shell">THEOS=/opt/theos
+PATH=${PATH}:${THEOS}/bin
+</code></pre>
+
+<blockquote>
+<p>官方默认是放在<code>~/theos</code>下，但安装过程发现，如果发现在这个目录下会报错</p>
+</blockquote>
+
+<pre><code>&lt;built-in&gt;:1:10: error: non-portable path to file
+      &#39;&quot;/UUsersGgkkttheosPPrefix.pch&quot;&#39;; specified path differs in case from file
+      name on disk [-Werror,-Wnonportable-include-path]
+#include &quot;/Users/GKK/theos/Prefix.pch&quot;
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         &quot;/UUsersGgkkttheosPPrefix.pch&quot;
+1 error generated.
+make[3]: *** [/Users/GKK/Desktop/test/.theos/obj/debug/armv7/Tweak.xm.7a3a1d98.o] Error 1
+make[2]: *** [/Users/GKK/Desktop/test/.theos/obj/debug/armv7/Test.dylib] Error 2
+make[1]: *** [internal-library-all_] Error 2
+make: *** [Test.all.tweak.variables] Error 2
+</code></pre>
+
+<p>下载Theos到<code>$THEOS</code>位置，依次执行以下命令</p>
+
+<pre><code class="language-shell">git clone --recursive https://github.com/theos/theos.git $THEOS
+sudo chown -R $(id -u):$(id -g) $THEOS
+curl https://ghostbin.com/ghost.sh -o $THEOS/bin/ghost
+chmod +x $THEOS/bin/ghost
+</code></pre>
+
+<h4 id="toc_1">生成tweak模板</h4>
+
+<p>通过nic.pl命令生成tweak项目</p>
+
+<pre><code class="language-shell">GKK:test $ nic.pl
+NIC 2.0 - New Instance Creator
+------------------------------
+  [1.] iphone/activator_event
+  [2.] iphone/application_modern
+  [3.] iphone/cydget
+  [4.] iphone/flipswitch_switch
+  [5.] iphone/framework
+  [6.] iphone/ios7_notification_center_widget
+  [7.] iphone/library
+  [8.] iphone/notification_center_widget
+  [9.] iphone/preference_bundle_modern
+  [10.] iphone/tool
+  [11.] iphone/tweak
+  [12.] iphone/xpc_service
+Choose a Template (required):
+</code></pre>
+
+<p>输入11生成tweak模板</p>
+
+<pre><code class="language-shell">NIC 2.0 - New Instance Creator
+------------------------------
+  [1.] iphone/activator_event
+  [2.] iphone/application_modern
+  [3.] iphone/cydget
+  [4.] iphone/flipswitch_switch
+  [5.] iphone/framework
+  [6.] iphone/ios7_notification_center_widget
+  [7.] iphone/library
+  [8.] iphone/notification_center_widget
+  [9.] iphone/preference_bundle_modern
+  [10.] iphone/tool
+  [11.] iphone/tweak
+  [12.] iphone/xpc_service
+Choose a Template (required): 11
+Project Name (required):
+</code></pre>
+
+<p>项目名字，我们这里输入Hello，接下来全部按回车即可。</p>
+
+<pre><code class="language-shell">NIC 2.0 - New Instance Creator
+------------------------------
+  [1.] iphone/activator_event
+  [2.] iphone/application_modern
+  [3.] iphone/cydget
+  [4.] iphone/flipswitch_switch
+  [5.] iphone/framework
+  [6.] iphone/ios7_notification_center_widget
+  [7.] iphone/library
+  [8.] iphone/notification_center_widget
+  [9.] iphone/preference_bundle_modern
+  [10.] iphone/tool
+  [11.] iphone/tweak
+  [12.] iphone/xpc_service
+Choose a Template (required): 11
+Project Name (required): HelloTweak
+Package Name [com.yourcompany.hellotweak]:
+Author/Maintainer Name [GKK]:
+[iphone/tweak] MobileSubstrate Bundle filter [com.apple.springboard]:
+[iphone/tweak] List of applications to terminate upon installation (space-separated, &#39;-&#39; for none) [SpringBoard]:
+Instantiating iphone/tweak in hellotweak/...
+Adding &#39;HelloTweak&#39; as an aggregate subproject in Theos makefile &#39;Makefile&#39;.
+Done.
+</code></pre>
+
+<h5 id="toc_2">编写Tweak</h5>
+
+<p>在生成的hellotweak目录下的Tweak.xm写入</p>
+
+<pre><code>%hook SpringBoard
+- (void)applicationDidFinishLaunching:(id)applicaton
+{
+    %orig;
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @&quot;Hello Tweak&quot; message: nil delegate: self cancelButtonTitle:@&quot;Cool&quot; otherButtonTitles: nil];
+    [alert show];
+    [alert release];
+}
+%end
+</code></pre>
+
+<p>大概就是在SpringBoard这个系统APP上hook<code>applicationDidFinishLaunching</code>方法，也就是<code>Method swizzling</code>，通过<code>%orig</code>调用原先的方法。</p>
+
+<h4 id="toc_3">安装到已越狱设备上</h4>
+
+<ul>
+<li><p>安装SSH</p>
+
+<p>通过设备上的Cydia安装<code>OpenSSH</code>，在设置-WIFI中找到当前WIFI的IP地址。<br/>
+在电脑上通过<code>ssh root@这里填设备的IP</code>来连接，默认的密码是<code>alpine</code></p></li>
+<li><p>安装tweak</p>
+
+<p>首先在Tweak项目目录下的Makefile中最上面加入<code>THEOS_DEVICE_IP = 这里填设备的IP</code></p>
+
+<p>最后一步，在命令行输入<code>make package install</code>，在输入两次SSH root密码后，SpringBoard重启将看到Alter。</p>
+
+<blockquote>
+<p>如果安装这里提示<code>substrate</code>相关报错，建议在<code>Cydia</code>中重新安装下<code>Substrate</code>就好了</p>
+</blockquote></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS实现夜间模式]]></title>
