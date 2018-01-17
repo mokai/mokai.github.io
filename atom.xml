@@ -4,7 +4,7 @@
   <title><![CDATA[GKK]]></title>
   <link href="https://mokai.me/atom.xml" rel="self"/>
   <link href="https://mokai.me/"/>
-  <updated>2018-01-18T00:19:36+08:00</updated>
+  <updated>2018-01-18T00:21:59+08:00</updated>
   <id>https://mokai.me/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -45,7 +45,7 @@ PATH=${PATH}:${THEOS}/bin
 </code></pre>
 
 <blockquote>
-<p>官方默认是放在<code>~/theos</code>下，但安装过程发现，如果发现在这个目录下会报错</p>
+<p>官方默认是放在<code>~/theos</code>下，但安装过程发现，在这个目录下会报错</p>
 </blockquote>
 
 <pre><code>&lt;built-in&gt;:1:10: error: non-portable path to file
