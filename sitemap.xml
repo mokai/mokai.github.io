@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
   <loc>https://mokai.me/</loc>
-  <lastmod>2018-01-18T00:22:02+08:00</lastmod>
+  <lastmod>2018-06-20T16:42:20+08:00</lastmod>
 </url>
 
 <url>
@@ -78,7 +78,12 @@
 
 <url>
   <loc>https://mokai.me/resume.html</loc>
-  <lastmod>2018-01-05T20:06:05+08:00</lastmod>
+  <lastmod>2018-06-13T22:53:16+08:00</lastmod>
+</url>
+
+<url>
+  <loc>https://mokai.me/projects.html</loc>
+  <lastmod>2018-05-28T17:55:55+08:00</lastmod>
 </url>
 
 
